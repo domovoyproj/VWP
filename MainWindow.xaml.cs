@@ -179,6 +179,7 @@ public partial class MainWindow : Window
     void Save(){if(Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify")))return;try{Directory.CreateDirectory(System.IO.Path.GetDirectoryName(settingsPath)!);string temp=settingsPath+".tmp";File.WriteAllText(temp,JsonSerializer.Serialize(preferences));File.Move(temp,settingsPath,true);}catch(Exception e){Status.Text="Настройки не сохранены: "+e.Message;}}
     async void Verify()
     {
+        preferences=JsonSerializer.Deserialize<Preferences>(JsonSerializer.Serialize(preferences))!;preferences.PauseBattery=false;preferences.PauseFullscreen=false;foreach(var config in preferences.Monitors.Values)config.UserPaused=false;
         Trace("verify");
         string folder=System.IO.Path.Combine(AppContext.BaseDirectory,"verification");Directory.CreateDirectory(folder);
         await System.Threading.Tasks.Task.Delay(700);
