@@ -20,7 +20,9 @@ public static class GalleryService
     public static async Task<List<GalleryItem>> Catalog(string url)
     {
         if(!Uri.TryCreate(url,UriKind.Absolute,out var uri)||uri.Scheme!="https")throw new InvalidDataException("Каталог должен использовать HTTPS.");
-        using var response=await client.GetAsync(url,HttpCompletionOption.ResponseHeadersRead);response.EnsureSuccessStatusCode();
+        if(uri.Host=="raw.githubusercontent.com")url+=(url.Contains('?')?"&":"?")+"vwp_refresh="+DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        using var request=new HttpRequestMessage(HttpMethod.Get,url);request.Headers.CacheControl=new CacheControlHeaderValue{NoCache=true};
+        using var response=await client.SendAsync(request,HttpCompletionOption.ResponseHeadersRead);response.EnsureSuccessStatusCode();
         if(response.Content.Headers.ContentLength>1024*1024)throw new InvalidDataException("Большой каталог.");
         string json=await response.Content.ReadAsStringAsync();if(json.Length>1024*1024)throw new InvalidDataException("Большой каталог.");
         var items=JsonSerializer.Deserialize<List<GalleryItem>>(json,options)??new();if(items.Count>500)throw new InvalidDataException("Слишком много наборов.");return items;
@@ -72,6 +74,9 @@ public static class GalleryService
             }
         }
         using var published=await Send(HttpMethod.Patch,"repos/"+repository+"/releases/"+id,new{draft=false});
+        var publicAssets=published.RootElement.GetProperty("assets").EnumerateArray().ToArray();
+        url=publicAssets.First(a=>a.GetProperty("name").GetString()=="collection.vwpbundle").GetProperty("browser_download_url").GetString()!;
+        thumbnail=publicAssets.FirstOrDefault(a=>a.GetProperty("name").GetString()!.StartsWith("cover.",StringComparison.Ordinal)).ValueKind==JsonValueKind.Undefined?null:publicAssets.First(a=>a.GetProperty("name").GetString()!.StartsWith("cover.",StringComparison.Ordinal)).GetProperty("browser_download_url").GetString();
         string path="repos/"+repository+"/contents/gallery/catalog.json";string? sha=null;var catalog=new List<GalleryItem>();
         using(var current=await api.GetAsync("https://api.github.com/"+path))
         {
