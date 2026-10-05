@@ -20,8 +20,14 @@ public static class GalleryService
     public static async Task<List<GalleryItem>> Catalog(string url)
     {
         if(!Uri.TryCreate(url,UriKind.Absolute,out var uri)||uri.Scheme!="https")throw new InvalidDataException("Каталог должен использовать HTTPS.");
-        if(uri.Host=="raw.githubusercontent.com")url+=(url.Contains('?')?"&":"?")+"vwp_refresh="+DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        bool github=uri.Host=="raw.githubusercontent.com";
+        if(github)
+        {
+            string[] parts=uri.AbsolutePath.Trim('/').Split('/');
+            if(parts.Length>=4)url="https://api.github.com/repos/"+parts[0]+"/"+parts[1]+"/contents/"+string.Join('/',parts.Skip(3))+"?ref="+Uri.EscapeDataString(Uri.UnescapeDataString(parts[2]));
+        }
         using var request=new HttpRequestMessage(HttpMethod.Get,url);request.Headers.CacheControl=new CacheControlHeaderValue{NoCache=true};
+        if(github)request.Headers.Accept.ParseAdd("application/vnd.github.raw+json");
         using var response=await client.SendAsync(request,HttpCompletionOption.ResponseHeadersRead);response.EnsureSuccessStatusCode();
         if(response.Content.Headers.ContentLength>1024*1024)throw new InvalidDataException("Большой каталог.");
         string json=await response.Content.ReadAsStringAsync();if(json.Length>1024*1024)throw new InvalidDataException("Большой каталог.");
@@ -83,6 +89,7 @@ public static class GalleryService
             if(current.IsSuccessStatusCode){using var json=JsonDocument.Parse(await current.Content.ReadAsStringAsync());sha=json.RootElement.GetProperty("sha").GetString();string encoded=json.RootElement.GetProperty("content").GetString()!.Replace("\n","");catalog=JsonSerializer.Deserialize<List<GalleryItem>>(Encoding.UTF8.GetString(Convert.FromBase64String(encoded)),options)??new();}
             else if(current.StatusCode!=System.Net.HttpStatusCode.NotFound)current.EnsureSuccessStatusCode();
         }
+        catalog.RemoveAll(item=>item.Name==manifest.Name && item.Author.Equals(author,StringComparison.OrdinalIgnoreCase));
         catalog.Add(new(manifest.Name,author,"Коллекция из "+manifest.Scenes.Count+" сцен",category,url,hash,"https://github.com/"+author,thumbnail));
         var payload=new Dictionary<string,object?>{{"message","Publish VWP collection: "+manifest.Name},{"content",Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(catalog)))}};if(sha is not null)payload["sha"]=sha;
         progress?.Report("Обновляю каталог автора…");using var saved=await Send(HttpMethod.Put,path,payload);

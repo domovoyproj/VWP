@@ -1,6 +1,10 @@
 {
   "tool": "built-in imagegen",
   "source": "assets/scene-0.png",
-  "background": "Remove the entire woman including hair and clothing, reconstruct the unobstructed Tokyo skyline, terrace, railing and sakura behind her. Preserve all surroundings, composition, camera, colors and anime painting style. No people, wide 16:9, no text.",
-  "foreground": "Isolate only the pink-haired woman in black floral kimono in the same pose, scale and placement on a wide 16:9 canvas. Preserve her face, hair strands and clothing. Remove all surroundings. Transparent background and clean alpha silhouette."
+  "background_prompt": "Edit target: the supplied Sakura Midnight illustration. Produce the exact same wide Tokyo skyline, rooftop terrace, crescent moon, night sky and sakura trees, matching composition, camera, colors and anime painting style. Remove the entire woman on the right, including her hair and all clothing, and plausibly reconstruct the unobstructed city, terrace floor, railing and sakura behind her. No people remain anywhere. This is a clean background plate for a layered interactive wallpaper. Preserve all surroundings, landscape wide 16:9, no text.",
+  "foreground_prompt": "Edit target: the supplied Sakura Midnight illustration. Isolate only the woman with pink flowing hair and black floral kimono on the right, in exactly the same pose, scale and placement on a wide 16:9 canvas. Preserve her original face, hairstyle, clothing and hair strands. Remove every city building, tree, sakura blossom, rooftop, railing, sky and particle. Everything except the woman is fully transparent, including the left 55% of the canvas. Clean alpha silhouette, no opaque background, no checkerboard painted into image. This is the foreground layer for an interactive wallpaper.",
+  "files": [
+    "sakura-background.png",
+    "sakura-character.png"
+  ]
 }
