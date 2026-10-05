@@ -24,6 +24,8 @@ def main():
                 continue
             if relative.parts[:2] in (('libvlc', 'win-x86'), ('libvlc', 'win-arm64')):
                 continue
+            if relative.parts[0] == 'assets' and path.name.startswith('scene-') and path.suffix == '.png':
+                continue
             archive.write(path, Path('VWP') / relative)
             count += 1
         archive.write(root / 'README.md', 'VWP/README.md')

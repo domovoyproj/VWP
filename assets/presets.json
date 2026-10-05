@@ -1,0 +1,146 @@
+[
+  {
+    "id": 0,
+    "name": "Sakura Midnight",
+    "category": "Аниме",
+    "description": "Сакура над ночным Токио.",
+    "accent": "#F877B8",
+    "motion": "petals"
+  },
+  {
+    "id": 1,
+    "name": "Neon Tokyo",
+    "category": "Город",
+    "description": "Неон, дождь и ночные поезда.",
+    "accent": "#36DDF2",
+    "motion": "rain"
+  },
+  {
+    "id": 2,
+    "name": "Crimson Moon",
+    "category": "Аниме",
+    "description": "Красная луна над горным храмом.",
+    "accent": "#F34F71",
+    "motion": "embers"
+  },
+  {
+    "id": 3,
+    "name": "Aurora Voyage",
+    "category": "Природа",
+    "description": "Северное сияние над снежным фьордом.",
+    "accent": "#70E8C3",
+    "motion": "snow"
+  },
+  {
+    "id": 4,
+    "name": "Astral Drift",
+    "category": "Космос",
+    "description": "Невесомость на орбите далёкой планеты.",
+    "accent": "#B299FF",
+    "motion": "stars"
+  },
+  {
+    "id": 5,
+    "name": "Golden Hour",
+    "category": "Природа",
+    "description": "Последний поезд сквозь золотые поля.",
+    "accent": "#F3C67B",
+    "motion": "dust"
+  },
+  {
+    "id": 6,
+    "name": "Rainy Ramen",
+    "category": "Город",
+    "description": "Тёплый свет в дождливом переулке.",
+    "accent": "#EFA887",
+    "motion": "rain"
+  },
+  {
+    "id": 7,
+    "name": "Ocean Sonata",
+    "category": "Фэнтези",
+    "description": "Подводное царство светящихся медуз.",
+    "accent": "#74E2E5",
+    "motion": "bubbles"
+  },
+  {
+    "id": 8,
+    "name": "Forest Shrine",
+    "category": "Фэнтези",
+    "description": "Лесной храм, лис и светлячки.",
+    "accent": "#91D8B3",
+    "motion": "fireflies"
+  },
+  {
+    "id": 9,
+    "name": "Skyline Racer",
+    "category": "Город",
+    "description": "Ночные трассы футуристического города.",
+    "accent": "#84BAF3",
+    "motion": "rain"
+  },
+  {
+    "id": 10,
+    "name": "Cloud Sanctuary",
+    "category": "Фэнтези",
+    "description": "Парящий сад над морем облаков.",
+    "accent": "#F2DCA8",
+    "motion": "dust"
+  },
+  {
+    "id": 11,
+    "name": "Violet Horizon",
+    "category": "Космос",
+    "description": "Фиолетовые миры над зеркальным берегом.",
+    "accent": "#E39BD4",
+    "motion": "stars"
+  },
+  {
+    "id": 12,
+    "name": "Winter Letters",
+    "category": "Природа",
+    "description": "Снежная деревня и красный зонт.",
+    "accent": "#D1E2F8",
+    "motion": "snow"
+  },
+  {
+    "id": 13,
+    "name": "Ember Ronin",
+    "category": "Аниме",
+    "description": "Одинокий ронин среди осенних огней.",
+    "accent": "#F59871",
+    "motion": "embers"
+  },
+  {
+    "id": 14,
+    "name": "Lo-Fi Atelier",
+    "category": "Город",
+    "description": "Уютная мастерская над вечерним городом.",
+    "accent": "#D6B29D",
+    "motion": "dust"
+  },
+  {
+    "id": 15,
+    "name": "Desert Mirage",
+    "category": "Природа",
+    "description": "Путешествие сквозь розовые дюны.",
+    "accent": "#ECB277",
+    "motion": "dust"
+  },
+  {
+    "id": 16,
+    "name": "Electric Bloom",
+    "category": "Абстракция",
+    "description": "Стеклянные лепестки и световые ленты.",
+    "accent": "#B8A6FB",
+    "motion": "stars"
+  },
+  {
+    "id": 17,
+    "name": "Moonlit Garden",
+    "category": "Природа",
+    "description": "Серебряный сад под полной луной.",
+    "accent": "#B3C9EF",
+    "motion": "fireflies"
+  }
+]
