@@ -51,9 +51,9 @@ public partial class MainWindow
             foreach(var actual in Forms.Screen.AllScreens){Config(actual).Scene="preset:0";ApplyScene(items[0],actual);}
             await Task.Delay(1500);Check("all connected monitors have independent hosts",Forms.Screen.AllScreens.All(s=>hosts[s.DeviceName].Active && hosts[s.DeviceName].Healthy));
             report.Add(new{name="physical monitor count",count=Forms.Screen.AllScreens.Length});
-            string json="{\"draft\":false,\"prerelease\":false,\"tag_name\":\"v0.3.0\",\"assets\":[{\"name\":\"VWP-0.3.0-Setup.exe\",\"browser_download_url\":\"https://github.com/domovoyproj/VWP/releases/download/v0.3.0/VWP-0.3.0-Setup.exe\",\"digest\":\"sha256:"+new string('a',64)+"\"}]}";
-            using var document=JsonDocument.Parse(json);Check("update manifest parsed",UpdateService.ParseRelease(document.RootElement)?.Version==new Version(0,3,0));
-            using var old=JsonDocument.Parse(json.Replace("v0.3.0","v0.1.0"));Check("old update ignored",UpdateService.ParseRelease(old.RootElement) is null);
+            string json="{\"draft\":false,\"prerelease\":false,\"tag_name\":\"v0.4.0\",\"assets\":[{\"name\":\"VWP-0.4.0-Setup.exe\",\"browser_download_url\":\"https://github.com/domovoyproj/VWP/releases/download/v0.4.0/VWP-0.4.0-Setup.exe\",\"digest\":\"sha256:"+new string('a',64)+"\"}]}";
+            using var document=JsonDocument.Parse(json);Check("update manifest parsed",UpdateService.ParseRelease(document.RootElement)?.Version==new Version(0,4,0));
+            using var old=JsonDocument.Parse(json.Replace("v0.4.0","v0.1.0"));Check("old update ignored",UpdateService.ParseRelease(old.RootElement) is null);
             bool rejected=false;try{using var invalid=JsonDocument.Parse(json.Replace("github.com/domovoyproj","example.com/domovoyproj"));UpdateService.ParseRelease(invalid.RootElement);}catch(InvalidDataException){rejected=true;}Check("untrusted update URL rejected",rejected);
         }
         catch(Exception e){report.Add(new{name="error",error=e.ToString(),passed=false});}

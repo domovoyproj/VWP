@@ -7,3 +7,6 @@ bin/
 obj/
 artifacts/
 *.tmp.mp4
+tools/ffmpeg.exe
+graphify-out/
+.codex/hooks.json

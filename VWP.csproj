@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType><TargetFramework>net8.0-windows</TargetFramework>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms><Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings><PlatformTarget>x64</PlatformTarget>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -13,8 +13,10 @@
     <Compile Remove="artifacts\**\*.cs" />
     <Page Remove="artifacts\**\*.xaml" />
     <PackageReference Include="LibVLCSharp" Version="3.9.7" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.23.1" />
     <Content Include="assets\**\*" Exclude="assets\*.tmp.mp4"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
     <Content Include="licenses\**\*"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="tools\ffmpeg.exe" Condition="Exists('tools\ffmpeg.exe')"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
   </ItemGroup>
 </Project>

@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "Sakura Depth",
+    "Author": "domovoyproj",
+    "Description": "РћС‚РґРµР»СЊРЅС‹Р№ РїРµСЂСЃРѕРЅР°Р¶, РіР»СѓР±РѕРєРёР№ РїР°СЂР°Р»Р»Р°РєСЃ, Р»РµРїРµСЃС‚РєРё Рё СЂРµР°РєС†РёСЏ РЅР° РјСѓР·С‹РєСѓ.",
+    "Category": "РђРЅРёРјРµ",
+    "Url": "https://github.com/domovoyproj/VWP/releases/download/v0.3.0/Sakura-Depth.vwpbundle",
+    "Sha256": "1e6339717112cb1093176cf6f5639a48754f81735e13f47fd5f02b1b7b43589b",
+    "Profile": "https://github.com/domovoyproj",
+    "Thumbnail": "https://raw.githubusercontent.com/domovoyproj/VWP/main/assets/0.jpg"
+  },
+  {
+    "Name": "Night Drive",
+    "Author": "domovoyproj",
+    "Description": "РўСЂРё РЅРѕС‡РЅС‹С… РіРѕСЂРѕРґР°: РґРѕР¶РґСЊ, РЅРµРѕРЅ Рё РіРѕС‚РѕРІР°СЏ РѕС‡РµСЂРµРґСЊ СЃС†РµРЅ.",
+    "Category": "Р“РѕСЂРѕРґ",
+    "Url": "https://github.com/domovoyproj/VWP/releases/download/v0.3.0/Night-Drive.vwpbundle",
+    "Sha256": "8d04d2006209c359eaf69c3c373bac2feeb47b9a9bd705ac4f7e8be165e702ab",
+    "Profile": "https://github.com/domovoyproj",
+    "Thumbnail": "https://raw.githubusercontent.com/domovoyproj/VWP/main/assets/1.jpg"
+  },
+  {
+    "Name": "Quiet Orbit",
+    "Author": "domovoyproj",
+    "Description": "РљРѕСЃРјРѕСЃ Рё РєСЂРёСЃС‚Р°Р»Р»РёС‡РµСЃРєРёР№ С†РІРµС‚РѕРє СЃ РёРЅС‚РµСЂР°РєС‚РёРІРЅС‹Рј СЃРІРµС‚РѕРј.",
+    "Category": "РљРѕСЃРјРѕСЃ",
+    "Url": "https://github.com/domovoyproj/VWP/releases/download/v0.3.0/Quiet-Orbit.vwpbundle",
+    "Sha256": "ac4a60a7936aa46a0a9430ba652d31439704b6bab64ba20903b5cce150614f7a",
+    "Profile": "https://github.com/domovoyproj",
+    "Thumbnail": "https://raw.githubusercontent.com/domovoyproj/VWP/main/assets/4.jpg"
+  }
+]

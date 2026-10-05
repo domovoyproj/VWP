@@ -10,7 +10,7 @@ namespace VWP;
 public sealed record UpdateRelease(Version Version,string Url,string Digest,string Name);
 public static class UpdateService
 {
-    public static Version CurrentVersion=>new(0,2,0);
+    public static Version CurrentVersion {get {var version=typeof(UpdateService).Assembly.GetName().Version!;return new(version.Major,version.Minor,version.Build);}}
     static readonly HttpClient client=new(){Timeout=TimeSpan.FromMinutes(10)};
     static UpdateService(){client.DefaultRequestHeaders.UserAgent.ParseAdd("VWP/"+CurrentVersion);}
     public static async Task<UpdateRelease?> Check()

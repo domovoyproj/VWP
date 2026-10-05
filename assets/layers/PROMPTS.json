@@ -1,0 +1,6 @@
+{
+  "tool": "built-in imagegen",
+  "source": "assets/scene-0.png",
+  "background": "Remove the entire woman including hair and clothing, reconstruct the unobstructed Tokyo skyline, terrace, railing and sakura behind her. Preserve all surroundings, composition, camera, colors and anime painting style. No people, wide 16:9, no text.",
+  "foreground": "Isolate only the pink-haired woman in black floral kimono in the same pose, scale and placement on a wide 16:9 canvas. Preserve her face, hair strands and clothing. Remove all surroundings. Transparent background and clean alpha silhouette."
+}

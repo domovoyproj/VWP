@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Threading;
+using System.Windows.Interop;
 using LibVLCSharp.Shared;
 using Forms = System.Windows.Forms;
 namespace VWP;
@@ -24,7 +25,12 @@ public sealed class DesktopHost : IDisposable
     DispatcherTimer? fadeTimer;
     bool fading;
     string? nextCover;
-    public bool Active => currentMedia is not null;
+    HwndSource? visualSource;
+    InteractiveVisual? interactiveVisual;
+    SceneLayers? sceneLayers;
+    AudioReaction? audioReaction;
+    public InteractiveVisual? Interactive=>interactiveVisual;
+    public bool Active => currentMedia is not null || interactiveVisual is not null;
     public bool Paused { get; private set; }
     public event Action? Failed;
     public event Action? LoopRequired;
@@ -37,7 +43,7 @@ public sealed class DesktopHost : IDisposable
     }
     public int Volume { set => player.Volume = value; }
     public bool Healthy => !Active || (IsWindow(parent) && IsWindow(window));
-    internal bool Playing => player.IsPlaying;
+    internal bool Playing => interactiveVisual is not null?!Paused:player.IsPlaying;
     internal long Position => player.Time;
     public void Play(string path, Forms.Screen screen,string? cover=null,bool transition=false)
     {
@@ -61,6 +67,20 @@ public sealed class DesktopHost : IDisposable
         currentMedia=new Media(vlc,path,FromType.FromPath);
         if (!player.Play(currentMedia)) { Stop(); throw new InvalidOperationException("Не удалось открыть видео."); }
         Paused=false;userPaused=false;automaticPaused=false;
+    }
+    public void PlayInteractive(SceneLayers layers,Forms.Screen screen,MonitorPreferences config,AudioReaction audio,string? cover)
+    {
+        Stop();targetScreen=screen;framing=config;sceneLayers=layers;audioReaction=audio;
+        if(cover is not null)try{backdrop?.Apply(cover,screen);}catch(Exception e){BackdropError=e.Message;}
+        CreateSurface(screen);CreateInteractive();Paused=false;userPaused=false;automaticPaused=false;
+    }
+    void CreateInteractive()
+    {
+        if(targetScreen is null || sceneLayers is null || audioReaction is null)return;
+        ShowWindow(videoWindow,0);
+        interactiveVisual=new InteractiveVisual(sceneLayers,framing,targetScreen,audioReaction);
+        visualSource=new HwndSource(new HwndSourceParameters("VWP Interactive"){ParentWindow=window,WindowStyle=0x40000000|0x10000000,Width=targetScreen.Bounds.Width,Height=targetScreen.Bounds.Height});
+        visualSource.RootVisual=interactiveVisual;
     }
     void CreateSurface(Forms.Screen screen)
     {
@@ -93,11 +113,16 @@ public sealed class DesktopHost : IDisposable
     }
     public void Recover()
     {
-        if(Healthy || currentMedia is null || targetScreen is null)return;
+        if(Healthy || !Active || targetScreen is null)return;
+        if(interactiveVisual is not null)
+        {
+            bool paused=Paused;interactiveVisual.Dispose();visualSource?.Dispose();interactiveVisual=null;visualSource=null;
+            if(IsWindow(window))DestroyWindow(window);CreateSurface(targetScreen);CreateInteractive();interactiveVisual?.SetPaused(paused);RecoveryCount++;return;
+        }
         recoveryPosition=Math.Max(0,player.Time);recoveryPaused=Paused;recoveryPending=true;
         player.Stop();if(IsWindow(window))DestroyWindow(window);window=IntPtr.Zero;parent=IntPtr.Zero;
         CreateSurface(targetScreen);player.Hwnd=videoWindow;
-        if(!player.Play(currentMedia))throw new InvalidOperationException("Не удалось восстановить видеообои.");
+        if(currentMedia is null || !player.Play(currentMedia))throw new InvalidOperationException("Не удалось восстановить видеообои.");
         RecoveryCount++;
     }
     public void CompleteRecovery()
@@ -120,12 +145,12 @@ public sealed class DesktopHost : IDisposable
     public void TogglePause() { SetUserPaused(!userPaused); }
     public void SetUserPaused(bool value) {userPaused=value;SyncPause();}
     public void SetAutomaticPause(string? reason) {PauseReason=reason;automaticPaused=reason is not null;SyncPause();}
-    void SyncPause() {if(!Active)return;bool value=userPaused||automaticPaused;if(Paused==value)return;Paused=value;player.SetPause(value);}
-    public void SetFraming(MonitorPreferences settings) {framing=settings;UpdateFrame();}
+    void SyncPause() {if(!Active)return;bool value=userPaused||automaticPaused;if(Paused==value)return;Paused=value;if(interactiveVisual is not null)interactiveVisual.SetPaused(value);else player.SetPause(value);}
+    public void SetFraming(MonitorPreferences settings) {framing=settings;interactiveVisual?.Configure(settings);UpdateFrame();}
     public void RefreshFrame()=>UpdateFrame();
     void UpdateFrame()
     {
-        if(targetScreen is null || videoWindow==IntPtr.Zero)return;
+        if(targetScreen is null || videoWindow==IntPtr.Zero || interactiveVisual is not null)return;
         uint width=0,height=0;player.Size(0,ref width,ref height);
         if(width==0||height==0)return;
         var next=PlaybackRules.Frame((int)width,(int)height,targetScreen.Bounds.Width,targetScreen.Bounds.Height,framing.Fit,framing.FocusX,framing.FocusY);
@@ -157,7 +182,7 @@ public sealed class DesktopHost : IDisposable
         finally{if(System.IO.File.Exists(raw))System.IO.File.Delete(raw);}
     }
     public void Stop()=>StopPlayback(true);
-    void StopPlayback(bool restore) {fadeTimer?.Stop();fadeTimer=null;fading=false;nextCover=null;recoveryPending=false;player.Stop();currentMedia?.Dispose();currentMedia=null;if(IsWindow(window))DestroyWindow(window);window=IntPtr.Zero;videoWindow=IntPtr.Zero;parent=IntPtr.Zero;targetScreen=null;Paused=false;if(restore)try{backdrop?.Restore();}catch(Exception e){BackdropError=e.Message;}}
+    void StopPlayback(bool restore) {interactiveVisual?.Dispose();visualSource?.Dispose();interactiveVisual=null;visualSource=null;sceneLayers=null;audioReaction=null;fadeTimer?.Stop();fadeTimer=null;fading=false;nextCover=null;recoveryPending=false;player.Stop();currentMedia?.Dispose();currentMedia=null;if(IsWindow(window))DestroyWindow(window);window=IntPtr.Zero;videoWindow=IntPtr.Zero;parent=IntPtr.Zero;targetScreen=null;Paused=false;if(restore)try{backdrop?.Restore();}catch(Exception e){BackdropError=e.Message;}}
     public void Dispose() {Stop();try{backdrop?.Dispose();}catch(Exception e){BackdropError=e.Message;}player.Dispose();vlc.Dispose();}
     [StructLayout(LayoutKind.Sequential)] struct Point { public int X,Y; }
     delegate bool EnumProc(IntPtr hwnd,IntPtr param);
@@ -172,5 +197,6 @@ public sealed class DesktopHost : IDisposable
     [DllImport("user32.dll")] static extern bool SetWindowPos(IntPtr window,IntPtr after,int x,int y,int width,int height,uint flags);
     [DllImport("user32.dll",EntryPoint="SetWindowLongPtrW")] static extern IntPtr SetWindowLongPtr(IntPtr window,int index,IntPtr value);
     [DllImport("user32.dll")] static extern bool SetLayeredWindowAttributes(IntPtr window,uint key,byte alpha,uint flags);
+    [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr window,int command);
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd,uint attribute,ref int value,uint size);
 }

@@ -68,7 +68,7 @@ public partial class MainWindow
     }
     void SessionChanged(object? sender,SessionSwitchEventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(e.Reason==SessionSwitchReason.SessionLock){sessionLocked=true;StopPreview();StopHover();}else if(e.Reason==SessionSwitchReason.SessionUnlock)sessionLocked=false;TickFeatures();}));
     void PowerChanged(object sender,PowerModeChangedEventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(e.Mode==PowerModes.Suspend){suspended=true;StopPreview();StopHover();}else if(e.Mode==PowerModes.Resume)suspended=false;TickFeatures();}));
-    void EvaluatePause(Forms.Screen screen,DesktopHost player)=>player.SetAutomaticPause(PausePolicy.Reason(screen,preferences.PauseFullscreen,preferences.PauseBattery,sessionLocked||suspended));
+    void EvaluatePause(Forms.Screen screen,DesktopHost player)=>player.SetAutomaticPause(PausePolicy.Reason(screen,preferences.PauseFullscreen,preferences.PauseBattery,sessionLocked||suspended,preferences.PauseExceptions));
     void TickFeatures()
     {
         foreach(var screen in Forms.Screen.AllScreens)
@@ -90,6 +90,7 @@ public partial class MainWindow
             catch(Exception e){Status.Text="Дисплей: "+e.Message;}
         }
         UpdatePlaybackStatus();
+        TickStudio();
     }
     void UpdatePlaybackStatus()
     {
@@ -100,17 +101,30 @@ public partial class MainWindow
             Status.Text=(player.PauseReason is not null?"Автопауза · "+player.PauseReason:config.UserPaused?"Пауза":"На рабочем столе")+" · "+(scene?.Name??"Видео")+(config.PlaylistEnabled?" · ♫ "+config.PlaylistName:"");
         }
     }
-    void ApplyScene(Wallpaper scene,Forms.Screen screen)
+    async void ApplyScene(Wallpaper scene,Forms.Screen screen)
     {
         if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
         var config=Config(screen);var player=GetHost(screen);
         try
         {
-            player.Play(scene.Path,screen,FramedCover(scene,screen,config),true);player.SetFraming(config);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
+            int generation=applyGeneration.GetValueOrDefault(screen.DeviceName)+1;applyGeneration[screen.DeviceName]=generation;
+            if(config.Interactive && LayersFor(scene) is SceneLayers layers && layers.Background is not null)
+                player.PlayInteractive(layers,screen,config,audio,FramedCover(scene,screen,config));
+            else
+            {
+                string path=scene.Path;var profile=PerformanceProfile.Resolve(config.Performance);
+                if(profile.Key=="Eco" || scene.PresetId is null && profile.Key=="Balance")
+                {
+                    Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(scene.Path,profile);
+                    if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
+                }
+                player.Play(path,screen,FramedCover(scene,screen,config),true);
+            }
+            player.SetFraming(config);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
             config.Scene=PlaybackRules.Key(scene);preferences.Last=scene.Path;preferences.LastPresetId=scene.PresetId;preferences.Monitor=screen.DeviceName;
             nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();UpdatePlaybackStatus();
         }
-        catch(Exception e){player.Stop();Status.Text="Не удалось применить: "+e.Message;}
+        catch(Exception e){if(player.Active)player.Stop();Status.Text="Не удалось применить: "+e.Message;}
     }
     static string? FramedCover(Wallpaper scene,Forms.Screen screen,MonitorPreferences config)
     {
@@ -171,6 +185,7 @@ public partial class MainWindow
         Settings.PlaylistName.Text=config.PlaylistName;Settings.PlaylistEnabled.IsChecked=config.PlaylistEnabled;Settings.Shuffle.IsChecked=config.Shuffle;
         Settings.Interval.Text=config.IntervalMinutes.ToString();Settings.ScheduleStart.Text=config.ScheduleStart;Settings.ScheduleEnd.Text=config.ScheduleEnd;
         Settings.PauseFullscreen.IsChecked=preferences.PauseFullscreen;Settings.PauseBattery.IsChecked=preferences.PauseBattery;Settings.HoverPreview.IsChecked=preferences.HoverPreview;Settings.CheckUpdates.IsChecked=preferences.CheckUpdates;
+        LoadStudioSettings();
         ShowPlaylistEntries();Settings.Error.Text="";SettingsOverlay.Visibility=Visibility.Visible;Settings.RenderCrop();
         Settings.BeginAnimation(OpacityProperty,new DoubleAnimation(0,1,TimeSpan.FromMilliseconds(180)));
     }
@@ -188,6 +203,7 @@ public partial class MainWindow
         config.Fit=Settings.FitMode.SelectedIndex==1?"Fit":"Fill";config.FocusX=Settings.FocusX.Value;config.FocusY=Settings.FocusY.Value;
         config.PlaylistName=string.IsNullOrWhiteSpace(Settings.PlaylistName.Text)?"Мой плейлист":Settings.PlaylistName.Text.Trim();config.IntervalMinutes=interval;config.ScheduleStart=Settings.ScheduleStart.Text;config.ScheduleEnd=Settings.ScheduleEnd.Text;config.PlaylistEnabled=Settings.PlaylistEnabled.IsChecked==true;config.Shuffle=Settings.Shuffle.IsChecked==true;
         preferences.PauseFullscreen=Settings.PauseFullscreen.IsChecked==true;preferences.PauseBattery=Settings.PauseBattery.IsChecked==true;preferences.HoverPreview=Settings.HoverPreview.IsChecked==true;preferences.CheckUpdates=Settings.CheckUpdates.IsChecked==true;
+        SaveStudioSettings();
         Save();SettingsOverlay.Visibility=Visibility.Collapsed;
         if(host?.Active==true && FindScene(config.Scene) is Wallpaper scene)ApplyScene(scene,SelectedScreen);
         else if(config.PlaylistEnabled)Advance(SelectedScreen,1);
@@ -206,14 +222,15 @@ public partial class MainWindow
                 if(destination!=path)await Task.Run(()=>File.Copy(path,destination));
                 if(items.Any(s=>s.Path==destination))continue;
                 preferences.Imports.Add(destination);preferences.ImportNames[destination]=System.IO.Path.GetFileNameWithoutExtension(path);
-                var scene=new Wallpaper(System.IO.Path.GetFileNameWithoutExtension(path),destination,null,"LOCAL VIDEO");items.Add(scene);Library.SelectedItem=scene;Save();
+                string? cover=null;try{string thumbnail=Path.ChangeExtension(destination,".jpg");await VideoRender.Thumbnail(destination,thumbnail);cover=thumbnail;preferences.ImportThumbnails[destination]=thumbnail;}catch{}
+                var scene=new Wallpaper(System.IO.Path.GetFileNameWithoutExtension(path),destination,cover,"LOCAL VIDEO");items.Add(scene);Library.SelectedItem=scene;Save();
             }
             RefreshFilter();Status.Text="Видео сохранены в библиотеку VWP";
         }
         catch(Exception e){Status.Text="Импорт: "+e.Message;}
         finally{importing=false;}
     }
-    void FilesDropped(object sender,DragEventArgs e){if(e.Data.GetData(DataFormats.FileDrop) is string[] files)ImportFiles(files);e.Handled=true;}
+    async void FilesDropped(object sender,DragEventArgs e){if(e.Data.GetData(DataFormats.FileDrop) is string[] files){foreach(var bundle in files.Where(f=>Path.GetExtension(f).Equals(".vwpbundle",StringComparison.OrdinalIgnoreCase)))try{await ImportCollection(bundle);}catch{}ImportFiles(files.Where(f=>!Path.GetExtension(f).Equals(".vwpbundle",StringComparison.OrdinalIgnoreCase)));}e.Handled=true;}
     void FilesDragOver(object sender,DragEventArgs e){e.Effects=e.Data.GetDataPresent(DataFormats.FileDrop)?DragDropEffects.Copy:DragDropEffects.None;e.Handled=true;}
     async void CardEnter(object sender,MouseEventArgs e)
     {

@@ -12,6 +12,10 @@ public sealed class MonitorPreferences
     public double FocusX { get; set; } = .5;
     public double FocusY { get; set; } = .5;
     public bool UserPaused { get; set; }
+    public bool Interactive {get;set;}
+    public bool MusicReactive {get;set;}
+    public double Depth {get;set;}=.65;
+    public string Performance {get;set;}="Balance";
     public string PlaylistName { get; set; } = "Мой плейлист";
     public List<string> Playlist { get; set; } = new();
     public bool PlaylistEnabled { get; set; }

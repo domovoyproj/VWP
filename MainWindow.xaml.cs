@@ -20,6 +20,12 @@ public sealed class Preferences
     public int SettingsVersion {get;set;}
     public List<string> Imports { get; set; }=new();
     public Dictionary<string,string> ImportNames {get;set;}=new();
+    public Dictionary<string,string> ImportThumbnails {get;set;}=new();
+    public Dictionary<string,SceneLayers> Layers {get;set;}=new();
+    public string Theme {get;set;}="System";
+    public bool SceneAccent {get;set;}=true;
+    public List<string> PauseExceptions {get;set;}=new();
+    public string GallerySource {get;set;}="https://raw.githubusercontent.com/domovoyproj/VWP/main/gallery/catalog.json";
     public string? Last { get; set; }
     public int? LastPresetId {get;set;}
     public string? Monitor { get; set; }
@@ -62,7 +68,7 @@ public partial class MainWindow : Window
         string assets=System.IO.Path.Combine(AppContext.BaseDirectory,"assets");
         var presets=JsonSerializer.Deserialize<List<PresetDefinition>>(File.ReadAllText(System.IO.Path.Combine(assets,"presets.json")),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
         foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 6 SEC · LOOP",preset.Category,preset.Description,preset.Id));
-        foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,null,"LOCAL VIDEO"));
+        foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO"));
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
         RefreshScreens(); Volume.Value=preferences.Volume; if(host is not null)host.Volume=preferences.Volume; Autostart.IsChecked=preferences.Autostart;
         var menu=new Forms.ContextMenuStrip();
@@ -73,6 +79,7 @@ public partial class MainWindow : Window
         tray=new Forms.NotifyIcon { Icon=new System.Drawing.Icon(System.IO.Path.Combine(assets,"app.ico")),Text="VWP — видеообои",Visible=true,ContextMenuStrip=menu };
         tray.DoubleClick+=(_,_)=>Dispatcher.Invoke(()=>{Show();Activate();});
         InitializeFeatures();
+        InitializeStudio();
         Microsoft.Win32.SystemEvents.DisplaySettingsChanged+=DisplayChanged;
         Loaded+=(_,_)=> {
             Trace("loaded "+string.Join(" ",Environment.GetCommandLineArgs()));
@@ -96,7 +103,7 @@ public partial class MainWindow : Window
     }
     [System.Runtime.InteropServices.DllImport("user32.dll")] static extern uint GetDpiForWindow(IntPtr hwnd);
     void RefreshScreens() {screenLayout=ScreenLayout();string? selected=Monitor.SelectedItem as string;Monitor.Items.Clear();int i=0;foreach(var screen in Forms.Screen.AllScreens)Monitor.Items.Add((screen.Primary?"Основной":"Дисплей "+(++i))+$" · {screen.Bounds.Width} × {screen.Bounds.Height}");Monitor.SelectedIndex=0;}
-    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
+    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;foreach(var key in applyGeneration.Keys.ToArray())applyGeneration[key]++;foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
     void SelectionChanged(object sender,SelectionChangedEventArgs e)
     {
         if(Library.SelectedItem is not Wallpaper item)return;
@@ -104,6 +111,7 @@ public partial class MainWindow : Window
         HeroTitle.Text=item.Name;
         HeroDescription.Text=item.Description;UpdateSceneActions();
         HeroImage.Source=item.Thumbnail is not null && File.Exists(item.Thumbnail)?new BitmapImage(new Uri(item.Thumbnail)):null;
+        UpdateTheme();
     }
     void RoundHero(object sender,SizeChangedEventArgs e) { Hero.Clip=new System.Windows.Media.RectangleGeometry(new Rect(0,0,Hero.ActualWidth,Hero.ActualHeight),22,22); }
     void RoundCard(object sender,SizeChangedEventArgs e) {var element=(FrameworkElement)sender;element.Clip=new System.Windows.Media.RectangleGeometry(new Rect(0,0,element.ActualWidth,element.ActualHeight),8,8);}
@@ -127,7 +135,7 @@ public partial class MainWindow : Window
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
     void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)button.Background=button.Tag as string==category?System.Windows.Media.Brushes.White:System.Windows.Media.Brushes.Transparent;RefreshFilter();}
     void PauseClick(object sender,RoutedEventArgs e) {var config=Config(SelectedScreen);config.UserPaused=!config.UserPaused;host?.SetUserPaused(config.UserPaused);Save();UpdatePlaybackStatus();}
-    void StopClick(object sender,RoutedEventArgs e) {host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";PauseButton.Content="Ⅱ  Пауза";}
+    void StopClick(object sender,RoutedEventArgs e) {applyGeneration[SelectedScreen.DeviceName]=applyGeneration.GetValueOrDefault(SelectedScreen.DeviceName)+1;host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";PauseButton.Content="Ⅱ  Пауза";}
     void QuitClick(object sender,RoutedEventArgs e) { exiting=true;Close(); }
     void TrayClick(object sender,RoutedEventArgs e) { StopPreview();StopHover();Hide();tray?.ShowBalloonTip(1500,"VWP","Лаунчер в трее. Обои продолжают работать.",Forms.ToolTipIcon.Info); }
     void ModeClick(object sender,RoutedEventArgs e)
@@ -231,6 +239,6 @@ public partial class MainWindow : Window
     protected override void OnClosing(CancelEventArgs e)
     {
         if(!exiting){e.Cancel=true;TrayClick(this,new());return;}
-        StopPreview();StopHover();featureTimer.Stop();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
+        StopPreview();StopHover();featureTimer.Stop();CloseStudio();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
     }
 }

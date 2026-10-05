@@ -5,6 +5,11 @@ $dotnetCommand = Get-Command dotnet -ErrorAction SilentlyContinue
 $sdk = if ($dotnetCommand) { $dotnetCommand.Source } elseif (Test-Path 'C:\momp\dotnet\dotnet.exe') { 'C:\momp\dotnet\dotnet.exe' } else { throw 'Install .NET 8 SDK' }
 [xml]$project = Get-Content VWP.csproj
 $version = $project.Project.PropertyGroup.Version
+if (!(Test-Path tools\ffmpeg.exe)) {
+    $python = if (Test-Path .venv\Scripts\python.exe) { Join-Path $PSScriptRoot '.venv\Scripts\python.exe' } else { 'python' }
+    & $python tools\bootstrap_ffmpeg.py
+    if ($LASTEXITCODE -ne 0) { throw 'Install imageio-ffmpeg==0.6.0, then run tools/bootstrap_ffmpeg.py' }
+}
 $output = Join-Path $PSScriptRoot "dist\Release-$version"
 & $sdk publish VWP.csproj -c Release -r win-x64 --self-contained true -o $output
 if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
