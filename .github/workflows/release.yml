@@ -1,7 +1,7 @@
 name: Windows release
 on:
   push:
-    tags: ['v*']
+    tags: ['v*', '!vwp-pack-*']
   workflow_dispatch:
 permissions:
   contents: write
@@ -45,5 +45,10 @@ jobs:
         run: |
           gh release view '${{ github.ref_name }}' --repo '${{ github.repository }}'
           if ($LASTEXITCODE -ne 0) { gh release create '${{ github.ref_name }}' --repo '${{ github.repository }}' --generate-notes }
-          gh release upload '${{ github.ref_name }}' dist/*-Setup.exe dist/*.zip dist/*.sha256 --repo '${{ github.repository }}' --clobber
-          if ($LASTEXITCODE -ne 0) { throw 'Release upload failed' }
+          $existing = @(gh release view '${{ github.ref_name }}' --repo '${{ github.repository }}' --json assets --jq '.assets[].name')
+          if ($LASTEXITCODE -ne 0) { throw 'Release inspection failed' }
+          $uploadFiles = @(Get-ChildItem -Path 'dist/*-Setup.exe', 'dist/*.zip', 'dist/*.sha256' | Where-Object { $_.Name -notin $existing } | ForEach-Object { $_.FullName })
+          if ($uploadFiles.Count -gt 0) {
+            gh release upload '${{ github.ref_name }}' @uploadFiles --repo '${{ github.repository }}'
+            if ($LASTEXITCODE -ne 0) { throw 'Release upload failed' }
+          }
