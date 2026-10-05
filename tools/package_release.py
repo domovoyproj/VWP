@@ -6,8 +6,8 @@ import zipfile
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--version', default='0.1.0')
-    parser.add_argument('--build', default='dist/VWP-v2')
+    parser.add_argument('--version', default='0.2.0')
+    parser.add_argument('--build', default='dist/Release-0.2.0')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     source = (root / args.build).resolve()

@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import imageio_ffmpeg
 from PIL import Image
+from make_presets import frame
 
 ROOT=Path(__file__).resolve().parents[1]/'assets'
 presets=json.loads((ROOT/'presets.json').read_text(encoding='utf-8-sig'))
@@ -19,6 +20,9 @@ for preset in presets:
     with Image.open(ROOT/f'scene-{index}.png') as image:image.verify()
     check=subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),'-v','error','-i',str(ROOT/f'{index}.mp4'),'-f','null','-'],capture_output=True)
     assert check.returncode==0,check.stderr.decode()
+    first=frame(preset,0).tobytes()
+    assert first==frame(preset,1).tobytes(),f'Loop is not periodic: {index}'
+    assert first!=frame(preset,.5).tobytes(),f'Missing motion: {index}'
     print(f"OK {index}: {preset['name']}",flush=True)
 with Image.open(ROOT/'app.ico') as icon:assert len(icon.ico.sizes())==7
-print('18 videos fully decoded, all thumbnails/artworks and 7 icon sizes verified.')
+print('18 videos fully decoded, periodic motion, all thumbnails/artworks and 7 icon sizes verified.')

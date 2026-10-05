@@ -17,19 +17,28 @@ public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitl
 public record PresetDefinition(int Id,string Name,string Category,string Description,string Accent,string Motion);
 public sealed class Preferences
 {
+    public int SettingsVersion {get;set;}
     public List<string> Imports { get; set; }=new();
+    public Dictionary<string,string> ImportNames {get;set;}=new();
     public string? Last { get; set; }
     public int? LastPresetId {get;set;}
     public string? Monitor { get; set; }
     public int Volume { get; set; }
     public bool Autostart { get; set; }
+    public bool PauseFullscreen { get; set; }=true;
+    public bool PauseBattery { get; set; }=true;
+    public bool HoverPreview { get; set; }=true;
+    public bool CheckUpdates { get; set; }=true;
+    public List<string> Favorites { get; set; }=new();
+    public Dictionary<string,MonitorPreferences> Monitors { get; set; }=new();
 }
 public partial class MainWindow : Window
 {
     readonly ObservableCollection<Wallpaper> items=new();
     readonly string settingsPath=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","settings.json");
     Preferences preferences=new();
-    DesktopHost? host;
+    readonly Dictionary<string,DesktopHost> hosts=new();
+    DesktopHost? host => hosts.GetValueOrDefault(SelectedScreen.DeviceName);
     Forms.NotifyIcon? tray;
     bool exiting;
     bool fullscreen;
@@ -48,17 +57,14 @@ public partial class MainWindow : Window
         HeroVideo.MediaFailed+=(_,_)=>{StopPreview();Status.Text="Формат превью не поддерживается Windows. Попробуйте применить обои через VLC.";};
         try { if (File.Exists(settingsPath)) preferences=JsonSerializer.Deserialize<Preferences>(File.ReadAllText(settingsPath))??new(); }
         catch (Exception e) { Status.Text="Настройки сброшены: "+e.Message; }
-        Core.Initialize(); host=new DesktopHost();
+        Core.Initialize(); StaticBackdrop.RecoverAll();
         Trace("vlc");
-        host.Failed += ()=>Dispatcher.BeginInvoke(new Action(()=> { Status.Text="Ошибка воспроизведения. Проверьте файл или выберите другое видео."; }));
-        host.LoopRequired += ()=>Dispatcher.BeginInvoke(new Action(()=>host.Replay()));
-        host.SurfaceReady += ()=>Dispatcher.BeginInvoke(new Action(()=>host.CompleteRecovery()));
         string assets=System.IO.Path.Combine(AppContext.BaseDirectory,"assets");
         var presets=JsonSerializer.Deserialize<List<PresetDefinition>>(File.ReadAllText(System.IO.Path.Combine(assets,"presets.json")),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
         foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 6 SEC · LOOP",preset.Category,preset.Description,preset.Id));
-        foreach(string path in preferences.Imports)items.Add(new(System.IO.Path.GetFileNameWithoutExtension(path),path,null,"LOCAL VIDEO"));
+        foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,null,"LOCAL VIDEO"));
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
-        RefreshScreens(); Volume.Value=preferences.Volume; host.Volume=preferences.Volume; Autostart.IsChecked=preferences.Autostart;
+        RefreshScreens(); Volume.Value=preferences.Volume; if(host is not null)host.Volume=preferences.Volume; Autostart.IsChecked=preferences.Autostart;
         var menu=new Forms.ContextMenuStrip();
         menu.Items.Add("Открыть VWP",null,(_,_)=>Dispatcher.Invoke(()=>{Show();Activate();}));
         menu.Items.Add("Пауза / продолжить",null,(_,_)=>Dispatcher.Invoke(()=>PauseClick(this,new())));
@@ -66,12 +72,12 @@ public partial class MainWindow : Window
         menu.Items.Add("Выход",null,(_,_)=>Dispatcher.Invoke(()=>{exiting=true;Close();}));
         tray=new Forms.NotifyIcon { Icon=new System.Drawing.Icon(System.IO.Path.Combine(assets,"app.ico")),Text="VWP — видеообои",Visible=true,ContextMenuStrip=menu };
         tray.DoubleClick+=(_,_)=>Dispatcher.Invoke(()=>{Show();Activate();});
-        var timer=new DispatcherTimer { Interval=TimeSpan.FromSeconds(3) };
-        timer.Tick+=(_,_)=> {try{if(host is {Healthy:false}){host.Recover();Status.Text="Обои восстановлены";}else host?.UpdateBackdrop();}catch(Exception e){Status.Text="Ожидание Explorer: "+e.Message;}};timer.Start();
+        InitializeFeatures();
         Microsoft.Win32.SystemEvents.DisplaySettingsChanged+=DisplayChanged;
         Loaded+=(_,_)=> {
             Trace("loaded "+string.Join(" ",Environment.GetCommandLineArgs()));
-            if(Environment.GetCommandLineArgs().Contains("--autostart")) { Restore(); Hide(); }
+            if(!Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal)))Restore();
+            if(Environment.GetCommandLineArgs().Contains("--autostart"))Hide();
             if(Environment.GetCommandLineArgs().Contains("--verify")) Verify();
             if(Environment.GetCommandLineArgs().Contains("--verify-ui")) VerifyUi();
             if(preferences.Autostart && !Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal)))AutostartClick(this,new());
@@ -89,14 +95,14 @@ public partial class MainWindow : Window
         Left=area.Left+(area.Width-Width)/2;Top=area.Top+(area.Height-Height)/2;
     }
     [System.Runtime.InteropServices.DllImport("user32.dll")] static extern uint GetDpiForWindow(IntPtr hwnd);
-    void RefreshScreens() {screenLayout=ScreenLayout();Monitor.Items.Clear(); int i=0;foreach(var s in Forms.Screen.AllScreens)Monitor.Items.Add((s.Primary?"Основной":"Дисплей "+(++i))+$" · {s.Bounds.Width} × {s.Bounds.Height}"); Monitor.SelectedIndex=0; }
-    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;host?.Stop();RefreshScreens();Status.Text="Дисплеи изменились. Примените обои снова.";}));
+    void RefreshScreens() {screenLayout=ScreenLayout();string? selected=Monitor.SelectedItem as string;Monitor.Items.Clear();int i=0;foreach(var screen in Forms.Screen.AllScreens)Monitor.Items.Add((screen.Primary?"Основной":"Дисплей "+(++i))+$" · {screen.Bounds.Width} × {screen.Bounds.Height}");Monitor.SelectedIndex=0;}
+    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
     void SelectionChanged(object sender,SelectionChangedEventArgs e)
     {
         if(Library.SelectedItem is not Wallpaper item)return;
-        StopPreview();
+        StopPreview();StopHover();
         HeroTitle.Text=item.Name;
-        HeroDescription.Text=item.Description;
+        HeroDescription.Text=item.Description;UpdateSceneActions();
         HeroImage.Source=item.Thumbnail is not null && File.Exists(item.Thumbnail)?new BitmapImage(new Uri(item.Thumbnail)):null;
     }
     void RoundHero(object sender,SizeChangedEventArgs e) { Hero.Clip=new System.Windows.Media.RectangleGeometry(new Rect(0,0,Hero.ActualWidth,Hero.ActualHeight),22,22); }
@@ -104,35 +110,26 @@ public partial class MainWindow : Window
     void ImportClick(object sender,RoutedEventArgs e)
     {
         var dialog=new Microsoft.Win32.OpenFileDialog { Multiselect=true,Filter="Видео|*.mp4;*.webm;*.mkv;*.mov;*.avi" };
-        if(dialog.ShowDialog()!=true)return;
-        foreach(string path in dialog.FileNames)if(!items.Any(x=>x.Path==path)){items.Add(new(System.IO.Path.GetFileNameWithoutExtension(path),path,null,"LOCAL VIDEO"));preferences.Imports.Add(path);}
-        CountLabel.Text=$"{items.Count} сцен";Library.SelectedIndex=items.Count-1;Save();
+        if(dialog.ShowDialog()==true)ImportFiles(dialog.FileNames);
     }
     void ApplyClick(object sender,RoutedEventArgs e)
     {
-        if(Library.SelectedItem is not Wallpaper item || host is null)return;
-        if(!File.Exists(item.Path)){Status.Text="Файл не найден. Импортируйте видео заново.";return;}
-        try { host.Play(item.Path,Forms.Screen.AllScreens[Math.Max(0,Monitor.SelectedIndex)],item.Thumbnail); host.Volume=(int)Volume.Value;
-            preferences.Last=item.Path;preferences.LastPresetId=item.PresetId; preferences.Monitor=Forms.Screen.AllScreens[Math.Max(0,Monitor.SelectedIndex)].DeviceName;Save();Status.Text="Сейчас на рабочем столе · "+item.Name+(host.BackdropError is null?"":" · Подложка: "+host.BackdropError);PauseButton.Content="Ⅱ  Пауза"; }
-        catch(Exception ex){host.Stop();Status.Text="Не удалось применить: "+ex.Message;}
+        if(Library.SelectedItem is Wallpaper item)ApplyScene(item,SelectedScreen);
     }
     void Restore()
     {
-        var item=items.FirstOrDefault(x=>x.Path==preferences.Last);
-        int? presetId=preferences.LastPresetId;
-        if(presetId is null && preferences.Last is not null && System.IO.Path.GetFileName(System.IO.Path.GetDirectoryName(preferences.Last))=="assets" && int.TryParse(System.IO.Path.GetFileNameWithoutExtension(preferences.Last),out int legacy))presetId=legacy;
-        item??=items.FirstOrDefault(x=>x.PresetId is not null && x.PresetId==presetId);
-        if(item is null)return;
-        Library.SelectedItem=item;var screens=Forms.Screen.AllScreens;int index=Array.FindIndex(screens,s=>s.DeviceName==preferences.Monitor);Monitor.SelectedIndex=Math.Max(0,index);ApplyClick(this,new());
+        foreach(var screen in Forms.Screen.AllScreens)
+            if(preferences.Monitors.TryGetValue(screen.DeviceName,out var config) && FindScene(config.Scene) is Wallpaper scene)ApplyScene(scene,screen);
+        LoadMonitorControls();
     }
-    bool FilterScene(object value) {var item=(Wallpaper)value;return (category=="Все сцены" || item.Category==category) && item.Name.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase);}
+    bool FilterScene(object value) {var item=(Wallpaper)value;return MatchesCollection(item) && item.Name.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase);}
     void RefreshFilter() {if(Library.ItemsSource is null)return;var view=System.Windows.Data.CollectionViewSource.GetDefaultView(items);view.Refresh();CountLabel.Text=$"{view.Cast<Wallpaper>().Count()} / {items.Count} сцен";}
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
     void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)button.Background=button.Tag as string==category?System.Windows.Media.Brushes.White:System.Windows.Media.Brushes.Transparent;RefreshFilter();}
-    void PauseClick(object sender,RoutedEventArgs e) { host?.TogglePause();PauseButton.Content=host?.Paused==true?"▶  Играть":"Ⅱ  Пауза"; }
-    void StopClick(object sender,RoutedEventArgs e) {host?.Stop();Status.Text="Обои остановлены";PauseButton.Content="Ⅱ  Пауза";}
+    void PauseClick(object sender,RoutedEventArgs e) {var config=Config(SelectedScreen);config.UserPaused=!config.UserPaused;host?.SetUserPaused(config.UserPaused);Save();UpdatePlaybackStatus();}
+    void StopClick(object sender,RoutedEventArgs e) {host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";PauseButton.Content="Ⅱ  Пауза";}
     void QuitClick(object sender,RoutedEventArgs e) { exiting=true;Close(); }
-    void TrayClick(object sender,RoutedEventArgs e) { StopPreview();Hide();tray?.ShowBalloonTip(1500,"VWP","Лаунчер в трее. Обои продолжают работать.",Forms.ToolTipIcon.Info); }
+    void TrayClick(object sender,RoutedEventArgs e) { StopPreview();StopHover();Hide();tray?.ShowBalloonTip(1500,"VWP","Лаунчер в трее. Обои продолжают работать.",Forms.ToolTipIcon.Info); }
     void ModeClick(object sender,RoutedEventArgs e)
     {
         if(!fullscreen)
@@ -154,9 +151,10 @@ public partial class MainWindow : Window
         }
     }
     void WindowKeyDown(object sender,System.Windows.Input.KeyEventArgs e) {if(e.Key==System.Windows.Input.Key.Escape && fullscreen){ModeClick(this,new());e.Handled=true;}}
-    void VolumeChanged(object sender,RoutedPropertyChangedEventArgs<double> e) {if(host is null)return;host.Volume=(int)e.NewValue;preferences.Volume=(int)e.NewValue;Save();}
+    void VolumeChanged(object sender,RoutedPropertyChangedEventArgs<double> e) {if(!featuresReady || loadingControls)return;var config=Config(SelectedScreen);config.Volume=(int)e.NewValue;if(host is not null)host.Volume=config.Volume;Save();}
     void PreviewClick(object sender,RoutedEventArgs e)
     {
+        StopHover();
         if(Library.SelectedItem is not Wallpaper item || !File.Exists(item.Path))return;
         if(HeroVideo.Visibility==Visibility.Visible){StopPreview();return;}
         HeroVideo.Source=new Uri(item.Path);HeroVideo.Visibility=Visibility.Visible;HeroVideo.Play();PreviewButton.Content="□  Остановить превью";
@@ -170,7 +168,7 @@ public partial class MainWindow : Window
         try { using var key=Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run");if(enabled)key.SetValue("VWP",command);else key.DeleteValue("VWP",false);preferences.Autostart=enabled;Save(); }
         catch(Exception ex){Autostart.IsChecked=preferences.Autostart;Status.Text="Автозапуск: "+ex.Message;}
     }
-    void Save(){try{Directory.CreateDirectory(System.IO.Path.GetDirectoryName(settingsPath)!);string temp=settingsPath+".tmp";File.WriteAllText(temp,JsonSerializer.Serialize(preferences));File.Move(temp,settingsPath,true);}catch(Exception e){Status.Text="Настройки не сохранены: "+e.Message;}}
+    void Save(){if(Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify")))return;try{Directory.CreateDirectory(System.IO.Path.GetDirectoryName(settingsPath)!);string temp=settingsPath+".tmp";File.WriteAllText(temp,JsonSerializer.Serialize(preferences));File.Move(temp,settingsPath,true);}catch(Exception e){Status.Text="Настройки не сохранены: "+e.Message;}}
     async void Verify()
     {
         Trace("verify");
@@ -200,8 +198,8 @@ public partial class MainWindow : Window
         foreach(var item in items.Where(x=>x.PresetId is 0 or 1 or 2 or 3 or 7 or 16))
         {
             try {
-                string? original=host!.StaticPicture(Forms.Screen.PrimaryScreen!);
-                host!.Play(item.Path,Forms.Screen.PrimaryScreen!,item.Thumbnail);host.Volume=0;
+                GetHost(Forms.Screen.PrimaryScreen!);string? original=host!.StaticPicture(Forms.Screen.PrimaryScreen!);
+                var player=GetHost(Forms.Screen.PrimaryScreen!);player.Play(item.Path,Forms.Screen.PrimaryScreen!,item.Thumbnail);player.Volume=0;
                 for(int retry=0;retry<12 && !host.Playing;retry++)await System.Threading.Tasks.Task.Delay(500);
                 await System.Threading.Tasks.Task.Delay(7200);
                 bool playing=host.Playing;long time=host.Position;
@@ -233,6 +231,6 @@ public partial class MainWindow : Window
     protected override void OnClosing(CancelEventArgs e)
     {
         if(!exiting){e.Cancel=true;TrayClick(this,new());return;}
-        StopPreview();SystemEvents.DisplaySettingsChanged-=DisplayChanged;host?.Dispose();tray?.Dispose();base.OnClosing(e);
+        StopPreview();StopHover();featureTimer.Stop();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
     }
 }
