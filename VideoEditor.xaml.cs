@@ -8,20 +8,22 @@ using System.Windows.Controls;
 namespace VWP;
 public partial class VideoEditor : UserControl
 {
-    string? input,name;
+    string? input,name,previewInput;
     CancellationTokenSource? cancellation;
     public event Action<string,string>? Saved;
     public VideoEditor()
     {
         InitializeComponent();Video.MediaEnded+=(_,_)=>{Video.Position=TimeSpan.Zero;Video.Play();};
         Video.MediaFailed+=(_,_)=>Status.Text="Превью не поддерживается Windows. Экспорт через FFmpeg доступен.";
-        Video.MediaOpened+=(_,_)=>{if(Video.NaturalDuration.HasTimeSpan && Video.Source?.LocalPath==input)End.Text=Video.NaturalDuration.TimeSpan.TotalSeconds.ToString("0.###",CultureInfo.InvariantCulture);};
+        Video.MediaOpened+=(_,_)=>{if(Video.NaturalDuration.HasTimeSpan && Video.Source?.LocalPath==previewInput)End.Text=Video.NaturalDuration.TimeSpan.TotalSeconds.ToString("0.###",CultureInfo.InvariantCulture);};
         PreviewButton.Click+=async(_,_)=>await Render(false);ExportButton.Click+=async(_,_)=>await Render(true);CancelButton.Click+=(_,_)=>cancellation?.Cancel();
     }
     public void Open(Wallpaper scene)
     {
         Close();input=scene.Path;name=scene.Name;SceneName.Text=name;Start.Text="0";End.Text="6";Speed.Text="1";Seam.Text="0.5";Brightness.Value=0;Contrast.Value=1;Saturation.Value=1;
-        Video.Source=new Uri(input);Video.Play();Status.Text="Исходное видео сохраняется. Результат добавится отдельной сценой.";
+        string proxy=Path.ChangeExtension(input,".preview.mp4");
+        previewInput=scene.PresetId is not null && File.Exists(proxy)?proxy:input;
+        Video.Source=new Uri(previewInput);Video.Play();Status.Text="Исходное видео сохраняется. Результат добавится отдельной сценой.";
     }
     internal VideoRecipe ReadRecipe()
     {
@@ -36,7 +38,7 @@ public partial class VideoEditor : UserControl
         try
         {
             var recipe=ReadRecipe();cancellation=new();PreviewButton.IsEnabled=false;ExportButton.IsEnabled=false;CancelButton.Visibility=Visibility.Visible;Video.Stop();Video.Source=null;
-            await VideoRender.Run(input,output,recipe,PerformanceProfile.Resolve("Balance"),new Progress<double>(value=>Status.Text=$"Обработка · {value:0}%"),cancellation.Token);
+            await VideoRender.Run(input,output,recipe,PerformanceProfile.Resolve(export?"Quality":"Balance"),new Progress<double>(value=>Status.Text=$"Обработка · {value:0}%"),cancellation.Token);
             if(export){string thumbnail=Path.ChangeExtension(output,".jpg");await VideoRender.Thumbnail(output,thumbnail);Saved?.Invoke(output,(name??"Видео")+" · Edit");Status.Text="Новая сцена добавлена в библиотеку.";}
             else{Video.Source=new Uri(output);Video.Play();Status.Text="Готовый цикл. Проверьте переход при повторе.";}
         }

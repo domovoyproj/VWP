@@ -1,8 +1,8 @@
 #ifndef AppVersion
- #define AppVersion "0.3.0"
+ #define AppVersion "0.3.1"
 #endif
 #ifndef BuildDir
- #define BuildDir "..\dist\Release-0.3.0"
+ #define BuildDir "..\dist\Release-0.3.1"
 #endif
 [Setup]
 AppId={{5B67AC71-9D02-46DE-87AE-642E81AF6374}

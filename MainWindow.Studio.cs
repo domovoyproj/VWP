@@ -56,7 +56,7 @@ public partial class MainWindow
         if(scene.Thumbnail is null)return null;
         var preset=scene.PresetId is int id?definitions.GetValueOrDefault(id):null;
         if(scene.PresetId==0)return new(){Background=Path.Combine(AppContext.BaseDirectory,"assets","layers","sakura-background.png"),Foreground=Path.Combine(AppContext.BaseDirectory,"assets","layers","sakura-character.png"),Accent="#F877B8",Effect="Petals"};
-        return new(){Background=scene.Thumbnail,Accent=preset?.Accent??"#A698EE",Effect=preset?.Motion switch{"rain"=>"Rain","petals"=>"Petals","embers"=>"Embers",_=>"Stars"}};
+        return new(){Background=FullResolutionCover(scene),Accent=preset?.Accent??"#A698EE",Effect=preset?.Motion switch{"rain"=>"Rain","petals"=>"Petals","embers"=>"Embers",_=>"Stars"}};
     }
     void LoadStudioSettings()
     {

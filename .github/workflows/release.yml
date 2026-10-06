@@ -18,7 +18,7 @@ jobs:
           python-version: '3.12'
       - name: Verify assets
         run: |
-          python -m pip install Pillow imageio-ffmpeg==0.6.0
+          python -m pip install -r tools/requirements-media.txt
           python tools/bootstrap_ffmpeg.py
           python tools/verify_presets.py
       - name: Build installer and portable archive

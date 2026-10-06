@@ -113,7 +113,7 @@ public partial class MainWindow
             else
             {
                 string path=scene.Path;var profile=PerformanceProfile.Resolve(config.Performance);
-                if(profile.Key=="Eco" || scene.PresetId is null && profile.Key=="Balance")
+                if(profile.Key!="Quality")
                 {
                     Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(scene.Path,profile);
                     if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
@@ -128,14 +128,29 @@ public partial class MainWindow
     }
     static string? FramedCover(Wallpaper scene,Forms.Screen screen,MonitorPreferences config)
     {
-        if(scene.Thumbnail is null || !File.Exists(scene.Thumbnail))return null;
+        string? cover=FullResolutionCover(scene);
+        if(cover is null || !File.Exists(cover))return null;
+        var info=new FileInfo(cover);
         string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","covers");Directory.CreateDirectory(folder);
-        string key=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(screen.DeviceName+scene.Path+config.Fit+config.FocusX.ToString(System.Globalization.CultureInfo.InvariantCulture)+config.FocusY.ToString(System.Globalization.CultureInfo.InvariantCulture)+screen.Bounds)));
+        string key=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(screen.DeviceName+cover+info.Length+info.LastWriteTimeUtc.Ticks+config.Fit+config.FocusX.ToString(System.Globalization.CultureInfo.InvariantCulture)+config.FocusY.ToString(System.Globalization.CultureInfo.InvariantCulture)+screen.Bounds)));
         string output=System.IO.Path.Combine(folder,key+".jpg");if(File.Exists(output))return output;
-        using var source=System.Drawing.Image.FromFile(scene.Thumbnail);using var target=new System.Drawing.Bitmap(screen.Bounds.Width,screen.Bounds.Height);
+        using var source=System.Drawing.Image.FromFile(cover);using var target=new System.Drawing.Bitmap(screen.Bounds.Width,screen.Bounds.Height);
         using var graphics=System.Drawing.Graphics.FromImage(target);graphics.Clear(System.Drawing.Color.FromArgb(20,20,28));graphics.InterpolationMode=System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
         graphics.DrawImage(source,PlaybackRules.Frame(source.Width,source.Height,target.Width,target.Height,config.Fit,config.FocusX,config.FocusY));
-        target.Save(output,System.Drawing.Imaging.ImageFormat.Jpeg);return output;
+        using var jpegOptions=new System.Drawing.Imaging.EncoderParameters(1);
+        jpegOptions.Param[0]=new System.Drawing.Imaging.EncoderParameter(System.Drawing.Imaging.Encoder.Quality,95L);
+        var jpegCodec=System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders().First(c=>c.FormatID==System.Drawing.Imaging.ImageFormat.Jpeg.Guid);
+        target.Save(output,jpegCodec,jpegOptions);return output;
+    }
+    static string? FullResolutionCover(Wallpaper scene)
+    {
+        string poster=System.IO.Path.ChangeExtension(scene.Path,".cover.jpg");
+        return scene.PresetId is not null && File.Exists(poster)?poster:scene.Thumbnail;
+    }
+    static string PreviewPath(Wallpaper scene)
+    {
+        string preview=System.IO.Path.ChangeExtension(scene.Path,".preview.mp4");
+        return scene.PresetId is not null && File.Exists(preview)?preview:scene.Path;
     }
     void MonitorChanged(object sender,SelectionChangedEventArgs e){if(featuresReady)LoadMonitorControls();}
     void LoadMonitorControls()
@@ -237,7 +252,7 @@ public partial class MainWindow
         if(!featuresReady||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||!File.Exists(scene.Path))return;
         StopHover();int generation=hoverGeneration;await Task.Delay(650);
         if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible)return;
-        hoverVideo=new MediaElement{Source=new Uri(scene.Path),Volume=0,LoadedBehavior=MediaState.Manual,UnloadedBehavior=MediaState.Close,Stretch=Stretch.UniformToFill,IsHitTestVisible=false};
+        hoverVideo=new MediaElement{Source=new Uri(PreviewPath(scene)),Volume=0,LoadedBehavior=MediaState.Manual,UnloadedBehavior=MediaState.Close,Stretch=Stretch.UniformToFill,IsHitTestVisible=false};
         var video=hoverVideo;video.MediaEnded+=(_,_)=>{video.Position=TimeSpan.Zero;video.Play();};video.MediaFailed+=(_,_)=>StopHover();card.Children.Add(video);video.Play();
     }
     void CardLeave(object sender,MouseEventArgs e)=>StopHover();

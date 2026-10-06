@@ -6,8 +6,8 @@ import zipfile
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--version', default='0.3.0')
-    parser.add_argument('--build', default='dist/Release-0.3.0')
+    parser.add_argument('--version', default='0.3.1')
+    parser.add_argument('--build', default='dist/Release-0.3.1')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     source = (root / args.build).resolve()

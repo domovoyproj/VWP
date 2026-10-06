@@ -9,22 +9,30 @@ import subprocess
 from concurrent.futures import ProcessPoolExecutor
 from PIL import Image, ImageDraw, ImageColor, ImageFilter
 import imageio_ffmpeg
+import cv2
+import numpy as np
+from make_previews import encode_preview
+
+cv2.setNumThreads(2)
 
 ROOT = Path(__file__).resolve().parents[1] / 'assets'
 PRESETS = json.loads((ROOT / 'presets.json').read_text(encoding='utf-8-sig'))
+WIDTH, HEIGHT, FPS, SECONDS = 3840, 2160, 60, 6
+SCALE = WIDTH / 1280
 
-@lru_cache(maxsize=18)
+@lru_cache(maxsize=2)
 def artwork(index):
     with Image.open(ROOT / f'scene-{index}.png') as source:
-        return source.convert('RGB').resize((1280,720),Image.Resampling.LANCZOS)
+        return np.asarray(source.convert('RGB').resize((WIDTH,HEIGHT),Image.Resampling.LANCZOS))
 
-@lru_cache(maxsize=18)
+@lru_cache(maxsize=2)
 def light(index,accent):
-    layer=Image.new('RGBA',(1280,720))
+    layer=Image.new('RGBA',(WIDTH,HEIGHT))
     draw=ImageDraw.Draw(layer)
     x=900 if index%2==0 else 370
-    draw.ellipse((x-350,-150,x+350,400),fill=(*ImageColor.getrgb(accent),45))
-    return layer.filter(ImageFilter.GaussianBlur(95))
+    draw.ellipse(tuple(v*SCALE for v in (x-350,-150,x+350,400)),fill=(*ImageColor.getrgb(accent),45))
+    rgba=np.asarray(layer.filter(ImageFilter.GaussianBlur(95*SCALE)))
+    return np.ascontiguousarray(rgba[:,:,:3]),rgba[:,:,3].astype(np.float32)/255
 
 # Localized motion stays away from faces: hair tips, foliage, fabric or crystal petals.
 SWAY={0:(.86,.59,.13,.24),1:(.84,.65,.13,.25),2:(.87,.57,.12,.32),
@@ -37,36 +45,45 @@ def living_art(preset,t):
     phase=t*math.tau
     source=artwork(preset['id'])
     region=SWAY.get(preset['id'])
-    def displaced(x,y):
-        depth=(y/720)**2
-        dx=math.sin(phase)*2.5*depth
-        dy=math.cos(phase)*1.2*depth
-        if region:
-            cx,cy,rx,ry=region
-            influence=math.exp(-((x/1280-cx)/rx)**2-((y/720-cy)/ry)**2)
-            dx+=math.sin(phase+y/130)*2.4*influence
-            dy+=math.cos(phase+x/260)*.9*influence
-        return x+dx,y+dy
-    mesh=[]
-    for y in range(0,720,90):
-        for x in range(0,1280,160):
-            corners=[displaced(x,y),displaced(x,y+90),displaced(x+160,y+90),displaced(x+160,y)]
-            mesh.append(((x,y,x+160,y+90),tuple(v for point in corners for v in point)))
-    warped=source.transform(source.size,Image.Transform.MESH,mesh,Image.Resampling.BICUBIC)
-    # Slow orbital camera, with overscan so no exposed border enters the frame.
+    # Compose camera and local displacement into one high-resolution resampling pass.
     zoom=1.035+.006*(1-math.cos(phase))
     width,height=1280/zoom,720/zoom
     left=(1280-width)/2+6*math.sin(phase)
     top=(720-height)/2+3*math.sin(phase)
-    im=warped.transform((1280,720),Image.Transform.EXTENT,(left,top,left+width,top+height),Image.Resampling.BICUBIC).convert('RGBA')
-    glow=light(preset['id'],preset['accent']).copy()
-    glow.putalpha(glow.getchannel('A').point(lambda a:int(a*(.68+.25*math.sin(phase)))))
-    return Image.alpha_composite(im,glow).convert('RGB')
+    x,y=np.meshgrid(np.linspace(left,left+width,129,dtype=np.float32),np.linspace(top,top+height,73,dtype=np.float32))
+    depth=(y/720)**2
+    dx=math.sin(phase)*2.5*depth
+    dy=math.cos(phase)*1.2*depth
+    if region:
+        cx,cy,rx,ry=region
+        influence=np.exp(-((x/1280-cx)/rx)**2-((y/720-cy)/ry)**2)
+        dx+=np.sin(phase+y/130)*2.4*influence
+        dy+=np.cos(phase+x/260)*.9*influence
+    map_x=cv2.resize(dx,(WIDTH,HEIGHT),interpolation=cv2.INTER_CUBIC)*SCALE
+    map_y=cv2.resize(dy,(WIDTH,HEIGHT),interpolation=cv2.INTER_CUBIC)*SCALE
+    map_x+=(np.arange(WIDTH,dtype=np.float32)/zoom+left*SCALE)[None,:]
+    map_y+=(np.arange(HEIGHT,dtype=np.float32)/zoom+top*SCALE)[:,None]
+    im=cv2.remap(source,map_x,map_y,cv2.INTER_CUBIC,borderMode=cv2.BORDER_REFLECT_101)
+    glow,alpha=light(preset['id'],preset['accent'])
+    weight=alpha*(.68+.25*math.sin(phase))
+    return Image.fromarray(cv2.blendLinear(im,glow,1-weight,weight))
+
+class ScaledDraw:
+    """Draw particle geometry directly at output resolution, in logical coordinates."""
+    def __init__(self,image):
+        self.draw=ImageDraw.Draw(image,'RGBA')
+    def line(self,coordinates,**options):
+        self.draw.line(tuple(v*SCALE for v in coordinates),**self.options(options))
+    def ellipse(self,coordinates,**options):
+        self.draw.ellipse(tuple(v*SCALE for v in coordinates),**self.options(options))
+    def options(self,options):
+        if 'width' in options:options['width']=max(1,round(options['width']*SCALE))
+        return options
 
 def frame(preset,t):
     t=t%1
     im=living_art(preset,t)
-    draw=ImageDraw.Draw(im,'RGBA')
+    draw=ScaledDraw(im)
     rng=random.Random(preset['id']+82)
     color=ImageColor.getrgb(preset['accent'])
     motion=preset['motion']
@@ -100,30 +117,37 @@ def frame(preset,t):
             draw.ellipse((x,y,x+size*(2 if motion=='petals' else 1),y+size),fill=(*color,110))
     return im
 
-def encode(preset):
+def encode(preset,encoder='libx264'):
     index=preset['id']
     temporary=ROOT/f'{index}.tmp.mp4'
-    cmd=[imageio_ffmpeg.get_ffmpeg_exe(),'-y','-f','rawvideo','-pix_fmt','rgb24','-s','1280x720','-r','24','-i','-','-an','-c:v','libx264','-threads','2','-pix_fmt','yuv420p','-crf','20','-movflags','+faststart',str(temporary)]
+    codec=['-c:v','h264_qsv','-preset','slow','-global_quality','16'] if encoder=='h264_qsv' else ['-c:v','libx264','-preset','veryfast','-crf','16']
+    cmd=[imageio_ffmpeg.get_ffmpeg_exe(),'-y','-hide_banner','-loglevel','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{WIDTH}x{HEIGHT}','-r',str(FPS),'-i','-','-an',*codec,'-threads','2','-vf','scale=out_color_matrix=bt709','-pix_fmt','yuv420p','-color_primaries','bt709','-color_trc','bt709','-colorspace','bt709','-movflags','+faststart',str(temporary)]
     process=subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
     try:
-        for n in range(144):process.stdin.write(frame(preset,n/144).tobytes())
+        for n in range(FPS*SECONDS):
+            process.stdin.write(frame(preset,n/(FPS*SECONDS)).tobytes())
+            if n%60==0:print(f"{index}: rendered {n}/{FPS*SECONDS}",flush=True)
     finally:
         process.stdin.close()
     errors=process.stderr.read()
     if process.wait():raise RuntimeError(errors.decode())
     temporary.replace(ROOT/f'{index}.mp4')
-    frame(preset,0).save(ROOT/f'{index}.jpg',quality=92)
+    cover=frame(preset,0)
+    cover.save(ROOT/f'{index}.cover.jpg',quality=96,subsampling=0)
+    cover.resize((1280,720),Image.Resampling.LANCZOS).save(ROOT/f'{index}.jpg',quality=95)
+    encode_preview(index)
     print(f"{index}: {preset['name']}",flush=True)
 
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--ids',nargs='+',type=int)
     parser.add_argument('--jobs',type=int,default=1)
+    parser.add_argument('--encoder',choices=['libx264','h264_qsv'],default='libx264')
     args=parser.parse_args()
     chosen=[p for p in PRESETS if args.ids is None or p['id'] in args.ids]
     if args.jobs>1:
-        with ProcessPoolExecutor(max_workers=args.jobs) as pool:list(pool.map(encode,chosen))
+        with ProcessPoolExecutor(max_workers=args.jobs) as pool:list(pool.map(encode,chosen,[args.encoder]*len(chosen)))
     else:
-        for preset in chosen:encode(preset)
+        for preset in chosen:encode(preset,args.encoder)
 
 if __name__=='__main__':main()
