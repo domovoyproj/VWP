@@ -17,6 +17,8 @@
      <ListBox x:Name="PlaylistEntries" MaxHeight="100" Background="{DynamicResource CardBrush}" BorderBrush="{DynamicResource LineBrush}" DisplayMemberPath="Name"/>
      <StackPanel Orientation="Horizontal" Margin="0,5,0,15"><Button x:Name="MoveUp" Content="↑" Padding="12,6"/><Button x:Name="MoveDown" Content="↓" Padding="12,6" Margin="6,0"/><Button x:Name="RemoveEntry" Content="Убрать" Padding="12,6"/><TextBlock x:Name="PlaylistCount" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center" Margin="12,0,0,0"/></StackPanel>
      <TextBlock Text="Живая глубина и музыка" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,12"/>
+     <CheckBox x:Name="SceneAnimation" Content="Анимация импортированных наборов" Margin="0,0,0,8"/>
+     <TextBlock Text="18 исходных видео и 18 объёмных сцен доступны одновременно в библиотеке. Новые сцены отмечены «3D» в названии. Этот переключатель относится только к импортированным наборам." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,0,0,12"/>
      <CheckBox x:Name="Interactive" Content="Интерактивный фон вместо видео" Margin="0,0,0,12"/>
      <CheckBox x:Name="Music" Content="Реакция света и частиц на системный звук" Margin="0,0,0,12"/>
      <TextBlock Text="Глубина параллакса" Foreground="{DynamicResource MutedBrush}"/><Slider x:Name="Depth" Minimum="0" Maximum="1" Value="0.65"/>

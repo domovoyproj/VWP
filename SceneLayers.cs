@@ -6,6 +6,9 @@ public sealed class SceneLayers
     public string? Foreground {get;set;}
     public string Accent {get;set;}="#A698EE";
     public string Effect {get;set;}="Stars";
+    public int? MotionId {get;set;}
+    [System.Text.Json.Serialization.JsonIgnore]
+    public string? Video {get;set;}
 }
 public sealed record PerformanceProfile(string Key,string Name,int Fps,int MaxHeight,int Particles)
 {

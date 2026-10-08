@@ -1,8 +1,8 @@
 #ifndef AppVersion
- #define AppVersion "0.3.1"
+ #define AppVersion "0.4.1"
 #endif
 #ifndef BuildDir
- #define BuildDir "..\dist\Release-0.3.1"
+ #define BuildDir "..\dist\Release-0.4.1"
 #endif
 [Setup]
 AppId={{5B67AC71-9D02-46DE-87AE-642E81AF6374}
@@ -32,7 +32,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Tasks]
 Name: "desktopicon"; Description: "Создать ярлык на рабочем столе"; Flags: unchecked
 [Files]
-Source: "{#BuildDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb,*.log,verification\*,libvlc\win-x86\*,libvlc\win-arm64\*,assets\scene-*.png"
+Source: "{#BuildDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb,*.log,verification\*,libvlc\win-x86\*,libvlc\win-arm64\*"
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 [Icons]
 Name: "{userprograms}\VWP"; Filename: "{app}\VWP.exe"

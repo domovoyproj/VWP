@@ -13,7 +13,7 @@ using Microsoft.Win32;
 using LibVLCSharp.Shared;
 using Forms = System.Windows.Forms;
 namespace VWP;
-public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null);
+public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null,bool IsSpatial=false);
 public record PresetDefinition(int Id,string Name,string Category,string Description,string Accent,string Motion);
 public sealed class Preferences
 {
@@ -68,6 +68,7 @@ public partial class MainWindow : Window
         string assets=System.IO.Path.Combine(AppContext.BaseDirectory,"assets");
         var presets=JsonSerializer.Deserialize<List<PresetDefinition>>(File.ReadAllText(System.IO.Path.Combine(assets,"presets.json")),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
         foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 4K · 60 FPS",preset.Category,preset.Description,preset.Id));
+        foreach(var preset in presets)items.Add(new(preset.Name+" · 3D",System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,"spatial",$"{preset.Id}.png"),preset.Category+" · ОБЪЁМНАЯ СЦЕНА",preset.Category,SpatialScene.Descriptions[preset.Id],preset.Id,true));
         foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO"));
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
         RefreshScreens(); Volume.Value=preferences.Volume; if(host is not null)host.Volume=preferences.Volume; Autostart.IsChecked=preferences.Autostart;
@@ -130,7 +131,7 @@ public partial class MainWindow : Window
             if(preferences.Monitors.TryGetValue(screen.DeviceName,out var config) && FindScene(config.Scene) is Wallpaper scene)ApplyScene(scene,screen);
         LoadMonitorControls();
     }
-    bool FilterScene(object value) {var item=(Wallpaper)value;return MatchesCollection(item) && item.Name.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase);}
+    bool FilterScene(object value) {var item=(Wallpaper)value;return (sceneFormat=="Все форматы" || sceneFormat=="3D" == item.IsSpatial) && MatchesCollection(item) && item.Name.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase);}
     void RefreshFilter() {if(Library.ItemsSource is null)return;var view=System.Windows.Data.CollectionViewSource.GetDefaultView(items);view.Refresh();CountLabel.Text=$"{view.Cast<Wallpaper>().Count()} / {items.Count} сцен";}
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
     void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)button.Background=button.Tag as string==category?System.Windows.Media.Brushes.White:System.Windows.Media.Brushes.Transparent;RefreshFilter();}
@@ -164,10 +165,17 @@ public partial class MainWindow : Window
     {
         StopHover();
         if(Library.SelectedItem is not Wallpaper item || !File.Exists(item.Path))return;
-        if(HeroVideo.Visibility==Visibility.Visible){StopPreview();return;}
+        if(HeroVideo.Visibility==Visibility.Visible || scenePreview is not null){StopPreview();return;}
+        if((item.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(item) is SceneLayers layers && layers.MotionId is not null)
+        {
+            scenePreview=new InteractiveVisual(layers,PlaybackConfig(item,Config(SelectedScreen)),SelectedScreen,audio);
+            HeroMotion.Children.Add(scenePreview);HeroMotion.Visibility=Visibility.Visible;
+            PreviewButton.Content="□  Остановить превью";return;
+        }
         HeroVideo.Source=new Uri(PreviewPath(item));HeroVideo.Visibility=Visibility.Visible;HeroVideo.Play();PreviewButton.Content="□  Остановить превью";
     }
-    void StopPreview() {HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Смотреть превью";}
+    InteractiveVisual? scenePreview;
+    void StopPreview() {scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Смотреть превью";}
     void AutostartClick(object sender,RoutedEventArgs e)
     {
         bool enabled=Autostart.IsChecked==true;
@@ -232,9 +240,13 @@ public partial class MainWindow : Window
         var image=new RenderTargetBitmap((int)visual.ActualWidth,(int)visual.ActualHeight,96,96,System.Windows.Media.PixelFormats.Pbgra32);
         image.Render(visual);var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(image));
         using(var stream=File.Create(System.IO.Path.Combine(folder,"launcher.png")))encoder.Save(stream);
+        Library.SelectedItem=items.First(item=>item.PresetId is not null && !item.IsSpatial);
         PreviewClick(this,new());await System.Threading.Tasks.Task.Delay(2500);
+        bool originalPreview=HeroVideo.Visibility==Visibility.Visible && HeroVideo.NaturalVideoWidth>0;
+        StopPreview();Library.SelectedItem=items.First(item=>item.IsSpatial);
+        PreviewClick(this,new());await System.Threading.Tasks.Task.Delay(1500);
         bool startupOnscreen=Top>=launchArea.Top && Left>=launchArea.Left && Top+ActualHeight<=launchArea.Bottom+1 && Left+ActualWidth<=launchArea.Right+1;
-        File.WriteAllText(System.IO.Path.Combine(folder,"ui-result.json"),JsonSerializer.Serialize(new {previewWidth=HeroVideo.NaturalVideoWidth,previewPosition=HeroVideo.Position.TotalMilliseconds,previewVisible=HeroVideo.Visibility==Visibility.Visible,startupOnscreen,left=Left,top=Top}));
+        File.WriteAllText(System.IO.Path.Combine(folder,"ui-result.json"),JsonSerializer.Serialize(new {originalPreview,originalPresets=items.Count(item=>item.PresetId is not null && !item.IsSpatial),spatialPresets=items.Count(item=>item.IsSpatial),uniqueKeys=items.Select(PlaybackRules.Key).Distinct().Count()==items.Count,independentSelection=items.Where(item=>item.PresetId is not null).All(item=>PlaybackConfig(item,new MonitorPreferences{SceneAnimation=false}).SceneAnimation==item.IsSpatial),spatialPreview=scenePreview?.Spatial is not null,spatialSeconds=scenePreview?.Spatial?.Time,spatialFrames=scenePreview?.RenderedFrames,spatialCovers=items.Count(item=>item.PresetId is not null && item.Thumbnail?.Contains("spatial")==true),startupOnscreen,left=Left,top=Top}));
         QuitClick(this,new());
     }
     protected override void OnClosing(CancelEventArgs e)

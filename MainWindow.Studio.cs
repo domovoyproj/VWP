@@ -52,24 +52,29 @@ public partial class MainWindow
     }
     SceneLayers? LayersFor(Wallpaper scene)
     {
-        if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom))return custom;
+        if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom)){custom.Video=custom.MotionId is not null?scene.Path:null;return custom;}
         if(scene.Thumbnail is null)return null;
         var preset=scene.PresetId is int id?definitions.GetValueOrDefault(id):null;
+        if(scene.IsSpatial && scene.PresetId is >=0 and <18)
+        {
+            string original=Path.Combine(AppContext.BaseDirectory,"assets",$"scene-{scene.PresetId}.png");
+            return new(){Background=File.Exists(original)?original:FullResolutionCover(scene),Video=scene.Path,MotionId=scene.PresetId,Accent=preset?.Accent??"#A698EE"};
+        }
         if(scene.PresetId==0)return new(){Background=Path.Combine(AppContext.BaseDirectory,"assets","layers","sakura-background.png"),Foreground=Path.Combine(AppContext.BaseDirectory,"assets","layers","sakura-character.png"),Accent="#F877B8",Effect="Petals"};
         return new(){Background=FullResolutionCover(scene),Accent=preset?.Accent??"#A698EE",Effect=preset?.Motion switch{"rain"=>"Rain","petals"=>"Petals","embers"=>"Embers",_=>"Stars"}};
     }
     void LoadStudioSettings()
     {
-        var config=Config(SelectedScreen);Settings.Interactive.IsChecked=config.Interactive;Settings.Music.IsChecked=config.MusicReactive;Settings.Depth.Value=config.Depth;
+        var config=Config(SelectedScreen);Settings.SceneAnimation.IsChecked=config.SceneAnimation;Settings.Interactive.IsChecked=config.Interactive;Settings.Music.IsChecked=config.MusicReactive;Settings.Depth.Value=config.Depth;
         Settings.Performance.SelectedIndex=config.Performance switch{"Eco"=>0,"Quality"=>2,_=>1};
         Settings.Theme.SelectedIndex=preferences.Theme switch{"Light"=>0,"Dark"=>1,_=>2};Settings.SceneAccent.IsChecked=preferences.SceneAccent;
         Settings.Exceptions.Text=string.Join(", ",preferences.PauseExceptions);Settings.GallerySource.Text=preferences.GallerySource;
-        Settings.LayersLabel.Text=Library.SelectedItem is Wallpaper scene && LayersFor(scene)?.Foreground is not null?"Фон + отдельный персонаж":"Фон + частицы. Можно добавить PNG персонажа.";
+        Settings.LayersLabel.Text=Library.SelectedItem is Wallpaper scene && LayersFor(scene)?.MotionId is int motionId?SpatialScene.Descriptions[motionId]:"Можно добавить фон и PNG персонажа.";
         UpdateResources();
     }
     void SaveStudioSettings()
     {
-        var config=Config(SelectedScreen);config.Interactive=Settings.Interactive.IsChecked==true;config.MusicReactive=Settings.Music.IsChecked==true;config.Depth=Settings.Depth.Value;
+        var config=Config(SelectedScreen);config.SceneAnimation=Settings.SceneAnimation.IsChecked==true;config.Interactive=Settings.Interactive.IsChecked==true;config.MusicReactive=Settings.Music.IsChecked==true;config.Depth=Settings.Depth.Value;
         config.Performance=Settings.Performance.SelectedIndex switch{0=>"Eco",2=>"Quality",_=>"Balance"};
         preferences.Theme=Settings.Theme.SelectedIndex switch{0=>"Light",1=>"Dark",_=>"System"};preferences.SceneAccent=Settings.SceneAccent.IsChecked==true;
         preferences.PauseExceptions=Settings.Exceptions.Text.Split(',',StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries).Select(Path.GetFileNameWithoutExtension).Where(s=>!string.IsNullOrEmpty(s)).Select(s=>s!).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
@@ -81,7 +86,7 @@ public partial class MainWindow
         var dialog=new OpenFileDialog{Filter=foreground?"PNG с прозрачностью|*.png":"Изображения|*.png;*.jpg;*.jpeg;*.webp"};if(dialog.ShowDialog()!=true)return;
         string folder=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","layers");Directory.CreateDirectory(folder);
         string file=Path.Combine(folder,Guid.NewGuid().ToString("N")+Path.GetExtension(dialog.FileName));File.Copy(dialog.FileName,file);
-        var layers=LayersFor(scene)??new();if(foreground)layers.Foreground=file;else layers.Background=file;preferences.Layers[PlaybackRules.Key(scene)]=layers;Settings.LayersLabel.Text=layers.Foreground is not null?"Фон + отдельный персонаж":"Фон + частицы";Save();
+        var layers=LayersFor(scene)??new();layers.MotionId=null;if(foreground)layers.Foreground=file;else layers.Background=file;preferences.Layers[PlaybackRules.Key(scene)]=layers;Settings.LayersLabel.Text=layers.Foreground is not null?"Фон + отдельный персонаж":"Фон + частицы";Save();
     }
     void UpdateResources()
     {

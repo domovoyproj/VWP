@@ -13,6 +13,7 @@ public sealed class MonitorPreferences
     public double FocusY { get; set; } = .5;
     public bool UserPaused { get; set; }
     public bool Interactive {get;set;}
+    public bool SceneAnimation {get;set;}=true;
     public bool MusicReactive {get;set;}
     public double Depth {get;set;}=.65;
     public string Performance {get;set;}="Quality";
@@ -23,11 +24,12 @@ public sealed class MonitorPreferences
     public int IntervalMinutes { get; set; } = 15;
     public string ScheduleStart { get; set; } = "00:00";
     public string ScheduleEnd { get; set; } = "00:00";
+    public MonitorPreferences ForScene(bool spatial){var copy=(MonitorPreferences)MemberwiseClone();copy.SceneAnimation=spatial;return copy;}
 }
 
 public static class PlaybackRules
 {
-    public static string Key(Wallpaper scene) => scene.PresetId is int id ? "preset:" + id : scene.Path;
+    public static string Key(Wallpaper scene) => scene.PresetId is int id ? (scene.IsSpatial?"spatial:":"preset:") + id : scene.Path;
     public static bool InSchedule(DateTime now, string start, string end)
     {
         if (!TimeSpan.TryParseExact(start, @"hh\:mm", null, out var from) || !TimeSpan.TryParseExact(end, @"hh\:mm", null, out var to)) return false;

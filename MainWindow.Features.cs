@@ -22,7 +22,9 @@ public partial class MainWindow
     readonly Random random=new();
     int hoverGeneration;
     MediaElement? hoverVideo;
+    InteractiveVisual? hoverMotion;
     string mood="Все настроения";
+    string sceneFormat="Все форматы";
     Forms.Screen SelectedScreen => Forms.Screen.AllScreens[Math.Clamp(Monitor?.SelectedIndex??0,0,Forms.Screen.AllScreens.Length-1)];
     MonitorPreferences Config(Forms.Screen screen)
     {
@@ -30,13 +32,14 @@ public partial class MainWindow
         return config;
     }
     Wallpaper? FindScene(string? key)=>items.FirstOrDefault(scene=>PlaybackRules.Key(scene)==key);
+    static MonitorPreferences PlaybackConfig(Wallpaper? scene,MonitorPreferences config)=>scene?.PresetId is not null?config.ForScene(scene.IsSpatial):config;
     DesktopHost GetHost(Forms.Screen screen)
     {
         if(hosts.TryGetValue(screen.DeviceName,out var player))return player;
         player=new DesktopHost();hosts[screen.DeviceName]=player;
         player.Failed+=()=>Dispatcher.BeginInvoke(new Action(()=>Status.Text="Ошибка видео на "+screen.DeviceName));
         player.LoopRequired+=()=>Dispatcher.BeginInvoke(new Action(player.Replay));
-        player.SurfaceReady+=()=>Dispatcher.BeginInvoke(new Action(()=>{player.CompleteRecovery();player.SetFraming(Config(screen));player.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,player);}));
+        player.SurfaceReady+=()=>Dispatcher.BeginInvoke(new Action(()=>{player.CompleteRecovery();player.SetFraming(PlaybackConfig(FindScene(Config(screen).Scene),Config(screen)));player.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,player);}));
         return player;
     }
     void InitializeFeatures()
@@ -104,12 +107,12 @@ public partial class MainWindow
     async void ApplyScene(Wallpaper scene,Forms.Screen screen)
     {
         if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
-        var config=Config(screen);var player=GetHost(screen);
+        var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);
         try
         {
             int generation=applyGeneration.GetValueOrDefault(screen.DeviceName)+1;applyGeneration[screen.DeviceName]=generation;
-            if(config.Interactive && LayersFor(scene) is SceneLayers layers && layers.Background is not null)
-                player.PlayInteractive(layers,screen,config,audio,FramedCover(scene,screen,config));
+            if(LayersFor(scene) is SceneLayers layers && layers.Background is not null && (scene.IsSpatial || config.Interactive || playback.SceneAnimation && layers.MotionId is not null))
+                player.PlayInteractive(layers,screen,playback,audio,FramedCover(scene,screen,playback));
             else
             {
                 string path=scene.Path;var profile=PerformanceProfile.Resolve(config.Performance);
@@ -120,7 +123,7 @@ public partial class MainWindow
                 }
                 player.Play(path,screen,FramedCover(scene,screen,config),true);
             }
-            player.SetFraming(config);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
+            player.SetFraming(playback);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
             config.Scene=PlaybackRules.Key(scene);preferences.Last=scene.Path;preferences.LastPresetId=scene.PresetId;preferences.Monitor=screen.DeviceName;
             nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();UpdatePlaybackStatus();
         }
@@ -128,7 +131,8 @@ public partial class MainWindow
     }
     static string? FramedCover(Wallpaper scene,Forms.Screen screen,MonitorPreferences config)
     {
-        string? cover=FullResolutionCover(scene);
+        string spatial=System.IO.Path.Combine(AppContext.BaseDirectory,"assets","spatial",$"{scene.PresetId}.png");
+        string? cover=scene.IsSpatial && File.Exists(spatial)?spatial:FullResolutionCover(scene);
         if(cover is null || !File.Exists(cover))return null;
         var info=new FileInfo(cover);
         string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","covers");Directory.CreateDirectory(folder);
@@ -155,9 +159,25 @@ public partial class MainWindow
     void MonitorChanged(object sender,SelectionChangedEventArgs e){if(featuresReady)LoadMonitorControls();}
     void LoadMonitorControls()
     {
-        if(!featuresReady)return;loadingControls=true;var config=Config(SelectedScreen);Volume.Value=config.Volume;
+        if(!featuresReady)return;loadingControls=true;var config=Config(SelectedScreen);Volume.Value=config.Volume;RefreshScenePresentations();
         if(FindScene(config.Scene) is Wallpaper scene)Library.SelectedItem=scene;
         loadingControls=false;UpdateSceneActions();UpdatePlaybackStatus();RefreshFilter();
+    }
+    void RefreshScenePresentations()
+    {
+        string? selected=Library.SelectedItem is Wallpaper current?PlaybackRules.Key(current):null;
+        StopHover();StopPreview();
+        for(int i=0;i<items.Count;i++)
+        {
+            var item=items[i];if(item.PresetId is not int id)continue;
+            bool spatial=item.IsSpatial;
+            string cover=System.IO.Path.Combine(AppContext.BaseDirectory,"assets",spatial?$"spatial/{id}.png":$"{id}.jpg");
+            if(!File.Exists(cover))continue;
+            string description=spatial?SpatialScene.Descriptions[id]:definitions.GetValueOrDefault(id)?.Description??item.Description;
+            string subtitle=item.Category+(spatial?" · 3D · REALTIME":" · 4K · 60 FPS");
+            if(item.Thumbnail!=cover || item.Subtitle!=subtitle)items[i]=item with {Thumbnail=cover,Subtitle=subtitle,Description=description};
+        }
+        if(selected is not null)Library.SelectedItem=FindScene(selected);
     }
     void UpdateSceneActions()
     {
@@ -180,6 +200,7 @@ public partial class MainWindow
         bool collection=category switch{"Все сцены"=>true,"Избранное"=>preferences.Favorites.Contains(PlaybackRules.Key(scene)),"Плейлист"=>Config(SelectedScreen).Playlist.Contains(PlaybackRules.Key(scene)),_=>scene.Category==category};
         return collection && (mood switch{"Ночной Токио"=>scene.PresetId is 0 or 1 or 6 or 9 or 14,"Спокойствие"=>scene.PresetId is 3 or 5 or 7 or 8 or 10 or 12 or 17,"Космос"=>scene.Category=="Космос","Работа"=>scene.PresetId is 5 or 8 or 10 or 14 or 15,_=>true});
     }
+    void FormatChanged(object sender,SelectionChangedEventArgs e){sceneFormat=(FormatPicker.SelectedItem as ComboBoxItem)?.Content as string??"Все форматы";if(Library is not null)RefreshFilter();}
     void MoodChanged(object sender,SelectionChangedEventArgs e){mood=(MoodPicker.SelectedItem as ComboBoxItem)?.Content as string??"Все настроения";RefreshFilter();}
     void PreviousClick(object sender,RoutedEventArgs e)=>Advance(SelectedScreen,-1);
     void NextClick(object sender,RoutedEventArgs e)=>Advance(SelectedScreen,1);
@@ -219,6 +240,7 @@ public partial class MainWindow
         config.PlaylistName=string.IsNullOrWhiteSpace(Settings.PlaylistName.Text)?"Мой плейлист":Settings.PlaylistName.Text.Trim();config.IntervalMinutes=interval;config.ScheduleStart=Settings.ScheduleStart.Text;config.ScheduleEnd=Settings.ScheduleEnd.Text;config.PlaylistEnabled=Settings.PlaylistEnabled.IsChecked==true;config.Shuffle=Settings.Shuffle.IsChecked==true;
         preferences.PauseFullscreen=Settings.PauseFullscreen.IsChecked==true;preferences.PauseBattery=Settings.PauseBattery.IsChecked==true;preferences.HoverPreview=Settings.HoverPreview.IsChecked==true;preferences.CheckUpdates=Settings.CheckUpdates.IsChecked==true;
         SaveStudioSettings();
+        RefreshScenePresentations();
         Save();SettingsOverlay.Visibility=Visibility.Collapsed;
         if(host?.Active==true && FindScene(config.Scene) is Wallpaper scene)ApplyScene(scene,SelectedScreen);
         else if(config.PlaylistEnabled)Advance(SelectedScreen,1);
@@ -251,10 +273,15 @@ public partial class MainWindow
     {
         if(!featuresReady||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||!File.Exists(scene.Path))return;
         StopHover();int generation=hoverGeneration;await Task.Delay(650);
-        if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible)return;
+        if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible||scenePreview is not null)return;
+        if((scene.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(scene) is SceneLayers layers && layers.MotionId is not null)
+        {
+            hoverMotion=new InteractiveVisual(layers,new MonitorPreferences{Performance="Balance",SceneAnimation=true},SelectedScreen,audio){IsHitTestVisible=false};
+            card.Children.Add(hoverMotion);return;
+        }
         hoverVideo=new MediaElement{Source=new Uri(PreviewPath(scene)),Volume=0,LoadedBehavior=MediaState.Manual,UnloadedBehavior=MediaState.Close,Stretch=Stretch.UniformToFill,IsHitTestVisible=false};
         var video=hoverVideo;video.MediaEnded+=(_,_)=>{video.Position=TimeSpan.Zero;video.Play();};video.MediaFailed+=(_,_)=>StopHover();card.Children.Add(video);video.Play();
     }
     void CardLeave(object sender,MouseEventArgs e)=>StopHover();
-    void StopHover(){hoverGeneration++;if(hoverVideo is null)return;var video=hoverVideo;hoverVideo=null;video.Stop();video.Source=null;if(video.Parent is Panel panel)panel.Children.Remove(video);}
+    void StopHover(){hoverGeneration++;if(hoverMotion is not null){hoverMotion.Dispose();if(hoverMotion.Parent is Panel parent)parent.Children.Remove(hoverMotion);hoverMotion=null;}if(hoverVideo is null)return;var video=hoverVideo;hoverVideo=null;video.Stop();video.Source=null;if(video.Parent is Panel panel)panel.Children.Remove(video);}
 }
