@@ -2,6 +2,7 @@ name: Cloud wallpaper collection
 on:
   push:
     branches: ['codex/scene-expansion']
+    tags: ['v0.5.*']
   workflow_dispatch:
 permissions:
   contents: read
@@ -49,6 +50,8 @@ jobs:
     needs: [motion,spatial]
     runs-on: windows-latest
     timeout-minutes: 60
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -71,17 +74,39 @@ jobs:
           python -m pip install 'Pillow>=11,<13' imageio-ffmpeg==0.6.0
           python tools/check_expansion.py
           python tools/bootstrap_ffmpeg.py
-      - name: Build cloud preview distribution
+      - name: Build complete Windows distribution
         run: |
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          if ('${{ github.ref_type }}' -eq 'tag' -and '${{ github.ref_name }}' -ne "v$version") { throw 'Tag/version mismatch' }
           ./build.ps1 -Installer
           if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
-          python tools/package_release.py --version 0.5.0 --build dist/Release-0.5.0
+          python tools/package_release.py --version $version --build "dist/Release-$version"
           if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
       - uses: actions/upload-artifact@v4
         with:
-          name: VWP-0.5.0-cloud-preview
+          name: VWP-Windows
           path: |
             dist/*-Setup.exe
             dist/*.zip
             dist/*.sha256
           retention-days: 14
+      - name: Publish official release
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = '${{ github.ref_name }}'
+          gh release view $tag --repo '${{ github.repository }}' --json tagName --jq '.tagName' *> $null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $tag --repo '${{ github.repository }}' --title 'VWP 0.5.0 — 61 сцена' --notes-file docs/RELEASE-0.5.0.md
+            if ($LASTEXITCODE -ne 0) { throw 'Release creation failed' }
+          }
+          $existing = @(gh release view $tag --repo '${{ github.repository }}' --json assets --jq '.assets[].name')
+          if ($LASTEXITCODE -ne 0) { throw 'Release inspection failed' }
+          $files = @(Get-ChildItem -Path 'dist/*-Setup.exe', 'dist/*.zip', 'dist/*.sha256' | Where-Object { $_.Name -notin $existing } | ForEach-Object { $_.FullName })
+          if ($files.Count -gt 0) {
+            gh release upload $tag @files --repo '${{ github.repository }}'
+            if ($LASTEXITCODE -ne 0) { throw 'Release upload failed' }
+          }
