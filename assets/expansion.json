@@ -1,0 +1,146 @@
+{
+  "spatial": [
+    {
+      "id": 18,
+      "name": "Orbital Garden",
+      "category": "Космос"
+    },
+    {
+      "id": 19,
+      "name": "Harbor Departures",
+      "category": "Город"
+    },
+    {
+      "id": 20,
+      "name": "Clockwork Cafe",
+      "category": "Город"
+    },
+    {
+      "id": 21,
+      "name": "Alpine Express",
+      "category": "Природа"
+    },
+    {
+      "id": 22,
+      "name": "Lantern Festival",
+      "category": "Город"
+    },
+    {
+      "id": 23,
+      "name": "Metro Loop",
+      "category": "Город"
+    },
+    {
+      "id": 24,
+      "name": "Quiet Observatory",
+      "category": "Космос"
+    },
+    {
+      "id": 25,
+      "name": "Robot Workshop",
+      "category": "Фэнтези"
+    },
+    {
+      "id": 26,
+      "name": "Coral Research",
+      "category": "Природа"
+    },
+    {
+      "id": 27,
+      "name": "Rooftop Basketball",
+      "category": "Город"
+    }
+  ],
+  "live": [
+    {
+      "id": 100,
+      "name": "Rain on Glass",
+      "category": "Город",
+      "description": "Капли скользят по стеклу на фоне ночных огней."
+    },
+    {
+      "id": 101,
+      "name": "Aurora Silk",
+      "category": "Природа",
+      "description": "Северное сияние переливается над тёмными горами."
+    },
+    {
+      "id": 102,
+      "name": "Tidal Light",
+      "category": "Природа",
+      "description": "Волны проходят через солнечную дорожку."
+    },
+    {
+      "id": 103,
+      "name": "Amber Hearth",
+      "category": "Природа",
+      "description": "Языки пламени и искры над тлеющими дровами."
+    },
+    {
+      "id": 104,
+      "name": "Stellar Flight",
+      "category": "Космос",
+      "description": "Полёт через звёздное поле."
+    },
+    {
+      "id": 105,
+      "name": "Koi Reverie",
+      "category": "Природа",
+      "description": "Рыбы кои кружат в пруду, двигая хвостами."
+    },
+    {
+      "id": 106,
+      "name": "Meteor Night",
+      "category": "Космос",
+      "description": "Метеоры пересекают звёздное небо."
+    },
+    {
+      "id": 107,
+      "name": "Firefly Meadow",
+      "category": "Природа",
+      "description": "Светлячки над колышущейся травой."
+    },
+    {
+      "id": 108,
+      "name": "Neon Highway",
+      "category": "Город",
+      "description": "Движение по ночной дороге к светящемуся горизонту."
+    },
+    {
+      "id": 109,
+      "name": "Lava Lamp",
+      "category": "Абстракция",
+      "description": "Мягкие светящиеся потоки и пузырьки лавы."
+    },
+    {
+      "id": 110,
+      "name": "Snowfall Pines",
+      "category": "Природа",
+      "description": "Снегопад среди еловых силуэтов."
+    },
+    {
+      "id": 111,
+      "name": "Sakura Current",
+      "category": "Аниме",
+      "description": "Лепестки сакуры пролетают над рекой."
+    },
+    {
+      "id": 112,
+      "name": "Cloud Voyagers",
+      "category": "Фэнтези",
+      "description": "Воздушные шары над плывущими облаками."
+    },
+    {
+      "id": 113,
+      "name": "Orbital Ballet",
+      "category": "Космос",
+      "description": "Спутники и кольца вокруг вращающейся планеты."
+    },
+    {
+      "id": 114,
+      "name": "Jellyfish Waltz",
+      "category": "Фэнтези",
+      "description": "Медузы пульсируют и плывут в глубине океана."
+    }
+  ]
+}

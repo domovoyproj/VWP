@@ -34,7 +34,7 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
     public bool HasMovingBackground=>videoReady;
     public double VideoSeconds=>motionVideo?.Position.TotalSeconds??0;
     public double AnimationSeconds=>clock.Elapsed.TotalSeconds;
-    public bool ObjectMotionActive=>layers.MotionId is >=0 and <18 && config.SceneAnimation;
+    public bool ObjectMotionActive=>layers.MotionId is >=0 and <SpatialScene.SceneCount && config.SceneAnimation;
     public int RenderedFrames {get;private set;}
     public double CursorOffsetX=>x;
     public InteractiveVisual(SceneLayers layers,MonitorPreferences config,Forms.Screen screen,AudioReaction audio)

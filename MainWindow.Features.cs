@@ -32,7 +32,7 @@ public partial class MainWindow
         return config;
     }
     Wallpaper? FindScene(string? key)=>items.FirstOrDefault(scene=>PlaybackRules.Key(scene)==key);
-    static MonitorPreferences PlaybackConfig(Wallpaper? scene,MonitorPreferences config)=>scene?.PresetId is not null?config.ForScene(scene.IsSpatial):config;
+    static MonitorPreferences PlaybackConfig(Wallpaper? scene,MonitorPreferences config)=>scene?.IsSpatial==true?config.ForScene(true):scene?.PresetId is not null?config.ForScene(false):config;
     DesktopHost GetHost(Forms.Screen screen)
     {
         if(hosts.TryGetValue(screen.DeviceName,out var player))return player;
@@ -163,22 +163,7 @@ public partial class MainWindow
         if(FindScene(config.Scene) is Wallpaper scene)Library.SelectedItem=scene;
         loadingControls=false;UpdateSceneActions();UpdatePlaybackStatus();RefreshFilter();
     }
-    void RefreshScenePresentations()
-    {
-        string? selected=Library.SelectedItem is Wallpaper current?PlaybackRules.Key(current):null;
-        StopHover();StopPreview();
-        for(int i=0;i<items.Count;i++)
-        {
-            var item=items[i];if(item.PresetId is not int id)continue;
-            bool spatial=item.IsSpatial;
-            string cover=System.IO.Path.Combine(AppContext.BaseDirectory,"assets",spatial?$"spatial/{id}.png":$"{id}.jpg");
-            if(!File.Exists(cover))continue;
-            string description=spatial?SpatialScene.Descriptions[id]:definitions.GetValueOrDefault(id)?.Description??item.Description;
-            string subtitle=item.Category+(spatial?" · 3D · REALTIME":" · 4K · 60 FPS");
-            if(item.Thumbnail!=cover || item.Subtitle!=subtitle)items[i]=item with {Thumbnail=cover,Subtitle=subtitle,Description=description};
-        }
-        if(selected is not null)Library.SelectedItem=FindScene(selected);
-    }
+    void RefreshScenePresentations(){StopHover();StopPreview();}
     void UpdateSceneActions()
     {
         if(!featuresReady || Library.SelectedItem is not Wallpaper scene)return;

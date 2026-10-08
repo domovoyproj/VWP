@@ -65,7 +65,7 @@ public static class BundleService
             if(manifest.Format!=1||manifest.Scenes.Count==0)throw new InvalidDataException("Формат набора не поддерживается.");
             if(manifest.Scenes.Count>200 || manifest.Scenes.Select(s=>s.Id).Distinct().Count()!=manifest.Scenes.Count)throw new InvalidDataException("Неверный список сцен.");
             foreach(var scene in manifest.Scenes)
-                if(scene.Name.Length>256||scene.Layers is not null && (!Regex.IsMatch(scene.Layers.Accent,"^#[0-9a-fA-F]{6}$")||scene.Layers.MotionId is <0 or >17))throw new InvalidDataException("Неверные настройки сцены.");
+                if(scene.Name.Length>256||scene.Layers is not null && (!Regex.IsMatch(scene.Layers.Accent,"^#[0-9a-fA-F]{6}$")||scene.Layers.MotionId is <0 or >=SpatialScene.SceneCount))throw new InvalidDataException("Неверные настройки сцены.");
             var settings=manifest.Settings;
             if(!double.IsFinite(settings.Depth)||settings.Depth<0||settings.Depth>1||!double.IsFinite(settings.FocusX)||settings.FocusX<0||settings.FocusX>1||!double.IsFinite(settings.FocusY)||settings.FocusY<0||settings.FocusY>1||settings.Volume<0||settings.Volume>100||settings.IntervalMinutes<1||settings.IntervalMinutes>1440)
                 throw new InvalidDataException("Настройки набора выходят за допустимые границы.");
