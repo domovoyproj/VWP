@@ -55,6 +55,8 @@ public partial class MainWindow
         if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom)){custom.Video=custom.MotionId is not null?scene.Path:null;return custom;}
         if(scene.Thumbnail is null)return null;
         var preset=scene.PresetId is int id?definitions.GetValueOrDefault(id):null;
+        // Procedural videos already contain motion; inherited layer settings must not replace them with a still.
+        if(preset is null && scene.PresetId is not null && !scene.IsSpatial)return null;
         if(scene.IsSpatial && scene.PresetId is >=0 and <SpatialScene.SceneCount)
         {
             string original=Path.Combine(AppContext.BaseDirectory,"assets",$"scene-{scene.PresetId}.png");

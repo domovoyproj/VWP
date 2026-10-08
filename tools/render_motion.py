@@ -50,7 +50,7 @@ class Canvas:
 def frame(scene,u,width=3840,height=2160):
     i=scene-100
     if not 0<=i<15:raise ValueError('Scene id must be 100..114')
-    u=u%1;p=TAU*u;c=Canvas(i,width,height);rng=random.Random(912+i)
+    p=TAU*(u%1);c=Canvas(i,width,height);rng=random.Random(912+i)
     def stars(n=80):
         for j in range(n):
             x,y=rng.random()*960,rng.random()*380;r=.5+(j%3)*.3
@@ -119,7 +119,7 @@ def frame(scene,u,width=3840,height=2160):
         for j in range(10):c.line([(360,210+j*12),(600,210+j*12)],'#7c5c83',4)
         c.poly([(380,270),(580,270),(1030,540),(-70,540)],'#1b2948')
         for j in range(15):
-            v=(j+u)/15;y=270+v*v*285;c.line([(380-v*490,y),(580+v*490,y)],'#947ca9',1.2)
+            v=(j/15+u)%1;y=270+v*v*285;c.line([(380-v*490,y),(580+v*490,y)],'#947ca9',1.2)
         for x in range(-4,5):c.line([(480+x*20,270),(480+x*210,540)],'#61799f',1.4)
         for j in range(18):
             v=(j/18+u)%1;y=280+v*v*300
@@ -147,7 +147,7 @@ def frame(scene,u,width=3840,height=2160):
         c.ellipse(750,100,40,40,'#ead0b9')
         for layer in range(4):
             for j in range(9):
-                x=((j*150+u*1050*(1+layer%2))%1350)-190;y=300+layer*55+math.sin(p+j)*6
+                x=((j*150+u*1350*(1+layer%2))%1350)-190;y=300+layer*55+math.sin(p+j)*6
                 c.ellipse(x,y,125,35,['#b4a5bb','#c6b5c4','#d3c4cf','#ded3d7'][layer])
         for j in range(3):
             x=220+j*260+math.sin(p+j)*35;y=170+j*35+math.cos(p+j)*15;col=['#c1909f','#8ca8b5','#d2b396'][j]
@@ -187,8 +187,11 @@ def encode(scene,output,width,height,fps,seconds):
     result=subprocess.run([ffmpeg,'-v','error','-threads','2','-i',str(target),'-f','framemd5','-'],capture_output=True,check=True,text=True)
     hashes=[line.split(',')[-1].strip() for line in result.stdout.splitlines() if line and not line.startswith('#')]
     assert len(hashes)==fps*seconds and all(a!=b for a,b in zip(hashes,hashes[1:])),f'Frozen/missing frames: {scene}'
-    assert frame(scene,0,320,180).tobytes()==frame(scene,1,320,180).tobytes(),'Loop endpoint is not periodic'
-    report={'id':scene,'width':width,'height':height,'fps':fps,'seconds':seconds,'frames':len(hashes),'uniqueAdjacentFrames':True,'periodic':True,'sha256':hashlib.sha256(target.read_bytes()).hexdigest()}
+    # Do not wrap u before this check: that would hide discontinuous translations.
+    # A subpixel rasterization tolerance covers floating-point endpoints of diagonal lines.
+    endpoint_delta=float(np.abs(np.asarray(frame(scene,0,960,540),dtype=np.int16)-np.asarray(frame(scene,1,960,540),dtype=np.int16)).mean())
+    assert endpoint_delta<.025,f'Loop endpoint is not periodic: {scene}, delta {endpoint_delta}'
+    report={'id':scene,'width':width,'height':height,'fps':fps,'seconds':seconds,'frames':len(hashes),'uniqueAdjacentFrames':True,'periodic':True,'endpointMeanDifference':endpoint_delta,'sha256':hashlib.sha256(target.read_bytes()).hexdigest()}
     (output/f'{scene}.json').write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report),flush=True)
 
 if __name__=='__main__':
