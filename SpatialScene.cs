@@ -7,8 +7,9 @@ using System.Windows.Media.Media3D;
 namespace VWP;
 
 /// <summary>Procedural, articulated dioramas. No video, bitmap deformation or network service.</summary>
-public sealed class SpatialScene : Grid,IDisposable
+public sealed partial class SpatialScene : Grid,IDisposable
 {
+    public const int SceneCount=28;
     readonly SpatialNode world;
     readonly List<Action<double>> motions=new();
     readonly Random random;
@@ -35,12 +36,22 @@ public sealed class SpatialScene : Grid,IDisposable
         "3D · Художник рисует и поднимает чашку",
         "3D · Караван верблюдов пересекает пустыню",
         "3D · Объёмный цветок раскрывает лепестки",
-        "3D · Кормление кои в лунном саду"};
+        "3D · Кормление кои в лунном саду",
+        "3D · Садовник поливает орбитальную оранжерею",
+        "3D · Паром отходит от причала, кран переносит груз",
+        "3D · Бариста готовит кофе, посетители беседуют",
+        "3D · Поезд пересекает альпийский виадук",
+        "3D · Лодки и фонари на ночном фестивале",
+        "3D · Поезд метро прибывает на платформу",
+        "3D · Астроном поворачивает телескоп",
+        "3D · Манипулятор собирает робота на конвейере",
+        "3D · Подводная станция, батискаф и дайвер",
+        "3D · Два игрока передают и бросают мяч"};
     public SpatialScene(int id)
     {
-        if(id<0||id>=18)throw new ArgumentOutOfRangeException(nameof(id));SceneId=id;random=new Random(740+id);
+        if(id<0||id>=SceneCount)throw new ArgumentOutOfRangeException(nameof(id));SceneId=id;random=new Random(740+id);
         string[] sky={"#292D58","#101D3D","#2F173C","#103B50","#111C3E","#B56E69","#222C45","#124F68","#264B47","#111B38","#758CB0","#383153","#586E8A","#5D343C","#283454","#B67565","#152D46","#243D54"};
-        var color=(Color)ColorConverter.ConvertFromString(sky[id]);
+        var color=(Color)ColorConverter.ConvertFromString(id<18?sky[id]:new[]{"#182D46","#4E7B88","#503D4D","#658799","#242E51","#283E4B","#182438","#243845","#123D5D","#705B7C"}[id-18]);
         Background=new LinearGradientBrush(color,Color.FromRgb((byte)Math.Min(255,color.R+35),(byte)Math.Min(255,color.G+24),(byte)Math.Min(255,color.B+33)),90);
         Children.Add(Viewport);
         var root=new Model3DGroup();root.Children.Add(new AmbientLight(Color.FromRgb(115,119,142)));root.Children.Add(new DirectionalLight(Color.FromRgb(255,228,209),new(-.5,-1,-.5)));root.Children.Add(new DirectionalLight(Color.FromRgb(95,134,210),new(1,-.3,1)));
@@ -53,6 +64,7 @@ public sealed class SpatialScene : Grid,IDisposable
             case 8:Shrine();break;case 9:Racer();break;case 10:Clouds();break;case 11:Horizon();break;
             case 12:Winter();break;case 13:Ronin();break;case 14:Atelier();break;case 15:Desert();break;
             case 16:Bloom();break;case 17:Garden();break;
+            default:BuildExpansion(id);break;
         }
         DressScene();
         if(id is 2 or 11)Viewport.Camera=new PerspectiveCamera(new(12,10,20),new(-12,-6,-20),new(0,1,0),48);

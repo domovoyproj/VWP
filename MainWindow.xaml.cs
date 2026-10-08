@@ -69,7 +69,8 @@ public partial class MainWindow : Window
         var presets=JsonSerializer.Deserialize<List<PresetDefinition>>(File.ReadAllText(System.IO.Path.Combine(assets,"presets.json")),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
         foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 4K · 60 FPS",preset.Category,preset.Description,preset.Id));
         foreach(var preset in presets)items.Add(new(preset.Name+" · 3D",System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,"spatial",$"{preset.Id}.png"),preset.Category+" · ОБЪЁМНАЯ СЦЕНА",preset.Category,SpatialScene.Descriptions[preset.Id],preset.Id,true));
-        foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO"));
+        LoadExpansion(assets);
+        foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO",IsSpatial:preferences.Layers.GetValueOrDefault(path)?.MotionId is not null));
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
         RefreshScreens(); Volume.Value=preferences.Volume; if(host is not null)host.Volume=preferences.Volume; Autostart.IsChecked=preferences.Autostart;
         var menu=new Forms.ContextMenuStrip();

@@ -9,4 +9,8 @@ artifacts/
 *.tmp.mp4
 tools/ffmpeg.exe
 graphify-out/
+assets/spatial/*-check-*.png
+assets/motion/*.mp4
+assets/motion/*.json
+assets/motion/*.cover.jpg
 .codex/hooks.json

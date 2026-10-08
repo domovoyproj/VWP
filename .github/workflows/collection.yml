@@ -1,0 +1,87 @@
+name: Cloud wallpaper collection
+on:
+  push:
+    branches: ['codex/scene-expansion']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: wallpaper-collection-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  motion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        id: [100,101,102,103,104,105,106,107,108,109,110,111,112,113,114]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'Pillow>=11,<13' 'numpy>=2,<3' imageio-ffmpeg==0.6.0
+      - name: Render and decode 4K 60 FPS loop
+        run: python tools/render_motion.py --id ${{ matrix.id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motion-${{ matrix.id }}
+          path: assets/motion/${{ matrix.id }}*
+          retention-days: 14
+  spatial:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Render and validate all ten 3D scenes
+        run: dotnet run --project tools/scene-check/scene-check.csproj -c Release -p:NuGetAudit=false -- assets/spatial
+      - uses: actions/upload-artifact@v4
+        with:
+          name: spatial-collection
+          path: assets/spatial/*.png
+          retention-days: 14
+  package:
+    needs: [motion,spatial]
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: motion-*
+          path: assets/motion
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: spatial-collection
+          path: assets/spatial
+      - name: Verify complete catalog
+        run: |
+          python -m pip install 'Pillow>=11,<13' imageio-ffmpeg==0.6.0
+          python tools/check_expansion.py
+          python tools/bootstrap_ffmpeg.py
+      - name: Build cloud preview distribution
+        run: |
+          ./build.ps1 -Installer
+          if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
+          python tools/package_release.py --version 0.5.0 --build dist/Release-0.5.0
+          if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VWP-0.5.0-cloud-preview
+          path: |
+            dist/*-Setup.exe
+            dist/*.zip
+            dist/*.sha256
+          retention-days: 14

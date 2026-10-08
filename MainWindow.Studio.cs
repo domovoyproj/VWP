@@ -55,7 +55,7 @@ public partial class MainWindow
         if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom)){custom.Video=custom.MotionId is not null?scene.Path:null;return custom;}
         if(scene.Thumbnail is null)return null;
         var preset=scene.PresetId is int id?definitions.GetValueOrDefault(id):null;
-        if(scene.IsSpatial && scene.PresetId is >=0 and <18)
+        if(scene.IsSpatial && scene.PresetId is >=0 and <SpatialScene.SceneCount)
         {
             string original=Path.Combine(AppContext.BaseDirectory,"assets",$"scene-{scene.PresetId}.png");
             return new(){Background=File.Exists(original)?original:FullResolutionCover(scene),Video=scene.Path,MotionId=scene.PresetId,Accent=preset?.Accent??"#A698EE"};
@@ -101,7 +101,7 @@ public partial class MainWindow
         if(SettingsOverlay.Visibility==Visibility.Visible)UpdateResources();
         if(mini?.IsVisible==true)UpdateMini();
     }
-    void EditorClick(object sender,RoutedEventArgs e){if(Library.SelectedItem is not Wallpaper scene)return;StopPreview();StopHover();Editor.Open(scene);EditorOverlay.Visibility=Visibility.Visible;}
+    void EditorClick(object sender,RoutedEventArgs e){if(Library.SelectedItem is not Wallpaper scene)return;if(scene.IsSpatial){Status.Text="Редактор доступен для видеообоев. 3D-сцена рисуется в реальном времени.";return;}StopPreview();StopHover();Editor.Open(scene);EditorOverlay.Visibility=Visibility.Visible;}
     void ShowMini()
     {
         if(mini is null)
@@ -122,7 +122,7 @@ public partial class MainWindow
     {
         if(items.Any(s=>s.Path==path))return;preferences.Imports.Add(path);preferences.ImportNames[path]=name;
         if(cover is not null)preferences.ImportThumbnails[path]=cover;if(layers is not null)preferences.Layers[path]=layers;
-        var scene=new Wallpaper(name,path,cover,"LOCAL COLLECTION");items.Add(scene);Library.SelectedItem=scene;Save();RefreshFilter();
+        var scene=new Wallpaper(name,path,cover,"LOCAL COLLECTION",IsSpatial:layers?.MotionId is not null);items.Add(scene);Library.SelectedItem=scene;Save();RefreshFilter();
     }
     List<Wallpaper> ExportScenes()
     {
