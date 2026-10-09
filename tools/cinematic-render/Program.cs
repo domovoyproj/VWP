@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using VWP;
 using Forms = System.Windows.Forms;
 
@@ -40,6 +41,7 @@ try
     for(int frame=0;frame<frames;frame++)
     {
         visual.RenderAt((double)frame/fps);
+        visual.Dispatcher.Invoke(new Action(() => {}),DispatcherPriority.Background);
         var bitmap=new RenderTargetBitmap(width,height,96,96,PixelFormats.Pbgra32);
         bitmap.Render(visual);
         bitmap.CopyPixels(pixels,width*4,0);
@@ -52,8 +54,8 @@ finally
     process.StandardInput.Close();
     process.WaitForExit();
 }
-if(process.ExitCode!=0 || !File.Exists(output) || new FileInfo(output).Length<100_000)
+if(process.ExitCode!=0 || visual.RenderedFrames<frames || !File.Exists(output) || new FileInfo(output).Length<100_000)
     throw new InvalidOperationException($"FFmpeg failed for scene {id}: {process.ExitCode}");
-Console.WriteLine($"Rendered {output}: {frames} frames, {new FileInfo(output).Length/1048576.0:F1} MiB");
+Console.WriteLine($"Rendered {output}: {frames} frames, {visual.RenderedFrames} WPF frames, {new FileInfo(output).Length/1048576.0:F1} MiB");
 }
 }
