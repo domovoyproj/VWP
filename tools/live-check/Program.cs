@@ -60,7 +60,9 @@ class Program
     if(args[0]=="--video-probe")
     {
      probeDesktop.LoopRequired+=()=>probeApp.Dispatcher.BeginInvoke(new Action(()=>probeDesktop?.Replay()));
-     probeDesktop.Play(Path.Combine(Environment.CurrentDirectory,"artifacts","alpine-probe.mp4"),Forms.Screen.PrimaryScreen!);
+     string video=sceneId<18?Path.Combine(AppContext.BaseDirectory,"assets",$"{sceneId}.mp4"):Path.Combine(Environment.CurrentDirectory,"artifacts","alpine-probe.mp4");
+     string cover=sceneId<18?Path.Combine(AppContext.BaseDirectory,"assets",$"{sceneId}.cover.jpg"):Path.Combine(AppContext.BaseDirectory,"assets","cinematic",$"{sceneId}.png");
+     probeDesktop.Play(video,Forms.Screen.PrimaryScreen!,cover);
     }
     else
     {
@@ -74,7 +76,7 @@ class Program
      ticks++;
      var visual=probeDesktop.Interactive;
      File.AppendAllText(status,$"\n{ticks}: root={visual?.ActualWidth:0}x{visual?.ActualHeight:0} spatial={visual?.Spatial?.ActualWidth:0}x{visual?.Spatial?.ActualHeight:0} viewport={visual?.Spatial?.Viewport.ActualWidth:0}x{visual?.Spatial?.Viewport.ActualHeight:0} frames={visual?.RenderedFrames} time={visual?.Spatial?.Time:0.00}");
-     if(ticks>=20){timer.Stop();probeApp.Shutdown();}
+     if(ticks>=(args[0]=="--video-probe"?45:20)){timer.Stop();probeApp.Shutdown();}
     };
     timer.Start();
     } catch(Exception e){File.AppendAllText(status,"\n"+e);probeApp.Shutdown(1);}
