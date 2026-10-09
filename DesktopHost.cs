@@ -8,7 +8,7 @@ using Forms = System.Windows.Forms;
 namespace VWP;
 public sealed class DesktopHost : IDisposable
 {
-    readonly LibVLC vlc = new LibVLC("--no-video-title-show");
+    readonly LibVLC vlc = new LibVLC("--no-video-title-show","--input-repeat=-1");
     readonly MediaPlayer player;
     Media? currentMedia;
     readonly StaticBackdrop? backdrop;
@@ -17,7 +17,8 @@ public sealed class DesktopHost : IDisposable
     long recoveryPosition;
     public int RecoveryCount {get;private set;}
     public string? BackdropError {get;private set;}
-    IntPtr window, parent, videoWindow;
+    IntPtr window, parent, videoWindow,coverWindow,coverBitmap;
+    string? coverPath;
     MonitorPreferences framing=new();
     bool userPaused, automaticPaused;
     public string? PauseReason {get;private set;}
@@ -55,7 +56,7 @@ public sealed class DesktopHost : IDisposable
             if(TakeFramedSnapshot(file,screen))snapshot=file;
         }
         StopPlayback(snapshot is null);
-        fading=snapshot is not null;nextCover=cover;
+        fading=snapshot is not null;nextCover=cover;coverPath=snapshot??cover;
         RecoveryCount=0;
         targetScreen=screen;
         if((snapshot??cover) is string picture && backdrop is not null)
@@ -70,7 +71,7 @@ public sealed class DesktopHost : IDisposable
     }
     public void PlayInteractive(SceneLayers layers,Forms.Screen screen,MonitorPreferences config,AudioReaction audio,string? cover)
     {
-        Stop();targetScreen=screen;framing=config;sceneLayers=layers;audioReaction=audio;
+        Stop();targetScreen=screen;framing=config;sceneLayers=layers;audioReaction=audio;coverPath=cover;
         if(cover is not null)try{backdrop?.Apply(cover,screen);}catch(Exception e){BackdropError=e.Message;}
         CreateSurface(screen);CreateInteractive();Paused=false;userPaused=false;automaticPaused=false;
     }
@@ -109,8 +110,12 @@ public sealed class DesktopHost : IDisposable
         window=CreateWindowEx(0x08000080,"STATIC","VWP Wallpaper",0x40000000|0x10000000|0x06000000,point.X,point.Y,rect.Width,rect.Height,parent,IntPtr.Zero,IntPtr.Zero,IntPtr.Zero);
         if (window==IntPtr.Zero) throw new Win32Exception(Marshal.GetLastWin32Error());
         if(fading){SetWindowLongPtr(window,-20,new IntPtr(0x08080080));SetLayeredWindowAttributes(window,0,0,2);}
+        coverWindow=CreateWindowEx(0,"STATIC","VWP Cover",0x40000000|0x10000000|0x06000000|0x4E,0,0,rect.Width,rect.Height,window,IntPtr.Zero,IntPtr.Zero,IntPtr.Zero);
+        if(coverWindow==IntPtr.Zero)throw new Win32Exception(Marshal.GetLastWin32Error());
+        SetCoverBitmap(coverPath,screen);
         videoWindow=CreateWindowEx(0,"STATIC","VWP Video",0x40000000|0x10000000|0x06000000,0,0,rect.Width,rect.Height,window,IntPtr.Zero,IntPtr.Zero,IntPtr.Zero);
         if(videoWindow==IntPtr.Zero)throw new Win32Exception(Marshal.GetLastWin32Error());
+        SetWindowPos(coverWindow,new IntPtr(1),0,0,0,0,0x3); // HWND_BOTTOM: keep the poster under VLC.
         int enabled=1;
         DwmSetWindowAttribute(window,12,ref enabled,4); // EXCLUDED_FROM_PEEK
         DwmSetWindowAttribute(window,3,ref enabled,4); // TRANSITIONS_FORCEDISABLED
@@ -124,7 +129,7 @@ public sealed class DesktopHost : IDisposable
             if(IsWindow(window))DestroyWindow(window);CreateSurface(targetScreen);CreateInteractive();interactiveVisual?.SetPaused(paused);RecoveryCount++;return;
         }
         recoveryPosition=Math.Max(0,player.Time);recoveryPaused=Paused;recoveryPending=true;
-        player.Stop();if(IsWindow(window))DestroyWindow(window);window=IntPtr.Zero;parent=IntPtr.Zero;
+        player.Stop();if(IsWindow(window))DestroyWindow(window);ReleaseCoverBitmap();window=IntPtr.Zero;parent=IntPtr.Zero;coverWindow=IntPtr.Zero;
         CreateSurface(targetScreen);player.Hwnd=videoWindow;
         if(currentMedia is null || !player.Play(currentMedia))throw new InvalidOperationException("Не удалось восстановить видеообои.");
         RecoveryCount++;
@@ -138,7 +143,7 @@ public sealed class DesktopHost : IDisposable
             fadeTimer.Tick+=(_,_)=>{
                 alpha=Math.Min(255,alpha+10);SetLayeredWindowAttributes(window,0,(byte)alpha,2);
                 if(alpha<255)return;fadeTimer?.Stop();fadeTimer=null;fading=false;SetWindowLongPtr(window,-20,new IntPtr(0x08000080));
-                if(nextCover is not null && targetScreen is not null){try{backdrop?.Apply(nextCover,targetScreen);}catch(Exception e){BackdropError=e.Message;}}
+                if(nextCover is not null && targetScreen is not null){coverPath=nextCover;SetCoverBitmap(nextCover,targetScreen);try{backdrop?.Apply(nextCover,targetScreen);}catch(Exception e){BackdropError=e.Message;}}
                 nextCover=null;
             };fadeTimer.Start();
         }
@@ -162,6 +167,25 @@ public sealed class DesktopHost : IDisposable
         SetWindowPos(videoWindow,IntPtr.Zero,VideoFrame.X,VideoFrame.Y,VideoFrame.Width,VideoFrame.Height,0x14);
     }
     public void Replay() { if(!Active || currentMedia is null || Paused)return;player.Stop();player.Play(currentMedia); }
+    void SetCoverBitmap(string? path,Forms.Screen screen)
+    {
+        if(coverWindow==IntPtr.Zero || path is null || !System.IO.File.Exists(path))return;
+        try
+        {
+            using var source=System.Drawing.Image.FromFile(path);
+            using var target=new System.Drawing.Bitmap(screen.Bounds.Width,screen.Bounds.Height);
+            using(var graphics=System.Drawing.Graphics.FromImage(target))
+            {
+                graphics.InterpolationMode=System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphics.DrawImage(source,0,0,target.Width,target.Height);
+            }
+            IntPtr bitmap=target.GetHbitmap();
+            SendMessage(coverWindow,0x172,IntPtr.Zero,bitmap); // STM_SETIMAGE / IMAGE_BITMAP
+            ReleaseCoverBitmap();coverBitmap=bitmap;
+        }
+        catch(Exception e){BackdropError=e.Message;}
+    }
+    void ReleaseCoverBitmap(){if(coverBitmap!=IntPtr.Zero){DeleteObject(coverBitmap);coverBitmap=IntPtr.Zero;}}
     internal bool BackdropApplied=>backdrop?.Applied==true;
     internal string? StaticPicture(Forms.Screen screen)=>backdrop?.ReadCurrent(screen);
     public void UpdateBackdrop()
@@ -186,7 +210,7 @@ public sealed class DesktopHost : IDisposable
         finally{if(System.IO.File.Exists(raw))System.IO.File.Delete(raw);}
     }
     public void Stop()=>StopPlayback(true);
-    void StopPlayback(bool restore) {interactiveVisual?.Dispose();visualSource?.Dispose();interactiveVisual=null;visualSource=null;sceneLayers=null;audioReaction=null;fadeTimer?.Stop();fadeTimer=null;fading=false;nextCover=null;recoveryPending=false;player.Stop();currentMedia?.Dispose();currentMedia=null;if(IsWindow(window))DestroyWindow(window);window=IntPtr.Zero;videoWindow=IntPtr.Zero;parent=IntPtr.Zero;targetScreen=null;Paused=false;if(restore)try{backdrop?.Restore();}catch(Exception e){BackdropError=e.Message;}}
+    void StopPlayback(bool restore) {interactiveVisual?.Dispose();visualSource?.Dispose();interactiveVisual=null;visualSource=null;sceneLayers=null;audioReaction=null;fadeTimer?.Stop();fadeTimer=null;fading=false;nextCover=null;recoveryPending=false;player.Stop();currentMedia?.Dispose();currentMedia=null;if(IsWindow(window))DestroyWindow(window);ReleaseCoverBitmap();window=IntPtr.Zero;videoWindow=IntPtr.Zero;coverWindow=IntPtr.Zero;parent=IntPtr.Zero;coverPath=null;targetScreen=null;Paused=false;if(restore)try{backdrop?.Restore();}catch(Exception e){BackdropError=e.Message;}}
     public void Dispose() {Stop();try{backdrop?.Dispose();}catch(Exception e){BackdropError=e.Message;}player.Dispose();vlc.Dispose();}
     [StructLayout(LayoutKind.Sequential)] struct Point { public int X,Y; }
     delegate bool EnumProc(IntPtr hwnd,IntPtr param);
@@ -194,6 +218,8 @@ public sealed class DesktopHost : IDisposable
     [DllImport("user32.dll",CharSet=CharSet.Unicode)] static extern IntPtr FindWindowEx(IntPtr parent,IntPtr after,string name,string? title);
     [DllImport("user32.dll")] static extern bool EnumWindows(EnumProc proc,IntPtr param);
     [DllImport("user32.dll")] static extern IntPtr SendMessageTimeout(IntPtr hwnd,uint msg,IntPtr wp,IntPtr lp,uint flags,uint timeout,out IntPtr result);
+    [DllImport("user32.dll")] static extern IntPtr SendMessage(IntPtr hwnd,uint msg,IntPtr wp,IntPtr lp);
+    [DllImport("gdi32.dll")] static extern bool DeleteObject(IntPtr objectHandle);
     [DllImport("user32.dll")] static extern int MapWindowPoints(IntPtr from,IntPtr to,ref Point point,uint count);
     [DllImport("user32.dll",CharSet=CharSet.Unicode,SetLastError=true)] static extern IntPtr CreateWindowEx(uint ex,string cls,string title,uint style,int x,int y,int width,int height,IntPtr parent,IntPtr menu,IntPtr instance,IntPtr param);
     [DllImport("user32.dll")] static extern bool DestroyWindow(IntPtr window);
