@@ -12,7 +12,12 @@ foreach ($preset in (Get-Content 'assets/presets.json' -Raw | ConvertFrom-Json))
 }
 if (Test-Path 'assets/expansion.json') {
     $collection = Get-Content 'assets/expansion.json' -Raw | ConvertFrom-Json
-    foreach ($scene in $collection.spatial) { $requiredAssets += "assets/spatial/$($scene.id).png" }
+    foreach ($scene in $collection.spatial) {
+        $requiredAssets += "assets/spatial/$($scene.id).png"
+        $requiredAssets += "assets/cinematic/$($scene.id).png"
+        $requiredAssets += "assets/cinematic/$($scene.id).mp4"
+    }
+    $requiredAssets += 'assets/cinematic/train.png'
     foreach ($scene in $collection.live) {
         foreach ($suffix in @('.mp4', '.jpg', '.cover.jpg', '.preview.mp4')) { $requiredAssets += "assets/motion/$($scene.id)$suffix" }
     }
