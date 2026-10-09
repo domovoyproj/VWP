@@ -10,8 +10,9 @@ public partial class MainWindow
         foreach(var entry in catalog.RootElement.GetProperty("spatial").EnumerateArray())
         {
             int id=entry.GetProperty("id").GetInt32();string cover=Path.Combine(assets,"spatial",$"{id}.png");
+            string cinematic=Path.Combine(assets,"cinematic",$"{id}.png");
             string category=entry.GetProperty("category").GetString()!;
-            items.Add(new(entry.GetProperty("name").GetString()+" · 3D",cover,cover,category+" · ОБЪЁМНАЯ СЦЕНА",category,SpatialScene.Descriptions[id],id,true));
+            items.Add(new(entry.GetProperty("name").GetString()+" · Живая сцена",Path.Combine(assets,"cinematic",$"{id}.mp4"),File.Exists(cinematic)?cinematic:cover,category+" · ЖИВАЯ СЦЕНА",category,SpatialScene.Descriptions[id],id,true));
         }
         foreach(var entry in catalog.RootElement.GetProperty("live").EnumerateArray())
         {

@@ -80,9 +80,9 @@ public sealed class DesktopHost : IDisposable
         ShowWindow(videoWindow,0);
         interactiveVisual=new InteractiveVisual(sceneLayers,framing,targetScreen,audioReaction);
         visualSource=new HwndSource(new HwndSourceParameters("VWP Interactive"){ParentWindow=window,WindowStyle=0x40000000|0x10000000,Width=targetScreen.Bounds.Width,Height=targetScreen.Bounds.Height});
-        // WorkerW is a redirected Explorer surface. Software composition avoids
-        // a live D3D viewport remaining occluded behind the static desktop cover.
-        if(interactiveVisual.Spatial is not null && visualSource.CompositionTarget is not null)
+        // Explorer redirects its wallpaper host. Hardware WPF content can update
+        // off-screen while the user sees only the static Windows wallpaper.
+        if(visualSource.CompositionTarget is not null)
             visualSource.CompositionTarget.RenderMode=System.Windows.Interop.RenderMode.SoftwareOnly;
         visualSource.RootVisual=interactiveVisual;
     }
