@@ -111,18 +111,17 @@ public partial class MainWindow
         try
         {
             int generation=applyGeneration.GetValueOrDefault(screen.DeviceName)+1;applyGeneration[screen.DeviceName]=generation;
-            if(LayersFor(scene) is SceneLayers layers && layers.Background is not null && (scene.IsSpatial || config.Interactive || playback.SceneAnimation && layers.MotionId is not null))
-                player.PlayInteractive(layers,screen,playback,audio,FramedCover(scene,screen,playback));
-            else
+            string path=scene.IsSpatial && scene.PresetId is >=18 and <SpatialScene.SceneCount
+                ?Path.Combine(AppContext.BaseDirectory,"assets","cinematic",$"{scene.PresetId}.mp4")
+                :scene.Path;
+            if(!File.Exists(path))throw new FileNotFoundException("Видео для сцены не установлено",path);
+            var profile=PerformanceProfile.Resolve(config.Performance);
+            if(profile.Key!="Quality")
             {
-                string path=scene.Path;var profile=PerformanceProfile.Resolve(config.Performance);
-                if(profile.Key!="Quality")
-                {
-                    Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(scene.Path,profile);
-                    if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
-                }
-                player.Play(path,screen,FramedCover(scene,screen,config),true);
+                Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(path,profile);
+                if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
             }
+            player.Play(path,screen,FramedCover(scene,screen,config),true);
             player.SetFraming(playback);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
             config.Scene=PlaybackRules.Key(scene);preferences.Last=scene.Path;preferences.LastPresetId=scene.PresetId;preferences.Monitor=screen.DeviceName;
             nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();UpdatePlaybackStatus();
@@ -131,14 +130,21 @@ public partial class MainWindow
     }
     static string? FramedCover(Wallpaper scene,Forms.Screen screen,MonitorPreferences config)
     {
+        string cinematic=System.IO.Path.Combine(AppContext.BaseDirectory,"assets","cinematic",$"{scene.PresetId}.png");
+        string original=System.IO.Path.Combine(AppContext.BaseDirectory,"assets",$"scene-{scene.PresetId}.png");
         string spatial=System.IO.Path.Combine(AppContext.BaseDirectory,"assets","spatial",$"{scene.PresetId}.png");
-        string? cover=scene.IsSpatial && File.Exists(spatial)?spatial:FullResolutionCover(scene);
+        string? cover=scene.IsSpatial && File.Exists(cinematic)?cinematic:
+            scene.IsSpatial && File.Exists(original)?original:
+            scene.IsSpatial && File.Exists(spatial)?spatial:FullResolutionCover(scene);
         if(cover is null || !File.Exists(cover))return null;
         var info=new FileInfo(cover);
         string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","covers");Directory.CreateDirectory(folder);
-        string key=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(screen.DeviceName+cover+info.Length+info.LastWriteTimeUtc.Ticks+config.Fit+config.FocusX.ToString(System.Globalization.CultureInfo.InvariantCulture)+config.FocusY.ToString(System.Globalization.CultureInfo.InvariantCulture)+screen.Bounds)));
+        string key=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("cover-v2"+screen.DeviceName+cover+info.Length+info.LastWriteTimeUtc.Ticks+config.Fit+config.FocusX.ToString(System.Globalization.CultureInfo.InvariantCulture)+config.FocusY.ToString(System.Globalization.CultureInfo.InvariantCulture)+screen.Bounds)));
         string output=System.IO.Path.Combine(folder,key+".jpg");if(File.Exists(output))return output;
-        using var source=System.Drawing.Image.FromFile(cover);using var target=new System.Drawing.Bitmap(screen.Bounds.Width,screen.Bounds.Height);
+        using var source=System.Drawing.Image.FromFile(cover);
+        int width=Math.Max(screen.Bounds.Width,source.Width);
+        int height=(int)Math.Round(width*(double)screen.Bounds.Height/screen.Bounds.Width);
+        using var target=new System.Drawing.Bitmap(width,height);
         using var graphics=System.Drawing.Graphics.FromImage(target);graphics.Clear(System.Drawing.Color.FromArgb(20,20,28));graphics.InterpolationMode=System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
         graphics.DrawImage(source,PlaybackRules.Frame(source.Width,source.Height,target.Width,target.Height,config.Fit,config.FocusX,config.FocusY));
         using var jpegOptions=new System.Drawing.Imaging.EncoderParameters(1);

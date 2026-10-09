@@ -59,8 +59,9 @@ public partial class MainWindow
         if(preset is null && scene.PresetId is not null && !scene.IsSpatial)return null;
         if(scene.IsSpatial && scene.PresetId is >=0 and <SpatialScene.SceneCount)
         {
+            string cinematic=Path.Combine(AppContext.BaseDirectory,"assets","cinematic",$"{scene.PresetId}.png");
             string original=Path.Combine(AppContext.BaseDirectory,"assets",$"scene-{scene.PresetId}.png");
-            return new(){Background=File.Exists(original)?original:FullResolutionCover(scene),Video=scene.Path,MotionId=scene.PresetId,Accent=preset?.Accent??"#A698EE"};
+            return new(){Background=File.Exists(cinematic)?cinematic:File.Exists(original)?original:FullResolutionCover(scene),Video=scene.PresetId<18?scene.Path:null,MotionId=scene.PresetId,Accent=preset?.Accent??"#A698EE"};
         }
         if(scene.PresetId==0)return new(){Background=Path.Combine(AppContext.BaseDirectory,"assets","layers","sakura-background.png"),Foreground=Path.Combine(AppContext.BaseDirectory,"assets","layers","sakura-character.png"),Accent="#F877B8",Effect="Petals"};
         return new(){Background=FullResolutionCover(scene),Accent=preset?.Accent??"#A698EE",Effect=preset?.Motion switch{"rain"=>"Rain","petals"=>"Petals","embers"=>"Embers",_=>"Stars"}};

@@ -24,8 +24,6 @@ def main():
                 continue
             if relative.parts[:2] in (('libvlc', 'win-x86'), ('libvlc', 'win-arm64')):
                 continue
-            if relative.parts[0] == 'assets' and path.name.startswith('scene-') and path.suffix == '.png':
-                continue
             archive.write(path, Path('VWP') / relative)
             count += 1
         archive.write(root / 'README.md', 'VWP/README.md')
@@ -37,6 +35,11 @@ def main():
             raise SystemExit(f'Archive check failed: {bad}')
         if 'VWP/VWP.exe' not in archive.namelist():
             raise SystemExit('VWP.exe is missing from archive.')
+        required = [f'VWP/assets/scene-{scene_id}.png' for scene_id in range(18)]
+        required += [f'VWP/assets/cinematic/{scene_id}.mp4' for scene_id in range(18, 28)]
+        absent = [name for name in required if name not in archive.namelist()]
+        if absent:
+            raise SystemExit(f'Wallpaper media missing from archive: {absent[0]}')
     print(f'{output.name}: {count} files, {output.stat().st_size:,} bytes, ZIP CRC verified')
     print(f'SHA256: {checksum}')
 

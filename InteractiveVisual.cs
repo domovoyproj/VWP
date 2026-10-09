@@ -35,6 +35,7 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
     public double VideoSeconds=>motionVideo?.Position.TotalSeconds??0;
     public double AnimationSeconds=>clock.Elapsed.TotalSeconds;
     public bool ObjectMotionActive=>layers.MotionId is >=0 and <SpatialScene.SceneCount && config.SceneAnimation;
+    public bool CinematicActive=>ObjectMotionActive && config.Performance=="Quality" && File.Exists(layers.Background);
     public int RenderedFrames {get;private set;}
     public double CursorOffsetX=>x;
     public InteractiveVisual(SceneLayers layers,MonitorPreferences config,Forms.Screen screen,AudioReaction audio)
@@ -62,14 +63,16 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
     public void Configure(MonitorPreferences settings)
     {
         config=settings;timer.Interval=TimeSpan.FromSeconds(1.0/PerformanceProfile.Resolve(settings.Performance).Fps);
-        if(ObjectMotionActive && Spatial is null){Spatial=new SpatialScene(layers.MotionId!.Value);AddVisualChild(Spatial);AddLogicalChild(Spatial);InvalidateMeasure();}
-        else if(!ObjectMotionActive && Spatial is not null){RemoveVisualChild(Spatial);RemoveLogicalChild(Spatial);Spatial.Dispose();Spatial=null;InvalidateMeasure();}
+        if(ObjectMotionActive && !CinematicActive && Spatial is null){Spatial=new SpatialScene(layers.MotionId!.Value);AddVisualChild(Spatial);AddLogicalChild(Spatial);InvalidateMeasure();}
+        else if((!ObjectMotionActive || CinematicActive) && Spatial is not null){RemoveVisualChild(Spatial);RemoveLogicalChild(Spatial);Spatial.Dispose();Spatial=null;InvalidateMeasure();}
         if(ObjectMotionActive && Spatial is null && layers.MotionId is int id && settings.Performance!="Eco" && PlanetMotionEffect.Available(id))
         {planets??=new PlanetMotionEffect(id);Effect=planets;}
         else{Effect=null;planets=null;}
         InvalidateVisual();
     }
     public void SetPaused(bool value){if(disposed)return;paused=value;if(value){timer.Stop();clock.Stop();motionVideo?.Pause();}else{clock.Start();timer.Start();motionVideo?.Play();}}
+    // Drive deterministic frames for the packaged video renderer.
+    public void RenderAt(double seconds){if(disposed)throw new ObjectDisposedException(nameof(InteractiveVisual));phase=seconds;Spatial?.Update(seconds);if(planets is not null)planets.Time=seconds;InvalidateVisual();}
     protected override void OnRender(DrawingContext drawing)
     {
         base.OnRender(drawing);if(ActualWidth<=0||ActualHeight<=0)return;RenderedFrames++;
@@ -106,9 +109,19 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
         if(planets is not null)planets.Frame=new(dx/ActualWidth,dy/ActualHeight,width/ActualWidth,height/ActualHeight);
         drawing.PushTransform(new TranslateTransform(dx,dy));drawing.PushTransform(new ScaleTransform(scale,scale));
         drawing.PushClip(new RectangleGeometry(new Rect(0,0,1920,1080)));
-        drawing.DrawImage(background,new Rect(0,0,1920,1080));
+        double loopPhase=2*Math.PI*(time%12)/12;
+        double driftX=CinematicActive?Math.Sin(loopPhase)*10:0;
+        double driftY=CinematicActive?Math.Sin(loopPhase+1)*5:0;
+        drawing.DrawImage(background,CinematicActive?new Rect(-16+driftX,-9+driftY,1952,1098):new Rect(0,0,1920,1080));
         if(videoReady && motionVideo is not null)drawing.DrawVideo(motionVideo,new Rect(0,0,1920,1080));
-        SceneActors.Draw(drawing,layers.MotionId!.Value,time,config.Performance=="Eco");
+        if(layers.MotionId<18)SceneActors.Draw(drawing,layers.MotionId!.Value,time,config.Performance=="Eco");
+        else
+        {
+            double loopTime=time%12;
+            drawing.PushOpacity(Math.Clamp(Math.Min(loopTime,12-loopTime)*2,0,1));
+            CinematicActors.Draw(drawing,layers.MotionId!.Value,time);
+            drawing.Pop();
+        }
         if(foreground is not null)drawing.DrawImage(foreground,new Rect(0,0,1920,1080));
         drawing.Pop();drawing.Pop();drawing.Pop();
     }
