@@ -1,0 +1,146 @@
+[
+  {
+    "Id": "sakura",
+    "Name": "Sakura Midnight",
+    "Description": "Ночная сакура, розовые лепестки и мягкий фиолетовый интерфейс.",
+    "Mode": "Dark",
+    "Accent": "#F877B8",
+    "Palette": "Sakura",
+    "Background": "../scene-0.png",
+    "CursorId": "vwp-sakura",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "neon",
+    "Name": "Neon Tokyo",
+    "Description": "Неоновый Токио, бирюзовый свет и угловатые технологичные указатели.",
+    "Mode": "Dark",
+    "Accent": "#36DDF2",
+    "Palette": "Neon",
+    "Background": "../scene-1.png",
+    "CursorId": "vwp-neon",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "crimson",
+    "Name": "Crimson Moon",
+    "Description": "Красная луна, тёмный храм и указатели в форме клинка.",
+    "Mode": "Dark",
+    "Accent": "#F34F71",
+    "Palette": "Crimson",
+    "Background": "../scene-2.png",
+    "CursorId": "vwp-crimson",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "astral",
+    "Name": "Astral Drift",
+    "Description": "Космические орбиты, лиловый свет и вращающийся спутник загрузки.",
+    "Mode": "Dark",
+    "Accent": "#B299FF",
+    "Palette": "Astral",
+    "Background": "../scene-4.png",
+    "CursorId": "vwp-astral",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "abyss",
+    "Name": "Ocean Sonata",
+    "Description": "Подводный мир, прозрачная бирюза и движущиеся пузырьки.",
+    "Mode": "Dark",
+    "Accent": "#74E2E5",
+    "Palette": "Abyss",
+    "Background": "../scene-7.png",
+    "CursorId": "vwp-abyss",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "cyber",
+    "Name": "Skyline Racer",
+    "Description": "Ночная гонка, кислотный акцент и точные сегментированные прицелы.",
+    "Mode": "Dark",
+    "Accent": "#B4F75C",
+    "Palette": "Cyber",
+    "Background": "../scene-9.png",
+    "CursorId": "vwp-cyber",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "aurora",
+    "Name": "Aurora Voyage",
+    "Description": "Северное сияние, ледяные грани и вращающаяся снежинка.",
+    "Mode": "Dark",
+    "Accent": "#70E8C3",
+    "Palette": "Aurora",
+    "Background": "../scene-3.png",
+    "CursorId": "vwp-aurora",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "ember",
+    "Name": "Ember Ronin",
+    "Description": "Осенний ронин, янтарные искры и золотые боевые указатели.",
+    "Mode": "Dark",
+    "Accent": "#F59871",
+    "Palette": "Ember",
+    "Background": "../scene-13.png",
+    "CursorId": "vwp-ember",
+    "License": "VWP original artwork"
+  },
+  {
+    "Id": "obsidian",
+    "Name": "Obsidian",
+    "Description": "Дымчатое стекло, графит и тёплый металлический свет.",
+    "Mode": "Dark",
+    "Accent": "#DDBA86",
+    "Background": "obsidian.png",
+    "CursorId": "vwp-obsidian",
+    "License": "VWP original · AI artwork"
+  },
+  {
+    "Id": "glacier",
+    "Name": "Glacier",
+    "Description": "Северный воздух, глубокий синий и прозрачный лёд.",
+    "Mode": "Dark",
+    "Accent": "#89BDE5",
+    "Background": "glacier.png",
+    "CursorId": "vwp-pearl",
+    "License": "VWP original · AI artwork"
+  },
+  {
+    "Id": "pearl",
+    "Name": "Pearl",
+    "Description": "Жемчужное стекло, светлый шёлк и мягкие розовые блики.",
+    "Mode": "Light",
+    "Accent": "#BD7A91",
+    "Background": "pearl.png",
+    "CursorId": "vwp-rose",
+    "License": "VWP original · AI artwork"
+  },
+  {
+    "Id": "catppuccin",
+    "Name": "Catppuccin Mocha",
+    "Description": "Адаптация открытой палитры Catppuccin для Windows и VWP.",
+    "Author": "Catppuccin · VWP",
+    "Mode": "Dark",
+    "Accent": "#CBA6F7",
+    "Palette": "Catppuccin",
+    "Background": "obsidian.png",
+    "CursorId": "bibata-ice",
+    "License": "MIT palette · VWP artwork",
+    "Source": "https://github.com/catppuccin/palette"
+  },
+  {
+    "Id": "nord",
+    "Name": "Nord Frost",
+    "Description": "Адаптация открытой северной палитры Nord для Windows и VWP.",
+    "Author": "Nord · VWP",
+    "Mode": "Dark",
+    "Accent": "#88C0D0",
+    "Palette": "Nord",
+    "Background": "glacier.png",
+    "CursorId": "capitaine-dark",
+    "License": "MIT palette · VWP artwork",
+    "Source": "https://github.com/nordtheme/nord"
+  }
+]

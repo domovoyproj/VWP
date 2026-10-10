@@ -40,6 +40,13 @@ def main():
         absent = [name for name in required if name not in archive.namelist()]
         if absent:
             raise SystemExit(f'Wallpaper media missing from archive: {absent[0]}')
+        names=archive.namelist()
+        if any(name.startswith(('VWP/assets/motion/','VWP/assets/spatial/')) for name in names):
+            raise SystemExit('Retired procedural or low-poly assets are present in the package.')
+        for name in ['themes/themes.json','themes/obsidian.png','themes/glacier.png','themes/pearl.png']:
+            if 'VWP/assets/'+name not in names:raise SystemExit('Personalization asset missing: '+name)
+        if len([name for name in names if name.startswith('VWP/assets/cursors/') and name.endswith('/pack.json')])!=14:
+            raise SystemExit('Cursor catalog is incomplete.')
     print(f'{output.name}: {count} files, {output.stat().st_size:,} bytes, ZIP CRC verified')
     print(f'SHA256: {checksum}')
 

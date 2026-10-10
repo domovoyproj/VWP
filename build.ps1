@@ -5,22 +5,28 @@ $dotnetCommand = Get-Command dotnet -ErrorAction SilentlyContinue
 $sdk = if ($dotnetCommand) { $dotnetCommand.Source } elseif (Test-Path 'C:\momp\dotnet\dotnet.exe') { 'C:\momp\dotnet\dotnet.exe' } else { throw 'Install .NET 8 SDK' }
 [xml]$project = Get-Content VWP.csproj
 $version = $project.Project.PropertyGroup.Version
-$requiredAssets = @('assets/presets.json')
+$requiredAssets = @('assets/presets.json', 'assets/themes/themes.json', 'assets/themes/obsidian.png', 'assets/themes/glacier.png', 'assets/themes/pearl.png')
+foreach ($id in @('vwp-sakura', 'vwp-neon', 'vwp-crimson', 'vwp-astral', 'vwp-abyss', 'vwp-cyber', 'vwp-aurora', 'vwp-ember', 'vwp-pearl', 'vwp-obsidian', 'vwp-rose', 'bibata-ice', 'bibata-classic', 'capitaine-dark')) {
+    $manifest = "assets/cursors/$id/pack.json"
+    $requiredAssets += $manifest
+    if (Test-Path -LiteralPath $manifest) {
+        $pack = Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json
+        foreach ($file in $pack.Files.PSObject.Properties.Value) { $requiredAssets += "assets/cursors/$id/$file" }
+        $requiredAssets += "assets/cursors/$id/LICENSE.txt"
+        $requiredAssets += "assets/cursors/$id/preview.png"
+        if ($pack.SourceArchive) { $requiredAssets += "assets/cursors/$id/$($pack.SourceArchive)" }
+    }
+}
 foreach ($preset in (Get-Content 'assets/presets.json' -Raw | ConvertFrom-Json)) {
     foreach ($suffix in @('.mp4', '.jpg', '.cover.jpg', '.preview.mp4')) { $requiredAssets += "assets/$($preset.id)$suffix" }
-    $requiredAssets += "assets/spatial/$($preset.id).png"
 }
 if (Test-Path 'assets/expansion.json') {
     $collection = Get-Content 'assets/expansion.json' -Raw | ConvertFrom-Json
     foreach ($scene in $collection.spatial) {
-        $requiredAssets += "assets/spatial/$($scene.id).png"
         $requiredAssets += "assets/cinematic/$($scene.id).png"
         $requiredAssets += "assets/cinematic/$($scene.id).mp4"
     }
     $requiredAssets += 'assets/cinematic/train.png'
-    foreach ($scene in $collection.live) {
-        foreach ($suffix in @('.mp4', '.jpg', '.cover.jpg', '.preview.mp4')) { $requiredAssets += "assets/motion/$($scene.id)$suffix" }
-    }
 }
 $missingAssets = @($requiredAssets | Where-Object { !(Test-Path -LiteralPath $_ -PathType Leaf) })
 if ($missingAssets.Count -gt 0) { throw "Incomplete wallpaper collection ($($missingAssets.Count) missing files). Run the Cloud wallpaper collection workflow, or render the media as described in README.md. First missing asset: $($missingAssets[0])" }
@@ -32,6 +38,12 @@ if (!(Test-Path tools\ffmpeg.exe)) {
 $output = Join-Path $PSScriptRoot "dist\Release-$version"
 & $sdk publish VWP.csproj -c Release -r win-x64 --self-contained true -o $output
 if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
+# Publish can reuse a previous output directory. Retired media must never re-enter an update.
+foreach ($obsolete in @('assets/motion', 'assets/spatial')) {
+    $target = [IO.Path]::GetFullPath((Join-Path $output $obsolete))
+    if (!$target.StartsWith([IO.Path]::GetFullPath($output) + [IO.Path]::DirectorySeparatorChar)) { throw 'Invalid cleanup target' }
+    if (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target -Recurse -Force }
+}
 if ($Installer) {
     if (!$Compiler) {
         $candidates = @((Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6\ISCC.exe'), (Join-Path $PSScriptRoot 'artifacts\inno\ISCC.exe'))

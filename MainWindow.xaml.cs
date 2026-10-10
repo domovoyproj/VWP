@@ -22,7 +22,11 @@ public sealed class Preferences
     public Dictionary<string,string> ImportNames {get;set;}=new();
     public Dictionary<string,string> ImportThumbnails {get;set;}=new();
     public Dictionary<string,SceneLayers> Layers {get;set;}=new();
-    public string Theme {get;set;}="System";
+    public string Theme {get;set;}="Dark";
+    public string AppearanceAccent {get;set;}="#A3BCF7";
+    public string AppearancePalette {get;set;}="";
+    public string AppearanceThemeId {get;set;}="";
+    public string CursorPackId {get;set;}="";
     public bool SceneAccent {get;set;}=true;
     public List<string> PauseExceptions {get;set;}=new();
     public string GallerySource {get;set;}="https://raw.githubusercontent.com/domovoyproj/VWP/main/gallery/catalog.json";
@@ -70,6 +74,7 @@ public partial class MainWindow : Window
         foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 4K · 60 FPS",preset.Category,preset.Description,preset.Id));
         foreach(var preset in presets)items.Add(new(preset.Name+" · Живая сцена",System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"scene-{preset.Id}.png"),preset.Category+" · ЖИВАЯ СЦЕНА",preset.Category,SpatialScene.Descriptions[preset.Id],preset.Id,true));
         LoadExpansion(assets);
+        RemoveRetiredWallpapers();
         foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO",IsSpatial:preferences.Layers.GetValueOrDefault(path)?.MotionId is not null));
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
         RefreshScreens(); Volume.Value=preferences.Volume; if(host is not null)host.Volume=preferences.Volume; Autostart.IsChecked=preferences.Autostart;
@@ -82,6 +87,7 @@ public partial class MainWindow : Window
         tray.DoubleClick+=(_,_)=>Dispatcher.Invoke(()=>{Show();Activate();});
         InitializeFeatures();
         InitializeStudio();
+        InitializeAppearance();
         Microsoft.Win32.SystemEvents.DisplaySettingsChanged+=DisplayChanged;
         Loaded+=(_,_)=> {
             Trace("loaded "+string.Join(" ",Environment.GetCommandLineArgs()));
@@ -135,7 +141,7 @@ public partial class MainWindow : Window
     bool FilterScene(object value) {var item=(Wallpaper)value;return (sceneFormat=="Все форматы" || sceneFormat=="3D" == item.IsSpatial) && MatchesCollection(item) && item.Name.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase);}
     void RefreshFilter() {if(Library.ItemsSource is null)return;var view=System.Windows.Data.CollectionViewSource.GetDefaultView(items);view.Refresh();CountLabel.Text=$"{view.Cast<Wallpaper>().Count()} / {items.Count} сцен";}
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
-    void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)button.Background=button.Tag as string==category?System.Windows.Media.Brushes.White:System.Windows.Media.Brushes.Transparent;RefreshFilter();}
+    void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)if(button.Tag as string==category)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=System.Windows.Media.Brushes.Transparent;RefreshFilter();}
     void PauseClick(object sender,RoutedEventArgs e) {var config=Config(SelectedScreen);config.UserPaused=!config.UserPaused;host?.SetUserPaused(config.UserPaused);Save();UpdatePlaybackStatus();}
     void StopClick(object sender,RoutedEventArgs e) {applyGeneration[SelectedScreen.DeviceName]=applyGeneration.GetValueOrDefault(SelectedScreen.DeviceName)+1;host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";PauseButton.Content="Ⅱ  Пауза";}
     void QuitClick(object sender,RoutedEventArgs e) { exiting=true;Close(); }
@@ -220,9 +226,11 @@ public partial class MainWindow : Window
                 var player=GetHost(Forms.Screen.PrimaryScreen!);player.Play(item.Path,Forms.Screen.PrimaryScreen!,item.Thumbnail);player.Volume=0;
                 for(int retry=0;retry<12 && !host.Playing;retry++)await System.Threading.Tasks.Task.Delay(500);
                 await System.Threading.Tasks.Task.Delay(7200);
+                // Sampling may coincide with a loop restart. Verify that playback resumes.
+                for(int retry=0;retry<12 && !host.Playing;retry++)await System.Threading.Tasks.Task.Delay(250);
                 bool playing=host.Playing;long time=host.Position;
-                host.TogglePause();await System.Threading.Tasks.Task.Delay(300);bool paused=host.Paused && !host.Playing;
-                host.TogglePause();await System.Threading.Tasks.Task.Delay(300);
+                Config(Forms.Screen.PrimaryScreen!).UserPaused=true;host.SetUserPaused(true);await System.Threading.Tasks.Task.Delay(300);bool paused=host.Paused && !host.Playing;
+                Config(Forms.Screen.PrimaryScreen!).UserPaused=false;host.SetUserPaused(false);await System.Threading.Tasks.Task.Delay(300);
                 bool resumed=host.Playing;bool healthy=host.Healthy;bool active=host.Active;bool backdropApplied=host.BackdropApplied;
                 bool matchingPicture=string.Equals(host.StaticPicture(Forms.Screen.PrimaryScreen!),item.Thumbnail,StringComparison.OrdinalIgnoreCase);string? backdropError=host.BackdropError;
                 host.Stop();bool originalRestored=string.Equals(original,host.StaticPicture(Forms.Screen.PrimaryScreen!),StringComparison.OrdinalIgnoreCase);
@@ -253,6 +261,6 @@ public partial class MainWindow : Window
     protected override void OnClosing(CancelEventArgs e)
     {
         if(!exiting){e.Cancel=true;TrayClick(this,new());return;}
-        StopPreview();StopHover();featureTimer.Stop();CloseStudio();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
+        StopPreview();StopHover();foreach(var cursor in sampleCursors)cursor.Dispose();sampleCursors.Clear();featureTimer.Stop();CloseStudio();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
     }
 }

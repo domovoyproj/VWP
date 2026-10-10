@@ -1,0 +1,29 @@
+{
+  "Id": "capitaine-dark",
+  "Name": "Capitaine Dark",
+  "Author": "Keefer Rourke · hervad",
+  "License": "LGPL-3.0-or-later",
+  "Source": "https://github.com/hervad/capitaine-cursors-w11-hidpi/tree/v3.1.0",
+  "SourceArchive": "source.zip",
+  "Accent": "#D5D9E2",
+  "Description": "Открытый набор · 17 ролей · анимированная загрузка · HiDPI",
+  "Files": {
+    "Arrow": "pointer.cur",
+    "Help": "help.cur",
+    "AppStarting": "working.ani",
+    "Wait": "busy.ani",
+    "Crosshair": "precision.cur",
+    "IBeam": "text.cur",
+    "NWPen": "handwriting.cur",
+    "No": "unavailable.cur",
+    "SizeNS": "vert.cur",
+    "SizeWE": "horz.cur",
+    "SizeNWSE": "dgn1.cur",
+    "SizeNESW": "dgn2.cur",
+    "SizeAll": "move.cur",
+    "UpArrow": "alternate.cur",
+    "Hand": "link.cur",
+    "Pin": "pin.cur",
+    "Person": "person.cur"
+  }
+}

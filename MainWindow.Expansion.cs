@@ -14,10 +14,5 @@ public partial class MainWindow
             string category=entry.GetProperty("category").GetString()!;
             items.Add(new(entry.GetProperty("name").GetString()+" · Живая сцена",Path.Combine(assets,"cinematic",$"{id}.mp4"),File.Exists(cinematic)?cinematic:cover,category+" · ЖИВАЯ СЦЕНА",category,SpatialScene.Descriptions[id],id,true));
         }
-        foreach(var entry in catalog.RootElement.GetProperty("live").EnumerateArray())
-        {
-            int id=entry.GetProperty("id").GetInt32();string category=entry.GetProperty("category").GetString()!;
-            items.Add(new(entry.GetProperty("name").GetString()!,Path.Combine(assets,"motion",$"{id}.mp4"),Path.Combine(assets,"motion",$"{id}.jpg"),category+" · 4K · 60 FPS",category,entry.GetProperty("description").GetString()!,id));
-        }
     }
 }

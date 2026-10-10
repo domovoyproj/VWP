@@ -15,6 +15,7 @@ class Program
  static void Check(bool ok,string message){if(!ok)throw new Exception(message);}
  [STAThread] static void Main(string[] args)
  {
+  if(args.Length==1 && args[0]=="--overlay-check"){OverlayCheck.Run();return;}
   if(args.Length==1 && args[0]=="--cinematic-check")
   {
    string cinematicOutput=Path.Combine(Environment.CurrentDirectory,"artifacts","cinematic-check");Directory.CreateDirectory(cinematicOutput);
@@ -29,6 +30,7 @@ class Program
       using var visual=new InteractiveVisual(new(){Background=background,MotionId=id},new(){Performance="Quality"},Forms.Screen.PrimaryScreen!,audio);
       checkWindow.Content=visual;await Task.Delay(200);
       Check(visual.CinematicActive && visual.Spatial is null,"Cinematic mode "+id);
+      foreach(string profile in new[]{"Balance","Eco"}){visual.Configure(new(){Performance=profile});Check(visual.CinematicActive && visual.Spatial is null,"Artwork preserved in "+profile+" for "+id);}visual.Configure(new(){Performance="Quality"});
       var a=Pixels(visual);await Task.Delay(900);var b=Pixels(visual);
       int changed=0;for(int i=0;i<a.Length;i+=4)if(Math.Abs(a[i]-b[i])+Math.Abs(a[i+1]-b[i+1])+Math.Abs(a[i+2]-b[i+2])>12)changed++;
       Check(changed>80,"Static cinematic scene "+id+"; changed pixels "+changed);
