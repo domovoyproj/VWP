@@ -1,10 +1,14 @@
 # VWP Studio — живые обои, темы и курсоры для Windows
 
-[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.6.0** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC
+[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.6.1** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC
 
 ![VWP Studio](docs/studio-themes.png)
 
-## Что нового в 0.6.0
+## Что нового в 0.6.1
+
+Смена сцен плавно смешивает последний кадр прежнего видео с новым за одну секунду. Переход ждёт готовности видеовывода, поддерживает быстрое переключение и паузу. Фон Windows заменяется без промежуточного возврата исходных обоев. [Подробности релиза](docs/RELEASE-0.6.1.md).
+
+## Studio, темы и курсоры
 
 - Отдельные разделы «Обои», «Темы» и «Курсоры», спокойная тёмная палитра, светлый режим, адаптивный баннер и крупные карточки с настоящими превью.
 - 13 готовых тем: восемь под первые аниме-обои и пять спокойных стилей — Obsidian, Glacier, Pearl, Catppuccin Mocha и Nord Frost. Тема меняет режим Windows, акцент, оформление VWP и, по выбору, курсоры и фон.
@@ -87,10 +91,12 @@ python tools/check_cinematic.py
 python tools/check_personalization.py
 dotnet build VWP.csproj -c Release
 powershell -ExecutionPolicy Bypass -File build.ps1 -Installer
-python tools/package_release.py --version 0.6.0 --build dist/Release-0.6.0
+python tools/package_release.py --version 0.6.1 --build dist/Release-0.6.1
 ```
 
-Для установщика нужен Inno Setup 6. Workflow **VWP Studio release** получает 10 неизменённых мастер-видео из официального 0.5.2 с проверкой SHA-256, проверяет коллекцию и курсоры, собирает установщик и portable. После публикации тега `v0.6.0` создаёт официальный GitHub Release.
+Для установщика нужен Inno Setup 6. Workflow **VWP Studio release** получает 10 неизменённых мастер-видео из официального 0.5.2 с проверкой SHA-256, проверяет коллекцию и курсоры, собирает установщик и portable. После публикации тега `v0.6.1` создаёт официальный GitHub Release.
+
+`dotnet run --project tools/live-check -c Release -- --transition-check` проверяет видимое смешивание двух контрольных видео, отсутствие чёрных кадров и резкого скачка, быструю смену сцен, паузу, очистку слоёв и прямую замену фонового изображения. Проверка сама создаёт MP4 в `artifacts/transition-check/` через `tools/ffmpeg.exe` или FFmpeg из PATH (640×360, 30 FPS, 8 секунд). Ей нужен интерактивный рабочий стол Windows; контрольное окно на время проверки должно быть видно.
 
 Нативная проверка `VWP.dll --verify-personalization` проверяет загрузку всех 238 курсоров Windows, применение/возврат, импорт/экспорт и миграцию удалённых сцен; снимки лаунчера сохраняются в `verification/`. Она временно меняет оформление текущего сеанса и затем восстанавливает его. `--verify`, `--verify-ui` проверяют воспроизведение, паузу, трей, режимы окна и превью. `tools/live-check --cinematic-check` проверяет изменение видимых пикселей всех 28 анимированных сцен и сохранение изображения в разных профилях.
 

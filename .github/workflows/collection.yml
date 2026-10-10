@@ -1,7 +1,7 @@
 name: VWP Studio release
 on:
   push:
-    branches: ['codex/personalization-studio']
+    branches: ['codex/personalization-studio', 'codex/smooth-transitions']
     tags: ['v0.5.*', 'v0.6.*']
   workflow_dispatch:
 permissions:
@@ -76,7 +76,8 @@ jobs:
           $notes = "docs/RELEASE-$version.md"
           gh release view $tag --repo '${{ github.repository }}' --json tagName --jq '.tagName' *> $null
           if ($LASTEXITCODE -ne 0) {
-            gh release create $tag --repo '${{ github.repository }}' --title "VWP $version — Studio, темы и курсоры" --notes-file $notes
+            $title = (Get-Content $notes -Encoding utf8 -TotalCount 1) -replace '^#\s+', ''
+            gh release create $tag --repo '${{ github.repository }}' --title $title --notes-file $notes
             if ($LASTEXITCODE -ne 0) { throw 'Release creation failed' }
           }
           $existing = @(gh release view $tag --repo '${{ github.repository }}' --json assets --jq '.assets[].name')
