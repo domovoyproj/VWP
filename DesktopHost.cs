@@ -8,7 +8,8 @@ using Forms = System.Windows.Forms;
 namespace VWP;
 public sealed class DesktopHost : IDisposable
 {
-    readonly LibVLC vlc = new LibVLC("--no-video-title-show","--input-repeat=-1");
+    // Transition snapshots must never put their filename or preview on the desktop.
+    readonly LibVLC vlc = new LibVLC("--no-video-title-show","--no-osd","--no-snapshot-preview","--input-repeat=-1");
     readonly MediaPlayer player;
     Media? currentMedia;
     readonly StaticBackdrop? backdrop;
@@ -38,7 +39,8 @@ public sealed class DesktopHost : IDisposable
     public event Action? SurfaceReady;
     public DesktopHost() {
         try {backdrop=new StaticBackdrop();}catch(Exception e){BackdropError=e.Message;}
-        player = new MediaPlayer(vlc); player.EncounteredError += (_,_) => Failed?.Invoke();
+        player = new MediaPlayer(vlc); player.SetVideoTitleDisplay(LibVLCSharp.Shared.Position.Disable,0);
+        player.EncounteredError += (_,_) => Failed?.Invoke();
         player.EndReached += (_,_)=>LoopRequired?.Invoke();
         player.Playing += (_,_)=>SurfaceReady?.Invoke();
     }

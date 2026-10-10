@@ -46,9 +46,9 @@ public partial class MainWindow
     void ThemeChanged(object sender,UserPreferenceChangedEventArgs e)=>Dispatcher.BeginInvoke(new Action(UpdateTheme));
     void UpdateTheme()
     {
-        if(!studioReady)return;string accent="#9B89D1";
+        if(!studioReady)return;string accent=preferences.AppearanceAccent;
         if(preferences.SceneAccent && Library.SelectedItem is Wallpaper scene)accent=LayersFor(scene)?.Accent??accent;
-        ThemeService.Apply(preferences.Theme,accent);
+        ThemeService.Apply(preferences.Theme,accent,preferences.AppearancePalette);
     }
     SceneLayers? LayersFor(Wallpaper scene)
     {

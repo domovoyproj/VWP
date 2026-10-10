@@ -34,6 +34,9 @@ Name: "desktopicon"; Description: "Создать ярлык на рабочем
 [Files]
 Source: "{#BuildDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb,*.log,verification\*,libvlc\win-x86\*,libvlc\win-arm64\*"
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
+[InstallDelete]
+Type: filesandordirs; Name: "{app}\assets\motion"
+Type: filesandordirs; Name: "{app}\assets\spatial"
 [Icons]
 Name: "{userprograms}\VWP"; Filename: "{app}\VWP.exe"
 Name: "{userdesktop}\VWP"; Filename: "{app}\VWP.exe"; Tasks: desktopicon

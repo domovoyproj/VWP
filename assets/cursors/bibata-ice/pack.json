@@ -1,0 +1,29 @@
+{
+  "Id": "bibata-ice",
+  "Name": "Bibata Modern Ice",
+  "Author": "Abdulkaiz Khatri",
+  "License": "GPL-3.0",
+  "Source": "https://github.com/ful1e5/Bibata_Cursor/tree/v2.0.7",
+  "SourceArchive": "source.zip",
+  "Accent": "#BAC8FF",
+  "Description": "Открытый набор · 17 ролей · анимированная загрузка · 32–128 px",
+  "Files": {
+    "Arrow": "pointer.cur",
+    "Help": "help.cur",
+    "AppStarting": "work.ani",
+    "Wait": "busy.ani",
+    "Crosshair": "cross.cur",
+    "IBeam": "text.cur",
+    "NWPen": "handwriting.cur",
+    "No": "unavailable.cur",
+    "SizeNS": "vert.cur",
+    "SizeWE": "horz.cur",
+    "SizeNWSE": "dgn1.cur",
+    "SizeNESW": "dgn2.cur",
+    "SizeAll": "move.cur",
+    "UpArrow": "alternate.cur",
+    "Hand": "link.cur",
+    "Pin": "pin.cur",
+    "Person": "person.cur"
+  }
+}

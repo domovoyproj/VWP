@@ -1,0 +1,29 @@
+{
+  "Id": "vwp-astral",
+  "Name": "Astral Orbit",
+  "Author": "VWP",
+  "License": "CC0-1.0",
+  "Source": "https://github.com/domovoyproj/VWP",
+  "Accent": "#B299FF",
+  "Order": 3,
+  "Description": "Аниме / gaming · 17 ролей · 24–96 px · анимированная загрузка",
+  "Files": {
+    "Arrow": "Arrow.cur",
+    "Help": "Help.cur",
+    "AppStarting": "AppStarting.ani",
+    "Wait": "Wait.ani",
+    "Crosshair": "Crosshair.cur",
+    "IBeam": "IBeam.cur",
+    "NWPen": "NWPen.cur",
+    "No": "No.cur",
+    "SizeNS": "SizeNS.cur",
+    "SizeWE": "SizeWE.cur",
+    "SizeNWSE": "SizeNWSE.cur",
+    "SizeNESW": "SizeNESW.cur",
+    "SizeAll": "SizeAll.cur",
+    "UpArrow": "UpArrow.cur",
+    "Hand": "Hand.cur",
+    "Pin": "Pin.cur",
+    "Person": "Person.cur"
+  }
+}

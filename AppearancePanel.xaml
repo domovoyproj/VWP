@@ -1,0 +1,47 @@
+<UserControl x:Class="VWP.AppearancePanel" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <Grid Margin="30,24,30,20">
+  <Grid.RowDefinitions><RowDefinition Height="70"/><RowDefinition Height="{Binding ActualHeight,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource HeroHeight}}"/><RowDefinition/><RowDefinition Height="84"/></Grid.RowDefinitions>
+  <Grid>
+   <StackPanel><TextBlock Text="ПЕРСОНАЛИЗАЦИЯ" FontSize="9" Foreground="{DynamicResource MutedBrush}"/><TextBlock x:Name="PageTitle" Text="Темы" FontSize="30" FontWeight="SemiBold" Margin="0,5,0,0"/></StackPanel>
+   <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"><Button x:Name="RestoreButton" Content="Вернуть прежнее" Background="Transparent" Padding="12,10" Margin="0,0,8,0"/><Button x:Name="ImportButton" Content="＋ Импорт"/></StackPanel>
+  </Grid>
+  <Border Grid.Row="1" Background="{DynamicResource CardBrush}" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" CornerRadius="20" Margin="0,0,0,18">
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="1.3*"/><ColumnDefinition/></Grid.ColumnDefinitions>
+    <Border x:Name="ThemePreview" CornerRadius="19,0,0,19" ClipToBounds="True" Background="#182130">
+     <Grid><Image x:Name="ThemeImage" Stretch="UniformToFill"/><Border Background="#28000000"/><Border Background="#D8202229" BorderBrush="#50FFFFFF" BorderThickness="1" CornerRadius="11" Margin="25,0,25,24" Height="62" VerticalAlignment="Bottom"><Grid Margin="16,10"><Grid.ColumnDefinitions><ColumnDefinition Width="30"/><ColumnDefinition/></Grid.ColumnDefinitions><Image Source="assets/app.png" Width="25" Height="25"/><StackPanel Grid.Column="1" Margin="10,0,0,0"><TextBlock Text="Твоё пространство" Foreground="White" FontWeight="SemiBold" FontSize="12"/><TextBlock Text="Windows + VWP" Foreground="#C0C8D7" FontSize="9" Margin="0,3,0,0"/></StackPanel></Grid></Border></Grid>
+    </Border>
+    <Border x:Name="CursorPreview" Visibility="Collapsed" CornerRadius="19,0,0,19" Background="#182130">
+     <Grid Margin="18"><Grid.RowDefinitions><RowDefinition/><RowDefinition Height="44"/></Grid.RowDefinitions><Image x:Name="CursorImage" Width="70" Height="70" Stretch="Uniform"/><StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"><Button x:Name="TryButton" Content="Наведи сюда" Background="#354153" Foreground="White" FontSize="11" Padding="14,9"/><TextBox x:Name="TryText" Text="Выдели текст" Width="124" Background="#283446" Foreground="White" Margin="8,0,0,0" FontSize="11" VerticalContentAlignment="Center"/><Button x:Name="TryBusy" Content="Загрузка" ToolTip="Наведи, чтобы увидеть анимацию курсора" Background="#354153" Foreground="White" FontSize="11" Padding="12,9" Margin="8,0,0,0"/></StackPanel></Grid>
+    </Border>
+    <StackPanel Grid.Column="1" Margin="24,12,20,12" VerticalAlignment="Center">
+     <TextBlock x:Name="Badge" Text="VWP ORIGINAL" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" FontSize="9"/>
+     <TextBlock x:Name="SelectedTitle" FontSize="22" FontWeight="SemiBold" Margin="0,6,0,6" TextTrimming="CharacterEllipsis"/>
+     <TextBlock x:Name="SelectedDescription" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" LineHeight="16" MaxHeight="32" TextTrimming="CharacterEllipsis"/>
+     <StackPanel Orientation="Horizontal" Margin="0,8,0,0"><Border x:Name="ColorSwatch" Width="22" Height="22" CornerRadius="11"/><TextBlock x:Name="SelectedMeta" VerticalAlignment="Center" Foreground="{DynamicResource MutedBrush}" FontSize="10" Margin="9,0,0,0"/></StackPanel>
+     <Button x:Name="SourceButton" Content="Автор и лицензия ↗" HorizontalAlignment="Left" Background="Transparent" Padding="0,4" FontSize="9" Foreground="{DynamicResource MutedBrush}"/>
+    </StackPanel>
+   </Grid>
+  </Border>
+  <Grid Grid.Row="2" Margin="0,0,0,14"><Grid.RowDefinitions><RowDefinition Height="32"/><RowDefinition/></Grid.RowDefinitions>
+   <DockPanel><TextBlock x:Name="CollectionLabel" Text="Готовые темы" FontSize="14" FontWeight="SemiBold"/><TextBlock x:Name="Count" HorizontalAlignment="Right" Foreground="{DynamicResource MutedBrush}" FontSize="11"/></DockPanel>
+   <ListBox x:Name="ThemeLibrary" Grid.Row="1" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+    <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel ItemWidth="{Binding ViewportWidth,RelativeSource={RelativeSource AncestorType=ScrollViewer},Converter={StaticResource CardWidth}}"/></ItemsPanelTemplate></ListBox.ItemsPanel>
+    <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem" BasedOn="{StaticResource AppearanceCard}"/></ListBox.ItemContainerStyle>
+    <ListBox.ItemTemplate><DataTemplate><StackPanel><Grid Height="108" ClipToBounds="True"><Image Source="{Binding Background}" Stretch="UniformToFill"/><Border Background="#30000000"/><Border Width="16" Height="16" CornerRadius="8" Background="{Binding Accent}" BorderBrush="White" BorderThickness="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12"/></Grid><TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="12" Margin="12,11,10,4"/><TextBlock Text="{Binding Meta}" Foreground="{DynamicResource MutedBrush}" FontSize="9" Margin="12,0,10,12" TextTrimming="CharacterEllipsis"/></StackPanel></DataTemplate></ListBox.ItemTemplate>
+   </ListBox>
+   <ListBox x:Name="CursorLibrary" Grid.Row="1" Visibility="Collapsed" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+    <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel ItemWidth="{Binding ViewportWidth,RelativeSource={RelativeSource AncestorType=ScrollViewer},Converter={StaticResource CardWidth}}"/></ItemsPanelTemplate></ListBox.ItemsPanel>
+    <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem" BasedOn="{StaticResource AppearanceCard}"/></ListBox.ItemContainerStyle>
+    <ListBox.ItemTemplate><DataTemplate><StackPanel><Border Background="#182130" Height="108"><Image Source="{Binding Preview}" Width="54" Height="54" Stretch="Uniform"/></Border><TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="12" Margin="12,11,10,4"/><TextBlock Text="{Binding Meta}" Foreground="{DynamicResource MutedBrush}" FontSize="9" Margin="12,0,10,12" TextTrimming="CharacterEllipsis"/></StackPanel></DataTemplate></ListBox.ItemTemplate>
+   </ListBox>
+  </Grid>
+  <Border Grid.Row="3" Background="{DynamicResource CardBrush}" CornerRadius="16" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Padding="17,9">
+   <Grid><Grid.RowDefinitions><RowDefinition/><RowDefinition Height="22"/></Grid.RowDefinitions><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <StackPanel x:Name="ThemeOptions" Orientation="Horizontal" VerticalAlignment="Center"><CheckBox x:Name="ApplyBackground" Content="Заменить обои" ToolTip="Остановить живые обои и поставить фон темы"/><CheckBox x:Name="ApplyCursors" Content="Курсоры темы" IsChecked="True" Margin="18,0,0,0"/></StackPanel>
+    <TextBlock x:Name="CursorHint" Text="Указатели во всех приложениях Windows" Foreground="{DynamicResource MutedBrush}" FontSize="11" VerticalAlignment="Center" Visibility="Collapsed"/>
+    <StackPanel Grid.Column="1" Orientation="Horizontal"><Button x:Name="ExportButton" Content="Экспорт" Background="Transparent" Margin="0,0,8,0"/><Button x:Name="ApplyButton" Content="Применить тему" Background="{DynamicResource PrimaryBrush}" Foreground="White" Padding="18,11"/></StackPanel>
+    <TextBlock x:Name="Status" Grid.Row="1" Grid.ColumnSpan="2" Text="Выбери свой стиль" FontSize="10" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+   </Grid>
+  </Border>
+ </Grid>
+</UserControl>
