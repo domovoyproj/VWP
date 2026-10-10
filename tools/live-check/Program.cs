@@ -16,6 +16,7 @@ class Program
  [STAThread] static void Main(string[] args)
  {
   if(args.Length==1 && args[0]=="--overlay-check"){OverlayCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--transition-check"){TransitionCheck.Run();return;}
   if(args.Length==1 && args[0]=="--cinematic-check")
   {
    string cinematicOutput=Path.Combine(Environment.CurrentDirectory,"artifacts","cinematic-check");Directory.CreateDirectory(cinematicOutput);
