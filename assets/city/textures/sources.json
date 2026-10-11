@@ -1,8 +1,68 @@
 {
-  "apartment.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Night apartment facade"},
-  "townhouse.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Traditional Japanese townhouse facade"},
-  "shop.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Night cafe and arcade storefront"},
-  "tree.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Japanese cherry tree with alpha transparency"},
-  "commuter.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Commuter train carriage textures; shared with living/commuter.png"},
-  "office-color.jpg": {"source":"https://ambientcg.com/a/Facade001","author":"Lennart Demes / ambientCG","license":"CC0-1.0","licenseUrl":"https://docs.ambientcg.com/license/","originalFile":"Facade001_2K-JPG_Color.jpg"}
+  "apartment.png": {
+    "source": "Original VWP artwork generated with built-in ImageGen",
+    "role": "Night apartment facade"
+  },
+  "townhouse.png": {
+    "source": "Original VWP artwork generated with built-in ImageGen",
+    "role": "Traditional Japanese townhouse facade"
+  },
+  "shop.png": {
+    "source": "Original VWP artwork generated with built-in ImageGen",
+    "role": "Night cafe and arcade storefront"
+  },
+  "tree.png": {
+    "source": "Original VWP artwork generated with built-in ImageGen",
+    "role": "Japanese cherry tree with alpha transparency"
+  },
+  "commuter.png": {
+    "source": "Original VWP artwork generated with built-in ImageGen",
+    "role": "Commuter train carriage textures; shared with living/commuter.png"
+  },
+  "office-color.jpg": {
+    "source": "https://ambientcg.com/a/Facade001",
+    "author": "Lennart Demes / ambientCG",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://docs.ambientcg.com/license/",
+    "originalFile": "Facade001_2K-JPG_Color.jpg"
+  },
+  "storefronts-v2.png": {
+    "source": "Original VWP artwork, built-in ImageGen",
+    "role": "Eight distinct night storefront interiors; UV atlas"
+  },
+  "city-light.hdr": {
+    "source": "https://polyhaven.com/a/shanghai_bund",
+    "author": "Greg Zaal / Poly Haven",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "role": "HDR environment lighting"
+  },
+  "brick_wall_003-color.jpg": {
+    "source": "https://polyhaven.com/a/brick_wall_003",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "resolution": "2K",
+    "role": "Physical wall color map"
+  },
+  "brick_wall_003-normal.jpg": {
+    "source": "https://polyhaven.com/a/brick_wall_003",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "resolution": "2K",
+    "role": "Physical wall normal map"
+  },
+  "concrete_wall_007-color.jpg": {
+    "source": "https://polyhaven.com/a/concrete_wall_007",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "resolution": "2K",
+    "role": "Physical wall color map"
+  },
+  "concrete_wall_007-normal.jpg": {
+    "source": "https://polyhaven.com/a/concrete_wall_007",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://polyhaven.com/license",
+    "resolution": "2K",
+    "role": "Physical wall normal map"
+  }
 }

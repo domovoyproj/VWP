@@ -17,6 +17,7 @@ public sealed class MonitorPreferences
     public bool MusicReactive {get;set;}
     public double Depth {get;set;}=.65;
     public string Performance {get;set;}="Quality";
+    public string CityPerformance {get;set;}="Auto";
     public string PlaylistName { get; set; } = "Мой плейлист";
     public List<string> Playlist { get; set; } = new();
     public bool PlaylistEnabled { get; set; }

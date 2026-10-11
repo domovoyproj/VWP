@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "files": [
+    "index.html", "city.css", "city.js", "architecture.js", "actors.js", "cover.png",
+    "vendor/three.module.js", "vendor/three.core.js", "vendor/Reflector.js", "vendor/BufferGeometryUtils.js",
+    "vendor/GLTFLoader.js", "vendor/HDRLoader.js", "vendor/SkeletonUtils.js", "vendor/LICENSE.txt",
+    "textures/apartment.png", "textures/townhouse.png", "textures/shop.png", "textures/tree.png", "textures/commuter.png",
+    "textures/office-color.jpg", "textures/city-light.hdr", "textures/storefronts-v2.png",
+    "textures/brick_wall_003-color.jpg", "textures/brick_wall_003-normal.jpg",
+    "textures/concrete_wall_007-color.jpg", "textures/concrete_wall_007-normal.jpg", "textures/sources.json",
+    "models/car-road.glb", "models/person-male.glb", "models/person-female.glb", "models/motion.glb",
+    "models/Hair_Buzzed.glb", "models/Hair_Long.glb", "models/Car-LICENSE.md", "models/car-metadata.json",
+    "models/CC-BY-4.0.txt", "models/LicenseRef-LegalMark-Khronos.txt",
+    "models/Quaternius-Characters-LICENSE.txt", "models/Quaternius-Animation-LICENSE.txt"
+  ]
+}

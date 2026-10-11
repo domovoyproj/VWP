@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -11,7 +12,7 @@ using Forms=System.Windows.Forms;
 static class CityCheck
 {
     static void Check(bool ok,string label){if(!ok)throw new Exception(label);}
-    public static void Run()
+    public static void Run(bool desktop=false)
     {
         Forms.Application.SetHighDpiMode(Forms.HighDpiMode.PerMonitorV2);
         string folder=Path.Combine(Environment.CurrentDirectory,"artifacts","city-check");Directory.CreateDirectory(folder);
@@ -21,6 +22,7 @@ static class CityCheck
         {
             try
             {
+                File.WriteAllText(Path.Combine(folder,"status.txt"),"RUNNING: native city verification");
                 string progress=Path.Combine(folder,"progress.txt");File.WriteAllText(progress,"authentication\n");
                 var fake=new FakeGithub();using(var access=new StarAccess(new HttpClient(fake),Path.Combine(folder,"access.bin")))
                 {
@@ -41,7 +43,7 @@ static class CityCheck
                     Check(!await checking&&!access.Unlocked&&!File.Exists(Path.Combine(folder,"access.bin")),"Disconnect defeats a late successful verification");
                 }
                 File.AppendAllText(progress,"render\n");form.Show();form.Activate();
-                await city.Initialize("Quality",true);await Task.Delay(1200);
+                await city.Initialize("Auto",true);await Task.Delay(10000);
                 await city.Capture(Path.Combine(folder,"initial.png"));
                 using(var frame=new Bitmap(Path.Combine(folder,"initial.png")))
                 {
@@ -49,7 +51,21 @@ static class CityCheck
                     Check(lit>1500&&colored>1500,"Rendered city must contain visible detailed colored geometry");
                 }
                 using var a=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics()"));int start=a.RootElement.GetProperty("frames").GetInt32();
-                await Task.Delay(800);using var b=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics()"));Check(b.RootElement.GetProperty("frames").GetInt32()>start+3,"City is animated");
+                var timer=Stopwatch.StartNew();await Task.Delay(3000);using var b=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics()"));
+                int animatedFrames=b.RootElement.GetProperty("frames").GetInt32()-start;
+                File.WriteAllText(Path.Combine(folder,"performance.json"),JsonSerializer.Serialize(new{width=1280,height=720,quality="Auto",observedFrames=animatedFrames,seconds=timer.Elapsed.TotalSeconds,observedFps=animatedFrames/timer.Elapsed.TotalSeconds,details=b.RootElement.Clone()}));
+                Check(animatedFrames>12,"City is animated");
+                Check(b.RootElement.GetProperty("actors").GetProperty("pedestrians").GetInt32()==14,"Rigged pedestrians are loaded");
+                Check(b.RootElement.GetProperty("architecture").GetProperty("templates").GetInt32()<=48,"Geometry template cache stays bounded");
+                double poseChange=0;
+                // A single sample can land on the same phase of a looping walk.
+                for(int sample=0;sample<4;sample++)
+                {
+                    await Task.Delay(150);using var motionPose=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics().walkingPose"));
+                    double difference=0;for(int i=0;i<4;i++)difference+=Math.Abs(a.RootElement.GetProperty("walkingPose")[i].GetDouble()-motionPose.RootElement[i].GetDouble());
+                    poseChange=Math.Max(poseChange,difference);
+                }
+                Check(poseChange>.01,"Walking animation deforms the skeleton");
                 city.SetPaused(true);await Task.Delay(300);string frozen=await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics().frames");await Task.Delay(400);Check(frozen==await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics().frames"),"Pause freezes renderer");city.SetPaused(false);
                 await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.move(40000,-40000);window.city.interact()");await Task.Delay(900);
                 using var moved=JsonDocument.Parse(await city.State());Check(Math.Abs(moved.RootElement.GetProperty("x").GetDouble())>39000,"Travel is not confined to the first city block");
@@ -57,7 +73,30 @@ static class CityCheck
                 await city.Capture(Path.Combine(folder,"travel.png"));File.WriteAllText(Path.Combine(folder,"metrics.json"),m.RootElement.GetRawText());
                 await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.restore({x:0,y:4.3,z:22,palette:0});");await Task.Delay(500);
                 string cover=Path.Combine(folder,"cover.png");await city.Control.CoreWebView2.ExecuteScriptAsync("document.body.classList.add('wallpaper')");await Task.Delay(150);await city.Capture(cover);
-                File.WriteAllText(Path.Combine(folder,"status.txt"),"PASS: authenticated star gate, encrypted credentials, revocation, backend gate, visible animated city, pause and bounded 40km travel");
+                if(desktop)
+                {
+                    city.Dispose();File.AppendAllText(progress,"desktop\n");
+                    using var testAccess=new StarAccess(new HttpClient(new FakeGithub()),Path.Combine(folder,"desktop-access.bin"));
+                    testAccess.Disconnect();Check(await testAccess.CheckAsync("test-read-only-token-01234567890"),"Test account unlocks through authenticated API responses");
+                    using var actualHost=new DesktopHost();
+                    try
+                    {
+                        await actualHost.PlayCity(testAccess,Forms.Screen.PrimaryScreen!,cover,"Auto");
+                        await Task.Delay(1200);Check(actualHost.IsCity&&actualHost.Healthy,"City attaches to the real Explorer wallpaper host");
+                        string? first=await actualHost.CitySnapshot();Check(first is not null,"Desktop city produces a frame");
+                        File.Move(first!,Path.Combine(folder,"desktop-first.png"),true);
+                        string initialState=await actualHost.CityState();await Task.Delay(1600);
+                        string? second=await actualHost.CitySnapshot();Check(second is not null,"Desktop city produces a second frame");
+                        File.Move(second!,Path.Combine(folder,"desktop-second.png"),true);
+                        Check(initialState!=await actualHost.CityState(),"Desktop city continues animating after initialization");
+                        using var firstImage=new Bitmap(Path.Combine(folder,"desktop-first.png"));using var secondImage=new Bitmap(Path.Combine(folder,"desktop-second.png"));
+                        int changes=0;for(int y=0;y<firstImage.Height;y+=8)for(int x=0;x<firstImage.Width;x+=8){var pixelA=firstImage.GetPixel(x,y);var pixelB=secondImage.GetPixel(x,y);if(Math.Abs(pixelA.R-pixelB.R)+Math.Abs(pixelA.G-pixelB.G)+Math.Abs(pixelA.B-pixelB.B)>18)changes++;}
+                        Check(changes>700,"Desktop WebView renders changing geometry");
+                        File.WriteAllText(Path.Combine(folder,"desktop-result.json"),JsonSerializer.Serialize(new{healthy=actualHost.Healthy,width=firstImage.Width,height=firstImage.Height,changedSamples=changes,backdropError=actualHost.BackdropError}));
+                    }
+                    finally{actualHost.Stop();testAccess.Disconnect();}
+                }
+                File.WriteAllText(Path.Combine(folder,"status.txt"),"PASS: authenticated star gate, encrypted credentials, revocation, backend gate, visible animated city, pause and bounded 40km travel"+(desktop?", actual Explorer host initialization and changing frames":""));
             }
             catch(Exception e){File.WriteAllText(Path.Combine(folder,"status.txt"),e.ToString());Environment.ExitCode=1;}
             finally{form.Close();}

@@ -25,7 +25,7 @@ static class LivingRender
             Process? encoder=null;
             try
             {
-                File.WriteAllText(status,"Loading textures");await surface.InitializeLiving(scene);
+                File.WriteAllText(status,"Loading textures");form.Show();form.Activate();await surface.InitializeLiving(scene);
                 int sequence=0;TaskCompletionSource? pending=null;
                 surface.Message+=json=>{using var m=JsonDocument.Parse(json);if(m.RootElement.TryGetProperty("type",out var type)&&type.GetString()=="frame"&&m.RootElement.GetProperty("id").GetInt32()==sequence)pending?.TrySetResult();};
                 async Task Draw(double seconds)

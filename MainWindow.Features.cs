@@ -112,7 +112,7 @@ public partial class MainWindow
         {
             bool allowed=await CheckCityAccess();if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
             if(!allowed){CityNavigation(this,new());return;}
-            try{var cityHost=GetHost(screen);await cityHost.PlayCity(starAccess,screen,CityCover,Config(screen).Performance,City.Palette.SelectedIndex);if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;cityHost.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,cityHost);Config(screen).Scene=PlaybackRules.Key(scene);Save();UpdatePlaybackStatus();}catch(Exception e){if(!exiting&&applyGeneration.GetValueOrDefault(screen.DeviceName)==generation)Status.Text="Город: "+e.Message;}return;
+            try{var cityHost=GetHost(screen);await cityHost.PlayCity(starAccess,screen,CityCover,Config(screen).CityPerformance,City.Palette.SelectedIndex);if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;cityHost.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,cityHost);Config(screen).Scene=PlaybackRules.Key(scene);Save();UpdatePlaybackStatus();}catch(Exception e){if(!exiting&&applyGeneration.GetValueOrDefault(screen.DeviceName)==generation)Status.Text="Город: "+e.Message;}return;
         }
         if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
         var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);

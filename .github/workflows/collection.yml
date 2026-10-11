@@ -1,7 +1,7 @@
 name: VWP Studio release
 on:
   push:
-    branches: ['codex/personalization-studio', 'codex/smooth-transitions']
+    branches: ['codex/personalization-studio', 'codex/smooth-transitions', 'codex/neon-city']
     tags: ['v0.5.*', 'v0.6.*', 'v0.7.*']
   workflow_dispatch:
 permissions:
