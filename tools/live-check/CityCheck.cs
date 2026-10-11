@@ -12,10 +12,11 @@ using Forms=System.Windows.Forms;
 static class CityCheck
 {
     static void Check(bool ok,string label){if(!ok)throw new Exception(label);}
-    public static void Run(bool desktop=false)
+    public static void Run(bool desktop=false,string profile="Auto")
     {
         Forms.Application.SetHighDpiMode(Forms.HighDpiMode.PerMonitorV2);
-        string folder=Path.Combine(Environment.CurrentDirectory,"artifacts","city-check");Directory.CreateDirectory(folder);
+        string folder=Path.Combine(Environment.CurrentDirectory,"artifacts",profile=="Eco"?"city-check-eco":"city-check");Directory.CreateDirectory(folder);
+        foreach(string name in new[]{"initial.png","animated.png","animation.json","performance.json","travel.png","metrics.json","cover.png","desktop-first.png","desktop-second.png","desktop-result.json"})File.Delete(Path.Combine(folder,name));
         using var form=new Forms.Form{ClientSize=new Size(1280,720),StartPosition=Forms.FormStartPosition.CenterScreen,TopMost=true,Text="VWP city verification"};
         using var city=new CitySurface();form.Controls.Add(city.Control);
         form.Shown+=async(_,_)=>
@@ -43,7 +44,7 @@ static class CityCheck
                     Check(!await checking&&!access.Unlocked&&!File.Exists(Path.Combine(folder,"access.bin")),"Disconnect defeats a late successful verification");
                 }
                 File.AppendAllText(progress,"render\n");form.Show();form.Activate();
-                await city.Initialize("Auto",true);await Task.Delay(10000);
+                await city.Initialize(profile,true);await Task.Delay(10000);
                 await city.Capture(Path.Combine(folder,"initial.png"));
                 using(var frame=new Bitmap(Path.Combine(folder,"initial.png")))
                 {
@@ -53,9 +54,25 @@ static class CityCheck
                 using var a=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics()"));int start=a.RootElement.GetProperty("frames").GetInt32();
                 var timer=Stopwatch.StartNew();await Task.Delay(3000);using var b=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics()"));
                 int animatedFrames=b.RootElement.GetProperty("frames").GetInt32()-start;
-                File.WriteAllText(Path.Combine(folder,"performance.json"),JsonSerializer.Serialize(new{width=1280,height=720,quality="Auto",observedFrames=animatedFrames,seconds=timer.Elapsed.TotalSeconds,observedFps=animatedFrames/timer.Elapsed.TotalSeconds,details=b.RootElement.Clone()}));
-                Check(animatedFrames>12,"City is animated");
-                Check(b.RootElement.GetProperty("actors").GetProperty("pedestrians").GetInt32()==14,"Rigged pedestrians are loaded");
+                File.WriteAllText(Path.Combine(folder,"performance.json"),JsonSerializer.Serialize(new{width=1280,height=720,quality=profile,observedFrames=animatedFrames,seconds=timer.Elapsed.TotalSeconds,observedFps=animatedFrames/timer.Elapsed.TotalSeconds,details=b.RootElement.Clone()}));
+                // CI may use Microsoft's software GPU. Prove changing rendered
+                // pixels and an advancing clock separately from the FPS report.
+                Check(animatedFrames>0,"City renderer advances on this adapter");
+                await city.Capture(Path.Combine(folder,"animated.png"));
+                using(var firstFrame=new Bitmap(Path.Combine(folder,"initial.png")))
+                using(var nextFrame=new Bitmap(Path.Combine(folder,"animated.png")))
+                {
+                    Check(firstFrame.Size==nextFrame.Size,"Animation captures keep their viewport size");
+                    int changed=0;
+                    for(int y=0;y<firstFrame.Height;y+=8)for(int x=0;x<firstFrame.Width;x+=8)
+                    {
+                        var firstPixel=firstFrame.GetPixel(x,y);var nextPixel=nextFrame.GetPixel(x,y);
+                        if(Math.Abs(firstPixel.R-nextPixel.R)+Math.Abs(firstPixel.G-nextPixel.G)+Math.Abs(firstPixel.B-nextPixel.B)>18)changed++;
+                    }
+                    Check(changed>400,"City renders changing geometry, rather than a still frame");
+                    File.WriteAllText(Path.Combine(folder,"animation.json"),JsonSerializer.Serialize(new{changedSamples=changed,animatedFrames}));
+                }
+                Check(b.RootElement.GetProperty("actors").GetProperty("pedestrians").GetInt32()==(profile=="Eco"?6:14),"Rigged pedestrians are loaded");
                 Check(b.RootElement.GetProperty("architecture").GetProperty("templates").GetInt32()<=48,"Geometry template cache stays bounded");
                 double poseChange=0;
                 // A single sample can land on the same phase of a looping walk.
@@ -69,9 +86,9 @@ static class CityCheck
                 city.SetPaused(true);await Task.Delay(300);string frozen=await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics().frames");await Task.Delay(400);Check(frozen==await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics().frames"),"Pause freezes renderer");city.SetPaused(false);
                 await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.move(40000,-40000);window.city.interact()");await Task.Delay(900);
                 using var moved=JsonDocument.Parse(await city.State());Check(Math.Abs(moved.RootElement.GetProperty("x").GetDouble())>39000,"Travel is not confined to the first city block");
-                using var m=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics()"));Check(m.RootElement.GetProperty("chunks").GetInt32()==49,"Infinite travel keeps a bounded chunk count");
+                using var m=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.metrics()"));Check(m.RootElement.GetProperty("chunks").GetInt32()==(profile=="Eco"?25:49),"Infinite travel keeps a bounded chunk count");
                 await city.Capture(Path.Combine(folder,"travel.png"));File.WriteAllText(Path.Combine(folder,"metrics.json"),m.RootElement.GetRawText());
-                await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.restore({x:0,y:4.3,z:22,palette:0});");await Task.Delay(500);
+                await city.Control.CoreWebView2.ExecuteScriptAsync("window.city.restore({x:5.55,y:2.3,z:22,palette:0});");await Task.Delay(500);
                 string cover=Path.Combine(folder,"cover.png");await city.Control.CoreWebView2.ExecuteScriptAsync("document.body.classList.add('wallpaper')");await Task.Delay(150);await city.Capture(cover);
                 if(desktop)
                 {

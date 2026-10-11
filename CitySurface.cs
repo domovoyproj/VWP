@@ -16,7 +16,7 @@ internal sealed class CitySurface : IDisposable
     public static string Folder=>Path.Combine(AppContext.BaseDirectory,"assets","city");
     public Task Initialize(string profile,bool preview,string? state=null,int palette=0,bool explore=false)=>InitializeSource(Folder,"index.html?quality="+Uri.EscapeDataString(profile)+"&preview="+(preview?"1":"0")+"&palette="+palette+"&explore="+(explore?"1":"0"),state);
     internal Task InitializeLiving(int scene,bool manual=true)=>InitializeSource(Path.Combine(AppContext.BaseDirectory,"assets"),"living/index.html?scene="+scene+"&manual="+(manual?"1":"0"));
-    internal Task InitializeCityRender()=>InitializeSource(Folder,"index.html?quality=Quality&preview=0&manual=1");
+    internal Task InitializeCityRender(bool bake=false)=>InitializeSource(Folder,"index.html?quality=Quality&preview=0&manual=1"+(bake?"&bake=1":""));
     async Task InitializeSource(string folder,string entry,string? state=null)
     {
         bool offline=entry.Contains("manual=1",StringComparison.Ordinal);
@@ -45,11 +45,25 @@ internal sealed class CitySurface : IDisposable
         using var validated=JsonDocument.Parse(state??"null");
         await web.AddScriptToExecuteOnDocumentCreatedAsync("window.initialCityState="+validated.RootElement.GetRawText()+";addEventListener('error',e=>window.chrome.webview.postMessage({type:'error',message:e.message}));addEventListener('unhandledrejection',e=>window.chrome.webview.postMessage({type:'error',message:String(e.reason)}));");
         web.Navigate("https://vwp-city.local/"+entry);
-        await ready.Task.WaitAsync(TimeSpan.FromSeconds(35));
+        await ready.Task.WaitAsync(TimeSpan.FromSeconds(offline?90:45));
     }
     public void SetPaused(bool value){if(!disposed&&Control.CoreWebView2 is not null)Control.CoreWebView2.PostWebMessageAsJson("{\"type\":\"pause\",\"value\":"+(value?"true":"false")+"}");}
     public void SetState(string state){if(!disposed&&Control.CoreWebView2 is not null)Control.CoreWebView2.PostWebMessageAsJson("{\"type\":\"state\",\"value\":"+state+"}");}
     public async Task<string> State()=>Control.CoreWebView2 is null?"null":await Control.CoreWebView2.ExecuteScriptAsync("window.city.state()");
+    // Offline exports must not inherit the cloud worker's 1024px desktop.
+    // Set a real render viewport, then capture that viewport without rescaling.
+    internal async Task SetExportViewport(int width,int height)
+    {
+        if(Control.CoreWebView2 is null)throw new InvalidOperationException("Renderer is not initialized");
+        await Control.CoreWebView2.CallDevToolsProtocolMethodAsync("Emulation.setDeviceMetricsOverride",JsonSerializer.Serialize(new{width,height,deviceScaleFactor=1,mobile=false,screenWidth=width,screenHeight=height}));
+    }
+    internal async Task CaptureExport(string path,int width,int height)
+    {
+        if(Control.CoreWebView2 is null)throw new InvalidOperationException("Renderer is not initialized");
+        string result=await Control.CoreWebView2.CallDevToolsProtocolMethodAsync("Page.captureScreenshot",JsonSerializer.Serialize(new{format="png",fromSurface=true,captureBeyondViewport=true,clip=new{x=0,y=0,width,height,scale=1}}));
+        using var image=JsonDocument.Parse(result);
+        await File.WriteAllBytesAsync(path,Convert.FromBase64String(image.RootElement.GetProperty("data").GetString()!));
+    }
     public async Task Capture(string path){if(Control.CoreWebView2 is null)return;using var file=File.Create(path);await Control.CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Png,file);}
     public void Dispose(){disposed=true;ready.TrySetCanceled();Control.Dispose();}
 }

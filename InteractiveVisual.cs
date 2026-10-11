@@ -86,7 +86,7 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
         }
         DrawPlane(drawing,background,.025);
         if(foreground is not null)DrawPlane(drawing,foreground,.06);
-        double music=config.MusicReactive?beat:0;
+        double music=config.MusicReactive&&config.Performance!="Eco"?beat:0;
         var glow=new RadialGradientBrush(Color.FromArgb((byte)(18+music*55),accent.R,accent.G,accent.B),Colors.Transparent){Center=new Point(.72,.4),GradientOrigin=new Point(.72,.4)};
         drawing.DrawRectangle(glow,null,new Rect(0,0,ActualWidth,ActualHeight));
         var brush=new SolidColorBrush(Color.FromArgb((byte)(70+music*150),accent.R,accent.G,accent.B));brush.Freeze();

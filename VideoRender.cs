@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -19,6 +20,7 @@ public sealed class VideoRecipe
 }
 public static class VideoRender
 {
+    static readonly ConcurrentDictionary<string,SemaphoreSlim> proxyLocks=new(StringComparer.OrdinalIgnoreCase);
     public static string Encoder=>Path.Combine(AppContext.BaseDirectory,"tools","ffmpeg.exe");
     public static async Task Run(string input,string output,VideoRecipe recipe,PerformanceProfile profile,IProgress<double>? progress=null,CancellationToken cancel=default)
     {
@@ -53,9 +55,15 @@ public static class VideoRender
         string folder=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","optimized");Directory.CreateDirectory(folder);
         var info=new FileInfo(input);string key=Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(input+info.Length+info.LastWriteTimeUtc.Ticks+profile.Key)));
         string output=Path.Combine(folder,key+".mp4");if(File.Exists(output))return output;
+        var gate=proxyLocks.GetOrAdd(output,_=>new SemaphoreSlim(1,1));await gate.WaitAsync();
+        try
+        {
+        if(File.Exists(output))return output;
         string temp=output+".tmp.mp4";
         var start=new ProcessStartInfo(Encoder){UseShellExecute=false,CreateNoWindow=true,RedirectStandardError=true};
         foreach(string arg in new[]{"-y","-loglevel","error","-i",input,"-vf",$"fps={profile.Fps},scale=-2:'trunc(min(ih,{profile.MaxHeight})/2)*2'","-c:v","libx264","-threads","2","-preset","fast","-crf","23","-c:a","aac","-movflags","+faststart",temp})start.ArgumentList.Add(arg);
         using var process=Process.Start(start)!;var errors=process.StandardError.ReadToEndAsync();await process.WaitForExitAsync();if(process.ExitCode!=0){if(File.Exists(temp))File.Delete(temp);throw new InvalidOperationException(await errors);}File.Move(temp,output,true);return output;
+        }
+        finally{gate.Release();}
     }
 }

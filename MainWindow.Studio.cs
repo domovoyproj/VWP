@@ -79,7 +79,8 @@ public partial class MainWindow
     void SaveStudioSettings()
     {
         var config=Config(SelectedScreen);config.SceneAnimation=Settings.SceneAnimation.IsChecked==true;config.Interactive=Settings.Interactive.IsChecked==true;config.MusicReactive=Settings.Music.IsChecked==true;config.Depth=Settings.Depth.Value;
-        config.Performance=Settings.Performance.SelectedIndex switch{0=>"Eco",2=>"Quality",_=>"Balance"};
+        string mode=Settings.Performance.SelectedIndex switch{0=>"Eco",2=>"Quality",_=>"Balance"};
+        if(config.Performance!=mode)PerformancePolicy.Apply(config,mode);UpdateQualityUi();
         preferences.Theme=Settings.Theme.SelectedIndex switch{0=>"Light",1=>"Dark",_=>"System"};preferences.SceneAccent=Settings.SceneAccent.IsChecked==true;
         preferences.PauseExceptions=Settings.Exceptions.Text.Split(',',StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries).Select(Path.GetFileNameWithoutExtension).Where(s=>!string.IsNullOrEmpty(s)).Select(s=>s!).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         preferences.GallerySource=string.IsNullOrWhiteSpace(Settings.GallerySource.Text)?GalleryService.DefaultSource:Settings.GallerySource.Text.Trim();UpdateTheme();
@@ -101,7 +102,7 @@ public partial class MainWindow
     }
     void TickStudio()
     {
-        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&pair.Value.Interactive is not null && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.MusicReactive));
+        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&pair.Value.Interactive is not null && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.Performance!="Eco"&&config.MusicReactive));
         if(SettingsOverlay.Visibility==Visibility.Visible)UpdateResources();
         if(mini?.IsVisible==true)UpdateMini();
     }

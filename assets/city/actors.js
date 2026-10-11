@@ -104,10 +104,10 @@ function mergeCar(root) {
     return result;
 }
 
-export async function createActors(scene, eco) {
+export async function createActors(scene, eco, bake=false) {
     const [carFile, male, female, motion, buzzed, long] = await Promise.all([
         'car-road.glb', 'person-male.glb', 'person-female.glb', 'motion.glb', 'Hair_Buzzed.glb', 'Hair_Long.glb'
-    ].map(name => loader.loadAsync('./models/' + name)));
+    ].map(name => !bake&&name==='motion.glb'?Promise.resolve(null):loader.loadAsync('./models/' + name)));
     const carTemplate = mergeCar(carFile.scene), vehicles = [];
     for (let i = 0; i < (eco ? 3 : 7); i++) {
         const car = carTemplate.clone(true), group = new T.Group(); group.add(car); scene.add(group);
@@ -118,8 +118,11 @@ export async function createActors(scene, eco) {
         });
         vehicles.push(group);
     }
-    let source; motion.scene.traverse(o => { if (o.isSkinnedMesh) source = o; });
-    if (!source) throw new Error('Walking animation is missing its skeleton');
+    let source; motion?.scene.traverse(o => { if (o.isSkinnedMesh) source = o; });
+    if (bake&&!source) throw new Error('Walking animation is missing its skeleton');
+    // The export tool bakes retargeting once. Normal startup just parses these
+    // compact tracks; it does not resample eight skeleton clips on the CPU.
+    const baked=bake?{}:await fetch('./models/street-motion.json').then(r=>{if(!r.ok)throw new Error('Street animation library is missing');return r.json();});
     const pedestrians = [];
     const shadowCanvas = document.createElement('canvas'); shadowCanvas.width = shadowCanvas.height = 128;
     const shadowContext = shadowCanvas.getContext('2d'), gradient = shadowContext.createRadialGradient(64, 64, 0, 64, 64, 64);
@@ -133,10 +136,14 @@ export async function createActors(scene, eco) {
     }
     for (const [gender, file] of [[0, male], [1, female]]) {
         const template = clone(file.scene), target = bodyOf(template);
-        source.skeleton.pose(); template.updateMatrixWorld(true); source.updateMatrixWorld(true);
-        const walk = retargetClip(target, source, motion.animations.find(c => c.name === 'Walk_Loop'), { getBoneName: boneName, hip: 'DEF-hips', fps: 30, hipInfluence: new T.Vector3(0, 1, 0) });
+        if(bake){source.skeleton.pose(); template.updateMatrixWorld(true); source.updateMatrixWorld(true);}
+        const clips = bake?['Walk_Loop','Walk_Formal_Loop','Idle_Talking_Loop','Idle_Loop'].map(name => {
+            source.skeleton.pose();target.skeleton.pose();template.updateMatrixWorld(true);source.updateMatrixWorld(true);
+            return retargetClip(target, source, motion.animations.find(c => c.name === name), { getBoneName: boneName, hip: 'DEF-hips', fps: 30, hipInfluence: new T.Vector3(0, 1, 0) });
+        }):baked[gender].map(c=>T.AnimationClip.parse(c));
         // Bind to named bones from the whole cloned hierarchy, including eye meshes.
-        for (const track of walk.tracks) track.name = track.name.replace(/^\.bones\[([^\]]+)\]/, '$1');
+        for (const clip of clips)for(const track of clip.tracks) track.name = track.name.replace(/^\.bones\[([^\]]+)\]/, '$1');
+        if(bake)baked[gender]=clips.map(c=>T.AnimationClip.toJSON(c));
         for (let i = 0; i < (eco ? 3 : 7); i++) {
             const root = clone(file.scene), body = bodyOf(root), group = new T.Group(); group.add(root); scene.add(group);
             dress(body, [0x293541, 0x443243, 0x465550, 0x665458][(i + gender) % 4], [0x1d2934, 0x343843, 0x2e3340][i % 3]);
@@ -151,27 +158,39 @@ export async function createActors(scene, eco) {
             root.updateMatrixWorld(true); root.traverse(o => {
                 if (!o.isSkinnedMesh) return; o.skeleton.update(); o.computeBoundingSphere(); o.boundingSphere.radius += .4; o.frustumCulled = true;
             });
-            const mixer = new T.AnimationMixer(root), action = mixer.clipAction(walk); action.play();
+            const behaviour=i>=5?(i===5?'talk':'wait'):'walk';
+            const mixer = new T.AnimationMixer(root), action = mixer.clipAction(clips[behaviour==='talk'?2:behaviour==='wait'?3:i%2]);action.play();
             const index = pedestrians.length;
             const shadow = new T.Mesh(new T.PlaneGeometry(1.2, 1.6), shadowMaterial); shadow.rotation.x = -Math.PI / 2; scene.add(shadow);
-            pedestrians.push({ group, mixer, phase: i * .17, index, shadow, knee: root.getObjectByName('calf_l') });
+            pedestrians.push({ group, mixer, phase: i * .17, index, shadow, behaviour, gender, knee: root.getObjectByName('calf_l') });
         }
     }
     return {
-        count: { vehicles: vehicles.length, pedestrians: pedestrians.length },
+        exportMotions(){return baked;},
+        count: { vehicles: vehicles.length, pedestrians: pedestrians.length, walking:pedestrians.filter(a=>a.behaviour==='walk').length, talking:pedestrians.filter(a=>a.behaviour==='talk').length, waiting:pedestrians.filter(a=>a.behaviour==='wait').length },
         inspect() { return pedestrians[0].knee.quaternion.toArray(); },
         update(time, world, origin) {
-            const street = Math.round(world.x / 40) * 40 - origin.x;
+            const nearestStreet=Math.round(world.x/40)*40;
+            const isCanal=Math.abs(nearestStreet-Math.round(nearestStreet/160)*160)<1;
+            const street = nearestStreet - origin.x;
+            const trafficStreet=street+(isCanal?40:0);
             for (let i = 0; i < vehicles.length; i++) {
                 const direction = i % 2 ? 1 : -1, car = vehicles[i];
                 const z = Math.floor((world.z + 120) / 240) * 240 + ((time * (8 + i % 3) * direction + i * 37 + 100000) % 240) - 120 - origin.z;
-                car.position.set(street + direction * 2.3, .04, z); car.rotation.y = direction > 0 ? Math.PI : 0;
+                car.position.set(trafficStreet + direction * 2.3, .04, z); car.rotation.y = direction > 0 ? Math.PI : 0;
             }
             for (let i = 0; i < pedestrians.length; i++) {
                 const actor = pedestrians[i], direction = i % 2 ? 1 : -1;
                 const z = Math.floor((world.z + 80) / 160) * 160 + ((time * direction * 1.18 + i * 11.5 + 100000) % 160) - 80 - origin.z;
                 const surfaceY = Math.abs(((z + origin.z + 20) % 40 + 40) % 40 - 20) < 4 ? .04 : .2;
-                actor.group.position.set(street + direction * (5.3 + i % 3 * .4), surfaceY, z); actor.group.rotation.y = direction > 0 ? 0 : Math.PI;
+                if(actor.behaviour==='walk') {
+                    actor.group.position.set(street + direction * (5.35 + i % 3 * .25), surfaceY, z); actor.group.rotation.y = direction > 0 ? 0 : Math.PI;
+                }else {
+                    const blockZ=Math.round(world.z/40)*40;
+                    // Two people face one another, while another pair wait by shops.
+                    actor.group.position.set(street+5.8,.2,blockZ+11+(actor.behaviour==='talk'?actor.gender*1.35:5+actor.gender*2.2));
+                    actor.group.rotation.y=actor.behaviour==='talk'?(actor.gender?Math.PI:0):-Math.PI/2;
+                }
                 actor.mixer.setTime(time * .8 + actor.phase);
                 actor.shadow.position.copy(actor.group.position); actor.shadow.position.y += .015;
             }

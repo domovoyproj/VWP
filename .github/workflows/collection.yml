@@ -56,6 +56,13 @@ jobs:
           $city = Start-Process -FilePath $checker -ArgumentList '--city-check' -WindowStyle Hidden -PassThru -Wait
           Get-Content artifacts/city-check/status.txt
           if ($city.ExitCode -ne 0) { throw 'Native city verification failed' }
+          $eco = Start-Process -FilePath $checker -ArgumentList '--city-check-eco' -WindowStyle Hidden -PassThru -Wait
+          Get-Content artifacts/city-check-eco/status.txt
+          if ($eco.ExitCode -ne 0) { throw 'Eco city verification failed' }
+          $launcher = Join-Path (Split-Path $checker) 'VWP.exe'
+          $design = Start-Process -FilePath $launcher -ArgumentList '--verify-redesign' -WindowStyle Hidden -PassThru -Wait
+          $designReport = Get-Content (Join-Path (Split-Path $checker) 'verification/design-result.json') -Raw | ConvertFrom-Json
+          if ($design.ExitCode -ne 0 -or @($designReport | Where-Object { !$_.passed }).Count -gt 0) { $designReport | ConvertTo-Json -Depth 5; throw 'Launcher design verification failed' }
           foreach ($scene in 1001,1002,1003) {
             $render = Start-Process -FilePath $checker -ArgumentList '--living-render',$scene,'2160','60' -WindowStyle Hidden -PassThru -Wait
             Get-Content "artifacts/living-check/$scene-status.txt"
@@ -71,6 +78,11 @@ jobs:
             artifacts/city-check/*.png
             artifacts/city-check/*.json
             artifacts/city-check/status.txt
+            artifacts/city-check-eco/*.png
+            artifacts/city-check-eco/*.json
+            artifacts/city-check-eco/status.txt
+            tools/live-check/bin/Release/net8.0-windows/verification/design-*.png
+            tools/live-check/bin/Release/net8.0-windows/verification/design-result.json
             artifacts/living-check/*-metrics.json
             artifacts/living-check/*-status.txt
             artifacts/living-check/*-motion.png

@@ -45,7 +45,7 @@ public sealed class Preferences
 public partial class MainWindow : Window
 {
     readonly ObservableCollection<Wallpaper> items=new();
-    readonly string settingsPath=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","settings.json");
+    readonly string settingsPath=Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal))?System.IO.Path.Combine(AppContext.BaseDirectory,"verification","settings.json"):System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","settings.json");
     Preferences preferences=new();
     readonly Dictionary<string,DesktopHost> hosts=new();
     DesktopHost? host => hosts.GetValueOrDefault(SelectedScreen.DeviceName);
@@ -98,6 +98,7 @@ public partial class MainWindow : Window
             if(Environment.GetCommandLineArgs().Contains("--autostart"))Hide();
             if(Environment.GetCommandLineArgs().Contains("--verify")) Verify();
             if(Environment.GetCommandLineArgs().Contains("--verify-ui")) VerifyUi();
+            if(Environment.GetCommandLineArgs().Contains("--verify-redesign"))_ = VerifyRedesign();
             if(preferences.Autostart && !Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal)))AutostartClick(this,new());
         };
     }
@@ -146,7 +147,7 @@ public partial class MainWindow : Window
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
     void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)if(button.Tag as string==category)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=System.Windows.Media.Brushes.Transparent;RefreshFilter();}
     void PauseClick(object sender,RoutedEventArgs e) {var config=Config(SelectedScreen);config.UserPaused=!config.UserPaused;host?.SetUserPaused(config.UserPaused);Save();UpdatePlaybackStatus();}
-    void StopClick(object sender,RoutedEventArgs e) {applyGeneration[SelectedScreen.DeviceName]=applyGeneration.GetValueOrDefault(SelectedScreen.DeviceName)+1;host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";PauseButton.Content="Ⅱ  Пауза";}
+    void StopClick(object sender,RoutedEventArgs e) {applyGeneration[SelectedScreen.DeviceName]=applyGeneration.GetValueOrDefault(SelectedScreen.DeviceName)+1;host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";UpdatePauseUi(false);}
     void QuitClick(object sender,RoutedEventArgs e) { exiting=true;Close(); }
     void TrayClick(object sender,RoutedEventArgs e) { StopPreview();StopHover();Hide();tray?.ShowBalloonTip(1500,"VWP","Лаунчер в трее. Обои продолжают работать.",Forms.ToolTipIcon.Info); }
     void ModeClick(object sender,RoutedEventArgs e)
@@ -171,22 +172,31 @@ public partial class MainWindow : Window
     }
     void WindowKeyDown(object sender,System.Windows.Input.KeyEventArgs e) {if(e.Key==System.Windows.Input.Key.Escape && fullscreen){ModeClick(this,new());e.Handled=true;}}
     void VolumeChanged(object sender,RoutedPropertyChangedEventArgs<double> e) {if(!featuresReady || loadingControls)return;var config=Config(SelectedScreen);config.Volume=(int)e.NewValue;if(host is not null)host.Volume=config.Volume;Save();}
-    void PreviewClick(object sender,RoutedEventArgs e)
+    async void PreviewClick(object sender,RoutedEventArgs e)
     {
         if(Library.SelectedItem is Wallpaper cityScene&&cityScene.PresetId==CityId){_ = ExploreCity(false);return;}
         StopHover();
         if(Library.SelectedItem is not Wallpaper item || !File.Exists(item.Path))return;
-        if(HeroVideo.Visibility==Visibility.Visible || scenePreview is not null){StopPreview();return;}
+        if(HeroVideo.Visibility==Visibility.Visible || scenePreview is not null || heroPreparing){StopPreview();return;}
         if((item.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(item) is SceneLayers layers && layers.MotionId is not null)
         {
             scenePreview=new InteractiveVisual(layers,PlaybackConfig(item,Config(SelectedScreen)),SelectedScreen,audio);
             HeroMotion.Children.Add(scenePreview);HeroMotion.Visibility=Visibility.Visible;
-            PreviewButton.Content="□  Остановить превью";return;
+            PreviewButton.Content="Остановить превью";return;
         }
-        HeroVideo.Source=new Uri(PreviewPath(item));HeroVideo.Visibility=Visibility.Visible;HeroVideo.Play();PreviewButton.Content="□  Остановить превью";
+        int generation=++previewGeneration;heroPreparing=true;PreviewButton.Content="Отменить превью";
+        try
+        {
+            string path=await VideoRender.Optimized(PreviewPath(item),PerformanceProfile.Resolve(Config(SelectedScreen).Performance));
+            if(generation!=previewGeneration || !Equals(Library.SelectedItem,item))return;
+            heroPreparing=false;HeroVideo.Source=new Uri(path);HeroVideo.Visibility=Visibility.Visible;HeroVideo.Play();PreviewButton.Content="Остановить превью";
+        }
+        catch(Exception error){if(generation==previewGeneration){StopPreview();Status.Text="Превью: "+error.Message;}}
     }
     InteractiveVisual? scenePreview;
-    void StopPreview() {scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Смотреть превью";}
+    int previewGeneration;
+    bool heroPreparing;
+    void StopPreview() {previewGeneration++;heroPreparing=false;scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Превью";}
     void AutostartClick(object sender,RoutedEventArgs e)
     {
         bool enabled=Autostart.IsChecked==true;

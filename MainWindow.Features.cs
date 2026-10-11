@@ -98,7 +98,7 @@ public partial class MainWindow
     }
     void UpdatePlaybackStatus()
     {
-        var player=host;PauseButton.Content=player?.Paused==true?"▶  Играть":"Ⅱ  Пауза";
+        var player=host;UpdatePauseUi(player?.Paused==true);
         if(player?.Active==true)
         {
             var config=Config(SelectedScreen);var scene=FindScene(config.Scene);
@@ -176,7 +176,7 @@ public partial class MainWindow
     {
         if(!featuresReady)return;loadingControls=true;var config=Config(SelectedScreen);Volume.Value=config.Volume;RefreshScenePresentations();
         if(FindScene(config.Scene) is Wallpaper scene)Library.SelectedItem=scene;
-        loadingControls=false;UpdateSceneActions();UpdatePlaybackStatus();RefreshFilter();
+        loadingControls=false;UpdateSceneActions();UpdatePlaybackStatus();RefreshFilter();UpdateQualityUi();
     }
     void RefreshScenePresentations(){StopHover();StopPreview();}
     void UpdateSceneActions()
@@ -271,7 +271,7 @@ public partial class MainWindow
     void FilesDragOver(object sender,DragEventArgs e){e.Effects=e.Data.GetDataPresent(DataFormats.FileDrop)?DragDropEffects.Copy:DragDropEffects.None;e.Handled=true;}
     async void CardEnter(object sender,MouseEventArgs e)
     {
-        if(!featuresReady||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||scene.PresetId==CityId||!File.Exists(scene.Path))return;
+        if(!featuresReady||Config(SelectedScreen).Performance=="Eco"||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||scene.PresetId==CityId||!File.Exists(scene.Path))return;
         StopHover();int generation=hoverGeneration;await Task.Delay(650);
         if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible||scenePreview is not null)return;
         if((scene.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(scene) is SceneLayers layers && layers.MotionId is not null)

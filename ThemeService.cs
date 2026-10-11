@@ -10,9 +10,9 @@ public static class ThemeService
     {
         bool dark=mode=="Dark" || mode=="System" && (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize","AppsUseLightTheme",1)??1)==0;
         var palette=new Dictionary<string,string>{
-            ["CanvasBrush"]=dark?"#101318":"#F5F6F8",["PanelBrush"]=dark?"#15191F":"#ECEFF3",["CardBrush"]=dark?"#1B2028":"#FFFFFF",
-            ["ControlBrush"]=dark?"#252C36":"#E6EAF0",["InkBrush"]=dark?"#F0F3F8":"#17212F",["MutedBrush"]=dark?"#95A1B2":"#687487",["LineBrush"]=dark?"#2B3441":"#DCE2EA",
-            ["SelectedBrush"]=dark?"#2B3545":"#DEE6F3",["PrimaryBrush"]=dark?MutedAccent(accent):"#24364E",["AccentBrush"]=accent};
+            ["CanvasBrush"]=dark?"#101116":"#F6F7FB",["PanelBrush"]=dark?"#15161D":"#EFF0F6",["CardBrush"]=dark?"#1B1D26":"#FFFFFF",
+            ["ControlBrush"]=dark?"#262936":"#E9EBF3",["InkBrush"]=dark?"#F2F3FA":"#212635",["MutedBrush"]=dark?"#A0A6B8":"#727B90",["LineBrush"]=dark?"#303342":"#DFE3ED",
+            ["SelectedBrush"]=dark?"#30354D":"#E4E8F8",["PrimaryBrush"]=dark?MutedAccent(accent):"#30384F",["AccentBrush"]=accent};
         if(dark && paletteName=="Catppuccin"){palette["CanvasBrush"]="#1E1E2E";palette["PanelBrush"]="#181825";palette["CardBrush"]="#242436";palette["ControlBrush"]="#313244";palette["InkBrush"]="#CDD6F4";palette["MutedBrush"]="#A6ADC8";}
         if(dark && paletteName=="Nord"){palette["CanvasBrush"]="#2E3440";palette["PanelBrush"]="#272D38";palette["CardBrush"]="#3B4252";palette["ControlBrush"]="#434C5E";palette["InkBrush"]="#ECEFF4";palette["MutedBrush"]="#B8C2D4";}
         if(dark)

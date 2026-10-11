@@ -26,7 +26,7 @@ public partial class MainWindow
         City.DisconnectButton.Click+=(_,_)=>{starAccess.Disconnect();StopLockedCities();UpdateCityAccess();};
         City.PreviewButton.Click+=async(_,_)=>await ExploreCity(false);
         City.ExploreButton.Click+=async(_,_)=>await ExploreCity(true);
-        City.ApplyButton.Click+=(_,_)=>{var scene=items.First(s=>s.PresetId==CityId);Config(SelectedScreen).CityPerformance=CityProfile;ApplyScene(scene,SelectedScreen);};
+        City.ApplyButton.Click+=(_,_)=>{var scene=items.First(s=>s.PresetId==CityId);PerformancePolicy.Apply(Config(SelectedScreen),CityProfile);UpdateQualityUi();ApplyScene(scene,SelectedScreen);};
         if(File.Exists(CityCover))City.Cover.Source=new BitmapImage(new Uri(CityCover));
         SourceInitialized+=(_,_)=>{var handle=new WindowInteropHelper(this).Handle;HwndSource.FromHwnd(handle)?.AddHook(CityMessage);if(!RegisterHotKey(handle,CityHotkey,0x4003,0x4E))City.ControlsHint.Text="Горячая клавиша занята. Используй кнопку «Войти в свои обои».";};
         Closed+=(_,_)=>{UnregisterHotKey(new WindowInteropHelper(this).Handle,CityHotkey);cityWindow?.Close();starAccess.Dispose();};
@@ -39,6 +39,7 @@ public partial class MainWindow
         City.Quality.SelectedIndex=Config(SelectedScreen).CityPerformance switch{"Eco"=>0,"Balance"=>1,"Quality"=>2,_=>3};
         StopPreview();StopHover();WallpaperPage.Visibility=Visibility.Collapsed;Appearance.Visibility=Visibility.Collapsed;City.Visibility=Visibility.Visible;
         SidebarCategories.Visibility=Visibility.Collapsed;SidebarImport.Visibility=Visibility.Collapsed;SidebarNote.Visibility=Visibility.Collapsed;
+        CollectionHeading.Visibility=Visibility.Collapsed;
         foreach(var button in new[]{WallpaperNav,ThemesNav,CursorsNav})button.Background=Brushes.Transparent;CityNav.SetResourceReference(System.Windows.Controls.Control.BackgroundProperty,"SelectedBrush");
         UpdateCityAccess();
     }

@@ -26,6 +26,11 @@
     "licenseUrl": "https://docs.ambientcg.com/license/",
     "originalFile": "Facade001_2K-JPG_Color.jpg"
   },
+  "details-v3.png": {
+    "source": "Original VWP artwork, built-in ImageGen",
+    "role": "Six detail panels: menu, vending machine, train cabin, noren, ramen kitchen, record shop",
+    "promptFile": "../details-v3.prompt.txt"
+  },
   "storefronts-v2.png": {
     "source": "Original VWP artwork, built-in ImageGen",
     "role": "Eight distinct night storefront interiors; UV atlas"

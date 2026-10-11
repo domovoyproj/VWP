@@ -52,6 +52,7 @@ public partial class MainWindow
         WallpaperPage.Visibility=wallpaper?Visibility.Visible:Visibility.Collapsed;
         Appearance.Visibility=wallpaper?Visibility.Collapsed:Visibility.Visible;
         SidebarCategories.Visibility=wallpaper?Visibility.Visible:Visibility.Collapsed;
+        CollectionHeading.Visibility=SidebarCategories.Visibility;
         SidebarImport.Visibility=wallpaper?Visibility.Visible:Visibility.Collapsed;
         SidebarNote.Visibility=wallpaper?Visibility.Collapsed:Visibility.Visible;
         foreach(var button in new[]{WallpaperNav,ThemesNav,CursorsNav})if((string)button.Tag==page)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=Brushes.Transparent;

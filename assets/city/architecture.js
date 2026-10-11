@@ -10,11 +10,11 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
     const plane = new T.PlaneGeometry(1, 1);
     const metal = new T.MeshStandardMaterial({ color: 0x53616d, metalness: .7, roughness: .36 });
     const dark = new T.MeshStandardMaterial({ color: 0x141d26, metalness: .28, roughness: .6 });
-    const wood = new T.MeshStandardMaterial({ color: 0x4c332e, roughness: .81 });
+    const wood = new T.MeshStandardMaterial({ color: 0x29343b, roughness: .81 });
     const wall = new T.MeshStandardMaterial({ vertexColors: true, roughness: .88 });
     const textureLoader = new T.TextureLoader();
-    const [concreteMap, concreteNormal, brickMap, brickNormal, storefrontAtlas] = await Promise.all([
-        'concrete_wall_007-color.jpg', 'concrete_wall_007-normal.jpg', 'brick_wall_003-color.jpg', 'brick_wall_003-normal.jpg', 'storefronts-v2.png'
+    const [concreteMap, concreteNormal, brickMap, brickNormal, storefrontAtlas, detailAtlas] = await Promise.all([
+        'concrete_wall_007-color.jpg', 'concrete_wall_007-normal.jpg', 'brick_wall_003-color.jpg', 'brick_wall_003-normal.jpg', 'storefronts-v2.png', 'details-v3.png'
     ].map(name => textureLoader.loadAsync('./textures/' + name)));
     for (const texture of [concreteMap, concreteNormal, brickMap, brickNormal]) {
         texture.wrapS = texture.wrapT = T.RepeatWrapping;
@@ -30,9 +30,12 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
         shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\n#ifdef USE_COLOR\ntotalEmissiveRadiance *= vColor;\n#endif');
     };
     const windowArt = new T.MeshStandardMaterial({ map: artwork.apartment, emissiveMap: artwork.apartment, emissive: 0xffffff, emissiveIntensity: .68, roughness: .46 });
+    const townhouseArt=new T.MeshStandardMaterial({map:artwork.townhouse,emissiveMap:artwork.townhouse,emissive:0xffffff,emissiveIntensity:.42,roughness:.79});
     const distantWall = new T.MeshStandardMaterial({ map: artwork.apartment, emissiveMap: artwork.apartment, emissive: 0xffffff, emissiveIntensity: .35, color: 0x97aabd, roughness: .85 });
     storefrontAtlas.colorSpace = T.SRGBColorSpace; storefrontAtlas.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     const storefrontArt = new T.MeshStandardMaterial({ map: storefrontAtlas, emissiveMap: storefrontAtlas, emissive: 0xffffff, emissiveIntensity: .9, roughness: .52 });
+    detailAtlas.colorSpace=T.SRGBColorSpace;detailAtlas.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+    const detailArt = new T.MeshStandardMaterial({ map:detailAtlas, emissiveMap:detailAtlas, emissive:0xffffff, emissiveIntensity:.45, roughness:.66 });
     // A shared atlas prevents each sign or building from adding a draw call.
     const atlas = document.createElement('canvas'); atlas.width = atlas.height = 2048;
     const ctx = atlas.getContext('2d');
@@ -106,6 +109,11 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
         for (let i = 0; i < uv.count; i++) uv.setXY(i, (index % 4 + .02 + uv.getX(i) * .96) / 4, (1 - Math.floor(index / 4) + .02 + uv.getY(i) * .96) / 2);
         return add(parent, g, bladeMaterial, 0, 0, z, 2.25, 4.3);
     }
+    function detailPanel(parent, width, height, x, y, z, index) {
+        const g=plane.clone(),uv=g.attributes.uv;
+        for(let i=0;i<uv.count;i++)uv.setXY(i,(index%3+.008+uv.getX(i)*.984)/3,(1-Math.floor(index/3)+.008+uv.getY(i)*.984)/2);
+        return add(parent,g,detailArt,x,y,z,width,height);
+    }
     function batch(group) {
         group.updateMatrixWorld(true); const inverse = group.matrixWorld.clone().invert(), batches = new Map();
         group.traverse(o => {
@@ -117,7 +125,12 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
         });
         group.clear();
         for (const [material, geometries] of batches) {
-            const geometry = mergeGeometries(geometries);
+            // Extruded arches and hulls are non-indexed; boxes are indexed.
+            // Normalise only mixed batches before joining their shared material.
+            const mixed=geometries.some(g=>g.index)&&geometries.some(g=>!g.index);
+            const inputs=mixed?geometries.map(g=>g.index?g.toNonIndexed():g):geometries;
+            const geometry = mergeGeometries(inputs);
+            if(mixed)for(let i=0;i<inputs.length;i++)if(inputs[i]!==geometries[i])inputs[i].dispose();
             for (const g of geometries) g.dispose();
             if (!geometry) throw new Error('Architecture batch has incompatible attributes');
             const joined = new T.Mesh(geometry, material);
@@ -128,8 +141,19 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
     function facade(building, width, height, depth, style, r) {
         const facade = new T.Group(); building.add(facade); facade.position.z = depth / 2 + .025;
         const shopIndex = Math.floor(r() * 8);
-        const floors = Math.floor((height - 4.4) / 3.1), bays = Math.max(2, Math.floor(width / 2.6));
+        const floors = style===0?0:Math.floor((height - 4.4) / 3.1), bays = Math.max(2, Math.floor(width / 2.6));
         const pitch = width / bays;
+        if(style===0){
+            const face=plane.clone(),uv=face.attributes.uv;
+            for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i),.385+uv.getY(i)*.585);
+            add(facade,face,townhouseArt,0,4+(height-4)/2,.045,width-.2,height-4);
+            // Real eaves and balconies project in front of the traditional art.
+            for(let y=4.6;y<height;y+=3.1){
+                add(facade,cube,wood,0,y,.22,width+.3,.1,.65);
+                add(facade,cube,metal,0,y+.62,.62,width-.5,.035,.035);
+                for(let x=-width/2+.4;x<width/2;x+=.32)add(facade,cube,dark,x,y+.32,.62,.028,.62,.028);
+            }
+        }
         for (let floor = 0; floor < floors; floor++) {
             const y = 5.9 + floor * 3.1;
             // Recessed dark frame -> lit interior -> mullions and projecting sill.
@@ -153,10 +177,25 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
         }
         if (style === 0) for (let i = 0; i <= bays; i++) add(facade, cube, wood, i * pitch - width / 2, height / 2 + 2, .12, .18, height - 4, .23);
         // Glass shop doors with visible counters, shelving and warm ceilings.
-        add(facade, cube, dark, 0, 2.1, .08, width - .45, 3.8, .26);
+        // The ground floor is hollow. The rear artwork sits inside a real alcove,
+        // behind counter furniture, lintels and a doorway one metre in front.
+        add(facade, cube, dark, 0, 2.1, -.96, width - .45, 3.8, .1);
         const shop = plane.clone(), shopUV = shop.attributes.uv;
         for (let i = 0; i < shopUV.count; i++) shopUV.setXY(i, (shopIndex % 2 + .012 + shopUV.getX(i) * .976) / 2, (3 - Math.floor(shopIndex / 2) + .012 + shopUV.getY(i) * .976) / 4);
-        add(facade, shop, storefrontArt, 0, 2.1, .23, width - .65, 3.55);
+        add(facade, shop, storefrontArt, 0, 2.1, -.89, width - .65, 3.55);
+        add(facade,cube,wood,0,.68,-.28,width*.75,.12,.65);
+        add(facade,cube,dark,0,.4,-.32,width*.75,.5,.35);
+        add(facade,cube,room,0,3.68,-.3,width-.8,.055,1.1,0xd3af7d);
+        for(const side of [-1,1])add(facade,cube,style===0?wood:wall,side*(width/2-.18),2.1,-.45,.32,3.8,1.15,0x52616a);
+        const doorX=width*.25;
+        add(facade,cube,dark,doorX,1.85,.18,1.1,3.3,.08);
+        detailPanel(facade,.98,1.6,doorX,2.5,.23,shopIndex%2?3:4);
+        add(facade,cube,metal,doorX+.38,1.48,.26,.035,.42,.055);
+        detailPanel(facade,1.1,1.45,-width*.28,1.3,.38,0);
+        if(shopIndex%3===0)for(let i=0;i<3;i++){
+            add(facade,cylinder,wood,-width*.15+i*.85,.62,.67,.28,.09,.28);
+            add(facade,cylinder,metal,-width*.15+i*.85,.35,.67,.035,.55,.035);
+        }
         for (let i = 0; i < bays; i++) {
             const x = (i + .5) * pitch - width / 2;
             add(facade, cube, dark, x, 2.15, .3, .09, 3.7, .14);
@@ -187,7 +226,11 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
     function building(parent, x, z, width, depth, height, style, r, detailed) {
         const b = new T.Group(); b.position.set(x, .22, z); parent.add(b);
         const color = colors[Math.floor(r() * colors.length)];
-        const shell = add(b, cube, detailed ? style === 0 ? brick : wall : distantWall, 0, height / 2, 0, width, height, depth, color);
+        const shell = add(b, cube, detailed ? style === 0 ? brick : wall : distantWall, 0, detailed?(height+4)/2:height/2, 0, width, detailed?height-4:height, depth, color);
+        if(detailed){
+            add(b,cube,dark,0,3.9,0,width,.18,depth);
+            for(const px of [-width/2+.18,width/2-.18])for(const pz of [-depth/2+.18,depth/2-.18])add(b,cube,style===0?brick:wall,px,2,pz,.36,4,.36,color);
+        }
         if (!detailed) {
             shell.geometry = cube.clone(); const uv = shell.geometry.attributes.uv;
             for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * width / 12, uv.getY(i) * height / 22);
@@ -246,8 +289,8 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
         for (const x of [-7.65, 7.65]) for (const z of [-7.65, 7.65]) {
             const houseRandom = seed(ix * 7 + house, iz * 11 + house * 2); house++;
             const n = houseRandom(), style = n < .46 ? 0 : n < .86 ? 1 : 2;
-            const width = 11.2 + houseRandom() * 2.4, depth = 11.2 + houseRandom() * 2.4;
-            const height = style === 0 ? 11 + Math.floor(houseRandom() * 2) * 3.1 : style === 1 ? 20 + Math.floor(houseRandom() * 7) * 3.1 : 49 + Math.floor(houseRandom() * 15) * 3.1;
+            const width = 9.8 + houseRandom() * 3.8, depth = 10.2 + houseRandom() * 3.4;
+            const height = style === 0 ? 7.8 + Math.floor(houseRandom() * 3) * 3.1 : style === 1 ? 17 + Math.floor(houseRandom() * 8) * 3.1 : 43 + Math.floor(houseRandom() * 13) * 3.1;
             building(group, x, z, width, depth, height, style, houseRandom, detailed);
         }
         for (const x of [-15.1, 15.1]) for (const z of [-13.5, 13.5]) {
@@ -262,10 +305,17 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
             // Textured vending cabinet with separate button panel and retrieval slot.
             add(group, cube, dark, x, 1.2, -4, .7, 2, 1.35);
             const machine = new T.Group(); group.add(machine); machine.position.set(x + Math.sign(x) * .36, 1.2, -4); machine.rotation.y = Math.sign(x) * Math.PI / 2;
-            add(machine, cube, room, -.15, .15, 0, .6, 1.35, .025, 0xa4bbc7);
-            for (let row = 0; row < 3; row++) for (let col = 0; col < 4; col++) add(machine, cylinder, glow, -.38 + col * .16, .55 - row * .35, .015, .038, .19, .038, row % 2 ? 0xc88371 : 0x72adbb);
-            add(machine, cube, metal, .37, 0, .02, .1, .3, .06);
-            add(machine, cube, dark, -.12, -.62, .04, .67, .15, .045);
+            detailPanel(machine,1.25,1.95,0,0,.015,1);
+            add(machine,cube,metal,.48,.07,.05,.06,.45,.055);
+            add(machine,cube,dark,0,-.72,.045,.77,.15,.04);
+            if(detailed){
+                // Street furniture gives the near district a human scale.
+                add(group,cube,wood,x,.63,8, .65,.12,2.2);
+                add(group,cube,wood,x+Math.sign(x)*.26,.98,8,.08,.65,2.2);
+                for(const z of [7.2,8.8])add(group,cube,metal,x,.35,z,.07,.55,.08);
+                for(let z=10;z<13;z+=.65)add(group,cylinder,metal,x,.9,z,.025,1.4,.025);
+                add(group,cube,dark,x+Math.sign(x)*.42,1.4,11.4,.75,.95,.12);
+            }
         }
         batch(group); return group;
     }
@@ -284,9 +334,9 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
     // They move in the same floating-origin coordinate frame as the near city.
     const skyline = new T.Group(); scene.add(skyline);
     const skylineMaterial = new T.ShaderMaterial({
-        uniforms: { fog: { value: new T.Color(0x101c2b) } },
-        vertexShader: `attribute vec3 color; varying vec3 c; varying vec3 w; varying vec3 n; void main(){c=color;n=normal;vec4 p=modelMatrix*vec4(position,1.);w=p.xyz;gl_Position=projectionMatrix*viewMatrix*p;}`,
-        fragmentShader: `uniform vec3 fog;varying vec3 c;varying vec3 w;varying vec3 n;float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}void main(){vec2 p=abs(n.x)>.5?w.zy:w.xy;vec2 cell=floor(p/vec2(3.,3.6)),f=fract(p/vec2(3.,3.6));float window=step(.24,f.x)*step(f.x,.75)*step(.23,f.y)*step(f.y,.67)*step(.79,h(cell));window*=1.-step(.5,abs(n.y));vec3 v=c*.095+vec3(.62,.46,.29)*window*.85;float mist=1.-exp(-length(cameraPosition-w)*.0025);gl_FragColor=vec4(mix(v,fog,mist),1.);}`
+        uniforms: { fog: { value: new T.Color(0x101c2b) }, image:{value:artwork.apartment} },
+        vertexShader: `attribute vec3 color; varying vec3 c; varying vec3 w; varying vec3 n;varying vec2 facadeUV;void main(){c=color;n=normal;facadeUV=uv;vec4 p=modelMatrix*vec4(position,1.);w=p.xyz;gl_Position=projectionMatrix*viewMatrix*p;}`,
+        fragmentShader: `uniform vec3 fog;uniform sampler2D image;varying vec3 c;varying vec3 w;varying vec3 n;varying vec2 facadeUV;void main(){vec3 painted=pow(texture2D(image,facadeUV).rgb,vec3(2.2));vec3 v=mix(painted*.7,c*.022,step(.5,abs(n.y)));float mist=1.-exp(-length(cameraPosition-w)*.007);gl_FragColor=vec4(mix(v,fog,mist),1.);}`
     });
     function updateSkyline(cx, cz, origin) {
         if (skyline.userData.cx === cx && skyline.userData.cz === cz && skyline.userData.ox === origin.x && skyline.userData.oz === origin.z) return;
@@ -297,7 +347,9 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
             const r = seed(cx + dx, cz + dz);
             for (let n = 0; n < 2; n++) {
                 const g = cube.clone(); const height = 25 + Math.pow(r(), 2) * 145;
-                const matrix = new T.Matrix4().compose(new T.Vector3((cx + dx + .3 + n * .4) * 40 - origin.x, height / 2, (cz + dz + .4) * 40 - origin.z), new T.Quaternion(), new T.Vector3(10 + r() * 8, height, 12 + r() * 7));
+                const width=10+r()*8,depth=12+r()*7;
+                const uv=g.attributes.uv;for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*width/12,uv.getY(i)*height/22);
+                const matrix = new T.Matrix4().compose(new T.Vector3((cx + dx + .3 + n * .4) * 40 - origin.x, height / 2, (cz + dz + .4) * 40 - origin.z), new T.Quaternion(), new T.Vector3(width, height, depth));
                 g.applyMatrix4(matrix); const c = new T.Color(colors[Math.floor(r() * colors.length)]), data = new Float32Array(g.attributes.position.count * 3);
                 for (let i = 0; i < g.attributes.position.count; i++) c.toArray(data, i * 3);
                 g.setAttribute('color', new T.BufferAttribute(data, 3)); geometry.push(g);
@@ -306,7 +358,7 @@ export async function createArchitecture(scene, renderer, seed, accent, treeMate
         skyline.add(new T.Mesh(mergeGeometries(geometry), skylineMaterial)); geometry.forEach(g => g.dispose());
         skyline.userData = { cx, cz, ox: origin.x, oz: origin.z };
     }
-    return { block, release, updateSkyline, batch, pavement, metal, dark, glass, room, glow, cube, cylinder, add,
+    return { block, release, updateSkyline, batch, pavement, metal, dark, glass, room, glow, cube, cylinder, add, detailPanel,
         metrics() { return { templates: templates.size, maxTemplates: 48 }; },
         recolor(fog) { skylineMaterial.uniforms.fog.value.setHex(fog); } };
 }
