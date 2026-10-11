@@ -74,6 +74,8 @@ public partial class MainWindow : Window
         foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 4K · 60 FPS",preset.Category,preset.Description,preset.Id));
         foreach(var preset in presets)items.Add(new(preset.Name+" · Живая сцена",System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"scene-{preset.Id}.png"),preset.Category+" · ЖИВАЯ СЦЕНА",preset.Category,SpatialScene.Descriptions[preset.Id],preset.Id,true));
         LoadExpansion(assets);
+        LoadLiving(assets);
+        items.Add(new("Afterlight · Endless City",Path.Combine(assets,"city","index.html"),Path.Combine(assets,"city","cover.png"),"ЭКСКЛЮЗИВ · ИНТЕРАКТИВНЫЙ 3D", "Город","Бесконечный неоновый город. Прогулка, полёт, дождь, транспорт и три настроения. Открывается за звезду GitHub.",CityId,true));
         RemoveRetiredWallpapers();
         foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO",IsSpatial:preferences.Layers.GetValueOrDefault(path)?.MotionId is not null));
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
@@ -88,6 +90,7 @@ public partial class MainWindow : Window
         InitializeFeatures();
         InitializeStudio();
         InitializeAppearance();
+        InitializeCity();
         Microsoft.Win32.SystemEvents.DisplaySettingsChanged+=DisplayChanged;
         Loaded+=(_,_)=> {
             Trace("loaded "+string.Join(" ",Environment.GetCommandLineArgs()));
@@ -170,6 +173,7 @@ public partial class MainWindow : Window
     void VolumeChanged(object sender,RoutedPropertyChangedEventArgs<double> e) {if(!featuresReady || loadingControls)return;var config=Config(SelectedScreen);config.Volume=(int)e.NewValue;if(host is not null)host.Volume=config.Volume;Save();}
     void PreviewClick(object sender,RoutedEventArgs e)
     {
+        if(Library.SelectedItem is Wallpaper cityScene&&cityScene.PresetId==CityId){_ = ExploreCity(false);return;}
         StopHover();
         if(Library.SelectedItem is not Wallpaper item || !File.Exists(item.Path))return;
         if(HeroVideo.Visibility==Visibility.Visible || scenePreview is not null){StopPreview();return;}

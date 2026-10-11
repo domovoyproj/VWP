@@ -14,5 +14,6 @@ assets/motion/*.mp4
 assets/motion/*.json
 assets/motion/*.cover.jpg
 assets/cinematic/*.mp4
+assets/living/*.mp4
 assets/cursors/sources/
 .codex/hooks.json

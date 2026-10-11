@@ -7,5 +7,8 @@ VWP uses unmodified, dynamically loaded third-party libraries. Their license tex
 - VLC/LibVLC native build revision 79128878dd: https://code.videolan.org/videolan/vlc/-/tree/79128878dd
 - .NET 8 runtime sources: https://github.com/dotnet/runtime/tree/v8.0.31
 - Windows Desktop runtime sources: https://github.com/dotnet/wpf/tree/v8.0.31 and https://github.com/dotnet/winforms/tree/v8.0.31
+- Three.js r180 and its bundled addons: https://github.com/mrdoob/three.js/tree/r180 (MIT; `Three-MIT.txt` and `assets/city/vendor/LICENSE.txt`).
+- Microsoft.Web.WebView2 1.0.3405.78 SDK: https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.3405.78 (`WebView2-LICENSE.txt`). The Evergreen Runtime is distributed separately by Microsoft.
+- ambientCG Facade001 color map: https://ambientcg.com/a/Facade001 (CC0-1.0; source and license URL in `assets/city/textures/sources.json`).
 
 The license texts in this directory apply to those components, not to the original illustration assets.

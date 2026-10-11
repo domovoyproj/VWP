@@ -52,6 +52,7 @@ public partial class MainWindow
     }
     SceneLayers? LayersFor(Wallpaper scene)
     {
+        if(scene.PresetId==CityId)return null;
         if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom)){custom.Video=custom.MotionId is not null?scene.Path:null;return custom;}
         if(scene.Thumbnail is null)return null;
         var preset=scene.PresetId is int id?definitions.GetValueOrDefault(id):null;
@@ -131,7 +132,7 @@ public partial class MainWindow
     {
         var config=Config(SelectedScreen);var scenes=config.Playlist.Select(FindScene).Where(s=>s is not null).Select(s=>s!).ToList();
         if(FindScene(config.Scene) is Wallpaper active)scenes.Add(active);if(scenes.Count==0 && Library.SelectedItem is Wallpaper selected)scenes.Add(selected);
-        return scenes.DistinctBy(PlaybackRules.Key).ToList();
+        return scenes.Where(s=>s.PresetId!=CityId).DistinctBy(PlaybackRules.Key).ToList();
     }
     async void ExportBundleClick(object sender,RoutedEventArgs e)
     {

@@ -1,0 +1,8 @@
+{
+  "apartment.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Night apartment facade"},
+  "townhouse.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Traditional Japanese townhouse facade"},
+  "shop.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Night cafe and arcade storefront"},
+  "tree.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Japanese cherry tree with alpha transparency"},
+  "commuter.png": {"source":"Original VWP artwork generated with built-in ImageGen","role":"Commuter train carriage textures; shared with living/commuter.png"},
+  "office-color.jpg": {"source":"https://ambientcg.com/a/Facade001","author":"Lennart Demes / ambientCG","license":"CC0-1.0","licenseUrl":"https://docs.ambientcg.com/license/","originalFile":"Facade001_2K-JPG_Color.jpg"}
+}

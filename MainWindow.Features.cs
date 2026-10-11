@@ -94,6 +94,7 @@ public partial class MainWindow
         }
         UpdatePlaybackStatus();
         TickStudio();
+        TickCity();
     }
     void UpdatePlaybackStatus()
     {
@@ -106,11 +107,17 @@ public partial class MainWindow
     }
     async void ApplyScene(Wallpaper scene,Forms.Screen screen)
     {
+        int generation=applyGeneration.GetValueOrDefault(screen.DeviceName)+1;applyGeneration[screen.DeviceName]=generation;
+        if(scene.PresetId==CityId)
+        {
+            bool allowed=await CheckCityAccess();if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
+            if(!allowed){CityNavigation(this,new());return;}
+            try{var cityHost=GetHost(screen);await cityHost.PlayCity(starAccess,screen,CityCover,Config(screen).Performance,City.Palette.SelectedIndex);if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;cityHost.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,cityHost);Config(screen).Scene=PlaybackRules.Key(scene);Save();UpdatePlaybackStatus();}catch(Exception e){if(!exiting&&applyGeneration.GetValueOrDefault(screen.DeviceName)==generation)Status.Text="Город: "+e.Message;}return;
+        }
         if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
         var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);
         try
         {
-            int generation=applyGeneration.GetValueOrDefault(screen.DeviceName)+1;applyGeneration[screen.DeviceName]=generation;
             string path=scene.IsSpatial && scene.PresetId is >=18 and <SpatialScene.SceneCount
                 ?Path.Combine(AppContext.BaseDirectory,"assets","cinematic",$"{scene.PresetId}.mp4")
                 :scene.Path;
@@ -121,12 +128,14 @@ public partial class MainWindow
                 Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(path,profile);
                 if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
             }
-            player.Play(path,screen,FramedCover(scene,screen,config),true);
+            string? previous=await player.CitySnapshot();
+            try{if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;player.Play(path,screen,FramedCover(scene,screen,config),true,previous);}
+            finally{if(previous is not null)try{File.Delete(previous);}catch{}}
             player.SetFraming(playback);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
             config.Scene=PlaybackRules.Key(scene);preferences.Last=scene.Path;preferences.LastPresetId=scene.PresetId;preferences.Monitor=screen.DeviceName;
             nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();UpdatePlaybackStatus();
         }
-        catch(Exception e){if(player.Active)player.Stop();Status.Text="Не удалось применить: "+e.Message;}
+        catch(Exception e){if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;if(player.Active)player.Stop();Status.Text="Не удалось применить: "+e.Message;}
     }
     static string? FramedCover(Wallpaper scene,Forms.Screen screen,MonitorPreferences config)
     {
@@ -262,7 +271,7 @@ public partial class MainWindow
     void FilesDragOver(object sender,DragEventArgs e){e.Effects=e.Data.GetDataPresent(DataFormats.FileDrop)?DragDropEffects.Copy:DragDropEffects.None;e.Handled=true;}
     async void CardEnter(object sender,MouseEventArgs e)
     {
-        if(!featuresReady||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||!File.Exists(scene.Path))return;
+        if(!featuresReady||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||scene.PresetId==CityId||!File.Exists(scene.Path))return;
         StopHover();int generation=hoverGeneration;await Task.Delay(650);
         if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible||scenePreview is not null)return;
         if((scene.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(scene) is SceneLayers layers && layers.MotionId is not null)

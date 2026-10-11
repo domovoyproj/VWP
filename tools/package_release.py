@@ -37,6 +37,9 @@ def main():
             raise SystemExit('VWP.exe is missing from archive.')
         required = [f'VWP/assets/scene-{scene_id}.png' for scene_id in range(18)]
         required += [f'VWP/assets/cinematic/{scene_id}.mp4' for scene_id in range(18, 28)]
+        required += [f'VWP/assets/living/{scene_id}.{ext}' for scene_id in range(1001,1004) for ext in ('mp4','png')]
+        required += ['VWP/assets/living/catalog.json','VWP/assets/city/index.html','VWP/assets/city/city.js','VWP/assets/city/vendor/three.core.js','VWP/assets/city/vendor/BufferGeometryUtils.js','VWP/assets/city/vendor/LICENSE.txt']
+        required += ['VWP/assets/city/'+name for name in ('city.css','cover.png','vendor/three.module.js','vendor/Reflector.js','textures/apartment.png','textures/townhouse.png','textures/shop.png','textures/tree.png','textures/commuter.png','textures/office-color.jpg')]
         absent = [name for name in required if name not in archive.namelist()]
         if absent:
             raise SystemExit(f'Wallpaper media missing from archive: {absent[0]}')

@@ -6,6 +6,9 @@ $sdk = if ($dotnetCommand) { $dotnetCommand.Source } elseif (Test-Path 'C:\momp\
 [xml]$project = Get-Content VWP.csproj
 $version = $project.Project.PropertyGroup.Version
 $requiredAssets = @('assets/presets.json', 'assets/themes/themes.json', 'assets/themes/obsidian.png', 'assets/themes/glacier.png', 'assets/themes/pearl.png')
+$requiredAssets += @('assets/city/index.html','assets/city/city.js','assets/city/cover.png','assets/city/vendor/three.module.js','assets/city/vendor/three.core.js','assets/city/vendor/Reflector.js','assets/city/vendor/BufferGeometryUtils.js','assets/city/vendor/LICENSE.txt','assets/living/catalog.json')
+$requiredAssets += @('assets/city/city.css','assets/city/textures/apartment.png','assets/city/textures/townhouse.png','assets/city/textures/shop.png','assets/city/textures/tree.png','assets/city/textures/commuter.png','assets/city/textures/office-color.jpg')
+foreach ($scene in 1001,1002,1003) { $requiredAssets += "assets/living/$scene.mp4"; $requiredAssets += "assets/living/$scene.png" }
 foreach ($id in @('vwp-sakura', 'vwp-neon', 'vwp-crimson', 'vwp-astral', 'vwp-abyss', 'vwp-cyber', 'vwp-aurora', 'vwp-ember', 'vwp-pearl', 'vwp-obsidian', 'vwp-rose', 'bibata-ice', 'bibata-classic', 'capitaine-dark')) {
     $manifest = "assets/cursors/$id/pack.json"
     $requiredAssets += $manifest

@@ -47,6 +47,7 @@ public partial class MainWindow
     void AppearanceNavigation(object sender,RoutedEventArgs e)=>NavigateAppearance((string)((Button)sender).Tag);
     void NavigateAppearance(string page)
     {
+        City.Visibility=Visibility.Collapsed;CityNav.Background=Brushes.Transparent;
         StopPreview();StopHover();cursorPage=page=="Cursors";bool wallpaper=page=="Wallpaper";
         WallpaperPage.Visibility=wallpaper?Visibility.Visible:Visibility.Collapsed;
         Appearance.Visibility=wallpaper?Visibility.Collapsed:Visibility.Visible;
