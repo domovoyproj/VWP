@@ -3,6 +3,7 @@ import { Reflector } from './vendor/Reflector.js';
 import { mergeGeometries } from './vendor/BufferGeometryUtils.js';
 
 const params=new URLSearchParams(location.search),preview=params.get('preview')==='1',quality=params.get('quality')||'Quality';
+const manual=params.get('manual')==='1';
 const high=quality==='Quality',eco=quality==='Eco',fps=high?60:eco?15:30;
 const canvas=document.querySelector('#scene'),send=o=>window.chrome?.webview?.postMessage(o);
 const palettes=[{name:'NEON WARD',a:0x6cbdcf,b:0xda699b,fog:0x192b40},{name:'SAKURA QUARTER',a:0xdf8dad,b:0x959bd8,fog:0x29283e},{name:'GLACIER DISTRICT',a:0x83caba,b:0x6aa4ce,fog:0x152f3e}];
@@ -127,7 +128,8 @@ function toast(text){const el=document.querySelector('#toast');el.textContent=te
 function state(){return{x:world.x,y:world.y,z:world.z,yaw,pitch,palette,distance,flying,raining};}
 function restore(s){if(!s)return;for(const n of ['x','y','z','yaw','pitch','distance'])if(s[n]!==undefined&&!Number.isFinite(s[n]))return;world.set(s.x??0,Math.max(2.3,Math.min(180,s.y??2.5)),s.z??22);yaw=s.yaw??0;pitch=Math.max(-1.25,Math.min(1.25,s.pitch??-.025));distance=s.distance??0;flying=!!s.flying;raining=s.raining!==false;palette=Math.abs(Math.floor(s.palette??palette))%3;recolor();recycle();}
 window.city={state,metrics:()=>({frames,chunks:chunks.size,drawCalls:renderCalls,triangles:renderTriangles,resolution:renderer.getDrawingBufferSize(new T.Vector2()).toArray(),world:[world.x,world.y,world.z],paused}),move:(x,z)=>{world.x+=x;world.z+=z;recycle();},pause:v=>paused=v,interact:()=>{palette=(palette+1)%3;recolor();toast('Район сменил освещение · '+palettes[palette].name);},restore};
-window.chrome?.webview?.addEventListener('message',e=>{if(e.data.type==='pause')paused=!!e.data.value;if(e.data.type==='state')restore(e.data.value);});
+window.city.renderAt=(seconds,pose)=>{if(!manual||!Number.isFinite(seconds))return;elapsed=seconds;auto=false;if(pose)restore(pose);frame(0,true);};
+window.chrome?.webview?.addEventListener('message',async e=>{if(e.data.type==='pause')paused=!!e.data.value;if(e.data.type==='state')restore(e.data.value);if(manual&&e.data.type==='render'){window.city.renderAt(e.data.time,e.data.pose);await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));send({type:'frame',id:e.data.id});}});
 document.querySelector('#enter').onclick=()=>canvas.requestPointerLock();document.querySelector('#close').onclick=()=>send({type:'close',state:state()});
 addEventListener('pointerlockchange',()=>{const wasActive=active;active=document.pointerLockElement===canvas;auto=!active;steps.clear();document.body.classList.toggle('playing',active);if(wasActive&&!active&&params.get('explore')==='1')send({type:'close',state:state()});});
 addEventListener('mousemove',e=>{if(active){yaw-=e.movementX*.002;pitch=Math.max(-1.25,Math.min(1.25,pitch-e.movementY*.002));}});
@@ -135,7 +137,7 @@ addEventListener('keydown',e=>{if(!active)return;steps.add(e.code);if(['KeyW','K
 addEventListener('keyup',e=>steps.delete(e.code));addEventListener('blur',()=>{steps.clear();if(document.pointerLockElement)document.exitPointerLock();});
 document.body.classList.toggle('wallpaper',!preview);recolor();restore(window.initialCityState);resize();recycle();
 let ready=false;
-function frame(now){requestAnimationFrame(frame);if(paused){lastTime=now;return;}if(now-lastRender<1000/fps)return;const dt=Math.min(.08,(now-(lastTime||now))/1000);lastTime=now;lastRender=now;elapsed+=dt;
+function frame(now,forced=false){if(!manual&&!forced)requestAnimationFrame(frame);if(!forced&&paused){lastTime=now;return;}if(!forced&&now-lastRender<1000/fps)return;const dt=forced?0:Math.min(.08,(now-(lastTime||now))/1000);lastTime=now;lastRender=now;elapsed+=dt;
 const old=world.clone();if(active){const speed=(steps.has('ShiftLeft')||steps.has('ShiftRight')?22:7)*dt,forward=(steps.has('KeyW')?1:0)-(steps.has('KeyS')?1:0),side=(steps.has('KeyD')?1:0)-(steps.has('KeyA')?1:0);world.x+=(-Math.sin(yaw)*forward+Math.cos(yaw)*side)*speed;world.z+=(-Math.cos(yaw)*forward-Math.sin(yaw)*side)*speed;
 if(!flying){const qx=Math.abs(((world.x%40)+60)%40-20),qz=Math.abs(((world.z%40)+60)%40-20);if(qx>6.2&&qz>6.2)world.copy(old);world.y+=(2.5-world.y)*Math.min(1,dt*4);}else{world.y+=((steps.has('Space')?1:0)-(steps.has('ControlLeft')?1:0))*speed;world.y=Math.max(2.5,Math.min(160,world.y));}}
 else if(auto){world.z-=dt*.95;world.x+=(Math.sin(elapsed*.04)*1.4-world.x%40)*Math.min(1,dt*.1);world.y+=(2.5-world.y)*Math.min(1,dt*.6);yaw+=(-yaw)*Math.min(1,dt*.3);pitch+=(-.025-pitch)*Math.min(1,dt*.3);}distance+=world.distanceTo(old);recycle();camera.position.copy(world).sub(origin);camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);
@@ -149,4 +151,4 @@ renderer.info.reset();renderer.setRenderTarget(target);renderer.render(scene,cam
 if(!ready&&frames>3){ready=true;send({type:'ready'});}if(now-lastStats>1000){document.querySelector('#stats').textContent=Math.round(distance)+' m · '+quality.toUpperCase();lastStats=now;}}
 addEventListener('error',e=>{send({type:'error',message:e.message});document.querySelector('#error').hidden=false;document.querySelector('#error').textContent='Не удалось запустить город.\n'+e.message;});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();send({type:'error',message:'Видеодрайвер сбросил 3D-контекст. Примени обои снова.'});});
-requestAnimationFrame(frame);
+if(manual){for(let i=0;i<4;i++)frame(0,true);}else requestAnimationFrame(frame);

@@ -16,9 +16,10 @@ internal sealed class CitySurface : IDisposable
     public static string Folder=>Path.Combine(AppContext.BaseDirectory,"assets","city");
     public Task Initialize(string profile,bool preview,string? state=null,int palette=0,bool explore=false)=>InitializeSource(Folder,"index.html?quality="+Uri.EscapeDataString(profile)+"&preview="+(preview?"1":"0")+"&palette="+palette+"&explore="+(explore?"1":"0"),state);
     internal Task InitializeLiving(int scene,bool manual=true)=>InitializeSource(Path.Combine(AppContext.BaseDirectory,"assets"),"living/index.html?scene="+scene+"&manual="+(manual?"1":"0"));
+    internal Task InitializeCityRender()=>InitializeSource(Folder,"index.html?quality=Quality&preview=0&manual=1");
     async Task InitializeSource(string folder,string entry,string? state=null)
     {
-        bool offline=entry.StartsWith("living/",StringComparison.Ordinal)&&entry.Contains("manual=1",StringComparison.Ordinal);
+        bool offline=entry.Contains("manual=1",StringComparison.Ordinal);
         string data=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP",offline?"living-render-browser":"city-browser");
         string arguments="--autoplay-policy=no-user-gesture-required"+(offline?" --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows":"");
         var environment=await CoreWebView2Environment.CreateAsync(null,data,new CoreWebView2EnvironmentOptions(arguments));
