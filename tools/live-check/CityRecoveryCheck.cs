@@ -38,7 +38,7 @@ static class CityRecoveryCheck
                 for(int i=0;i<180;i++)
                 {
                     await Task.Delay(500);
-                    if(city.RecoveryCount>0&&city.EffectiveProfile=="Eco")
+                    if(city.RecoveryCount>0&&!city.Recovering&&city.EffectiveProfile=="Eco")
                     {
                         try{using var metrics=JsonDocument.Parse(await city.Control.CoreWebView2.ExecuteScriptAsync("window.city?.metrics()??null").WaitAsync(TimeSpan.FromSeconds(2)));if(metrics.RootElement.ValueKind==JsonValueKind.Object&&metrics.RootElement.GetProperty("frames").GetInt32()>3)break;}catch{}
                     }

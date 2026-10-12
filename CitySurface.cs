@@ -20,6 +20,7 @@ internal sealed class CitySurface : IDisposable
     readonly string? browserDataName;
     public CitySurface(string? browserDataName=null){this.browserDataName=browserDataName;}
     public int RecoveryCount=>recoveries;
+    internal bool Recovering=>recovering;
     public string EffectiveProfile=>profile;
     public event Action<string>? Message;
     public static string Folder=>Path.Combine(AppContext.BaseDirectory,"assets","city");
@@ -45,14 +46,23 @@ internal sealed class CitySurface : IDisposable
         web.NavigationCompleted+=(_,e)=>{if(!e.IsSuccess&&e.WebErrorStatus!=CoreWebView2WebErrorStatus.OperationCanceled)Fail("Не удалось открыть локальную сцену города: "+e.WebErrorStatus);};
         web.PermissionRequested+=(_,e)=>e.State=CoreWebView2PermissionState.Deny;
         web.ProcessFailed+=(_,e)=>HandleProcessFailure(e.ProcessFailedKind,$"reason={e.Reason}; exit={e.ExitCode}; process={e.ProcessDescription}");
-        web.WebMessageReceived+=(_,e)=>
+        web.WebMessageReceived+=async(_,e)=>
         {
             if(!e.Source.StartsWith("https://vwp-city.local/",StringComparison.Ordinal))return;
             string json=e.WebMessageAsJson;
             using var message=JsonDocument.Parse(json);
             string? type=message.RootElement.GetProperty("type").GetString();
-            if(type=="state") {lastState=message.RootElement.GetProperty("value").GetRawText();unresponsiveReports=0;return;}
-            if(type=="ready") {unresponsiveReports=0;if(recovering)SetState(lastState);SetPaused(paused);ready.TrySetResult();recoveryReady?.TrySetResult();}
+            if(type=="state") {if(!recovering)lastState=message.RootElement.GetProperty("value").GetRawText();unresponsiveReports=0;return;}
+            if(type=="ready")
+            {
+                unresponsiveReports=0;
+                if(recovering)
+                {
+                    try{await web.ExecuteScriptAsync("window.city.restore("+lastState+");window.city.pause("+JsonSerializer.Serialize(paused)+")").WaitAsync(TimeSpan.FromSeconds(15));}
+                    catch(Exception error){Fail("Не удалось восстановить позицию: "+error.Message);return;}
+                }
+                if(disposed)return;SetPaused(paused);ready.TrySetResult();recoveryReady?.TrySetResult();
+            }
             if(type=="contextlost") {_ = RecoverRenderer("WebGL context lost");return;}
             if(type=="error") {Fail(message.RootElement.GetProperty("message").GetString()??"Ошибка 3D-сцены.");return;}
             Message?.Invoke(json);
