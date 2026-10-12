@@ -88,5 +88,125 @@
     "#1B1916",
     "#211F1B",
     "#2D2A24"
+  ],
+  "Vibe-amber-konbini": [
+    "#15120F",
+    "#1B1815",
+    "#211E1A",
+    "#2D2823"
+  ],
+  "Vibe-hoshizora": [
+    "#111215",
+    "#16181B",
+    "#1C1E22",
+    "#25292E"
+  ],
+  "Vibe-sakura-soda": [
+    "#FEF8FA",
+    "#FDF4F7",
+    "#FFFDFD",
+    "#FDEEF3"
+  ],
+  "Vibe-midnight-record": [
+    "#141210",
+    "#1A1715",
+    "#201D1A",
+    "#2B2724"
+  ],
+  "Vibe-hydrangea-stop": [
+    "#111314",
+    "#16191A",
+    "#1C1F21",
+    "#262A2C"
+  ],
+  "Vibe-summer-rooftop": [
+    "#FEF8F7",
+    "#FDF3F1",
+    "#FFFDFC",
+    "#FBEDEA"
+  ],
+  "Vibe-lantern-river": [
+    "#141310",
+    "#1B1815",
+    "#211E1A",
+    "#2D2924"
+  ],
+  "Vibe-chrome-sunset": [
+    "#0F1313",
+    "#151919",
+    "#1A1F1F",
+    "#232A2A"
+  ],
+  "Vibe-vhs-motel": [
+    "#151111",
+    "#1B1716",
+    "#221D1B",
+    "#2E2725"
+  ],
+  "Vibe-arcade-hours": [
+    "#131215",
+    "#18181B",
+    "#1E1D22",
+    "#29282E"
+  ],
+  "Vibe-moss-mist": [
+    "#111312",
+    "#161918",
+    "#1C1F1D",
+    "#252A28"
+  ],
+  "Vibe-quiet-fjord": [
+    "#F9FBFC",
+    "#F5F8FA",
+    "#FDFEFE",
+    "#F0F4F7"
+  ],
+  "Vibe-golden-dunes": [
+    "#FCF9F5",
+    "#FAF6EE",
+    "#FEFDFC",
+    "#F8F1E6"
+  ],
+  "Vibe-orbital-bath": [
+    "#F8FBFC",
+    "#F3F8FB",
+    "#FDFEFE",
+    "#EDF4F8"
+  ],
+  "Vibe-signal-garden": [
+    "#131214",
+    "#19171A",
+    "#1F1D20",
+    "#2A272C"
+  ],
+  "Vibe-aurora-relay": [
+    "#101413",
+    "#151A19",
+    "#1B201F",
+    "#242B2A"
+  ],
+  "Vibe-soft-monolith": [
+    "#F9FAFB",
+    "#F6F8F9",
+    "#FDFEFE",
+    "#F1F4F6"
+  ],
+  "Vibe-glass-horizon": [
+    "#131214",
+    "#18181A",
+    "#1E1D21",
+    "#29282C"
+  ],
+  "Vibe-copper-cathedral": [
+    "#14110F",
+    "#1A1714",
+    "#201C19",
+    "#2C2622"
+  ],
+  "Vibe-jade-dream": [
+    "#F6FAF8",
+    "#F1F7F4",
+    "#FCFEFD",
+    "#EAF3EE"
   ]
 }

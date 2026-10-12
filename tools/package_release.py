@@ -40,6 +40,8 @@ def main():
         required += [f'VWP/assets/cinematic/{scene_id}.mp4' for scene_id in range(18, 28)]
         required += [f'VWP/assets/living/{scene_id}.{ext}' for scene_id in range(1001,1004) for ext in ('mp4','png')]
         required += [f'VWP/assets/anime/{scene_id}.{ext}' for scene_id in range(1101,1116) for ext in ('mp4','png')]
+        required += [f'VWP/assets/vibes/{scene_id}.{ext}' for scene_id in range(1201,1221) for ext in ('mp4','png','poster.png','preview.mp4')]
+        required += ['VWP/assets/vibes/'+name for name in ('catalog.json','vibes.js','index.html','characters/record-girl.png','characters/rooftop-girl.png')]
         required += ['VWP/assets/anime/catalog.json','VWP/assets/anime/anime.js','VWP/assets/anime/index.html','VWP/assets/themes/palettes.json']
         required += ['VWP/assets/living/catalog.json','VWP/assets/city/index.html','VWP/assets/city/city.js','VWP/assets/city/vendor/three.core.js','VWP/assets/city/vendor/BufferGeometryUtils.js','VWP/assets/city/vendor/LICENSE.txt']
         required += ['VWP/assets/city/'+name for name in ('city.css','cover.png','vendor/three.module.js','vendor/Reflector.js','textures/apartment.png','textures/townhouse.png','textures/shop.png','textures/tree.png','textures/commuter.png','textures/office-color.jpg')]
@@ -55,7 +57,7 @@ def main():
             raise SystemExit('Retired procedural or low-poly assets are present in the package.')
         for name in ['themes/themes.json','themes/obsidian.png','themes/glacier.png','themes/pearl.png']:
             if 'VWP/assets/'+name not in names:raise SystemExit('Personalization asset missing: '+name)
-        if len([name for name in names if name.startswith('VWP/assets/cursors/') and name.endswith('/pack.json')])!=29:
+        if len([name for name in names if name.startswith('VWP/assets/cursors/') and name.endswith('/pack.json')])!=49:
             raise SystemExit('Cursor catalog is incomplete.')
     print(f'{output.name}: {count} files, {output.stat().st_size:,} bytes, ZIP CRC verified')
     print(f'SHA256: {checksum}')

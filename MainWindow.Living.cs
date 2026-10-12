@@ -7,7 +7,7 @@ public partial class MainWindow
     sealed record LivingDefinition(int Id,string Name,string Category,string Description,string Accent);
     void LoadLiving(string assets)
     {
-        foreach(string collection in new[]{"living","anime"})LoadArtworkCollection(assets,collection);
+        foreach(string collection in new[]{"living","anime","vibes"})LoadArtworkCollection(assets,collection);
     }
     void LoadArtworkCollection(string assets,string collection)
     {
@@ -16,6 +16,9 @@ public partial class MainWindow
         var catalog=JsonSerializer.Deserialize<List<LivingDefinition>>(File.ReadAllText(file),new JsonSerializerOptions{PropertyNameCaseInsensitive=true});
         if(catalog is null)return;
         foreach(var scene in catalog)
-            items.Add(new(scene.Name,Path.Combine(folder,scene.Id+".mp4"),Path.Combine(folder,scene.Id+".png"),scene.Category+" · 4K · 60 FPS · ORIGINAL",scene.Category,scene.Description,scene.Id));
+        {
+            string poster=Path.Combine(folder,scene.Id+".poster.png");if(!File.Exists(poster))poster=Path.Combine(folder,scene.Id+".png");
+            items.Add(new(scene.Name,Path.Combine(folder,scene.Id+".mp4"),poster,scene.Category+" · 4K · 60 FPS · ORIGINAL",scene.Category,scene.Description,scene.Id));
+        }
     }
 }

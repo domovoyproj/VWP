@@ -1,4 +1,4 @@
-"""Reuse unchanged 0.7.0 video masters for the runtime-only 0.7.1 hotfix."""
+"""Restore unchanged, checksum-pinned original masters without rerendering them."""
 import hashlib
 import shutil
 import subprocess

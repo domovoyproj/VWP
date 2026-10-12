@@ -1,0 +1,3 @@
+Original VWP cursor artwork, dedicated under CC0 1.0.
+https://creativecommons.org/publicdomain/zero/1.0/
+Source: tools/make_vibe_styles.py and tools/make_cursors.py
