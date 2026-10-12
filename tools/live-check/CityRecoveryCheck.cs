@@ -25,6 +25,8 @@ static class CityRecoveryCheck
             {
                 File.WriteAllText(Path.Combine(folder,"status.txt"),"RUNNING");
                 await city.Initialize("Eco",true);await Task.Delay(1200);
+                string layout=await city.Control.CoreWebView2.ExecuteScriptAsync("(()=>{const a=document.querySelector('.title').getBoundingClientRect(),b=document.querySelector('#start').getBoundingClientRect(),c=document.querySelector('footer').getBoundingClientRect();return a.bottom<=b.top&&b.bottom<=c.top&&c.bottom<=innerHeight})()");
+                Check(layout=="true","Compact city title, entry button and help do not overlap");
                 int before=await Frames(city);
                 city.HandleProcessFailure(CoreWebView2ProcessFailedKind.GpuProcessExited,"verification: nonfatal notification");
                 city.HandleProcessFailure(CoreWebView2ProcessFailedKind.UtilityProcessExited,"verification: nonfatal notification");

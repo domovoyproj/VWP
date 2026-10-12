@@ -108,7 +108,7 @@ foreach ($id in 1001..1003) {
 Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList '--living-render','1101','2160','60' -Wait
 python tools/check_living.py
 powershell -ExecutionPolicy Bypass -File build.ps1 -Installer
-python tools/package_release.py --version 0.7.0 --build dist/Release-0.7.0
+python tools/package_release.py --version 0.7.1 --build dist/Release-0.7.1
 ```
 
 Для установщика нужен Inno Setup 6. Workflow **VWP Studio release** проверяет город и лаунчер, экспортирует три Living Originals и 15 Anime Atelier на отдельных облачных машинах, получает 10 неизменённых мастер-видео из официального 0.5.2 с проверкой SHA-256, проверяет коллекцию и курсоры, собирает установщик и portable. Вызовы нативного рендерера на одном ПК следует дожидаться по очереди. Тег `v0.7.0` публикует установщик и portable из успешной полной облачной сборки того же коммита с повторной проверкой SHA-256; до загрузки файлов релиз остаётся черновиком.
