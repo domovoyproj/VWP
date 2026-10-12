@@ -18,6 +18,7 @@ class Program
   if(args.Length==1 && args[0]=="--overlay-check"){OverlayCheck.Run();return;}
   if(args.Length==1 && args[0]=="--transition-check"){TransitionCheck.Run();return;}
   if(args.Length==1 && args[0]=="--city-check"){CityCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--city-recovery-check"){CityRecoveryCheck.Run();return;}
   if(args.Length==1 && args[0]=="--city-check-eco"){CityCheck.Run(false,"Eco");return;}
   if(args.Length==1 && args[0]=="--city-desktop-check"){CityCheck.Run(true);return;}
   if(args.Length==1 && args[0]=="--city-preview"){new Application().Run(new CityWindow("Quality"));return;}

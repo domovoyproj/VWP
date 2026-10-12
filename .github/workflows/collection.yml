@@ -1,7 +1,7 @@
 name: VWP Studio release
 on:
   push:
-    branches: ['codex/personalization-studio', 'codex/smooth-transitions', 'codex/neon-city']
+    branches: ['codex/personalization-studio', 'codex/smooth-transitions', 'codex/neon-city', 'codex/city-runtime-recovery']
     tags: ['v0.5.*', 'v0.6.*', 'v0.7.*']
   workflow_dispatch:
 permissions:
@@ -47,6 +47,13 @@ jobs:
           $design = Start-Process -FilePath $launcher -ArgumentList '--verify-redesign' -WindowStyle Hidden -PassThru -Wait
           $report = Get-Content tools/live-check/bin/Release/net8.0-windows/verification/design-result.json -Raw | ConvertFrom-Json
           if ($design.ExitCode -ne 0 -or @($report | Where-Object { !$_.passed }).Count -gt 0) { $report | ConvertTo-Json -Depth 5; throw 'Launcher design verification failed' }
+      - name: Verify recovery from an actual renderer crash
+        shell: pwsh
+        run: |
+          $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
+          $check = Start-Process -FilePath $checker -ArgumentList '--city-recovery-check' -WindowStyle Hidden -PassThru -Wait
+          Get-Content artifacts/city-recovery-check/status.txt
+          if ($check.ExitCode -ne 0) { throw 'Native renderer recovery failed' }
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -58,11 +65,12 @@ jobs:
             artifacts/city-check-eco/*.png
             artifacts/city-check-eco/*.json
             artifacts/city-check-eco/status.txt
+            artifacts/city-recovery-check/*
             tools/live-check/bin/Release/net8.0-windows/verification/design-*.png
             tools/live-check/bin/Release/net8.0-windows/verification/design-result.json
           retention-days: 14
   originals:
-    if: github.ref_type != 'tag'
+    if: github.ref_type != 'tag' && github.ref_name != 'codex/city-runtime-recovery'
     needs: verify
     runs-on: windows-latest
     timeout-minutes: 90
@@ -123,7 +131,7 @@ jobs:
             artifacts/living-check/*-motion.png
           retention-days: 14
   anime:
-    if: github.ref_type != 'tag'
+    if: github.ref_type != 'tag' && github.ref_name != 'codex/city-runtime-recovery'
     needs: verify
     runs-on: windows-latest
     timeout-minutes: 120
@@ -184,12 +192,14 @@ jobs:
             artifacts/living-check/*-motion.png
           retention-days: 14
   package:
-    if: github.ref_type != 'tag'
+    if: always() && github.ref_type != 'tag' && needs.verify.result == 'success' && (github.ref_name == 'codex/city-runtime-recovery' || (needs.originals.result == 'success' && needs.anime.result == 'success'))
     needs: [verify, originals, anime]
     runs-on: windows-latest
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
@@ -197,11 +207,13 @@ jobs:
         with:
           python-version: '3.12'
       - uses: actions/download-artifact@v4
+        if: github.ref_name != 'codex/city-runtime-recovery'
         with:
           pattern: VWP-Living-10*
           merge-multiple: true
           path: assets/living
       - uses: actions/download-artifact@v4
+        if: github.ref_name != 'codex/city-runtime-recovery'
         with:
           pattern: VWP-Anime-11*
           merge-multiple: true
@@ -209,8 +221,8 @@ jobs:
       - name: Restore cinematic masters and validate media
         shell: pwsh
         run: |
-          python tools/fetch_cinematic.py
-          if ($LASTEXITCODE -ne 0) { throw 'Cinematic master download failed' }
+          if ('${{ github.ref_name }}' -eq 'codex/city-runtime-recovery') { python tools/restore_release_media.py } else { python tools/fetch_cinematic.py }
+          if ($LASTEXITCODE -ne 0) { throw 'Verified master download failed' }
           python -m pip install 'Pillow>=11,<13' imageio-ffmpeg==0.6.0
           python tools/bootstrap_ffmpeg.py
           if ($LASTEXITCODE -ne 0) { throw 'Encoder preparation failed' }
@@ -293,7 +305,7 @@ jobs:
           $sha = '${{ github.sha }}'
           $runs = gh api "repos/$repository/actions/workflows/collection.yml/runs?head_sha=$sha&status=success&per_page=100" | ConvertFrom-Json
           if ($LASTEXITCODE -ne 0) { throw 'Unable to find verified builds' }
-          $branches = @('codex/personalization-studio','codex/smooth-transitions','codex/neon-city')
+          $branches = @('codex/personalization-studio','codex/smooth-transitions','codex/neon-city','codex/city-runtime-recovery')
           $verified = $runs.workflow_runs | Where-Object { $_.head_sha -eq $sha -and $_.event -in @('push','workflow_dispatch') -and $_.head_branch -in $branches -and $_.head_repository.full_name -eq $repository -and $_.conclusion -eq 'success' } | Select-Object -First 1
           if (!$verified) { throw 'This commit has no successful complete distribution build. Build the branch before tagging.' }
           gh run download $verified.id --repo $repository --name VWP-Windows --dir dist
