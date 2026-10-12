@@ -14,7 +14,8 @@ static class LivingRender
     public static void Run(string[] args)
     {
         int scene=int.Parse(args[1]),height=args.Length>2?int.Parse(args[2]):720,fps=args.Length>3?int.Parse(args[3]):30;
-        if(scene is <1001 or >1003||height is <360 or >2160||fps is <1 or >60)throw new ArgumentException("living-render <1001..1003> [height] [fps]");
+        bool anime=scene is >=1101 and <=1115;
+        if((!anime&&scene is <1001 or >1003)||height is <360 or >2160||fps is <1 or >60)throw new ArgumentException("living-render <1001..1003|1101..1115> [height] [fps]");
         Forms.Application.SetHighDpiMode(Forms.HighDpiMode.PerMonitorV2);
         int width=height*16/9;string folder=Path.Combine(Environment.CurrentDirectory,"artifacts","living-check");Directory.CreateDirectory(folder);
         string output=Path.Combine(folder,$"{scene}-{height}p.mp4"),status=Path.Combine(folder,$"{scene}-status.txt");
@@ -26,7 +27,7 @@ static class LivingRender
             Process? encoder=null;
             try
             {
-                File.WriteAllText(status,"Loading textures");form.Show();form.Activate();await surface.InitializeLiving(scene);await surface.SetExportViewport(width,height);
+                File.WriteAllText(status,"Loading textures");form.Show();form.Activate();if(anime)await surface.InitializeAnime(scene);else await surface.InitializeLiving(scene);await surface.SetExportViewport(width,height);
                 int sequence=0;TaskCompletionSource? pending=null;
                 surface.Message+=json=>{using var m=JsonDocument.Parse(json);if(m.RootElement.TryGetProperty("type",out var type)&&type.GetString()=="frame"&&m.RootElement.GetProperty("id").GetInt32()==sequence)pending?.TrySetResult();};
                 async Task Draw(double seconds)
@@ -61,7 +62,7 @@ static class LivingRender
                     if(frame%fps==0)File.WriteAllText(status,$"Rendering {frame/fps}/12 s · {width}x{height} · {fps} FPS");
                 }
                 encoder.StandardInput.Close();await encoder.WaitForExitAsync();if(encoder.ExitCode!=0)throw new InvalidOperationException("Video encoder failed");
-                if(height==2160&&fps==60){string media=Path.Combine(Environment.CurrentDirectory,"assets","living");File.Copy(output,Path.Combine(media,scene+".mp4"),true);await Draw(5);await surface.CaptureExport(Path.Combine(media,scene+".png"),width,height);}
+                if(height==2160&&fps==60){string media=Path.Combine(Environment.CurrentDirectory,"assets",anime?"anime":"living");File.Copy(output,Path.Combine(media,scene+".mp4"),true);if(!anime){await Draw(5);await surface.CaptureExport(Path.Combine(media,scene+".png"),width,height);}}
                 File.WriteAllText(status,$"PASS: moving scene, seamless 12-second loop; {output}");
             }
             catch(Exception e){File.WriteAllText(status,e.ToString());Environment.ExitCode=1;}

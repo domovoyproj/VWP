@@ -1,4 +1,4 @@
-"""Validate the three approved originals' animated videos before packaging."""
+"""Validate Living Originals and Anime Atelier master videos before packaging."""
 import argparse
 from pathlib import Path
 import imageio_ffmpeg
@@ -8,8 +8,8 @@ parser.add_argument('--previews', action='store_true')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 size, fps = ((1280,720),30) if args.previews else ((3840,2160),60)
-for scene in range(1001,1004):
-    video = root/'artifacts'/'living-check'/f'{scene}-720p.mp4' if args.previews else root/'assets'/'living'/f'{scene}.mp4'
+for scene in list(range(1001,1004))+(list(range(1101,1116)) if not args.previews else []):
+    video = root/'artifacts'/'living-check'/f'{scene}-720p.mp4' if args.previews else root/'assets'/('anime' if scene>=1101 else 'living')/f'{scene}.mp4'
     if not video.is_file() or video.stat().st_size<100_000:
         raise SystemExit(f'Missing animated original: {video}')
     samples=[]

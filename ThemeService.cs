@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Win32;
 namespace VWP;
 public static class ThemeService
 {
+    static readonly Dictionary<string,string[]> atelier=File.Exists(Path.Combine(AppContext.BaseDirectory,"assets","themes","palettes.json"))?JsonSerializer.Deserialize<Dictionary<string,string[]>>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"assets","themes","palettes.json")))!:new();
     public static void Apply(string mode,string accent,string paletteName="")
     {
         bool dark=mode=="Dark" || mode=="System" && (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize","AppsUseLightTheme",1)??1)==0;
@@ -29,6 +32,7 @@ public static class ThemeService
                 "Ember"=>new[]{"#1C1515","#281C1C","#352525","#49332E"},
                 _=>null
             };
+            if(atelier.TryGetValue(paletteName,out var custom))gaming=custom;
             if(gaming is not null){palette["CanvasBrush"]=gaming[0];palette["PanelBrush"]=gaming[1];palette["CardBrush"]=gaming[2];palette["ControlBrush"]=gaming[3];palette["SelectedBrush"]=gaming[3];}
         }
         foreach(var color in palette){var brush=new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Value));brush.Freeze();Application.Current.Resources[color.Key]=brush;}

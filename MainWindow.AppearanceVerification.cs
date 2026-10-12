@@ -16,22 +16,30 @@ public partial class MainWindow
         string cursorBackup=Path.Combine(AppearanceCatalog.Data,"cursor-backup.json"),themeBackup=Path.Combine(AppearanceCatalog.Data,"theme-backup.json"),appBackup=AppAppearanceBackup;
         byte[]? savedCursor=File.Exists(cursorBackup)?File.ReadAllBytes(cursorBackup):null,savedTheme=File.Exists(themeBackup)?File.ReadAllBytes(themeBackup):null;
         byte[]? savedApp=File.Exists(appBackup)?File.ReadAllBytes(appBackup):null;
+        var initialCursors=CursorPackService.CaptureState();
         var importedFolders=new List<string>();
         try
         {
             if(File.Exists(cursorBackup))File.Delete(cursorBackup);if(File.Exists(themeBackup))File.Delete(themeBackup);if(File.Exists(appBackup))File.Delete(appBackup);
             preferences=JsonSerializer.Deserialize<Preferences>(JsonSerializer.Serialize(original))!;
-            Check("retired collection is absent",items.All(item=>item.PresetId is not (>=100 and <=114)) && items.Count(item=>item.PresetId is not null)==46);
+            Check("retired collection is absent",items.All(item=>item.PresetId is not (>=100 and <=114)) && items.Count(item=>item.PresetId is >=0 and <28)==46);
+            Check("living originals and exclusive city installed",items.Count(item=>item.PresetId is >=1001 and <=1003)==3 && items.Count(item=>item.PresetId==CityId)==1);
+            Check("fifteen new anime wallpapers installed",items.Count(item=>item.PresetId is >=1101 and <=1115)==15);
             var config=Config(SelectedScreen);config.Scene="preset:114";config.Playlist.Add("preset:100");preferences.Favorites.Add("preset:114");RemoveRetiredWallpapers();
             Check("retired scene migration",config.Scene=="preset:0"&&!config.Playlist.Contains("preset:100")&&!preferences.Favorites.Contains("preset:114"));
-            Check("thirteen themes and fourteen packs installed",appearanceThemes.Count>=13 && cursorPacks.Count>=14);
+            Check("complete theme and cursor catalogs installed",appearanceThemes.Count>=28 && cursorPacks.Count>=29);
             foreach(var pack in cursorPacks){CursorPackService.Validate(pack);Check("Windows loads all roles: "+pack.Name,pack.Files.Count==17);}
             using var before=Registry.CurrentUser.OpenSubKey(@"Control Panel\Cursors");
             string originalArrow=Convert.ToString(before?.GetValue("Arrow",null,RegistryValueOptions.DoNotExpandEnvironmentNames))??"";
             CursorPackService.Apply(cursorPacks.First(p=>p.Id=="vwp-pearl"));
             Check("system pointer changes",Convert.ToString(Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Cursors","Arrow",""))?.Contains("vwp-pearl")==true);
             CursorPackService.Restore();
-            using(var restored=Registry.CurrentUser.OpenSubKey(@"Control Panel\Cursors"))Check("previous pointer restored",originalArrow==(Convert.ToString(restored?.GetValue("Arrow",null,RegistryValueOptions.DoNotExpandEnvironmentNames))??""));
+            using(var restored=Registry.CurrentUser.OpenSubKey(@"Control Panel\Cursors"))
+            {
+                string restoredArrow=Convert.ToString(restored?.GetValue("Arrow",null,RegistryValueOptions.DoNotExpandEnvironmentNames))??"";
+                // Windows can expand environment variables and normalize path casing when reloading a scheme.
+                Check("previous pointer restored",string.Equals(Environment.ExpandEnvironmentVariables(originalArrow),Environment.ExpandEnvironmentVariables(restoredArrow),StringComparison.OrdinalIgnoreCase));
+            }
             string export=Path.Combine(folder,"cursor-roundtrip.zip");CursorPackService.Export(cursorPacks.First(p=>p.Id=="vwp-rose"),export);
             var imported=CursorPackService.Import(export);importedFolders.Add(imported.Folder);Check("cursor ZIP roundtrip",imported.Files.Count==17);
             string nativeTheme=Path.Combine(folder,"Obsidian.theme");WindowsAppearanceService.Export(appearanceThemes.First(t=>t.Id=="obsidian"),cursorPacks.First(p=>p.Id=="vwp-obsidian"),nativeTheme);
@@ -58,10 +66,10 @@ public partial class MainWindow
             Check("cursor preview has real native and animated cursors",Appearance.TryButton.Cursor is not null && Appearance.TryText.Cursor is not null && Appearance.TryBusy.Cursor is not null);
             preferences.Theme="Light";UpdateTheme();NavigateAppearance("Themes");Appearance.ThemeLibrary.SelectedItem=appearanceThemes.First(t=>t.Id=="pearl");await Task.Delay(300);RenderVerification("studio-light");
         }
-        catch(Exception e){report.Add(new{name="error",passed=false,error=e.ToString()});}
+        catch(Exception e){report.Add(new{name="error",passed=false,error=e.ToString()});Environment.ExitCode=1;}
         finally
         {
-            try{CursorPackService.Restore();WindowsAppearanceService.Restore();}catch(Exception e){report.Add(new{name="restore error",passed=false,error=e.ToString()});}
+            try{CursorPackService.Restore();WindowsAppearanceService.Restore();CursorPackService.RestoreState(initialCursors);}catch(Exception e){report.Add(new{name="restore error",passed=false,error=e.ToString()});Environment.ExitCode=1;}
             foreach(var player in hosts.Values)player.Stop();
             if(savedCursor is not null)File.WriteAllBytes(cursorBackup,savedCursor);if(savedTheme is not null)File.WriteAllBytes(themeBackup,savedTheme);if(savedApp is not null)File.WriteAllBytes(appBackup,savedApp);else File.Delete(appBackup);
             foreach(string target in importedFolders.Where(path=>Directory.Exists(path)))

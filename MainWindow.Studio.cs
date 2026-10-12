@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,15 @@ public partial class MainWindow
     readonly AudioReaction audio=new();
     readonly Dictionary<int,PresetDefinition> definitions=new();
     readonly Dictionary<string,int> applyGeneration=new();
+    readonly Dictionary<string,CancellationTokenSource> applyCancellations=new();
+    readonly Dictionary<string,Wallpaper> pendingScenes=new();
+    void CancelPendingApply(string device)
+    {
+        applyGeneration[device]=applyGeneration.GetValueOrDefault(device)+1;
+        if(applyCancellations.Remove(device,out var pending))pending.Cancel();
+        pendingScenes.Remove(device);
+    }
+    void CancelAllApplies(){foreach(string device in applyGeneration.Keys.ToArray())CancelPendingApply(device);}
     List<GalleryItem> catalog=new();
     MiniPlayer? mini;
     bool studioReady,miniLoading;
@@ -74,7 +84,17 @@ public partial class MainWindow
         Settings.Theme.SelectedIndex=preferences.Theme switch{"Light"=>0,"Dark"=>1,_=>2};Settings.SceneAccent.IsChecked=preferences.SceneAccent;
         Settings.Exceptions.Text=string.Join(", ",preferences.PauseExceptions);Settings.GallerySource.Text=preferences.GallerySource;
         Settings.LayersLabel.Text=Library.SelectedItem is Wallpaper scene && LayersFor(scene)?.MotionId is int motionId?SpatialScene.Descriptions[motionId]:"Можно добавить фон и PNG персонажа.";
+        UpdateLayerControls();
         UpdateResources();
+    }
+    void UpdateLayerControls()
+    {
+        var selected=FindScene(Config(SelectedScreen).Scene)??Library.SelectedItem as Wallpaper;
+        bool editable=selected is not null && selected.PresetId!=CityId;
+        bool custom=editable && (selected!.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(selected)));
+        foreach(var element in new System.Windows.Controls.Control[]{Settings.SceneAnimation,Settings.Interactive,Settings.Music,Settings.Depth})element.IsEnabled=custom;
+        Settings.BackgroundButton.IsEnabled=Settings.ForegroundButton.IsEnabled=editable;
+        if(!custom)Settings.LayersLabel.Text=editable?"Встроенная сцена воспроизводится как видео. Добавь свои слои, чтобы включить параллакс.":"Интерактивным городом можно управлять в разделе «Эксклюзивы».";
     }
     void SaveStudioSettings()
     {
@@ -91,7 +111,7 @@ public partial class MainWindow
         var dialog=new OpenFileDialog{Filter=foreground?"PNG с прозрачностью|*.png":"Изображения|*.png;*.jpg;*.jpeg;*.webp"};if(dialog.ShowDialog()!=true)return;
         string folder=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","layers");Directory.CreateDirectory(folder);
         string file=Path.Combine(folder,Guid.NewGuid().ToString("N")+Path.GetExtension(dialog.FileName));File.Copy(dialog.FileName,file);
-        var layers=LayersFor(scene)??new();layers.MotionId=null;if(foreground)layers.Foreground=file;else layers.Background=file;preferences.Layers[PlaybackRules.Key(scene)]=layers;Settings.LayersLabel.Text=layers.Foreground is not null?"Фон + отдельный персонаж":"Фон + частицы";Save();
+        var layers=LayersFor(scene)??new();layers.MotionId=null;if(foreground)layers.Foreground=file;else layers.Background=file;preferences.Layers[PlaybackRules.Key(scene)]=layers;Settings.LayersLabel.Text=layers.Foreground is not null?"Фон + отдельный персонаж":"Фон + частицы";Save();UpdateLayerControls();
     }
     void UpdateResources()
     {

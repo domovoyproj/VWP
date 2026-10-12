@@ -24,9 +24,10 @@ public static class VideoRender
     public static string Encoder=>Path.Combine(AppContext.BaseDirectory,"tools","ffmpeg.exe");
     public static async Task Run(string input,string output,VideoRecipe recipe,PerformanceProfile profile,IProgress<double>? progress=null,CancellationToken cancel=default)
     {
+        cancel.ThrowIfCancellationRequested();
         if(!File.Exists(Encoder))throw new FileNotFoundException("FFmpeg не включён в сборку.");
         double duration=recipe.End-recipe.Start;
-        if(duration<.5||recipe.Start<0||recipe.Speed<.25||recipe.Speed>3||recipe.Seam<0||recipe.Seam>=duration/recipe.Speed/2)throw new ArgumentException("Проверьте границы фрагмента, скорость и длительность стыка.");
+        if(!double.IsFinite(recipe.Start)||!double.IsFinite(recipe.End)||!double.IsFinite(recipe.Speed)||!double.IsFinite(recipe.Seam)||duration<.5||recipe.Start<0||recipe.Speed<.25||recipe.Speed>3||recipe.Seam<0||recipe.Seam>=duration/recipe.Speed/2)throw new ArgumentException("Проверьте границы фрагмента, скорость и длительность стыка.");
         string F(double value)=>value.ToString("0.######",CultureInfo.InvariantCulture);
         string filter=$"setpts=(PTS-STARTPTS)/{F(recipe.Speed)},fps={profile.Fps},scale=-2:'trunc(min(ih,{profile.MaxHeight})/2)*2',setsar=1,eq=brightness={F(recipe.Brightness)}:contrast={F(recipe.Contrast)}:saturation={F(recipe.Saturation)},format=yuv420p";
         double length=duration/recipe.Speed;
@@ -43,27 +44,34 @@ public static class VideoRender
         await process.WaitForExitAsync();cancel.ThrowIfCancellationRequested();
         if(process.ExitCode!=0)throw new InvalidOperationException(await errors);
     }
-    public static async Task Thumbnail(string input,string output)
+    public static async Task Thumbnail(string input,string output,CancellationToken cancel=default)
     {
+        cancel.ThrowIfCancellationRequested();
         var start=new ProcessStartInfo(Encoder){UseShellExecute=false,CreateNoWindow=true,RedirectStandardError=true};
         foreach(string arg in new[]{"-y","-loglevel","error","-i",input,"-frames:v","1","-vf","scale=640:-2",output})start.ArgumentList.Add(arg);
-        using var process=Process.Start(start)!;var error=process.StandardError.ReadToEndAsync();await process.WaitForExitAsync();if(process.ExitCode!=0)throw new InvalidOperationException(await error);
+        using var process=Process.Start(start)!;using var registration=cancel.Register(()=>{try{process.Kill(true);}catch{}});var error=process.StandardError.ReadToEndAsync();await process.WaitForExitAsync();cancel.ThrowIfCancellationRequested();if(process.ExitCode!=0)throw new InvalidOperationException(await error);
     }
-    public static async Task<string> Optimized(string input,PerformanceProfile profile)
+    public static async Task<string> Optimized(string input,PerformanceProfile profile,CancellationToken cancel=default)
     {
+        cancel.ThrowIfCancellationRequested();
         if(profile.Key=="Quality")return input;
         string folder=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","optimized");Directory.CreateDirectory(folder);
         var info=new FileInfo(input);string key=Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(input+info.Length+info.LastWriteTimeUtc.Ticks+profile.Key)));
         string output=Path.Combine(folder,key+".mp4");if(File.Exists(output))return output;
-        var gate=proxyLocks.GetOrAdd(output,_=>new SemaphoreSlim(1,1));await gate.WaitAsync();
+        var gate=proxyLocks.GetOrAdd(output,_=>new SemaphoreSlim(1,1));await gate.WaitAsync(cancel);
+        string temp=output+".tmp.mp4";
         try
         {
+        cancel.ThrowIfCancellationRequested();
         if(File.Exists(output))return output;
-        string temp=output+".tmp.mp4";
         var start=new ProcessStartInfo(Encoder){UseShellExecute=false,CreateNoWindow=true,RedirectStandardError=true};
         foreach(string arg in new[]{"-y","-loglevel","error","-i",input,"-vf",$"fps={profile.Fps},scale=-2:'trunc(min(ih,{profile.MaxHeight})/2)*2'","-c:v","libx264","-threads","2","-preset","fast","-crf","23","-c:a","aac","-movflags","+faststart",temp})start.ArgumentList.Add(arg);
-        using var process=Process.Start(start)!;var errors=process.StandardError.ReadToEndAsync();await process.WaitForExitAsync();if(process.ExitCode!=0){if(File.Exists(temp))File.Delete(temp);throw new InvalidOperationException(await errors);}File.Move(temp,output,true);return output;
+        using var process=Process.Start(start)??throw new InvalidOperationException("Не удалось подготовить видео.");
+        using var registration=cancel.Register(()=>{try{process.Kill(true);}catch{}});
+        var errors=process.StandardError.ReadToEndAsync();await process.WaitForExitAsync();cancel.ThrowIfCancellationRequested();
+        if(process.ExitCode!=0)throw new InvalidOperationException(await errors);
+        File.Move(temp,output,true);return output;
         }
-        finally{gate.Release();}
+        finally{try{if(File.Exists(temp))File.Delete(temp);}finally{gate.Release();}}
     }
 }

@@ -7,7 +7,11 @@ public partial class MainWindow
     sealed record LivingDefinition(int Id,string Name,string Category,string Description,string Accent);
     void LoadLiving(string assets)
     {
-        string folder=Path.Combine(assets,"living"),file=Path.Combine(folder,"catalog.json");
+        foreach(string collection in new[]{"living","anime"})LoadArtworkCollection(assets,collection);
+    }
+    void LoadArtworkCollection(string assets,string collection)
+    {
+        string folder=Path.Combine(assets,collection),file=Path.Combine(folder,"catalog.json");
         if(!File.Exists(file))return;
         var catalog=JsonSerializer.Deserialize<List<LivingDefinition>>(File.ReadAllText(file),new JsonSerializerOptions{PropertyNameCaseInsensitive=true});
         if(catalog is null)return;

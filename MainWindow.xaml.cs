@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -115,7 +116,7 @@ public partial class MainWindow : Window
     }
     [System.Runtime.InteropServices.DllImport("user32.dll")] static extern uint GetDpiForWindow(IntPtr hwnd);
     void RefreshScreens() {screenLayout=ScreenLayout();string? selected=Monitor.SelectedItem as string;Monitor.Items.Clear();int i=0;foreach(var screen in Forms.Screen.AllScreens)Monitor.Items.Add((screen.Primary?"Основной":"Дисплей "+(++i))+$" · {screen.Bounds.Width} × {screen.Bounds.Height}");Monitor.SelectedIndex=0;}
-    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;foreach(var key in applyGeneration.Keys.ToArray())applyGeneration[key]++;foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
+    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;CancelAllApplies();foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
     void SelectionChanged(object sender,SelectionChangedEventArgs e)
     {
         if(Library.SelectedItem is not Wallpaper item)return;
@@ -147,7 +148,7 @@ public partial class MainWindow : Window
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
     void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)if(button.Tag as string==category)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=System.Windows.Media.Brushes.Transparent;RefreshFilter();}
     void PauseClick(object sender,RoutedEventArgs e) {var config=Config(SelectedScreen);config.UserPaused=!config.UserPaused;host?.SetUserPaused(config.UserPaused);Save();UpdatePlaybackStatus();}
-    void StopClick(object sender,RoutedEventArgs e) {applyGeneration[SelectedScreen.DeviceName]=applyGeneration.GetValueOrDefault(SelectedScreen.DeviceName)+1;host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";UpdatePauseUi(false);}
+    void StopClick(object sender,RoutedEventArgs e) {CancelPendingApply(SelectedScreen.DeviceName);host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";UpdatePauseUi(false);}
     void QuitClick(object sender,RoutedEventArgs e) { exiting=true;Close(); }
     void TrayClick(object sender,RoutedEventArgs e) { StopPreview();StopHover();Hide();tray?.ShowBalloonTip(1500,"VWP","Лаунчер в трее. Обои продолжают работать.",Forms.ToolTipIcon.Info); }
     void ModeClick(object sender,RoutedEventArgs e)
@@ -185,18 +186,21 @@ public partial class MainWindow : Window
             PreviewButton.Content="Остановить превью";return;
         }
         int generation=++previewGeneration;heroPreparing=true;PreviewButton.Content="Отменить превью";
+        previewCancellation=new();var cancel=previewCancellation.Token;
         try
         {
-            string path=await VideoRender.Optimized(PreviewPath(item),PerformanceProfile.Resolve(Config(SelectedScreen).Performance));
+            string path=await VideoRender.Optimized(PreviewPath(item),PerformanceProfile.Resolve(Config(SelectedScreen).Performance),cancel);
             if(generation!=previewGeneration || !Equals(Library.SelectedItem,item))return;
             heroPreparing=false;HeroVideo.Source=new Uri(path);HeroVideo.Visibility=Visibility.Visible;HeroVideo.Play();PreviewButton.Content="Остановить превью";
         }
+        catch(OperationCanceledException) when(cancel.IsCancellationRequested){}
         catch(Exception error){if(generation==previewGeneration){StopPreview();Status.Text="Превью: "+error.Message;}}
     }
     InteractiveVisual? scenePreview;
     int previewGeneration;
     bool heroPreparing;
-    void StopPreview() {previewGeneration++;heroPreparing=false;scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Превью";}
+    CancellationTokenSource? previewCancellation;
+    void StopPreview() {previewGeneration++;previewCancellation?.Cancel();previewCancellation?.Dispose();previewCancellation=null;heroPreparing=false;scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Превью";}
     void AutostartClick(object sender,RoutedEventArgs e)
     {
         bool enabled=Autostart.IsChecked==true;
@@ -275,6 +279,6 @@ public partial class MainWindow : Window
     protected override void OnClosing(CancelEventArgs e)
     {
         if(!exiting){e.Cancel=true;TrayClick(this,new());return;}
-        StopPreview();StopHover();foreach(var cursor in sampleCursors)cursor.Dispose();sampleCursors.Clear();featureTimer.Stop();CloseStudio();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
+        StopPreview();StopHover();CancelAllApplies();foreach(var cursor in sampleCursors)cursor.Dispose();sampleCursors.Clear();featureTimer.Stop();CloseStudio();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
     }
 }

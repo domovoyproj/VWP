@@ -36,8 +36,12 @@ static class CityCheck
                     fake.Star=HttpStatusCode.Forbidden;Check(!await access.CheckAsync()&&!access.Unlocked,"Missing permissions fail closed");
                     fake.Star=HttpStatusCode.NoContent;Check(await access.CheckAsync("test-read-only-token-01234567890"),"Reconnect works");
                     fake.User=HttpStatusCode.Unauthorized;Check(!await access.CheckAsync()&&!access.Unlocked,"Revoked token locks access");
-                    using var host=new DesktopHost(form.Handle);bool refused=false;try{await host.PlayCity(access,Forms.Screen.PrimaryScreen!,"none","Quality");}catch(InvalidOperationException){refused=true;}
-                    Check(refused&&!host.Active,"Desktop host enforces star entitlement");
+                    using var host=new DesktopHost(form.Handle);
+                    for(int palette=0;palette<3;palette++)foreach(string quality in new[]{"Eco","Balance","Quality","Auto"})
+                    {
+                        bool refused=false;try{await host.PlayCity(access,Forms.Screen.PrimaryScreen!,"none",quality,palette);}catch(InvalidOperationException){refused=true;}
+                        Check(refused&&!host.Active,$"Desktop host locks palette {palette} in {quality} without a verified star");
+                    }
                     fake.User=HttpStatusCode.OK;fake.Star=HttpStatusCode.NoContent;fake.HoldStar=true;
                     var checking=access.CheckAsync("test-read-only-token-01234567890");await fake.StarRequested.Task;
                     access.Disconnect();fake.ReleaseStar.SetResult();

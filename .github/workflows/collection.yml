@@ -111,9 +111,60 @@ jobs:
             artifacts/living-check/*-status.txt
             artifacts/living-check/*-motion.png
           retention-days: 14
+  anime:
+    if: github.ref_type != 'tag'
+    needs: verify
+    runs-on: windows-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        scene: [1101, 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare renderer and encoder
+        shell: pwsh
+        run: |
+          python -m pip install imageio-ffmpeg==0.6.0
+          python tools/bootstrap_ffmpeg.py
+          if ($LASTEXITCODE -ne 0) { throw 'Encoder preparation failed' }
+          ./tools/ensure_webview2.ps1
+          dotnet build tools/live-check/live-check.csproj -c Release --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Native renderer build failed' }
+      - name: Render ${{ matrix.scene }} at 4K60
+        shell: pwsh
+        run: |
+          $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
+          $scene = ${{ matrix.scene }}
+          $render = Start-Process -FilePath $checker -ArgumentList '--living-render',$scene,'2160','60' -WindowStyle Hidden -PassThru -Wait
+          Get-Content "artifacts/living-check/$scene-status.txt"
+          if ($render.ExitCode -ne 0) { throw "Anime scene $scene failed" }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VWP-Anime-${{ matrix.scene }}
+          path: |
+            assets/anime/${{ matrix.scene }}.mp4
+            assets/anime/${{ matrix.scene }}.png
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-Anime-QA-${{ matrix.scene }}
+          path: |
+            artifacts/living-check/*-metrics.json
+            artifacts/living-check/*-status.txt
+            artifacts/living-check/*-motion.png
+          retention-days: 14
   package:
     if: github.ref_type != 'tag'
-    needs: [verify, originals]
+    needs: [verify, originals, anime]
     runs-on: windows-latest
     timeout-minutes: 40
     steps:
@@ -129,6 +180,11 @@ jobs:
           pattern: VWP-Living-10*
           merge-multiple: true
           path: assets/living
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: VWP-Anime-11*
+          merge-multiple: true
+          path: assets/anime
       - name: Restore cinematic masters and validate media
         shell: pwsh
         run: |
@@ -156,10 +212,29 @@ jobs:
           ./tools/ensure_webview2.ps1
           [xml]$project = Get-Content VWP.csproj
           $version = $project.Project.PropertyGroup.Version
-          dotnet "dist/Release-$version/VWP.dll" --verify-personalization
-          if ($LASTEXITCODE -ne 0) { throw 'Verification process failed' }
+          $launcher = (Resolve-Path "dist/Release-$version/VWP.exe").Path
+          $check = Start-Process -FilePath $launcher -ArgumentList '--verify-personalization' -WindowStyle Hidden -PassThru -Wait
+          if ($check.ExitCode -ne 0) {
+            Get-Content "dist/Release-$version/verification/personalization-result.json" -ErrorAction SilentlyContinue
+            Get-Content (Join-Path $env:LOCALAPPDATA 'VWP/startup-error.log') -ErrorAction SilentlyContinue
+            throw 'Verification process failed'
+          }
           $report = Get-Content "dist/Release-$version/verification/personalization-result.json" -Raw | ConvertFrom-Json
           if (@($report | Where-Object { !$_.passed }).Count -gt 0) { $report | ConvertTo-Json -Depth 5; throw 'Personalization checks failed' }
+      - name: Verify desktop playback, editor, cancellation and collection imports
+        shell: pwsh
+        run: |
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          $launcher = (Resolve-Path "dist/Release-$version/VWP.exe").Path
+          $check = Start-Process -FilePath $launcher -ArgumentList '--verify-studio' -WindowStyle Hidden -PassThru -Wait
+          if ($check.ExitCode -ne 0) {
+            Get-Content "dist/Release-$version/verification/studio-result.json" -ErrorAction SilentlyContinue
+            Get-Content (Join-Path $env:LOCALAPPDATA 'VWP/startup-error.log') -ErrorAction SilentlyContinue
+            throw 'Studio verification process failed'
+          }
+          $report = Get-Content "dist/Release-$version/verification/studio-result.json" -Raw | ConvertFrom-Json
+          if (@($report | Where-Object { $_.passed -eq $false }).Count -gt 0) { $report | ConvertTo-Json -Depth 5; throw 'Studio checks failed' }
       - uses: actions/upload-artifact@v4
         with:
           name: VWP-Windows
@@ -173,7 +248,11 @@ jobs:
         if: always()
         with:
           name: VWP-Studio-QA
-          path: dist/Release-*/verification/studio-*.png
+          path: |
+            dist/Release-*/verification/studio-*.png
+            dist/Release-*/verification/editor.png
+            dist/Release-*/verification/gallery.png
+            dist/Release-*/verification/*-result.json
           retention-days: 14
   release:
     if: github.ref_type == 'tag'

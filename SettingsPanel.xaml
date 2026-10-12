@@ -19,7 +19,7 @@
      <TextBlock Text="Живая глубина и музыка" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,12"/>
      <CheckBox x:Name="SceneAnimation" Content="Анимация импортированных наборов" Margin="0,0,0,8"/>
      <TextBlock Text="Эффекты импортированных наборов. Для встроенных видео и эксклюзивного города выбери режим качества в верхней панели." TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,0,0,12"/>
-     <CheckBox x:Name="Interactive" Content="Интерактивный фон вместо видео" Margin="0,0,0,12"/>
+     <CheckBox x:Name="Interactive" Content="Параллакс и частицы для собственных слоёв" Margin="0,0,0,12"/>
      <CheckBox x:Name="Music" Content="Реакция света и частиц на системный звук" Margin="0,0,0,12"/>
      <TextBlock Text="Глубина параллакса" Foreground="{DynamicResource MutedBrush}"/><Slider x:Name="Depth" Minimum="0" Maximum="1" Value="0.65"/>
      <TextBlock x:Name="LayersLabel" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,4,0,8"/>

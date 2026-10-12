@@ -32,7 +32,8 @@ public partial class MainWindow
                 Check("video "+mode+" frame budget",PerformanceProfile.Resolve(Config(SelectedScreen).Performance).Fps==(mode=="Eco"?15:mode=="Quality"?60:30));
             }
             QualityClick(this,new());await Task.Delay(150);Capture((FrameworkElement)QualityPopup.Child,"design-quality");QualityPopup.IsOpen=false;
-            preferences.Theme="Light";UpdateTheme();await Task.Delay(100);Capture((FrameworkElement)Content,"design-light");
+            UpdatePauseUi(true);preferences.Theme="Light";UpdateTheme();await Task.Delay(100);Capture((FrameworkElement)Content,"design-light");
+            Check("paused glyph follows theme changes",PauseGlyph.Fill==Application.Current.Resources["InkBrush"]);UpdatePauseUi(false);
             preferences.Theme="Dark";UpdateTheme();ModeClick(this,new());await Task.Delay(150);Capture((FrameworkElement)Content,"design-fullscreen");
             var screen=System.Windows.Forms.Screen.FromHandle(new System.Windows.Interop.WindowInteropHelper(this).Handle).Bounds;var device=PresentationSource.FromVisual(this)!.CompositionTarget!.TransformFromDevice;
             Check("fullscreen fills the screen",Math.Abs(Left-screen.Left*device.M11)<1&&Math.Abs(Top-screen.Top*device.M22)<1&&Math.Abs(ActualWidth-screen.Width*device.M11)<1&&Math.Abs(ActualHeight-screen.Height*device.M22)<1);ModeClick(this,new());

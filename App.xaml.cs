@@ -9,7 +9,7 @@ public partial class App : System.Windows.Application
     protected override void OnStartup(StartupEventArgs e)
     {
         DispatcherUnhandledException += (_, args) => {
-            System.IO.File.WriteAllText(System.IO.Path.Combine(AppContext.BaseDirectory,"startup-error.log"),args.Exception.ToString());
+            try{string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP");System.IO.Directory.CreateDirectory(folder);System.IO.File.WriteAllText(System.IO.Path.Combine(folder,"startup-error.log"),args.Exception.ToString());}catch{}
             args.Handled=true; Shutdown(1);
         };
         mutex = new Mutex(true, "Local\\DomovoyVWP", out bool first);

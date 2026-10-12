@@ -99,6 +99,7 @@ public partial class MainWindow
     void UpdatePlaybackStatus()
     {
         var player=host;UpdatePauseUi(player?.Paused==true);
+        if(pendingScenes.TryGetValue(SelectedScreen.DeviceName,out var pending)){Status.Text="Готовлю сцену · "+pending.Name;return;}
         if(player?.Active==true)
         {
             var config=Config(SelectedScreen);var scene=FindScene(config.Scene);
@@ -107,16 +108,26 @@ public partial class MainWindow
     }
     async void ApplyScene(Wallpaper scene,Forms.Screen screen)
     {
-        int generation=applyGeneration.GetValueOrDefault(screen.DeviceName)+1;applyGeneration[screen.DeviceName]=generation;
+        CancelPendingApply(screen.DeviceName);int generation=applyGeneration[screen.DeviceName];
+        using var cancellation=new System.Threading.CancellationTokenSource();
+        applyCancellations[screen.DeviceName]=cancellation;pendingScenes[screen.DeviceName]=scene;
+        bool applied=false;
+        try
+        {
         if(scene.PresetId==CityId)
         {
             bool allowed=await CheckCityAccess();if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
             if(!allowed){CityNavigation(this,new());return;}
-            try{var cityHost=GetHost(screen);await cityHost.PlayCity(starAccess,screen,CityCover,Config(screen).CityPerformance,City.Palette.SelectedIndex);if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;cityHost.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,cityHost);Config(screen).Scene=PlaybackRules.Key(scene);Save();UpdatePlaybackStatus();}catch(Exception e){if(!exiting&&applyGeneration.GetValueOrDefault(screen.DeviceName)==generation)Status.Text="Город: "+e.Message;}return;
+            var cityHost=GetHost(screen);await cityHost.PlayCity(starAccess,screen,CityCover,Config(screen).CityPerformance,City.Palette.SelectedIndex);if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;cityHost.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,cityHost);Config(screen).Scene=PlaybackRules.Key(scene);Save();applied=true;return;
         }
         if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
         var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);
-        try
+        var layers=LayersFor(scene);
+        if(config.Interactive && (scene.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(scene))) && layers?.Background is string background && File.Exists(background))
+        {
+            player.PlayInteractive(layers,screen,playback,audio,FramedCover(scene,screen,config));
+        }
+        else
         {
             string path=scene.IsSpatial && scene.PresetId is >=18 and <SpatialScene.SceneCount
                 ?Path.Combine(AppContext.BaseDirectory,"assets","cinematic",$"{scene.PresetId}.mp4")
@@ -125,17 +136,27 @@ public partial class MainWindow
             var profile=PerformanceProfile.Resolve(config.Performance);
             if(profile.Key!="Quality")
             {
-                Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(path,profile);
+                Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(path,profile,cancellation.Token);
                 if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
             }
             string? previous=await player.CitySnapshot();
             try{if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;player.Play(path,screen,FramedCover(scene,screen,config),true,previous);}
             finally{if(previous is not null)try{File.Delete(previous);}catch{}}
+        }
             player.SetFraming(playback);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
             config.Scene=PlaybackRules.Key(scene);preferences.Last=scene.Path;preferences.LastPresetId=scene.PresetId;preferences.Monitor=screen.DeviceName;
-            nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();UpdatePlaybackStatus();
+            nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();applied=true;
         }
-        catch(Exception e){if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;if(player.Active)player.Stop();Status.Text="Не удалось применить: "+e.Message;}
+        catch(OperationCanceledException) when(cancellation.IsCancellationRequested){}
+        catch(Exception e){if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;Status.Text="Не удалось применить: "+e.Message;}
+        finally
+        {
+            if(applyCancellations.TryGetValue(screen.DeviceName,out var current)&&ReferenceEquals(current,cancellation))
+            {
+                applyCancellations.Remove(screen.DeviceName);pendingScenes.Remove(screen.DeviceName);
+                if(applied&&!exiting)UpdatePlaybackStatus();
+            }
+        }
     }
     static string? FramedCover(Wallpaper scene,Forms.Screen screen,MonitorPreferences config)
     {

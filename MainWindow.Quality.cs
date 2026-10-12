@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +17,8 @@ public partial class MainWindow
         foreach(var screen in Forms.Screen.AllScreens)
         {
             var config=Config(screen);PerformancePolicy.Apply(config,mode);
-            if(hosts.TryGetValue(screen.DeviceName,out var player)&&player.Active&&FindScene(config.Scene) is Wallpaper scene)ApplyScene(scene,screen);
+            var scene=pendingScenes.GetValueOrDefault(screen.DeviceName)??FindScene(config.Scene);
+            if(scene is not null&&(pendingScenes.ContainsKey(screen.DeviceName)||hosts.TryGetValue(screen.DeviceName,out var player)&&player.Active))ApplyScene(scene,screen);
         }
         Save();UpdateQualityUi();
         Status.Text=mode=="Eco"?"Экономия включена · 15 FPS, облегчённые видео и 3D":"Режим применён ко всем экранам · "+QualityCaption(mode);
@@ -33,6 +35,6 @@ public partial class MainWindow
     {
         PauseLabel.Text=paused?"Продолжить":"Пауза";
         PauseGlyph.Data=Geometry.Parse(paused?"M 2 1 L 10 7 L 2 13 Z":"M 3 1 L 3 13 M 9 1 L 9 13");
-        PauseGlyph.Fill=paused?(Brush)Application.Current.Resources["InkBrush"]:Brushes.Transparent;
+        if(paused)PauseGlyph.SetResourceReference(System.Windows.Shapes.Shape.FillProperty,"InkBrush");else PauseGlyph.Fill=Brushes.Transparent;
     }
 }
