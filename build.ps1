@@ -5,8 +5,17 @@ $dotnetCommand = Get-Command dotnet -ErrorAction SilentlyContinue
 $sdk = if ($dotnetCommand) { $dotnetCommand.Source } elseif (Test-Path 'C:\momp\dotnet\dotnet.exe') { 'C:\momp\dotnet\dotnet.exe' } else { throw 'Install .NET 8 SDK' }
 [xml]$project = Get-Content VWP.csproj
 $version = $project.Project.PropertyGroup.Version
-$requiredAssets = @('assets/presets.json', 'assets/themes/themes.json', 'assets/themes/obsidian.png', 'assets/themes/glacier.png', 'assets/themes/pearl.png')
-foreach ($id in @('vwp-sakura', 'vwp-neon', 'vwp-crimson', 'vwp-astral', 'vwp-abyss', 'vwp-cyber', 'vwp-aurora', 'vwp-ember', 'vwp-pearl', 'vwp-obsidian', 'vwp-rose', 'bibata-ice', 'bibata-classic', 'capitaine-dark')) {
+$requiredAssets = @('assets/presets.json', 'assets/themes/themes.json', 'assets/themes/palettes.json', 'assets/themes/obsidian.png', 'assets/themes/glacier.png', 'assets/themes/pearl.png', 'assets/anime/catalog.json', 'assets/anime/anime.js', 'assets/anime/index.html')
+$requiredAssets += @('assets/city/index.html','assets/city/city.js','assets/city/cover.png','assets/city/vendor/three.module.js','assets/city/vendor/three.core.js','assets/city/vendor/Reflector.js','assets/city/vendor/BufferGeometryUtils.js','assets/city/vendor/LICENSE.txt','assets/living/catalog.json')
+$requiredAssets += @('assets/city/city.css','assets/city/textures/apartment.png','assets/city/textures/townhouse.png','assets/city/textures/shop.png','assets/city/textures/tree.png','assets/city/textures/commuter.png','assets/city/textures/office-color.jpg')
+$requiredAssets += 'assets/city/resources.json'
+if (Test-Path -LiteralPath 'assets/city/resources.json') {
+    foreach ($file in (Get-Content -LiteralPath 'assets/city/resources.json' -Raw | ConvertFrom-Json).files) { $requiredAssets += "assets/city/$file" }
+}
+foreach ($scene in 1001,1002,1003) { $requiredAssets += "assets/living/$scene.mp4"; $requiredAssets += "assets/living/$scene.png" }
+foreach ($scene in 1101..1115) { $requiredAssets += "assets/anime/$scene.mp4"; $requiredAssets += "assets/anime/$scene.png" }
+foreach ($folder in (Get-ChildItem assets/cursors -Directory | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'pack.json') })) {
+    $id = $folder.Name
     $manifest = "assets/cursors/$id/pack.json"
     $requiredAssets += $manifest
     if (Test-Path -LiteralPath $manifest) {

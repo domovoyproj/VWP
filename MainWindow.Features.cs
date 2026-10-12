@@ -94,10 +94,12 @@ public partial class MainWindow
         }
         UpdatePlaybackStatus();
         TickStudio();
+        TickCity();
     }
     void UpdatePlaybackStatus()
     {
-        var player=host;PauseButton.Content=player?.Paused==true?"▶  Играть":"Ⅱ  Пауза";
+        var player=host;UpdatePauseUi(player?.Paused==true);
+        if(pendingScenes.TryGetValue(SelectedScreen.DeviceName,out var pending)){Status.Text="Готовлю сцену · "+pending.Name;return;}
         if(player?.Active==true)
         {
             var config=Config(SelectedScreen);var scene=FindScene(config.Scene);
@@ -106,11 +108,27 @@ public partial class MainWindow
     }
     async void ApplyScene(Wallpaper scene,Forms.Screen screen)
     {
-        if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
-        var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);
+        CancelPendingApply(screen.DeviceName);int generation=applyGeneration[screen.DeviceName];
+        using var cancellation=new System.Threading.CancellationTokenSource();
+        applyCancellations[screen.DeviceName]=cancellation;pendingScenes[screen.DeviceName]=scene;
+        bool applied=false;
         try
         {
-            int generation=applyGeneration.GetValueOrDefault(screen.DeviceName)+1;applyGeneration[screen.DeviceName]=generation;
+        if(scene.PresetId==CityId)
+        {
+            bool allowed=await CheckCityAccess();if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
+            if(!allowed){CityNavigation(this,new());return;}
+            var cityHost=GetHost(screen);await cityHost.PlayCity(starAccess,screen,CityCover,Config(screen).CityPerformance,City.Palette.SelectedIndex);if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;cityHost.SetUserPaused(Config(screen).UserPaused);EvaluatePause(screen,cityHost);Config(screen).Scene=PlaybackRules.Key(scene);Save();applied=true;return;
+        }
+        if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
+        var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);
+        var layers=LayersFor(scene);
+        if(config.Interactive && (scene.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(scene))) && layers?.Background is string background && File.Exists(background))
+        {
+            player.PlayInteractive(layers,screen,playback,audio,FramedCover(scene,screen,config));
+        }
+        else
+        {
             string path=scene.IsSpatial && scene.PresetId is >=18 and <SpatialScene.SceneCount
                 ?Path.Combine(AppContext.BaseDirectory,"assets","cinematic",$"{scene.PresetId}.mp4")
                 :scene.Path;
@@ -118,15 +136,27 @@ public partial class MainWindow
             var profile=PerformanceProfile.Resolve(config.Performance);
             if(profile.Key!="Quality")
             {
-                Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(path,profile);
+                Status.Text="Готовлю видео для профиля «"+profile.Name+"»…";path=await VideoRender.Optimized(path,profile,cancellation.Token);
                 if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
             }
-            player.Play(path,screen,FramedCover(scene,screen,config),true);
+            string? previous=await player.CitySnapshot();
+            try{if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;player.Play(path,screen,FramedCover(scene,screen,config),true,previous);}
+            finally{if(previous is not null)try{File.Delete(previous);}catch{}}
+        }
             player.SetFraming(playback);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
             config.Scene=PlaybackRules.Key(scene);preferences.Last=scene.Path;preferences.LastPresetId=scene.PresetId;preferences.Monitor=screen.DeviceName;
-            nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();UpdatePlaybackStatus();
+            nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();applied=true;
         }
-        catch(Exception e){if(player.Active)player.Stop();Status.Text="Не удалось применить: "+e.Message;}
+        catch(OperationCanceledException) when(cancellation.IsCancellationRequested){}
+        catch(Exception e){if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;Status.Text="Не удалось применить: "+e.Message;}
+        finally
+        {
+            if(applyCancellations.TryGetValue(screen.DeviceName,out var current)&&ReferenceEquals(current,cancellation))
+            {
+                applyCancellations.Remove(screen.DeviceName);pendingScenes.Remove(screen.DeviceName);
+                if(applied&&!exiting)UpdatePlaybackStatus();
+            }
+        }
     }
     static string? FramedCover(Wallpaper scene,Forms.Screen screen,MonitorPreferences config)
     {
@@ -167,7 +197,7 @@ public partial class MainWindow
     {
         if(!featuresReady)return;loadingControls=true;var config=Config(SelectedScreen);Volume.Value=config.Volume;RefreshScenePresentations();
         if(FindScene(config.Scene) is Wallpaper scene)Library.SelectedItem=scene;
-        loadingControls=false;UpdateSceneActions();UpdatePlaybackStatus();RefreshFilter();
+        loadingControls=false;UpdateSceneActions();UpdatePlaybackStatus();RefreshFilter();UpdateQualityUi();
     }
     void RefreshScenePresentations(){StopHover();StopPreview();}
     void UpdateSceneActions()
@@ -262,7 +292,7 @@ public partial class MainWindow
     void FilesDragOver(object sender,DragEventArgs e){e.Effects=e.Data.GetDataPresent(DataFormats.FileDrop)?DragDropEffects.Copy:DragDropEffects.None;e.Handled=true;}
     async void CardEnter(object sender,MouseEventArgs e)
     {
-        if(!featuresReady||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||!File.Exists(scene.Path))return;
+        if(!featuresReady||Config(SelectedScreen).Performance=="Eco"||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||scene.PresetId==CityId||!File.Exists(scene.Path))return;
         StopHover();int generation=hoverGeneration;await Task.Delay(650);
         if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible||scenePreview is not null)return;
         if((scene.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(scene) is SceneLayers layers && layers.MotionId is not null)
@@ -270,7 +300,11 @@ public partial class MainWindow
             hoverMotion=new InteractiveVisual(layers,new MonitorPreferences{Performance="Balance",SceneAnimation=true},SelectedScreen,audio){IsHitTestVisible=false};
             card.Children.Add(hoverMotion);return;
         }
-        hoverVideo=new MediaElement{Source=new Uri(PreviewPath(scene)),Volume=0,LoadedBehavior=MediaState.Manual,UnloadedBehavior=MediaState.Close,Stretch=Stretch.UniformToFill,IsHitTestVisible=false};
+        string hoverPath=PreviewPath(scene);
+        // Auto and Balance must not silently decode a 4K master for a tiny card.
+        // Explicit preview still prepares the selected performance profile.
+        if(Config(SelectedScreen).Performance!="Quality" && hoverPath==scene.Path && scene.PresetId is not null)return;
+        hoverVideo=new MediaElement{Source=new Uri(hoverPath),Volume=0,LoadedBehavior=MediaState.Manual,UnloadedBehavior=MediaState.Close,Stretch=Stretch.UniformToFill,IsHitTestVisible=false};
         var video=hoverVideo;video.MediaEnded+=(_,_)=>{video.Position=TimeSpan.Zero;video.Play();};video.MediaFailed+=(_,_)=>StopHover();card.Children.Add(video);video.Play();
     }
     void CardLeave(object sender,MouseEventArgs e)=>StopHover();

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,15 @@ public partial class MainWindow
     readonly AudioReaction audio=new();
     readonly Dictionary<int,PresetDefinition> definitions=new();
     readonly Dictionary<string,int> applyGeneration=new();
+    readonly Dictionary<string,CancellationTokenSource> applyCancellations=new();
+    readonly Dictionary<string,Wallpaper> pendingScenes=new();
+    void CancelPendingApply(string device)
+    {
+        applyGeneration[device]=applyGeneration.GetValueOrDefault(device)+1;
+        if(applyCancellations.Remove(device,out var pending))pending.Cancel();
+        pendingScenes.Remove(device);
+    }
+    void CancelAllApplies(){foreach(string device in applyGeneration.Keys.ToArray())CancelPendingApply(device);}
     List<GalleryItem> catalog=new();
     MiniPlayer? mini;
     bool studioReady,miniLoading;
@@ -52,6 +62,7 @@ public partial class MainWindow
     }
     SceneLayers? LayersFor(Wallpaper scene)
     {
+        if(scene.PresetId==CityId)return null;
         if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom)){custom.Video=custom.MotionId is not null?scene.Path:null;return custom;}
         if(scene.Thumbnail is null)return null;
         var preset=scene.PresetId is int id?definitions.GetValueOrDefault(id):null;
@@ -73,12 +84,23 @@ public partial class MainWindow
         Settings.Theme.SelectedIndex=preferences.Theme switch{"Light"=>0,"Dark"=>1,_=>2};Settings.SceneAccent.IsChecked=preferences.SceneAccent;
         Settings.Exceptions.Text=string.Join(", ",preferences.PauseExceptions);Settings.GallerySource.Text=preferences.GallerySource;
         Settings.LayersLabel.Text=Library.SelectedItem is Wallpaper scene && LayersFor(scene)?.MotionId is int motionId?SpatialScene.Descriptions[motionId]:"Можно добавить фон и PNG персонажа.";
+        UpdateLayerControls();
         UpdateResources();
+    }
+    void UpdateLayerControls()
+    {
+        var selected=FindScene(Config(SelectedScreen).Scene)??Library.SelectedItem as Wallpaper;
+        bool editable=selected is not null && selected.PresetId!=CityId;
+        bool custom=editable && (selected!.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(selected)));
+        foreach(var element in new System.Windows.Controls.Control[]{Settings.SceneAnimation,Settings.Interactive,Settings.Music,Settings.Depth})element.IsEnabled=custom;
+        Settings.BackgroundButton.IsEnabled=Settings.ForegroundButton.IsEnabled=editable;
+        if(!custom)Settings.LayersLabel.Text=editable?"Встроенная сцена воспроизводится как видео. Добавь свои слои, чтобы включить параллакс.":"Интерактивным городом можно управлять в разделе «Эксклюзивы».";
     }
     void SaveStudioSettings()
     {
         var config=Config(SelectedScreen);config.SceneAnimation=Settings.SceneAnimation.IsChecked==true;config.Interactive=Settings.Interactive.IsChecked==true;config.MusicReactive=Settings.Music.IsChecked==true;config.Depth=Settings.Depth.Value;
-        config.Performance=Settings.Performance.SelectedIndex switch{0=>"Eco",2=>"Quality",_=>"Balance"};
+        string mode=Settings.Performance.SelectedIndex switch{0=>"Eco",2=>"Quality",_=>"Balance"};
+        if(config.Performance!=mode)PerformancePolicy.Apply(config,mode);UpdateQualityUi();
         preferences.Theme=Settings.Theme.SelectedIndex switch{0=>"Light",1=>"Dark",_=>"System"};preferences.SceneAccent=Settings.SceneAccent.IsChecked==true;
         preferences.PauseExceptions=Settings.Exceptions.Text.Split(',',StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries).Select(Path.GetFileNameWithoutExtension).Where(s=>!string.IsNullOrEmpty(s)).Select(s=>s!).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         preferences.GallerySource=string.IsNullOrWhiteSpace(Settings.GallerySource.Text)?GalleryService.DefaultSource:Settings.GallerySource.Text.Trim();UpdateTheme();
@@ -89,7 +111,7 @@ public partial class MainWindow
         var dialog=new OpenFileDialog{Filter=foreground?"PNG с прозрачностью|*.png":"Изображения|*.png;*.jpg;*.jpeg;*.webp"};if(dialog.ShowDialog()!=true)return;
         string folder=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","layers");Directory.CreateDirectory(folder);
         string file=Path.Combine(folder,Guid.NewGuid().ToString("N")+Path.GetExtension(dialog.FileName));File.Copy(dialog.FileName,file);
-        var layers=LayersFor(scene)??new();layers.MotionId=null;if(foreground)layers.Foreground=file;else layers.Background=file;preferences.Layers[PlaybackRules.Key(scene)]=layers;Settings.LayersLabel.Text=layers.Foreground is not null?"Фон + отдельный персонаж":"Фон + частицы";Save();
+        var layers=LayersFor(scene)??new();layers.MotionId=null;if(foreground)layers.Foreground=file;else layers.Background=file;preferences.Layers[PlaybackRules.Key(scene)]=layers;Settings.LayersLabel.Text=layers.Foreground is not null?"Фон + отдельный персонаж":"Фон + частицы";Save();UpdateLayerControls();
     }
     void UpdateResources()
     {
@@ -100,7 +122,7 @@ public partial class MainWindow
     }
     void TickStudio()
     {
-        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&pair.Value.Interactive is not null && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.MusicReactive));
+        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&pair.Value.Interactive is not null && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.Performance!="Eco"&&config.MusicReactive));
         if(SettingsOverlay.Visibility==Visibility.Visible)UpdateResources();
         if(mini?.IsVisible==true)UpdateMini();
     }
@@ -131,7 +153,7 @@ public partial class MainWindow
     {
         var config=Config(SelectedScreen);var scenes=config.Playlist.Select(FindScene).Where(s=>s is not null).Select(s=>s!).ToList();
         if(FindScene(config.Scene) is Wallpaper active)scenes.Add(active);if(scenes.Count==0 && Library.SelectedItem is Wallpaper selected)scenes.Add(selected);
-        return scenes.DistinctBy(PlaybackRules.Key).ToList();
+        return scenes.Where(s=>s.PresetId!=CityId).DistinctBy(PlaybackRules.Key).ToList();
     }
     async void ExportBundleClick(object sender,RoutedEventArgs e)
     {

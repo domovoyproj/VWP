@@ -17,6 +17,12 @@ class Program
  {
   if(args.Length==1 && args[0]=="--overlay-check"){OverlayCheck.Run();return;}
   if(args.Length==1 && args[0]=="--transition-check"){TransitionCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--city-check"){CityCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--city-check-eco"){CityCheck.Run(false,"Eco");return;}
+  if(args.Length==1 && args[0]=="--city-desktop-check"){CityCheck.Run(true);return;}
+  if(args.Length==1 && args[0]=="--city-preview"){new Application().Run(new CityWindow("Quality"));return;}
+  if(args.Length>=1 && args[0]=="--city-video"){CityVideo.Run(args);return;}
+  if(args.Length>=2 && args[0]=="--living-render"){LivingRender.Run(args);return;}
   if(args.Length==1 && args[0]=="--cinematic-check")
   {
    string cinematicOutput=Path.Combine(Environment.CurrentDirectory,"artifacts","cinematic-check");Directory.CreateDirectory(cinematicOutput);

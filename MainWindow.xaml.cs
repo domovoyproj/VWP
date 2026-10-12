@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -45,7 +46,7 @@ public sealed class Preferences
 public partial class MainWindow : Window
 {
     readonly ObservableCollection<Wallpaper> items=new();
-    readonly string settingsPath=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","settings.json");
+    readonly string settingsPath=Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal))?System.IO.Path.Combine(AppContext.BaseDirectory,"verification","settings.json"):System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","settings.json");
     Preferences preferences=new();
     readonly Dictionary<string,DesktopHost> hosts=new();
     DesktopHost? host => hosts.GetValueOrDefault(SelectedScreen.DeviceName);
@@ -74,6 +75,8 @@ public partial class MainWindow : Window
         foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 4K · 60 FPS",preset.Category,preset.Description,preset.Id));
         foreach(var preset in presets)items.Add(new(preset.Name+" · Живая сцена",System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"scene-{preset.Id}.png"),preset.Category+" · ЖИВАЯ СЦЕНА",preset.Category,SpatialScene.Descriptions[preset.Id],preset.Id,true));
         LoadExpansion(assets);
+        LoadLiving(assets);
+        items.Add(new("Afterlight · Endless City",Path.Combine(assets,"city","index.html"),Path.Combine(assets,"city","cover.png"),"ЭКСКЛЮЗИВ · ИНТЕРАКТИВНЫЙ 3D", "Город","Бесконечный неоновый город. Прогулка, полёт, дождь, транспорт и три настроения. Открывается за звезду GitHub.",CityId,true));
         RemoveRetiredWallpapers();
         foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO",IsSpatial:preferences.Layers.GetValueOrDefault(path)?.MotionId is not null));
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
@@ -88,6 +91,7 @@ public partial class MainWindow : Window
         InitializeFeatures();
         InitializeStudio();
         InitializeAppearance();
+        InitializeCity();
         Microsoft.Win32.SystemEvents.DisplaySettingsChanged+=DisplayChanged;
         Loaded+=(_,_)=> {
             Trace("loaded "+string.Join(" ",Environment.GetCommandLineArgs()));
@@ -95,6 +99,7 @@ public partial class MainWindow : Window
             if(Environment.GetCommandLineArgs().Contains("--autostart"))Hide();
             if(Environment.GetCommandLineArgs().Contains("--verify")) Verify();
             if(Environment.GetCommandLineArgs().Contains("--verify-ui")) VerifyUi();
+            if(Environment.GetCommandLineArgs().Contains("--verify-redesign"))_ = VerifyRedesign();
             if(preferences.Autostart && !Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal)))AutostartClick(this,new());
         };
     }
@@ -111,7 +116,7 @@ public partial class MainWindow : Window
     }
     [System.Runtime.InteropServices.DllImport("user32.dll")] static extern uint GetDpiForWindow(IntPtr hwnd);
     void RefreshScreens() {screenLayout=ScreenLayout();string? selected=Monitor.SelectedItem as string;Monitor.Items.Clear();int i=0;foreach(var screen in Forms.Screen.AllScreens)Monitor.Items.Add((screen.Primary?"Основной":"Дисплей "+(++i))+$" · {screen.Bounds.Width} × {screen.Bounds.Height}");Monitor.SelectedIndex=0;}
-    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;foreach(var key in applyGeneration.Keys.ToArray())applyGeneration[key]++;foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
+    void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;CancelAllApplies();foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
     void SelectionChanged(object sender,SelectionChangedEventArgs e)
     {
         if(Library.SelectedItem is not Wallpaper item)return;
@@ -143,7 +148,7 @@ public partial class MainWindow : Window
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
     void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)if(button.Tag as string==category)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=System.Windows.Media.Brushes.Transparent;RefreshFilter();}
     void PauseClick(object sender,RoutedEventArgs e) {var config=Config(SelectedScreen);config.UserPaused=!config.UserPaused;host?.SetUserPaused(config.UserPaused);Save();UpdatePlaybackStatus();}
-    void StopClick(object sender,RoutedEventArgs e) {applyGeneration[SelectedScreen.DeviceName]=applyGeneration.GetValueOrDefault(SelectedScreen.DeviceName)+1;host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";PauseButton.Content="Ⅱ  Пауза";}
+    void StopClick(object sender,RoutedEventArgs e) {CancelPendingApply(SelectedScreen.DeviceName);host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";UpdatePauseUi(false);}
     void QuitClick(object sender,RoutedEventArgs e) { exiting=true;Close(); }
     void TrayClick(object sender,RoutedEventArgs e) { StopPreview();StopHover();Hide();tray?.ShowBalloonTip(1500,"VWP","Лаунчер в трее. Обои продолжают работать.",Forms.ToolTipIcon.Info); }
     void ModeClick(object sender,RoutedEventArgs e)
@@ -168,21 +173,34 @@ public partial class MainWindow : Window
     }
     void WindowKeyDown(object sender,System.Windows.Input.KeyEventArgs e) {if(e.Key==System.Windows.Input.Key.Escape && fullscreen){ModeClick(this,new());e.Handled=true;}}
     void VolumeChanged(object sender,RoutedPropertyChangedEventArgs<double> e) {if(!featuresReady || loadingControls)return;var config=Config(SelectedScreen);config.Volume=(int)e.NewValue;if(host is not null)host.Volume=config.Volume;Save();}
-    void PreviewClick(object sender,RoutedEventArgs e)
+    async void PreviewClick(object sender,RoutedEventArgs e)
     {
+        if(Library.SelectedItem is Wallpaper cityScene&&cityScene.PresetId==CityId){_ = ExploreCity(false);return;}
         StopHover();
         if(Library.SelectedItem is not Wallpaper item || !File.Exists(item.Path))return;
-        if(HeroVideo.Visibility==Visibility.Visible || scenePreview is not null){StopPreview();return;}
+        if(HeroVideo.Visibility==Visibility.Visible || scenePreview is not null || heroPreparing){StopPreview();return;}
         if((item.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(item) is SceneLayers layers && layers.MotionId is not null)
         {
             scenePreview=new InteractiveVisual(layers,PlaybackConfig(item,Config(SelectedScreen)),SelectedScreen,audio);
             HeroMotion.Children.Add(scenePreview);HeroMotion.Visibility=Visibility.Visible;
-            PreviewButton.Content="□  Остановить превью";return;
+            PreviewButton.Content="Остановить превью";return;
         }
-        HeroVideo.Source=new Uri(PreviewPath(item));HeroVideo.Visibility=Visibility.Visible;HeroVideo.Play();PreviewButton.Content="□  Остановить превью";
+        int generation=++previewGeneration;heroPreparing=true;PreviewButton.Content="Отменить превью";
+        previewCancellation=new();var cancel=previewCancellation.Token;
+        try
+        {
+            string path=await VideoRender.Optimized(PreviewPath(item),PerformanceProfile.Resolve(Config(SelectedScreen).Performance),cancel);
+            if(generation!=previewGeneration || !Equals(Library.SelectedItem,item))return;
+            heroPreparing=false;HeroVideo.Source=new Uri(path);HeroVideo.Visibility=Visibility.Visible;HeroVideo.Play();PreviewButton.Content="Остановить превью";
+        }
+        catch(OperationCanceledException) when(cancel.IsCancellationRequested){}
+        catch(Exception error){if(generation==previewGeneration){StopPreview();Status.Text="Превью: "+error.Message;}}
     }
     InteractiveVisual? scenePreview;
-    void StopPreview() {scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Смотреть превью";}
+    int previewGeneration;
+    bool heroPreparing;
+    CancellationTokenSource? previewCancellation;
+    void StopPreview() {previewGeneration++;previewCancellation?.Cancel();previewCancellation?.Dispose();previewCancellation=null;heroPreparing=false;scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Превью";}
     void AutostartClick(object sender,RoutedEventArgs e)
     {
         bool enabled=Autostart.IsChecked==true;
@@ -261,6 +279,6 @@ public partial class MainWindow : Window
     protected override void OnClosing(CancelEventArgs e)
     {
         if(!exiting){e.Cancel=true;TrayClick(this,new());return;}
-        StopPreview();StopHover();foreach(var cursor in sampleCursors)cursor.Dispose();sampleCursors.Clear();featureTimer.Stop();CloseStudio();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
+        StopPreview();StopHover();CancelAllApplies();foreach(var cursor in sampleCursors)cursor.Dispose();sampleCursors.Clear();featureTimer.Stop();CloseStudio();SystemEvents.PowerModeChanged-=PowerChanged;SystemEvents.SessionSwitch-=SessionChanged;SystemEvents.DisplaySettingsChanged-=DisplayChanged;foreach(var player in hosts.Values)player.Dispose();tray?.Dispose();base.OnClosing(e);
     }
 }

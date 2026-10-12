@@ -7,7 +7,7 @@ using System.Windows.Interop;
 using LibVLCSharp.Shared;
 using Forms = System.Windows.Forms;
 namespace VWP;
-public sealed class DesktopHost : IDisposable
+public sealed partial class DesktopHost : IDisposable
 {
     // Transition snapshots must never put their filename or preview on the desktop.
     readonly LibVLC vlc = new LibVLC("--no-video-title-show","--no-osd","--no-snapshot-preview","--input-repeat=-1");
@@ -36,7 +36,7 @@ public sealed class DesktopHost : IDisposable
     SceneLayers? sceneLayers;
     AudioReaction? audioReaction;
     public InteractiveVisual? Interactive=>interactiveVisual;
-    public bool Active => currentMedia is not null || interactiveVisual is not null;
+    public bool Active => currentMedia is not null || interactiveVisual is not null || citySurface is not null;
     public bool Paused { get; private set; }
     public event Action? Failed;
     public event Action? LoopRequired;
@@ -52,24 +52,11 @@ public sealed class DesktopHost : IDisposable
     }
     public int Volume { set => player.Volume = value; }
     public bool Healthy => !Active || (IsWindow(parent) && IsWindow(window));
-    internal bool Playing => interactiveVisual is not null?!Paused:player.IsPlaying;
+    internal bool Playing => interactiveVisual is not null||citySurface is not null?!Paused:player.IsPlaying;
     internal long Position => player.Time;
-    public void Play(string path, Forms.Screen screen,string? cover=null,bool transition=false)
+    public void Play(string path, Forms.Screen screen,string? cover=null,bool transition=false,string? previousFrame=null)
     {
-        string? snapshot=null;
-        if(transition && Active && Healthy)
-        {
-            string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","transitions");System.IO.Directory.CreateDirectory(folder);
-            string file=System.IO.Path.Combine(folder,Guid.NewGuid().ToString("N")+".png");
-            if(TakeFramedSnapshot(file,screen))snapshot=file;
-            else if(coverPath is not null && System.IO.File.Exists(coverPath)){System.IO.File.Copy(coverPath,file,true);snapshot=file;}
-            if(snapshot is not null)
-            {
-                sceneTransition?.ComposeOver(snapshot);
-                var overlay=new DesktopTransition(parent,screen.Bounds,snapshot);
-                sceneTransition?.Dispose();sceneTransition=overlay;
-            }
-        }
+        string? snapshot=transition?PrepareTransition(screen,previousFrame):null;
         StopPlayback(snapshot is null,snapshot is not null);
         transitionSnapshot=snapshot;nextCover=cover;coverPath=cover;transitionWaiting=sceneTransition is not null;
         RecoveryCount=0;
@@ -84,6 +71,18 @@ public sealed class DesktopHost : IDisposable
         if (!player.Play(currentMedia)) { Stop(); throw new InvalidOperationException("Не удалось открыть видео."); }
         Paused=false;userPaused=false;automaticPaused=false;
         StartTransition();
+    }
+    string? PrepareTransition(Forms.Screen screen,string? previousFrame=null)
+    {
+        if(!Active||!Healthy)return null;
+        string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","transitions");System.IO.Directory.CreateDirectory(folder);
+        string file=System.IO.Path.Combine(folder,Guid.NewGuid().ToString("N")+".png");
+        string? snapshot=null;
+        if(previousFrame is not null&&System.IO.File.Exists(previousFrame)){System.IO.File.Copy(previousFrame,file);snapshot=file;}
+        else if(TakeFramedSnapshot(file,screen))snapshot=file;
+        else if(coverPath is not null&&System.IO.File.Exists(coverPath)){System.IO.File.Copy(coverPath,file);snapshot=file;}
+        if(snapshot is not null){sceneTransition?.ComposeOver(snapshot);var overlay=new DesktopTransition(parent,screen.Bounds,snapshot);sceneTransition?.Dispose();sceneTransition=overlay;}
+        return snapshot;
     }
     public void PlayInteractive(SceneLayers layers,Forms.Screen screen,MonitorPreferences config,AudioReaction audio,string? cover)
     {
@@ -143,6 +142,7 @@ public sealed class DesktopHost : IDisposable
     public void Recover()
     {
         if(Healthy || !Active || targetScreen is null)return;
+        if(citySurface is not null){RecoverCity();return;}
         if(sceneTransition is not null)FinishTransition();
         if(interactiveVisual is not null)
         {
@@ -158,6 +158,7 @@ public sealed class DesktopHost : IDisposable
     public void CompleteRecovery()
     {
         UpdateFrame();
+        if(citySurface is not null){citySurface.SetPaused(Paused);return;}
         if(Active && interactiveVisual is null && (userPaused||automaticPaused) && !transitionWaiting)player.SetPause(true);
         if(!recoveryPending || !Active)return;
         recoveryPending=false;if(recoveryPosition>0)player.Time=recoveryPosition;
@@ -175,9 +176,9 @@ public sealed class DesktopHost : IDisposable
             {
                 uint width=0,height=0;player.Size(0,ref width,ref height);
                 // Playing precedes the first displayed frame. Keep the old image during decoder warm-up.
-                bool ready=waiting.ElapsedMilliseconds>=180 && width>0 && height>0 && player.Time>0;
+                bool ready=waiting.ElapsedMilliseconds>=180 && (citySurface is not null?cityReady:width>0&&height>0&&player.Time>0);
                 if(!ready && waiting.ElapsedMilliseconds<8000)return;
-                UpdateFrame();transitionWaiting=false;if(Paused)player.SetPause(true);blend=Stopwatch.StartNew();
+                UpdateFrame();transitionWaiting=false;if(Paused&&citySurface is null)player.SetPause(true);blend=Stopwatch.StartNew();
             }
             double progress=blend.Elapsed.TotalMilliseconds/1000;
             if(!Healthy||!sceneTransition.Valid){FinishTransition();return;}
@@ -204,12 +205,12 @@ public sealed class DesktopHost : IDisposable
     public void TogglePause() { SetUserPaused(!userPaused); }
     public void SetUserPaused(bool value) {userPaused=value;SyncPause();}
     public void SetAutomaticPause(string? reason) {PauseReason=reason;automaticPaused=reason is not null;SyncPause();}
-    void SyncPause() {if(!Active)return;bool value=userPaused||automaticPaused;if(Paused==value)return;Paused=value;if(interactiveVisual is not null)interactiveVisual.SetPaused(value);else if(!transitionWaiting)player.SetPause(value);}
+    void SyncPause() {if(!Active)return;bool value=userPaused||automaticPaused;if(Paused==value)return;Paused=value;if(citySurface is not null)citySurface.SetPaused(value);else if(interactiveVisual is not null)interactiveVisual.SetPaused(value);else if(!transitionWaiting)player.SetPause(value);}
     public void SetFraming(MonitorPreferences settings) {framing=settings;interactiveVisual?.Configure(settings);UpdateFrame();}
     public void RefreshFrame()=>UpdateFrame();
     void UpdateFrame()
     {
-        if(targetScreen is null || videoWindow==IntPtr.Zero || interactiveVisual is not null)return;
+        if(targetScreen is null || videoWindow==IntPtr.Zero || interactiveVisual is not null || citySurface is not null)return;
         uint width=0,height=0;player.Size(0,ref width,ref height);
         if(width==0||height==0)return;
         var next=PlaybackRules.Frame((int)width,(int)height,targetScreen.Bounds.Width,targetScreen.Bounds.Height,framing.Fit,framing.FocusX,framing.FocusY);
@@ -263,6 +264,7 @@ public sealed class DesktopHost : IDisposable
     void DeleteTransitionSnapshot(){if(transitionSnapshot is not null)try{System.IO.File.Delete(transitionSnapshot);}catch{}transitionSnapshot=null;}
     void StopPlayback(bool restore,bool preserveTransition=false)
     {
+        citySurface?.Dispose();citySurface=null;cityReady=false;cityGeneration++;
         interactiveVisual?.Dispose();visualSource?.Dispose();interactiveVisual=null;visualSource=null;sceneLayers=null;audioReaction=null;
         fadeTimer?.Stop();fadeTimer=null;transitionWaiting=false;
         if(!preserveTransition){sceneTransition?.Dispose();sceneTransition=null;}

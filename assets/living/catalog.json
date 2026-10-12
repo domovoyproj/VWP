@@ -1,0 +1,5 @@
+[
+  {"id":1001,"name":"Rain District","category":"Город","description":"Ночной канал, проходящий поезд, дождь и живые отражения.","accent":"#7CCBE0"},
+  {"id":1002,"name":"Last Metro","category":"Аниме","description":"Крыша над Токио, метро на изогнутом мосту и лунные облака.","accent":"#A6BAEC"},
+  {"id":1003,"name":"Sakura Arcade","category":"Город","description":"Неоновая улица, поезд, пара под зонтом и лепестки сакуры.","accent":"#E3A2BF"}
+]

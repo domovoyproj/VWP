@@ -1,0 +1,10 @@
+{
+  "source": "Quaternius Universal Animation Library",
+  "sourceUrl": "https://opengameart.org/content/universal-animation-library",
+  "license": "CC0-1.0",
+  "sourceFile": "motion.glb",
+  "targetFiles": ["person-male.glb", "person-female.glb"],
+  "clips": ["Walk_Loop", "Walk_Formal_Loop", "Idle_Talking_Loop", "Idle_Loop"],
+  "processing": "Retargeted to each original character skeleton at 30 Hz with Three.js SkeletonUtils; tracks interpolated during rendering",
+  "rebuildCommand": "live-check.exe --city-video 720 30 --bake"
+}

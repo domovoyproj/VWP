@@ -1,0 +1,66 @@
+[
+  {
+    "name": "profile button visible in compact mode",
+    "passed": true
+  },
+  {
+    "name": "playback controls do not overlap display selector",
+    "passed": true
+  },
+  {
+    "name": "filters do not overlap count",
+    "passed": true
+  },
+  {
+    "name": "vector pause glyph is retained",
+    "passed": true
+  },
+  {
+    "name": "compact stays in working area",
+    "passed": true
+  },
+  {
+    "name": "global Eco policy",
+    "passed": true
+  },
+  {
+    "name": "video Eco frame budget",
+    "passed": true
+  },
+  {
+    "name": "global Balance policy",
+    "passed": true
+  },
+  {
+    "name": "video Balance frame budget",
+    "passed": true
+  },
+  {
+    "name": "global Quality policy",
+    "passed": true
+  },
+  {
+    "name": "video Quality frame budget",
+    "passed": true
+  },
+  {
+    "name": "global Auto policy",
+    "passed": true
+  },
+  {
+    "name": "video Auto frame budget",
+    "passed": true
+  },
+  {
+    "name": "fullscreen fills the screen",
+    "passed": true
+  },
+  {
+    "name": "cursor demo text is not clipped",
+    "passed": true
+  },
+  {
+    "name": "UI verification settings are isolated",
+    "passed": true
+  }
+]

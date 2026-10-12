@@ -1,6 +1,7 @@
 """Package the self-contained x64 build; preserve its native libraries and runtime."""
 import argparse
 import hashlib
+import json
 from pathlib import Path
 import zipfile
 
@@ -37,6 +38,15 @@ def main():
             raise SystemExit('VWP.exe is missing from archive.')
         required = [f'VWP/assets/scene-{scene_id}.png' for scene_id in range(18)]
         required += [f'VWP/assets/cinematic/{scene_id}.mp4' for scene_id in range(18, 28)]
+        required += [f'VWP/assets/living/{scene_id}.{ext}' for scene_id in range(1001,1004) for ext in ('mp4','png')]
+        required += [f'VWP/assets/anime/{scene_id}.{ext}' for scene_id in range(1101,1116) for ext in ('mp4','png')]
+        required += ['VWP/assets/anime/catalog.json','VWP/assets/anime/anime.js','VWP/assets/anime/index.html','VWP/assets/themes/palettes.json']
+        required += ['VWP/assets/living/catalog.json','VWP/assets/city/index.html','VWP/assets/city/city.js','VWP/assets/city/vendor/three.core.js','VWP/assets/city/vendor/BufferGeometryUtils.js','VWP/assets/city/vendor/LICENSE.txt']
+        required += ['VWP/assets/city/'+name for name in ('city.css','cover.png','vendor/three.module.js','vendor/Reflector.js','textures/apartment.png','textures/townhouse.png','textures/shop.png','textures/tree.png','textures/commuter.png','textures/office-color.jpg')]
+        manifest = 'VWP/assets/city/resources.json'
+        if manifest not in archive.namelist():
+            raise SystemExit('City resource manifest is missing from archive.')
+        required += ['VWP/assets/city/' + name for name in json.loads(archive.read(manifest))['files']]
         absent = [name for name in required if name not in archive.namelist()]
         if absent:
             raise SystemExit(f'Wallpaper media missing from archive: {absent[0]}')
@@ -45,7 +55,7 @@ def main():
             raise SystemExit('Retired procedural or low-poly assets are present in the package.')
         for name in ['themes/themes.json','themes/obsidian.png','themes/glacier.png','themes/pearl.png']:
             if 'VWP/assets/'+name not in names:raise SystemExit('Personalization asset missing: '+name)
-        if len([name for name in names if name.startswith('VWP/assets/cursors/') and name.endswith('/pack.json')])!=14:
+        if len([name for name in names if name.startswith('VWP/assets/cursors/') and name.endswith('/pack.json')])!=29:
             raise SystemExit('Cursor catalog is incomplete.')
     print(f'{output.name}: {count} files, {output.stat().st_size:,} bytes, ZIP CRC verified')
     print(f'SHA256: {checksum}')

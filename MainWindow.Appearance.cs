@@ -47,10 +47,12 @@ public partial class MainWindow
     void AppearanceNavigation(object sender,RoutedEventArgs e)=>NavigateAppearance((string)((Button)sender).Tag);
     void NavigateAppearance(string page)
     {
+        City.Visibility=Visibility.Collapsed;CityNav.Background=Brushes.Transparent;
         StopPreview();StopHover();cursorPage=page=="Cursors";bool wallpaper=page=="Wallpaper";
         WallpaperPage.Visibility=wallpaper?Visibility.Visible:Visibility.Collapsed;
         Appearance.Visibility=wallpaper?Visibility.Collapsed:Visibility.Visible;
         SidebarCategories.Visibility=wallpaper?Visibility.Visible:Visibility.Collapsed;
+        CollectionHeading.Visibility=SidebarCategories.Visibility;
         SidebarImport.Visibility=wallpaper?Visibility.Visible:Visibility.Collapsed;
         SidebarNote.Visibility=wallpaper?Visibility.Collapsed:Visibility.Visible;
         foreach(var button in new[]{WallpaperNav,ThemesNav,CursorsNav})if((string)button.Tag==page)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=Brushes.Transparent;

@@ -7,12 +7,12 @@ from PIL import Image
 from make_cursors import ROLES
 root=Path(__file__).resolve().parents[1]/'assets'
 themes=json.loads((root/'themes'/'themes.json').read_text(encoding='utf-8'))
-assert len(themes)==13
+assert len(themes)==28
 for theme in themes:
     assert re.fullmatch(r'#[0-9A-Fa-f]{6}',theme['Accent']) and theme['Mode'] in ('Light','Dark')
     with Image.open(root/'themes'/theme['Background']) as picture:assert picture.width>=1280 and picture.height>=720
-packs=list((root/'cursors').glob('*/pack.json'));assert len(packs)==14
-assert len({theme['Id'] for theme in themes})==13
+packs=list((root/'cursors').glob('*/pack.json'));assert len(packs)==29
+assert len({theme['Id'] for theme in themes})==28
 assert all(theme['CursorId'] in {json.loads(p.read_text(encoding='utf-8'))['Id'] for p in packs} for theme in themes)
 for manifest in packs:
     pack=json.loads(manifest.read_text(encoding='utf-8'));assert set(pack['Files'])==set(ROLES)
@@ -27,4 +27,4 @@ for manifest in packs:
                 w,h,_,_,x,y,length,offset=struct.unpack_from('<BBBBHHII',data,6+i*16)
                 assert x<(w or 256) and y<(h or 256) and offset+length<=len(data)
         else:assert data[:4]==b'RIFF' and data[8:12]==b'ACON' and struct.unpack_from('<I',data,4)[0]+8==len(data)
-print('PASS: 13 themes, 14 packs, 238 native cursor files, licenses and corresponding sources')
+print('PASS: 28 themes, 29 packs, 493 native cursor files, licenses and corresponding sources')

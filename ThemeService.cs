@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Win32;
 namespace VWP;
 public static class ThemeService
 {
+    static readonly Dictionary<string,string[]> atelier=File.Exists(Path.Combine(AppContext.BaseDirectory,"assets","themes","palettes.json"))?JsonSerializer.Deserialize<Dictionary<string,string[]>>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"assets","themes","palettes.json")))!:new();
     public static void Apply(string mode,string accent,string paletteName="")
     {
         bool dark=mode=="Dark" || mode=="System" && (int)(Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize","AppsUseLightTheme",1)??1)==0;
         var palette=new Dictionary<string,string>{
-            ["CanvasBrush"]=dark?"#101318":"#F5F6F8",["PanelBrush"]=dark?"#15191F":"#ECEFF3",["CardBrush"]=dark?"#1B2028":"#FFFFFF",
-            ["ControlBrush"]=dark?"#252C36":"#E6EAF0",["InkBrush"]=dark?"#F0F3F8":"#17212F",["MutedBrush"]=dark?"#95A1B2":"#687487",["LineBrush"]=dark?"#2B3441":"#DCE2EA",
-            ["SelectedBrush"]=dark?"#2B3545":"#DEE6F3",["PrimaryBrush"]=dark?MutedAccent(accent):"#24364E",["AccentBrush"]=accent};
+            ["CanvasBrush"]=dark?"#101116":"#F6F7FB",["PanelBrush"]=dark?"#15161D":"#EFF0F6",["CardBrush"]=dark?"#1B1D26":"#FFFFFF",
+            ["ControlBrush"]=dark?"#262936":"#E9EBF3",["InkBrush"]=dark?"#F2F3FA":"#212635",["MutedBrush"]=dark?"#A0A6B8":"#727B90",["LineBrush"]=dark?"#303342":"#DFE3ED",
+            ["SelectedBrush"]=dark?"#30354D":"#E4E8F8",["PrimaryBrush"]=dark?MutedAccent(accent):"#30384F",["AccentBrush"]=accent};
         if(dark && paletteName=="Catppuccin"){palette["CanvasBrush"]="#1E1E2E";palette["PanelBrush"]="#181825";palette["CardBrush"]="#242436";palette["ControlBrush"]="#313244";palette["InkBrush"]="#CDD6F4";palette["MutedBrush"]="#A6ADC8";}
         if(dark && paletteName=="Nord"){palette["CanvasBrush"]="#2E3440";palette["PanelBrush"]="#272D38";palette["CardBrush"]="#3B4252";palette["ControlBrush"]="#434C5E";palette["InkBrush"]="#ECEFF4";palette["MutedBrush"]="#B8C2D4";}
         if(dark)
@@ -29,6 +32,7 @@ public static class ThemeService
                 "Ember"=>new[]{"#1C1515","#281C1C","#352525","#49332E"},
                 _=>null
             };
+            if(atelier.TryGetValue(paletteName,out var custom))gaming=custom;
             if(gaming is not null){palette["CanvasBrush"]=gaming[0];palette["PanelBrush"]=gaming[1];palette["CardBrush"]=gaming[2];palette["ControlBrush"]=gaming[3];palette["SelectedBrush"]=gaming[3];}
         }
         foreach(var color in palette){var brush=new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Value));brush.Freeze();Application.Current.Resources[color.Key]=brush;}
