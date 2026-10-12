@@ -16,7 +16,7 @@ if subprocess.run(['git', 'diff', '--quiet', baseline, '--', *inputs], cwd=root)
     raise SystemExit('Artwork or video renderer changed: masters must be rendered afresh.')
 expected = [f'assets/{i}{suffix}' for i in range(18) for suffix in ('.mp4', '.preview.mp4', '.cover.jpg')]
 expected += [f'assets/cinematic/{i}.mp4' for i in range(18,28)]
-expected += [f'assets/living/{i}.mp4' for i in range(1001,1004)]
+expected += [f'assets/living/{i}.{extension}' for i in range(1001,1004) for extension in ('mp4','png')]
 expected += [f'assets/anime/{i}.mp4' for i in range(1101,1116)]
 with tempfile.TemporaryDirectory(prefix='vwp-hotfix-media-') as folder:
     archive = Path(folder) / 'source.zip'
