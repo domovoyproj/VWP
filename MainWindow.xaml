@@ -187,6 +187,8 @@
        </ComboBox>
        <ComboBox x:Name="MoodPicker" Width="132" Height="34" FontSize="10" Margin="0,0,0,6" SelectionChanged="MoodChanged">
         <ComboBoxItem Content="Все настроения" />
+        <ComboBoxItem Content="Осень" />
+        <ComboBoxItem Content="Зима" />
         <ComboBoxItem Content="Ночной Токио" />
         <ComboBoxItem Content="Спокойствие" />
         <ComboBoxItem Content="Космос" />

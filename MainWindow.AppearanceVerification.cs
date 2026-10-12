@@ -26,12 +26,15 @@ public partial class MainWindow
             Check("living originals and exclusive city installed",items.Count(item=>item.PresetId is >=1001 and <=1003)==3 && items.Count(item=>item.PresetId==CityId)==1);
             Check("fifteen new anime wallpapers installed",items.Count(item=>item.PresetId is >=1101 and <=1115)==15);
             Check("twenty animated Vibe wallpapers installed",items.Count(item=>item.PresetId is >=1201 and <=1220)==20);
+            Check("six animated seasonal wallpapers installed",items.Count(item=>item.PresetId is >=1301 and <=1306)==6);
+            string previousMood=mood,previousCategory=category;category="Все сцены";mood="Осень";Check("autumn filter selects three seasonal scenes",items.Count(MatchesCollection)==3);mood="Зима";Check("winter filter selects three seasonal scenes",items.Count(MatchesCollection)==3);mood=previousMood;category=previousCategory;
             var config=Config(SelectedScreen);config.Scene="preset:114";config.Playlist.Add("preset:100");preferences.Favorites.Add("preset:114");RemoveRetiredWallpapers();
             Check("retired scene migration",config.Scene=="preset:0"&&!config.Playlist.Contains("preset:100")&&!preferences.Favorites.Contains("preset:114"));
-            Check("complete theme and cursor catalogs installed",appearanceThemes.Count>=48 && cursorPacks.Count>=49);
+            Check("complete theme and cursor catalogs installed",appearanceThemes.Count>=54 && cursorPacks.Count>=55);
             Check("twenty matching Vibe themes and cursor packs",appearanceThemes.Count(t=>t.Id.StartsWith("vibe-"))==20 && cursorPacks.Count(p=>p.Id.StartsWith("vwp-vibe-"))==20);
+            Check("six matching seasonal themes and cursor packs",appearanceThemes.Count(t=>t.Id.StartsWith("season-"))==6 && cursorPacks.Count(p=>p.Id.StartsWith("vwp-season-"))==6);
             var palettes=JsonSerializer.Deserialize<Dictionary<string,string[]>>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory,"assets","themes","palettes.json")))!;
-            foreach(var matched in appearanceThemes.Where(t=>t.Id.StartsWith("vibe-")))
+            foreach(var matched in appearanceThemes.Where(t=>t.Id.StartsWith("vibe-")||t.Id.StartsWith("season-")))
             {
                 ThemeService.Apply(matched.Mode,matched.Accent,matched.Palette);
                 var actual=((System.Windows.Media.SolidColorBrush)System.Windows.Application.Current.Resources["CanvasBrush"]).Color;

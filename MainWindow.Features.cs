@@ -219,7 +219,7 @@ public partial class MainWindow
     bool MatchesCollection(Wallpaper scene)
     {
         bool collection=category switch{"Все сцены"=>true,"Избранное"=>preferences.Favorites.Contains(PlaybackRules.Key(scene)),"Плейлист"=>Config(SelectedScreen).Playlist.Contains(PlaybackRules.Key(scene)),_=>scene.Category==category};
-        return collection && (mood switch{"Ночной Токио"=>scene.PresetId is 0 or 1 or 6 or 9 or 14,"Спокойствие"=>scene.PresetId is 3 or 5 or 7 or 8 or 10 or 12 or 17,"Космос"=>scene.Category=="Космос","Работа"=>scene.PresetId is 5 or 8 or 10 or 14 or 15,_=>true});
+        return collection && (mood switch{"Осень"=>scene.PresetId is >=1301 and <=1303,"Зима"=>scene.PresetId is >=1304 and <=1306,"Ночной Токио"=>scene.PresetId is 0 or 1 or 6 or 9 or 14,"Спокойствие"=>scene.PresetId is 3 or 5 or 7 or 8 or 10 or 12 or 17,"Космос"=>scene.Category=="Космос","Работа"=>scene.PresetId is 5 or 8 or 10 or 14 or 15,_=>true});
     }
     void FormatChanged(object sender,SelectionChangedEventArgs e){sceneFormat=(FormatPicker.SelectedItem as ComboBoxItem)?.Content as string??"Все форматы";if(sceneFormat=="Живые сцены")sceneFormat="3D";if(Library is not null)RefreshFilter();}
     void MoodChanged(object sender,SelectionChangedEventArgs e){mood=(MoodPicker.SelectedItem as ComboBoxItem)?.Content as string??"Все настроения";RefreshFilter();}

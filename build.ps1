@@ -16,6 +16,8 @@ foreach ($scene in 1001,1002,1003) { $requiredAssets += "assets/living/$scene.mp
 foreach ($scene in 1101..1115) { $requiredAssets += "assets/anime/$scene.mp4"; $requiredAssets += "assets/anime/$scene.png" }
 foreach ($scene in 1201..1220) { foreach ($extension in 'mp4','png','poster.png','preview.mp4') { $requiredAssets += "assets/vibes/$scene.$extension" } }
 $requiredAssets += @('assets/vibes/catalog.json','assets/vibes/index.html','assets/vibes/vibes.js','assets/vibes/characters/record-girl.png','assets/vibes/characters/rooftop-girl.png')
+foreach ($scene in 1301..1306) { foreach ($extension in 'mp4','png','poster.png','preview.mp4') { $requiredAssets += "assets/seasons/$scene.$extension" } }
+$requiredAssets += @('assets/seasons/catalog.json','assets/seasons/index.html','assets/seasons/seasons.js')
 foreach ($folder in (Get-ChildItem assets/cursors -Directory | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'pack.json') })) {
     $id = $folder.Name
     $manifest = "assets/cursors/$id/pack.json"

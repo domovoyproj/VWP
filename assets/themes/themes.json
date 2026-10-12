@@ -597,5 +597,83 @@
     "Palette": "Vibe-jade-dream",
     "Background": "../vibes/1220.poster.png",
     "CursorId": "vwp-vibe-jade-dream"
+  },
+  {
+    "Id": "season-maple",
+    "Name": "Maple Afterglow",
+    "Description": "Осенний Киото: кружатся кленовые листья, течёт канал и мерцают фонари. Тема и курсоры Momiji.",
+    "Author": "VWP",
+    "License": "VWP original artwork · AI-assisted",
+    "Source": "https://github.com/domovoyproj/VWP",
+    "Mode": "Dark",
+    "Accent": "#E9A067",
+    "Palette": "Season-maple",
+    "Background": "../seasons/1301.poster.png",
+    "CursorId": "vwp-season-maple"
+  },
+  {
+    "Id": "season-chestnut",
+    "Name": "Rainy Chestnut",
+    "Description": "Дождь за окном кофейни, тёплый свет и пар над чашкой. Тема и курсоры Chestnut Cream.",
+    "Author": "VWP",
+    "License": "VWP original artwork · AI-assisted",
+    "Source": "https://github.com/domovoyproj/VWP",
+    "Mode": "Light",
+    "Accent": "#CCA481",
+    "Palette": "Season-chestnut",
+    "Background": "../seasons/1302.poster.png",
+    "CursorId": "vwp-season-chestnut"
+  },
+  {
+    "Id": "season-copper",
+    "Name": "Copper Lake",
+    "Description": "Медный лес, ветер в листве, рябь озера и медленно плывущий туман. Тема и курсоры Copper Fern.",
+    "Author": "VWP",
+    "License": "VWP original artwork · AI-assisted",
+    "Source": "https://github.com/domovoyproj/VWP",
+    "Mode": "Dark",
+    "Accent": "#DBA557",
+    "Palette": "Season-copper",
+    "Background": "../seasons/1303.poster.png",
+    "CursorId": "vwp-season-copper"
+  },
+  {
+    "Id": "season-sapporo",
+    "Name": "Sapporo Blue",
+    "Description": "Снегопад на ночной улице, синие сумерки и тёплый свет японских ресторанов. Тема и курсоры Blue Snow.",
+    "Author": "VWP",
+    "License": "VWP original artwork · AI-assisted",
+    "Source": "https://github.com/domovoyproj/VWP",
+    "Mode": "Dark",
+    "Accent": "#A6CAE9",
+    "Palette": "Season-sapporo",
+    "Background": "../seasons/1304.poster.png",
+    "CursorId": "vwp-season-sapporo"
+  },
+  {
+    "Id": "season-onsen",
+    "Name": "Snowfall Onsen",
+    "Description": "Горячий источник среди снега: волны, пар и снежинки на фоне гор. Тема и курсоры Jade Frost.",
+    "Author": "VWP",
+    "License": "VWP original artwork · AI-assisted",
+    "Source": "https://github.com/domovoyproj/VWP",
+    "Mode": "Dark",
+    "Accent": "#93CDBE",
+    "Palette": "Season-onsen",
+    "Background": "../seasons/1305.poster.png",
+    "CursorId": "vwp-season-onsen"
+  },
+  {
+    "Id": "season-vinyl",
+    "Name": "Winter Vinyl",
+    "Description": "Уютная комната, снег за окном, пар от кофе и мягкий вечерний свет. Тема и курсоры Wool & Ice.",
+    "Author": "VWP",
+    "License": "VWP original artwork · AI-assisted",
+    "Source": "https://github.com/domovoyproj/VWP",
+    "Mode": "Light",
+    "Accent": "#B7C5D6",
+    "Palette": "Season-vinyl",
+    "Background": "../seasons/1306.poster.png",
+    "CursorId": "vwp-season-vinyl"
   }
 ]

@@ -1,0 +1,271 @@
+[
+  {
+    "id": 1301,
+    "name": "Maple Afterglow",
+    "category": "Аниме",
+    "season": "Осень",
+    "description": "Осенний Киото: кружатся кленовые листья, течёт канал и мерцают фонари.",
+    "accent": "#E9A067",
+    "style": "maple",
+    "cursor": "Momiji",
+    "mode": "Dark",
+    "weather": "leaves",
+    "weatherRect": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "waterRect": [
+      0.15,
+      0.61,
+      1,
+      1
+    ],
+    "sky": 0.26,
+    "glow": [
+      0.96,
+      0.39
+    ],
+    "steam": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "waterEdges": [
+      0.15,
+      0.43,
+      1,
+      1
+    ]
+  },
+  {
+    "id": 1302,
+    "name": "Rainy Chestnut",
+    "category": "Аниме",
+    "season": "Осень",
+    "description": "Дождь за окном кофейни, тёплый свет и пар над чашкой.",
+    "accent": "#CCA481",
+    "style": "chestnut",
+    "cursor": "Chestnut Cream",
+    "mode": "Light",
+    "weather": "rain",
+    "weatherRect": [
+      0,
+      0,
+      0.6,
+      0.83
+    ],
+    "waterRect": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sky": 0,
+    "glow": [
+      0.919,
+      0.616
+    ],
+    "steam": [
+      0.744,
+      0.721,
+      0.031,
+      0.14
+    ],
+    "background": "1302-clean.png",
+    "panes": [
+      [
+        0,
+        0.07,
+        0.235,
+        0.69
+      ],
+      [
+        0.276,
+        0.02,
+        0.483,
+        0.66
+      ],
+      [
+        0.511,
+        0.065,
+        0.596,
+        0.61
+      ]
+    ]
+  },
+  {
+    "id": 1303,
+    "name": "Copper Lake",
+    "category": "Природа",
+    "season": "Осень",
+    "description": "Медный лес, ветер в листве, рябь озера и медленно плывущий туман.",
+    "accent": "#DBA557",
+    "style": "copper",
+    "cursor": "Copper Fern",
+    "mode": "Dark",
+    "weather": "leaves",
+    "weatherRect": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "waterRect": [
+      0,
+      0.51,
+      1,
+      1
+    ],
+    "sky": 0.17,
+    "glow": [
+      0.872,
+      0.361
+    ],
+    "steam": [
+      0.46,
+      0.53,
+      0.36,
+      0.055
+    ],
+    "waterEdges": [
+      0,
+      0,
+      0.84,
+      0.46
+    ]
+  },
+  {
+    "id": 1304,
+    "name": "Sapporo Blue",
+    "category": "Аниме",
+    "season": "Зима",
+    "description": "Снегопад на ночной улице, синие сумерки и тёплый свет японских ресторанов.",
+    "accent": "#A6CAE9",
+    "style": "sapporo",
+    "cursor": "Blue Snow",
+    "mode": "Dark",
+    "weather": "snow",
+    "weatherRect": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "waterRect": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sky": 0.15,
+    "glow": [
+      0.896,
+      0.41
+    ],
+    "steam": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": 1305,
+    "name": "Snowfall Onsen",
+    "category": "Аниме",
+    "season": "Зима",
+    "description": "Горячий источник среди снега: волны, пар и снежинки на фоне гор.",
+    "accent": "#93CDBE",
+    "style": "onsen",
+    "cursor": "Jade Frost",
+    "mode": "Dark",
+    "weather": "snow",
+    "weatherRect": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "waterRect": [
+      0,
+      0.56,
+      1,
+      0.86
+    ],
+    "sky": 0.24,
+    "glow": [
+      0.912,
+      0.324
+    ],
+    "steam": [
+      0.49,
+      0.57,
+      0.37,
+      0.12
+    ],
+    "waterEdges": [
+      0,
+      0.23,
+      1,
+      0.96
+    ]
+  },
+  {
+    "id": 1306,
+    "name": "Winter Vinyl",
+    "category": "Аниме",
+    "season": "Зима",
+    "description": "Уютная комната, снег за окном, пар от кофе и мягкий вечерний свет.",
+    "accent": "#B7C5D6",
+    "style": "vinyl",
+    "cursor": "Wool & Ice",
+    "mode": "Light",
+    "weather": "snow",
+    "weatherRect": [
+      0,
+      0,
+      0.61,
+      0.82
+    ],
+    "waterRect": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "sky": 0,
+    "glow": [
+      0.663,
+      0.254
+    ],
+    "steam": [
+      0.846,
+      0.47,
+      0.019,
+      0.11
+    ],
+    "panes": [
+      [
+        0,
+        0,
+        0.141,
+        0.817
+      ],
+      [
+        0.176,
+        0,
+        0.521,
+        0.671
+      ],
+      [
+        0.545,
+        0.041,
+        0.61,
+        0.586
+      ]
+    ]
+  }
+]

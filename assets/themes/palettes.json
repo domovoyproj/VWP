@@ -208,5 +208,41 @@
     "#F1F7F4",
     "#FCFEFD",
     "#EAF3EE"
+  ],
+  "Season-maple": [
+    "#14110F",
+    "#1B1714",
+    "#211C19",
+    "#2D2621"
+  ],
+  "Season-chestnut": [
+    "#FBF8F5",
+    "#F8F3EF",
+    "#FEFDFC",
+    "#F5EDE6"
+  ],
+  "Season-copper": [
+    "#14110E",
+    "#1A1713",
+    "#201D18",
+    "#2C2720"
+  ],
+  "Season-sapporo": [
+    "#111314",
+    "#17191B",
+    "#1D1F21",
+    "#272A2D"
+  ],
+  "Season-onsen": [
+    "#111313",
+    "#161918",
+    "#1C1F1E",
+    "#252A29"
+  ],
+  "Season-vinyl": [
+    "#F9FAFC",
+    "#F6F7FA",
+    "#FDFEFE",
+    "#F1F3F7"
   ]
 }
