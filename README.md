@@ -1,10 +1,12 @@
 # VWP Studio — живые обои, темы и курсоры для Windows
 
-[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.7.0** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC / WebView2
+[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.7.1** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC / WebView2
 
 ![VWP Studio](docs/studio-themes.png)
 
 ## Что нового в 0.7.0
+
+**Исправление 0.7.1:** город больше не закрывается при единичном предупреждении о занятом рендере или перезапуске GPU/служебного процесса WebView2. При падении рендера он пытается восстановиться в «Экономии» с сохранением позиции и паузы. «Авто» начинает с меньшей нагрузки на встроенную графику. [Подробности](docs/RELEASE-0.7.1.md).
 
 **Afterlight** — бесконечный интерактивный 3D-город с каналами, мостами, лодками, поездами и людьми со скелетной анимацией. Можно гулять, летать и менять настроение района. Превью открыто всем; применение города к рабочему столу требует подтверждения звезды VWP у собственного GitHub-аккаунта.
 
@@ -106,7 +108,7 @@ foreach ($id in 1001..1003) {
 Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList '--living-render','1101','2160','60' -Wait
 python tools/check_living.py
 powershell -ExecutionPolicy Bypass -File build.ps1 -Installer
-python tools/package_release.py --version 0.7.0 --build dist/Release-0.7.0
+python tools/package_release.py --version 0.7.1 --build dist/Release-0.7.1
 ```
 
 Для установщика нужен Inno Setup 6. Workflow **VWP Studio release** проверяет город и лаунчер, экспортирует три Living Originals и 15 Anime Atelier на отдельных облачных машинах, получает 10 неизменённых мастер-видео из официального 0.5.2 с проверкой SHA-256, проверяет коллекцию и курсоры, собирает установщик и portable. Вызовы нативного рендерера на одном ПК следует дожидаться по очереди. Тег `v0.7.0` публикует установщик и portable из успешной полной облачной сборки того же коммита с повторной проверкой SHA-256; до загрузки файлов релиз остаётся черновиком.

@@ -1,1 +1,18 @@
 *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#050814;color:#eef5ff;font:14px 'Segoe UI Variable',Arial,sans-serif}canvas{width:100%;height:100%;display:block}#hud{position:fixed;inset:0;padding:32px 40px;pointer-events:none;background:linear-gradient(180deg,#05081436,transparent 35%,transparent 70%,#05081488)}header,footer{display:flex;justify-content:space-between;align-items:center}.mark{font-size:10px;letter-spacing:3px;color:#a4c8dc}button{pointer-events:auto;border:1px solid #ffffff30;background:#ffffff12;backdrop-filter:blur(20px);color:white;border-radius:16px;padding:17px 24px;font:inherit;cursor:pointer}#close{background:#ff6058;border:0;border-radius:50%;width:26px;height:26px;padding:0;font-size:20px}h1{font-size:clamp(42px,6vw,84px);font-weight:500;letter-spacing:-4px;margin:8px 0 12px}.title{position:absolute;top:21%;left:40px;text-shadow:0 3px 24px #050814}.title p{letter-spacing:4px;font-size:10px;color:#8bc7e6}.title span{color:#c7d4e2}#start{position:absolute;left:40px;bottom:115px}#enter{background:#dcf0ff;color:#071523;border:0;font-weight:600;min-width:210px}#enter span{margin-left:42px}#start p{font-size:11px;color:#c7d4e2;margin-top:20px}footer{position:absolute;bottom:32px;left:40px;right:40px;font-size:10px;letter-spacing:2px;color:#9eb6c8}#crosshair{position:fixed;top:50%;left:50%;display:none;color:#fff9;font-size:20px;transform:translate(-50%,-50%)}body.playing .title,body.playing #start,body.playing header{display:none}body.playing #crosshair{display:block}body.wallpaper #hud,body.wallpaper #crosshair{display:none}#toast{position:fixed;left:50%;bottom:85px;transform:translateX(-50%);padding:14px 22px;border-radius:18px;background:#071323d9;backdrop-filter:blur(15px);opacity:0;transition:opacity .3s}#toast.visible{opacity:1}#error{position:absolute;inset:0;padding:80px;background:#080d19;color:#d9eafa;white-space:pre-wrap}
+
+/* Keep the title, entry button and help in separate rows even at 150% DPI. */
+#hud{display:flex;flex-direction:column;gap:clamp(10px,3vh,24px);padding:clamp(16px,4vh,32px) clamp(20px,4vw,40px)}
+.title{position:static;margin-top:auto;max-width:100%}
+#start{position:static;margin-bottom:auto}
+footer{position:static;gap:8px 16px;flex-wrap:wrap;margin-top:auto}
+#stats{margin-left:auto;white-space:nowrap}
+#start p{max-width:560px;line-height:1.5;margin-bottom:0}
+@media(max-height:420px){
+  #hud{gap:10px;padding:16px 20px}
+  .title p{display:none}
+  h1{font-size:34px;letter-spacing:-1.5px;margin:0 0 6px}
+  .title span{font-size:12px}
+  #enter{padding:12px 18px;min-width:190px}
+  #start p{font-size:10px;margin-top:8px}
+  footer{font-size:9px;letter-spacing:.5px}
+}

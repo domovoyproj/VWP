@@ -8,13 +8,13 @@ import { createCanal } from './canal.js';
 
 const params=new URLSearchParams(location.search),preview=params.get('preview')==='1',quality=params.get('quality')||'Quality';
 const manual=params.get('manual')==='1';
-const adaptive=quality==='Auto',high=quality==='Quality'||adaptive,eco=quality==='Eco',fps=quality==='Quality'?60:eco?15:30;
+const adaptive=quality==='Auto',high=quality==='Quality',eco=quality==='Eco',fps=quality==='Quality'?60:eco?15:30;
 const canvas=document.querySelector('#scene'),send=o=>window.chrome?.webview?.postMessage(o);
 const palettes=[{name:'NEON WARD',a:0x6cbdcf,b:0xda699b,fog:0x192b40},{name:'SAKURA QUARTER',a:0xdf8dad,b:0x959bd8,fog:0x29283e},{name:'GLACIER DISTRICT',a:0x83caba,b:0x6aa4ce,fog:0x152f3e}];
 let palette=Number(params.get('palette')||0)%3,paused=false,active=false,flying=false,raining=true,yaw=0,pitch=-.025,elapsed=0,frames=0,auto=true,distance=0;
 let world=new T.Vector3(5.55,1.92,22),origin=new T.Vector3(),lastTime=0,lastRender=0,lastStats=0,steps=new Set(),chunks=new Map(),renderCalls=0,renderTriangles=0;
 const seed=(x,z)=>{let s=(Math.imul(x,73856093)^Math.imul(z,19349663)^81721)>>>0;return()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296}};
-const renderer=new T.WebGLRenderer({canvas,antialias:true,powerPreference:eco?'low-power':'high-performance'});
+const renderer=new T.WebGLRenderer({canvas,antialias:high,powerPreference:eco?'low-power':'high-performance'});
 renderer.info.autoReset=false;
 function pixelBudget(){return quality==='Quality'?devicePixelRatio:eco?Math.min(.65,1280/innerWidth,720/innerHeight):Math.min(devicePixelRatio,1,1600/innerWidth,900/innerHeight);}
 renderer.setPixelRatio(pixelBudget());renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
@@ -109,7 +109,8 @@ addEventListener('mousemove',e=>{if(active){yaw-=e.movementX*.002;pitch=Math.max
 addEventListener('keydown',e=>{if(!active)return;steps.add(e.code);if(['KeyW','KeyA','KeyS','KeyD','Space'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='KeyF'){flying=!flying;toast(flying?'Полёт · Space вверх / Ctrl вниз':'Прогулка по улицам');}if(e.code==='KeyR'){raining=!raining;toast(raining?'Дождь включён':'Ясная ночь');}if(e.code==='KeyE'){if(Math.abs(world.z-(Math.round((world.z+40)/160)*160-40))<12){world.z-=320;toast('Экспресс доставил тебя в следующий квартал');}else window.city.interact();}if(e.code==='KeyHome'){restore({x:5.55,y:1.92,z:22,palette});toast('Вернулся к началу прогулки');}});
 addEventListener('keyup',e=>steps.delete(e.code));addEventListener('blur',()=>{steps.clear();if(document.pointerLockElement)document.exitPointerLock();});
 document.body.classList.toggle('wallpaper',!preview);recolor();restore(window.initialCityState);
-let frameAverage=1000/fps,scaleTimer=0,renderScale=1;
+// Start Auto within the budget of integrated graphics; scale up after measured frames.
+let frameAverage=1000/fps,scaleTimer=0,renderScale=adaptive?.65:1;
 let ready=false,shadowCell='';
 const reflectionProjection=new T.Matrix4();let reflectionTime=-Infinity;
 if(reflection){const reflect=reflection.onBeforeRender.bind(reflection);reflection.onBeforeRender=(...args)=>{if(manual||elapsed-reflectionTime>=1/20||frames<4){reflect(...args);reflectionProjection.copy(reflection.material.uniforms.textureMatrix.value).multiply(reflection.matrixWorld.clone().invert());reflectionTime=elapsed;}else reflection.material.uniforms.textureMatrix.value.copy(reflectionProjection).multiply(reflection.matrixWorld);};}
@@ -132,6 +133,7 @@ blur.uniforms.image.value=bloomB.texture;blur.uniforms.direction.value.set(0,1/b
 renderer.setRenderTarget(null);renderer.render(postScene,postCamera);frames++;
 if(!ready&&frames>3){ready=true;send({type:'ready'});}if(now-lastStats>1000){document.querySelector('#stats').textContent=Math.round(distance)+' m · '+quality.toUpperCase()+' · '+Math.round(1000/frameAverage)+' FPS';lastStats=now;}}
 addEventListener('error',e=>{send({type:'error',message:e.message});document.querySelector('#error').hidden=false;document.querySelector('#error').textContent='Не удалось запустить город.\n'+e.message;});
-canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();send({type:'error',message:'Видеодрайвер сбросил 3D-контекст. Примени обои снова.'});});
+canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();send({type:'contextlost'});});
+if(!manual)setInterval(()=>send({type:'state',value:state()}),3000);
 resize();recycle();
 if(manual){for(let i=0;i<4;i++)frame(0,true);}else requestAnimationFrame(frame);
