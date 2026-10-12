@@ -33,6 +33,27 @@ Midnight Record — девушка в наушниках с чашкой, дож
 
 ## Видео
 
-Видеопревью появятся здесь после завершения проверенного рендера.
+Превью 1280 × 720 / 30 FPS доступны в официальном релизе 0.8.0. Мастер 4K60 включён в установщик и portable.
+
+- [Amber Konbini — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1201.preview.mp4)
+- [Hoshizora Terrace — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1202.preview.mp4)
+- [Sakura Soda — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1203.preview.mp4)
+- [Midnight Record — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1204.preview.mp4)
+- [Hydrangea Stop — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1205.preview.mp4)
+- [Summer Rooftop — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1206.preview.mp4)
+- [Paper Lantern River — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1207.preview.mp4)
+- [Chrome Sunset — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1208.preview.mp4)
+- [VHS Motel — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1209.preview.mp4)
+- [Arcade Hours — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1210.preview.mp4)
+- [Moss & Mist — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1211.preview.mp4)
+- [Quiet Fjord — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1212.preview.mp4)
+- [Golden Dunes — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1213.preview.mp4)
+- [Orbital Bath — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1214.preview.mp4)
+- [Signal Garden — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1215.preview.mp4)
+- [Aurora Relay — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1216.preview.mp4)
+- [Soft Monolith — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1217.preview.mp4)
+- [Glass Horizon — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1218.preview.mp4)
+- [Copper Cathedral — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1219.preview.mp4)
+- [Jade Dream — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1220.preview.mp4)
 
 [Промпты и происхождение](../assets/vibes/ARTWORK.md).

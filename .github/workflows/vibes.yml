@@ -164,7 +164,7 @@ jobs:
           python tools/bootstrap_ffmpeg.py
           if ($LASTEXITCODE -ne 0) { throw 'Encoder preparation failed' }
           foreach ($check in 'check_expansion.py','check_cinematic.py','check_personalization.py','check_living.py','check_vibes.py') {
-            python "tools/$check"
+            if ($check -eq 'check_vibes.py') { python "tools/$check" --previews } else { python "tools/$check" }
             if ($LASTEXITCODE -ne 0) { throw "Asset validation failed: $check" }
           }
       - name: Build complete Windows distribution
@@ -205,6 +205,18 @@ jobs:
           }
           $report = Get-Content "dist/Release-$version/verification/studio-result.json" -Raw | ConvertFrom-Json
           if (@($report | Where-Object { $_.passed -eq $false }).Count -gt 0) { $report | ConvertTo-Json -Depth 5; throw 'Studio checks failed' }
+      - name: Prepare public collection previews
+        shell: pwsh
+        run: |
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          foreach ($scene in 1201..1220) {
+            $name = "VWP-$version-$scene.preview.mp4"
+            $destination = Join-Path dist $name
+            Copy-Item -LiteralPath "assets/vibes/$scene.preview.mp4" -Destination $destination
+            $checksum = (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash.ToLowerInvariant()
+            Set-Content -LiteralPath ($destination+'.sha256') -Value ($checksum+'  '+$name) -Encoding ascii
+          }
       - uses: actions/upload-artifact@v4
         with:
           name: VWP-Windows
@@ -212,6 +224,7 @@ jobs:
             dist/*-Setup.exe
             dist/*.zip
             dist/*.sha256
+            dist/*.preview.mp4
           if-no-files-found: error
           retention-days: 14
       - uses: actions/upload-artifact@v4
@@ -250,7 +263,8 @@ jobs:
           [xml]$project = Get-Content VWP.csproj
           $version = $project.Project.PropertyGroup.Version
           if ('${{ github.ref_name }}' -ne "v$version") { throw 'Tag/version mismatch' }
-          foreach ($name in @("VWP-$version-Setup.exe","VWP-$version-win-x64.zip")) {
+          $names = @("VWP-$version-Setup.exe","VWP-$version-win-x64.zip") + @(1201..1220 | ForEach-Object { "VWP-$version-$_.preview.mp4" })
+          foreach ($name in $names) {
             $file = Join-Path dist $name
             $checksum = (Get-Content -LiteralPath ($file+'.sha256') -Raw).Trim()
             if ($checksum -notmatch ('^([0-9a-fA-F]{64})\s+'+[regex]::Escape($name)+'$')) { throw "Invalid checksum record: $name" }
@@ -276,7 +290,7 @@ jobs:
           }
           $existing = @(gh release view $tag --repo $repository --json assets --jq '.assets[].name')
           if ($LASTEXITCODE -ne 0) { throw 'Release inspection failed' }
-          $files = @(Get-ChildItem -Path 'dist/*-Setup.exe', 'dist/*.zip', 'dist/*.sha256' | Where-Object { $_.Name -notin $existing } | ForEach-Object { $_.FullName })
+          $files = @(Get-ChildItem -Path 'dist/*-Setup.exe', 'dist/*.zip', 'dist/*.sha256', 'dist/*.preview.mp4' | Where-Object { $_.Name -notin $existing } | ForEach-Object { $_.FullName })
           if ($files.Count -gt 0) {
             gh release upload $tag @files --repo $repository
             if ($LASTEXITCODE -ne 0) { throw 'Release upload failed' }
