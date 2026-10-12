@@ -39,6 +39,7 @@ void main(){
   col+=vec3(.14,.18,.22)*rain*(kind==3?windowMask:1.);
  }
  for(int i=0;i<128;i++){
+  if(kind==8)break;
   if(i>=48&&kind!=8)break;
   float n=float(i),speed=(kind==7||kind==10)?-1.:1.;
   vec2 center=fract(vec2(hash(n+2.)+sin(phase+n)*.023,hash(n+83.)+phase/6.28318530718*speed));
@@ -58,8 +59,32 @@ void main(){
 }`});
 const scene=new T.Scene(),camera=new T.OrthographicCamera(-1,1,1,-1,.01,10);camera.position.z=2;
 scene.add(new T.Mesh(new T.PlaneGeometry(2,2),material));
+// Snow is drawn only in its small particle footprints, instead of running 128
+// particle calculations for every pixel of the 4K background.
+let snowMaterial;
+if(entry.effect==='snow-window'){
+ const geometry=new T.BufferGeometry();
+ geometry.setAttribute('position',new T.BufferAttribute(new Float32Array(128*3),3));
+ geometry.setAttribute('particle',new T.BufferAttribute(Float32Array.from({length:128},(_,n)=>n),1));
+ snowMaterial=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,toneMapped:false,
+  uniforms:{phase:uniforms.phase,viewport:{value:new T.Vector2(innerWidth,innerHeight)}},
+  vertexShader:`attribute float particle;uniform float phase;uniform vec2 viewport;varying float glow;
+   float hash(float n){return fract(sin(n*127.13)*43758.5453);}
+   void main(){float n=particle;vec2 center=fract(vec2(hash(n+2.)+sin(phase+n)*.023,hash(n+83.)+phase/6.28318530718));
+    float fade=smoothstep(0.,.045,center.y)*(1.-smoothstep(.955,1.,center.y));glow=(.5+.3*sin(phase*2.+n))*fade;
+    gl_Position=vec4(center.x*2.-1.,1.-center.y*2.,0.,1.);gl_PointSize=viewport.y*7./sqrt(22000.);
+   }`,
+  fragmentShader:`uniform vec2 viewport;varying float glow;
+   void main(){vec2 p=vec2(gl_FragCoord.x/viewport.x,1.-gl_FragCoord.y/viewport.y);
+    float windowMask=(1.-smoothstep(.51,.57,p.x))*(1.-smoothstep(.65,.73,p.y));
+    vec2 d=(gl_PointCoord-.5)*7./sqrt(22000.);
+    float alpha=exp(-dot(d,d)*22000.)*glow*windowMask;
+    if(alpha<.002)discard;gl_FragColor=vec4(.85,.93,1.,alpha);
+   }`});
+ const flakes=new T.Points(geometry,snowMaterial);flakes.frustumCulled=false;flakes.renderOrder=1;scene.add(flakes);
+}
 let time=0,frames=0,paused=false;
-function resize(){renderer.setSize(innerWidth,innerHeight,false);}addEventListener('resize',resize);resize();
+function resize(){renderer.setSize(innerWidth,innerHeight,false);snowMaterial?.uniforms.viewport.value.set(innerWidth,innerHeight);}addEventListener('resize',resize);resize();
 function renderAt(seconds){time=((seconds%12)+12)%12;uniforms.phase.value=time/12*Math.PI*2;renderer.render(scene,camera);frames++;}
 window.living={renderAt,metrics:()=>({frames,time,resolution:renderer.getDrawingBufferSize(new T.Vector2()).toArray(),kind:entry.effect}),pause:value=>paused=value};
 window.chrome?.webview?.addEventListener('message',async e=>{if(e.data.type==='pause')paused=!!e.data.value;if(e.data.type==='render'){renderAt(e.data.time);await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));send({type:'frame',id:e.data.id});}});

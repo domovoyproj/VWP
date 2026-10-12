@@ -1,0 +1,108 @@
+{
+  "run": 38192202665,
+  "sha": "191e25f8903fbab4d6f573beb09807f8563bc315",
+  "artifacts": [
+    {
+      "scene": 1001,
+      "id": 11723565088,
+      "name": "VWP-Living-1001",
+      "digest": "b23ccba762e6086173d47236d43946eb8ad42f0de78f87e03745d7c2fd119c96"
+    },
+    {
+      "scene": 1002,
+      "id": 11722854245,
+      "name": "VWP-Living-1002",
+      "digest": "6af8e9c9279600883058fb2862165d916fa17c39079e5c193b37f38248cafa1b"
+    },
+    {
+      "scene": 1003,
+      "id": 11723641992,
+      "name": "VWP-Living-1003",
+      "digest": "7bcb2122ff2a46aa8e9f0b3e32cf9ece05bc3f342b9e2a47e9485f8aacff240e"
+    },
+    {
+      "scene": 1101,
+      "id": 11724420164,
+      "name": "VWP-Anime-1101",
+      "digest": "1ea3bf1a5d5bd73a3ba2f21e9b52b118aff9ed3d5f380115a5403a4db1a2be18"
+    },
+    {
+      "scene": 1102,
+      "id": 11723840146,
+      "name": "VWP-Anime-1102",
+      "digest": "711a7140a39b948036add33e6d877b3f70784a13a6c56830b68443fc6b5abc2d"
+    },
+    {
+      "scene": 1103,
+      "id": 11723562977,
+      "name": "VWP-Anime-1103",
+      "digest": "cd3b2a51aeb0b39ae58fd4f6f0ca9ab8158d4dfd4bb7363cc78d17d35b488ab8"
+    },
+    {
+      "scene": 1104,
+      "id": 11724715467,
+      "name": "VWP-Anime-1104",
+      "digest": "0e49f287122a7352db044fb580fe47d4a6cdca3947ba3d332e83c4dbd119ce83"
+    },
+    {
+      "scene": 1105,
+      "id": 11723338979,
+      "name": "VWP-Anime-1105",
+      "digest": "b6db91b9586836145e8cd5c8b8e60d6ba0e38f9cf8e79ddd97796f3d6b8bedcc"
+    },
+    {
+      "scene": 1106,
+      "id": 11724795107,
+      "name": "VWP-Anime-1106",
+      "digest": "e8dac3c129ff1dbd94dad7160460e7c1f8c8e69abf3fc752fb3305119a4cc7fb"
+    },
+    {
+      "scene": 1107,
+      "id": 11723728429,
+      "name": "VWP-Anime-1107",
+      "digest": "76f35a9e5a599f8cd4f46d63a62a1fd21ce6bfadb1fc9a3ebe5839eb4cd4faf6"
+    },
+    {
+      "scene": 1108,
+      "id": 11723990685,
+      "name": "VWP-Anime-1108",
+      "digest": "d8bb9cfb9a54ede6548eea319d62a7abbcc77a27f21aefbda548940f54583f1b"
+    },
+    {
+      "scene": 1109,
+      "id": 11724461134,
+      "name": "VWP-Anime-1109",
+      "digest": "239706983f54d12da499c80b967e6e3b0998008b2346043e42b5644ce9b0984e"
+    },
+    {
+      "scene": 1111,
+      "id": 11723862438,
+      "name": "VWP-Anime-1111",
+      "digest": "e92973337d5df106933c96d82411a27a74e484b5f1d71d60651865e06c128576"
+    },
+    {
+      "scene": 1112,
+      "id": 11723669574,
+      "name": "VWP-Anime-1112",
+      "digest": "90cfd38ff9e066b8c27d6dd115b0e5eff5a4110aa6615db82f6bb1651bc2b420"
+    },
+    {
+      "scene": 1113,
+      "id": 11723538281,
+      "name": "VWP-Anime-1113",
+      "digest": "7d2de43023f6e609a4982d2c96a1770ec92ed08358c188553be5cb17e32087f6"
+    },
+    {
+      "scene": 1114,
+      "id": 11723925706,
+      "name": "VWP-Anime-1114",
+      "digest": "a259fbee664ef681e915ca769b8663dd4e231906f94928c73014a2ef43dc3ec8"
+    },
+    {
+      "scene": 1115,
+      "id": 11724810214,
+      "name": "VWP-Anime-1115",
+      "digest": "c8f94d7dafa334c1bc35a54cd61d43ac8a06d7e1800952aabb6f8f67a651bdbc"
+    }
+  ]
+}

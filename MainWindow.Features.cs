@@ -300,7 +300,11 @@ public partial class MainWindow
             hoverMotion=new InteractiveVisual(layers,new MonitorPreferences{Performance="Balance",SceneAnimation=true},SelectedScreen,audio){IsHitTestVisible=false};
             card.Children.Add(hoverMotion);return;
         }
-        hoverVideo=new MediaElement{Source=new Uri(PreviewPath(scene)),Volume=0,LoadedBehavior=MediaState.Manual,UnloadedBehavior=MediaState.Close,Stretch=Stretch.UniformToFill,IsHitTestVisible=false};
+        string hoverPath=PreviewPath(scene);
+        // Auto and Balance must not silently decode a 4K master for a tiny card.
+        // Explicit preview still prepares the selected performance profile.
+        if(Config(SelectedScreen).Performance!="Quality" && hoverPath==scene.Path && scene.PresetId is not null)return;
+        hoverVideo=new MediaElement{Source=new Uri(hoverPath),Volume=0,LoadedBehavior=MediaState.Manual,UnloadedBehavior=MediaState.Close,Stretch=Stretch.UniformToFill,IsHitTestVisible=false};
         var video=hoverVideo;video.MediaEnded+=(_,_)=>{video.Position=TimeSpan.Zero;video.Play();};video.MediaFailed+=(_,_)=>StopHover();card.Children.Add(video);video.Play();
     }
     void CardLeave(object sender,MouseEventArgs e)=>StopHover();
