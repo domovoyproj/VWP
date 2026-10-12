@@ -1,6 +1,6 @@
 # Vibe Collection — original artwork
 
-Twenty original clean plates and two original adult character layers were created for VWP using the built-in ImageGen tool. No paid external video service is used. Every plate has a sibling `.prompt.txt`; the two character prompts are in `characters/`. The source images remain preserved alongside the renderer.
+Twenty background plates and two adult character layers for VWP. Each plate has a companion `.prompt.txt` with its visual specification; character specifications are in `characters/`. Source images are kept alongside the renderer.
 
 The landscape sources are 1672 × 941; character layers are 1024 × 1536 RGBA. Master movies are exported at 3840 × 2160 / 60 FPS. This is a 4K export of scaled source artwork with native-resolution motion, **not native 4K source illustration or generative character video**.
 

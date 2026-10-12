@@ -52,7 +52,7 @@ WASD — движение, мышь — обзор, Shift — ускорение
 
 Для города нужен [Microsoft WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/). Обычные видео продолжают использовать LibVLC. Three.js, текстуры и сцена поставляются локально, без загрузки CDN во время работы.
 
-Промпты собственных изображений, созданных встроенным ImageGen: `assets/living/generation.json`, `assets/city/generation.json`, полные `assets/city/storefronts-v2.prompt.txt` и [details-v3.prompt.txt](../assets/city/details-v3.prompt.txt). [Новый атлас V3](../assets/city/textures/details-v3.png) включает меню, автомат напитков, салон поезда и интерьеры магазинов. Модели персонажей, волос и анимации Quaternius распространяются под CC0; Car Concept — под CC-BY-4.0 с указанием автора и изменений. Карты материалов и HDR Poly Haven — CC0. Источники записаны в `assets/city/textures/sources.json`, лицензии моделей — в `assets/city/models/`. Three.js r180 используется под MIT. Лицензия SDK WebView2 включена в `licenses/`.
+Спецификации собственных изображений: `assets/living/generation.json`, `assets/city/generation.json`, полные `assets/city/storefronts-v2.prompt.txt` и [details-v3.prompt.txt](../assets/city/details-v3.prompt.txt). [Новый атлас V3](../assets/city/textures/details-v3.png) включает меню, автомат напитков, салон поезда и интерьеры магазинов. Модели персонажей, волос и анимации Quaternius распространяются под CC0; Car Concept — под CC-BY-4.0 с указанием автора и изменений. Карты материалов и HDR Poly Haven — CC0. Источники записаны в `assets/city/textures/sources.json`, лицензии моделей — в `assets/city/models/`. Three.js r180 используется под MIT. Лицензия SDK WebView2 включена в `licenses/`.
 
 ## Качество и новый лаунчер
 

@@ -30,7 +30,7 @@ for order,entry in enumerate(entries):
     (folder/'LICENSE.txt').write_text('Original VWP cursor artwork, dedicated to the public domain under CC0 1.0.\nhttps://creativecommons.org/publicdomain/zero/1.0/\nSource: tools/make_anime_styles.py and tools/make_cursors.py\n',encoding='utf-8')
     palette='Atelier-'+entry['style']
     palettes[palette]=['#'+''.join(f'{round(c*factor+base):02X}' for c in rgb) for factor,base in ((.045,10),(.055,14),(.065,18),(.09,24))]
-    themes.append(dict(Id='atelier-'+entry['style'],Name=entry['name'],Description=entry['description']+' Согласованная палитра и курсоры '+entry['cursor']+'.',Author='VWP',License='VWP original artwork · AI-assisted',Source='https://github.com/domovoyproj/VWP',Mode='Light' if entry['id'] in (1107,1110,1115) else 'Dark',Accent=accent,Palette=palette,Background='../anime/'+str(entry['id'])+'.png',CursorId=ident))
+    themes.append(dict(Id='atelier-'+entry['style'],Name=entry['name'],Description=entry['description']+' Согласованная палитра и курсоры '+entry['cursor']+'.',Author='VWP',License='VWP original artwork',Source='https://github.com/domovoyproj/VWP',Mode='Light' if entry['id'] in (1107,1110,1115) else 'Dark',Accent=accent,Palette=palette,Background='../anime/'+str(entry['id'])+'.png',CursorId=ident))
 themes_path.write_text(json.dumps(themes,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 (ROOT/'assets/themes/palettes.json').write_text(json.dumps(palettes,indent=2)+'\n',encoding='utf-8')
 print('Generated 15 matching themes and 15 complete original cursor packs')
