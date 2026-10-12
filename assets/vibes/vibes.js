@@ -105,6 +105,6 @@ addEventListener('resize',resize);resize();
 function renderAt(seconds){time=((seconds%12)+12)%12;phase.value=time/12*Math.PI*2;background.visible=!characterOnly;if(particles)particles.visible=!characterOnly;if(planet)planet.visible=!characterOnly;renderer.render(scene,camera);frames++;}
 window.living={renderAt,metrics:()=>({frames,time,resolution:renderer.getDrawingBufferSize(new T.Vector2()).toArray(),kind:entry.effect,particles:particles?.geometry.attributes.particle.count||0,character:!!character,planet:!!planet}),pause:value=>paused=value};
 if(manual)window.living.characterOnly=value=>{characterOnly=!!value;renderer.setClearColor(0x090c16,1);};
-window.chrome?.webview?.addEventListener('message',async e=>{if(e.data.type==='pause')paused=!!e.data.value;if(e.data.type==='render'){renderAt(e.data.time);await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));send({type:'frame',id:e.data.id});}});
+window.chrome?.webview?.addEventListener('message',async e=>{if(e.data.type==='pause')paused=!!e.data.value;if(e.data.type==='render'){renderAt(e.data.time);if(manual)renderer.getContext().finish();await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));send({type:'frame',id:e.data.id});}});
 renderAt(0);send({type:'ready'});
 const start=performance.now();function animate(now){if(!paused)renderAt((now-start)/1000);requestAnimationFrame(animate);}if(!manual)requestAnimationFrame(animate);

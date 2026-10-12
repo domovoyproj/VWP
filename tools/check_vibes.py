@@ -4,7 +4,7 @@ from pathlib import Path
 import imageio_ffmpeg
 from PIL import Image
 
-parser=argparse.ArgumentParser();parser.add_argument('--scene',type=int);args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--scene',type=int);parser.add_argument('--previews',action='store_true');args=parser.parse_args()
 root=Path(__file__).resolve().parents[1];entries=json.loads((root/'assets/vibes/catalog.json').read_text(encoding='utf-8'))
 assert len(entries)==20 and {e['id'] for e in entries}==set(range(1201,1221))
 assert sum('character' in e for e in entries)==2
@@ -24,4 +24,7 @@ for entry in entries:
         data=json.loads(metrics.read_text());assert data['edgeChanges']<=10 and data['changed']>=700
     if 'character' in entry:
         with Image.open(root/'assets/vibes/characters'/entry['character']['file']) as character:assert character.mode=='RGBA' and character.getchannel('A').getextrema()[0]==0
+    if args.previews:
+        reader=imageio_ffmpeg.read_frames(str(root/'assets/vibes'/f'{scene}.preview.mp4'),pix_fmt='rgb24',output_params=['-frames:v','1'])
+        info=next(reader);next(reader);reader.close();assert tuple(info['size'])==(1280,720) and abs(info['fps']-30)<.01 and abs(info['duration']-12)<.05
     print(f'{scene}: PASS, 4K60, 12 s, {changed} changing color channels, composed poster')

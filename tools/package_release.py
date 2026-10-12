@@ -40,7 +40,7 @@ def main():
         required += [f'VWP/assets/cinematic/{scene_id}.mp4' for scene_id in range(18, 28)]
         required += [f'VWP/assets/living/{scene_id}.{ext}' for scene_id in range(1001,1004) for ext in ('mp4','png')]
         required += [f'VWP/assets/anime/{scene_id}.{ext}' for scene_id in range(1101,1116) for ext in ('mp4','png')]
-        required += [f'VWP/assets/vibes/{scene_id}.{ext}' for scene_id in range(1201,1221) for ext in ('mp4','png','poster.png')]
+        required += [f'VWP/assets/vibes/{scene_id}.{ext}' for scene_id in range(1201,1221) for ext in ('mp4','png','poster.png','preview.mp4')]
         required += ['VWP/assets/vibes/'+name for name in ('catalog.json','vibes.js','index.html','characters/record-girl.png','characters/rooftop-girl.png')]
         required += ['VWP/assets/anime/catalog.json','VWP/assets/anime/anime.js','VWP/assets/anime/index.html','VWP/assets/themes/palettes.json']
         required += ['VWP/assets/living/catalog.json','VWP/assets/city/index.html','VWP/assets/city/city.js','VWP/assets/city/vendor/three.core.js','VWP/assets/city/vendor/BufferGeometryUtils.js','VWP/assets/city/vendor/LICENSE.txt']

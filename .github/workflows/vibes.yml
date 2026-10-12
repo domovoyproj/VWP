@@ -111,12 +111,19 @@ jobs:
           python -m pip install 'Pillow>=11,<13'
           python tools/check_vibes.py --scene ${{ matrix.scene }}
           if ($LASTEXITCODE -ne 0) { throw 'Master validation failed' }
+      - name: Encode lightweight launcher preview
+        shell: pwsh
+        run: |
+          $scene = ${{ matrix.scene }}
+          ./tools/ffmpeg.exe -y -v error -i "assets/vibes/$scene.mp4" -vf 'scale=1280:720:flags=lanczos,fps=30' -an -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p -movflags +faststart "assets/vibes/$scene.preview.mp4"
+          if ($LASTEXITCODE -ne 0) { throw 'Preview encoding failed' }
       - uses: actions/upload-artifact@v4
         with:
           name: VWP-Vibe-${{ matrix.scene }}
           path: |
             assets/vibes/${{ matrix.scene }}.mp4
             assets/vibes/${{ matrix.scene }}.poster.png
+            assets/vibes/${{ matrix.scene }}.preview.mp4
           if-no-files-found: error
           retention-days: 14
       - uses: actions/upload-artifact@v4

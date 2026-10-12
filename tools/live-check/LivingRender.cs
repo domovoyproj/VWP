@@ -37,7 +37,9 @@ static class LivingRender
                     surface.Control.CoreWebView2.PostWebMessageAsJson(JsonSerializer.Serialize(new{type="render",time=seconds,id=sequence}));
                     await pending.Task.WaitAsync(TimeSpan.FromSeconds(15));
                 }
-                string capture=Path.Combine(folder,$"{scene}-frame.png");await Draw(0);await surface.CaptureExport(Path.Combine(folder,$"{scene}-start.png"),width,height);
+                // Device-metrics resize and the first GPU upload can outlive the
+                // ready message. Warm the compositor before accepting any frame.
+                string capture=Path.Combine(folder,$"{scene}-frame.png");await Draw(0);await Task.Delay(250);await Draw(0);await surface.CaptureExport(Path.Combine(folder,$"{scene}-start.png"),width,height);
                 await Draw(5);await surface.CaptureExport(Path.Combine(folder,$"{scene}-motion.png"),width,height);
                 await Draw(12);await surface.CaptureExport(Path.Combine(folder,$"{scene}-loop.png"),width,height);
                 using(var first=new Bitmap(Path.Combine(folder,$"{scene}-start.png")))using(var moved=new Bitmap(Path.Combine(folder,$"{scene}-motion.png")))using(var loop=new Bitmap(Path.Combine(folder,$"{scene}-loop.png")))
