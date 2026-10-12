@@ -1,0 +1,278 @@
+name: VWP Vibe collection
+on:
+  push:
+    branches: ['codex/vibe-collection']
+    tags: ['v0.8.*']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: vwp-vibes-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: github.ref_type != 'tag'
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Prepare native renderer
+        shell: pwsh
+        run: |
+          ./tools/ensure_webview2.ps1
+          dotnet build tools/live-check/live-check.csproj -c Release --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Native renderer build failed' }
+      - name: Verify native Auto city
+        shell: pwsh
+        run: |
+          $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
+          $city = Start-Process -FilePath $checker -ArgumentList '--city-check' -WindowStyle Hidden -PassThru -Wait
+          Get-Content artifacts/city-check/status.txt
+          if ($city.ExitCode -ne 0) { throw 'Native city verification failed' }
+      - name: Verify native Eco city
+        shell: pwsh
+        run: |
+          $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
+          $city = Start-Process -FilePath $checker -ArgumentList '--city-check-eco' -WindowStyle Hidden -PassThru -Wait
+          Get-Content artifacts/city-check-eco/status.txt
+          if ($city.ExitCode -ne 0) { throw 'Eco city verification failed' }
+      - name: Verify redesigned launcher
+        shell: pwsh
+        run: |
+          $launcher = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/VWP.exe).Path
+          $design = Start-Process -FilePath $launcher -ArgumentList '--verify-redesign' -WindowStyle Hidden -PassThru -Wait
+          $report = Get-Content tools/live-check/bin/Release/net8.0-windows/verification/design-result.json -Raw | ConvertFrom-Json
+          if ($design.ExitCode -ne 0 -or @($report | Where-Object { !$_.passed }).Count -gt 0) { $report | ConvertTo-Json -Depth 5; throw 'Launcher design verification failed' }
+      - name: Verify recovery from an actual renderer crash
+        shell: pwsh
+        run: |
+          $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
+          $check = Start-Process -FilePath $checker -ArgumentList '--city-recovery-check' -WindowStyle Hidden -PassThru -Wait
+          Get-Content artifacts/city-recovery-check/status.txt
+          if ($check.ExitCode -ne 0) { throw 'Native renderer recovery failed' }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-Native-QA
+          path: |
+            artifacts/city-check/*.png
+            artifacts/city-check/*.json
+            artifacts/city-check/status.txt
+            artifacts/city-check-eco/*.png
+            artifacts/city-check-eco/*.json
+            artifacts/city-check-eco/status.txt
+            artifacts/city-recovery-check/*
+            tools/live-check/bin/Release/net8.0-windows/verification/design-*.png
+            tools/live-check/bin/Release/net8.0-windows/verification/design-result.json
+          retention-days: 14
+  vibes:
+    if: github.ref_type != 'tag'
+    needs: verify
+    runs-on: windows-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        scene: [1201, 1202, 1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217, 1218, 1219, 1220]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare renderer and encoder
+        shell: pwsh
+        run: |
+          python -m pip install imageio-ffmpeg==0.6.0
+          python tools/bootstrap_ffmpeg.py
+          if ($LASTEXITCODE -ne 0) { throw 'Encoder preparation failed' }
+          ./tools/ensure_webview2.ps1
+          dotnet build tools/live-check/live-check.csproj -c Release --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Native renderer build failed' }
+      - name: Render ${{ matrix.scene }} at 4K60
+        shell: pwsh
+        run: |
+          $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
+          $scene = ${{ matrix.scene }}
+          $render = Start-Process -FilePath $checker -ArgumentList '--living-render',$scene,'2160','60' -WindowStyle Hidden -PassThru -Wait
+          Get-Content "artifacts/living-check/$scene-status.txt"
+          if ($render.ExitCode -ne 0) { throw "Vibe scene $scene failed" }
+      - name: Validate mastered movie
+        shell: pwsh
+        run: |
+          python -m pip install 'Pillow>=11,<13'
+          python tools/check_vibes.py --scene ${{ matrix.scene }}
+          if ($LASTEXITCODE -ne 0) { throw 'Master validation failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VWP-Vibe-${{ matrix.scene }}
+          path: |
+            assets/vibes/${{ matrix.scene }}.mp4
+            assets/vibes/${{ matrix.scene }}.poster.png
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-Vibe-QA-${{ matrix.scene }}
+          path: |
+            artifacts/living-check/*-metrics.json
+            artifacts/living-check/*-status.txt
+            artifacts/living-check/*-motion.png
+          retention-days: 14
+  package:
+    if: github.ref_type != 'tag'
+    needs: [verify, vibes]
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: VWP-Vibe-12*
+          merge-multiple: true
+          path: assets/vibes
+      - name: Restore cinematic masters and validate media
+        shell: pwsh
+        run: |
+          python tools/restore_release_media.py
+          if ($LASTEXITCODE -ne 0) { throw 'Verified master download failed' }
+          python -m pip install 'Pillow>=11,<13' imageio-ffmpeg==0.6.0
+          python tools/bootstrap_ffmpeg.py
+          if ($LASTEXITCODE -ne 0) { throw 'Encoder preparation failed' }
+          foreach ($check in 'check_expansion.py','check_cinematic.py','check_personalization.py','check_living.py','check_vibes.py') {
+            python "tools/$check"
+            if ($LASTEXITCODE -ne 0) { throw "Asset validation failed: $check" }
+          }
+      - name: Build complete Windows distribution
+        shell: pwsh
+        run: |
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          ./build.ps1 -Installer
+          if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
+          python tools/package_release.py --version $version --build "dist/Release-$version"
+          if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
+      - name: Verify packaged native cursors, Windows restore, imports and launcher
+        shell: pwsh
+        run: |
+          ./tools/ensure_webview2.ps1
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          $launcher = (Resolve-Path "dist/Release-$version/VWP.exe").Path
+          $check = Start-Process -FilePath $launcher -ArgumentList '--verify-personalization' -WindowStyle Hidden -PassThru -Wait
+          if ($check.ExitCode -ne 0) {
+            Get-Content "dist/Release-$version/verification/personalization-result.json" -ErrorAction SilentlyContinue
+            Get-Content (Join-Path $env:LOCALAPPDATA 'VWP/startup-error.log') -ErrorAction SilentlyContinue
+            throw 'Verification process failed'
+          }
+          $report = Get-Content "dist/Release-$version/verification/personalization-result.json" -Raw | ConvertFrom-Json
+          if (@($report | Where-Object { !$_.passed }).Count -gt 0) { $report | ConvertTo-Json -Depth 5; throw 'Personalization checks failed' }
+      - name: Verify desktop playback, editor, cancellation and collection imports
+        shell: pwsh
+        run: |
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          $launcher = (Resolve-Path "dist/Release-$version/VWP.exe").Path
+          $check = Start-Process -FilePath $launcher -ArgumentList '--verify-studio' -WindowStyle Hidden -PassThru -Wait
+          if ($check.ExitCode -ne 0) {
+            Get-Content "dist/Release-$version/verification/studio-result.json" -ErrorAction SilentlyContinue
+            Get-Content (Join-Path $env:LOCALAPPDATA 'VWP/startup-error.log') -ErrorAction SilentlyContinue
+            throw 'Studio verification process failed'
+          }
+          $report = Get-Content "dist/Release-$version/verification/studio-result.json" -Raw | ConvertFrom-Json
+          if (@($report | Where-Object { $_.passed -eq $false }).Count -gt 0) { $report | ConvertTo-Json -Depth 5; throw 'Studio checks failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VWP-Windows
+          path: |
+            dist/*-Setup.exe
+            dist/*.zip
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-Studio-QA
+          path: |
+            dist/Release-*/verification/studio-*.png
+            dist/Release-*/verification/editor.png
+            dist/Release-*/verification/gallery.png
+            dist/Release-*/verification/*-result.json
+          retention-days: 14
+  release:
+    if: github.ref_type == 'tag'
+    runs-on: windows-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download verified distribution for this exact commit
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $repository = '${{ github.repository }}'
+          $sha = '${{ github.sha }}'
+          $runs = gh api "repos/$repository/actions/workflows/vibes.yml/runs?head_sha=$sha&status=success&per_page=100" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { throw 'Unable to find verified builds' }
+          $branches = @('codex/vibe-collection')
+          $verified = $runs.workflow_runs | Where-Object { $_.head_sha -eq $sha -and $_.event -in @('push','workflow_dispatch') -and $_.head_branch -in $branches -and $_.head_repository.full_name -eq $repository -and $_.conclusion -eq 'success' } | Select-Object -First 1
+          if (!$verified) { throw 'This commit has no successful complete distribution build. Build the branch before tagging.' }
+          gh run download $verified.id --repo $repository --name VWP-Windows --dir dist
+          if ($LASTEXITCODE -ne 0) { throw 'Verified distribution download failed' }
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          if ('${{ github.ref_name }}' -ne "v$version") { throw 'Tag/version mismatch' }
+          foreach ($name in @("VWP-$version-Setup.exe","VWP-$version-win-x64.zip")) {
+            $file = Join-Path dist $name
+            $checksum = (Get-Content -LiteralPath ($file+'.sha256') -Raw).Trim()
+            if ($checksum -notmatch ('^([0-9a-fA-F]{64})\s+'+[regex]::Escape($name)+'$')) { throw "Invalid checksum record: $name" }
+            $expected = $Matches[1]
+            if ((Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash -ne $expected) { throw "Checksum mismatch: $name" }
+          }
+          "Verified artifact source: $($verified.html_url)" | Add-Content $env:GITHUB_STEP_SUMMARY
+      - name: Publish official release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $repository = '${{ github.repository }}'
+          $tag = '${{ github.ref_name }}'
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          $notes = "docs/RELEASE-$version.md"
+          gh release view $tag --repo $repository --json tagName --jq '.tagName' *> $null
+          if ($LASTEXITCODE -ne 0) {
+            $title = (Get-Content $notes -Encoding utf8 -TotalCount 1) -replace '^#\s+', ''
+            gh release create $tag --repo $repository --verify-tag --draft --title $title --notes-file $notes
+            if ($LASTEXITCODE -ne 0) { throw 'Draft release creation failed' }
+          }
+          $existing = @(gh release view $tag --repo $repository --json assets --jq '.assets[].name')
+          if ($LASTEXITCODE -ne 0) { throw 'Release inspection failed' }
+          $files = @(Get-ChildItem -Path 'dist/*-Setup.exe', 'dist/*.zip', 'dist/*.sha256' | Where-Object { $_.Name -notin $existing } | ForEach-Object { $_.FullName })
+          if ($files.Count -gt 0) {
+            gh release upload $tag @files --repo $repository
+            if ($LASTEXITCODE -ne 0) { throw 'Release upload failed' }
+          }
+          gh release edit $tag --repo $repository --draft=false --prerelease=false --latest
+          if ($LASTEXITCODE -ne 0) { throw 'Official release publication failed' }

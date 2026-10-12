@@ -25,9 +25,11 @@ public partial class MainWindow
             Check("retired collection is absent",items.All(item=>item.PresetId is not (>=100 and <=114)) && items.Count(item=>item.PresetId is >=0 and <28)==46);
             Check("living originals and exclusive city installed",items.Count(item=>item.PresetId is >=1001 and <=1003)==3 && items.Count(item=>item.PresetId==CityId)==1);
             Check("fifteen new anime wallpapers installed",items.Count(item=>item.PresetId is >=1101 and <=1115)==15);
+            Check("twenty animated Vibe wallpapers installed",items.Count(item=>item.PresetId is >=1201 and <=1220)==20);
             var config=Config(SelectedScreen);config.Scene="preset:114";config.Playlist.Add("preset:100");preferences.Favorites.Add("preset:114");RemoveRetiredWallpapers();
             Check("retired scene migration",config.Scene=="preset:0"&&!config.Playlist.Contains("preset:100")&&!preferences.Favorites.Contains("preset:114"));
-            Check("complete theme and cursor catalogs installed",appearanceThemes.Count>=28 && cursorPacks.Count>=29);
+            Check("complete theme and cursor catalogs installed",appearanceThemes.Count>=48 && cursorPacks.Count>=49);
+            Check("twenty matching Vibe themes and cursor packs",appearanceThemes.Count(t=>t.Id.StartsWith("vibe-"))==20 && cursorPacks.Count(p=>p.Id.StartsWith("vwp-vibe-"))==20);
             foreach(var pack in cursorPacks){CursorPackService.Validate(pack);Check("Windows loads all roles: "+pack.Name,pack.Files.Count==17);}
             using var before=Registry.CurrentUser.OpenSubKey(@"Control Panel\Cursors");
             string originalArrow=Convert.ToString(before?.GetValue("Arrow",null,RegistryValueOptions.DoNotExpandEnvironmentNames))??"";

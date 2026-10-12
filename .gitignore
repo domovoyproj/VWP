@@ -16,5 +16,7 @@ assets/motion/*.cover.jpg
 assets/cinematic/*.mp4
 assets/living/*.mp4
 assets/anime/*.mp4
+assets/vibes/*.mp4
+assets/vibes/*.poster.png
 assets/cursors/sources/
 .codex/hooks.json
