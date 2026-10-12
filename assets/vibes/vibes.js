@@ -60,6 +60,13 @@ void main(){
  }
  if(kind==11){float rays=pow(.5+.5*sin(p.x*43.+p.y*19.+phase*2.)*sin(p.x*17.-p.y*27.-phase),6.);col+=vec3(.14,.18,.23)*rays*(wet+.20);}
  if(kind==2||kind==7||kind==13){float beam=pow(.5+.5*sin(p.x*16.+p.y*6.+phase),5.);col+=accent*beam*.065*smoothstep(.09,.60,dot(col,vec3(.3,.5,.2)));}
+ if(kind==13){
+  vec2 lamp=(p-vec2(.82,.66))*vec2(4.,7.),sconce=(p-vec2(.18,.40))*vec2(5.,5.);
+  float glow=exp(-dot(lamp,lamp))+exp(-dot(sconce,sconce))*.45;
+  float flicker=.5+.5*sin(phase*3.+p.y*2.);col+=vec3(.29,.11,.035)*glow*flicker;
+  float moonbeam=exp(-pow((p.x-(.78-p.y*.20))*8.,2.))*smoothstep(.35,.85,p.y);
+  col+=vec3(.09,.13,.19)*moonbeam*(.5+.5*sin(phase));
+ }
  gl_FragColor=vec4(max(col,0.),1.);
  #include <colorspace_fragment>
 }`});
