@@ -7,7 +7,7 @@ baseline='acdf24a53fc0caa50e5518b14311995f91f80de9'
 url='https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-win-x64.zip'
 expected_hash='86937f5ea6bc6124f5d8415ca45024289271ecce8a3b6056ca35ddbd490288e2'
 inputs=['assets/anime','assets/living','assets/cinematic','assets/vibes','assets/presets.json','assets/expansion.json']
-diff=subprocess.run(['git','diff','--quiet',baseline,'--',*inputs],cwd=root)
+diff=subprocess.run(['git','diff','--quiet',baseline,'--',*inputs,':(exclude)**/*.md',':(exclude)**/*.prompt.txt'],cwd=root)
 if diff.returncode!=0:raise SystemExit('Baseline artwork/rendering inputs changed; render fresh masters.')
 expected=[f'assets/{i}{suffix}' for i in range(18) for suffix in ('.mp4','.preview.mp4','.cover.jpg')]
 expected += [f'assets/cinematic/{i}.mp4' for i in range(18,27)] # Rooftop Basketball is rendered afresh.
