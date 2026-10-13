@@ -86,9 +86,10 @@ public partial class MainWindow
                     EvaluatePause(screen,player);
                 }
                 if(!config.PlaylistEnabled || !PlaybackRules.InSchedule(DateTime.Now,config.ScheduleStart,config.ScheduleEnd))continue;
+                if(pendingScenes.ContainsKey(screen.DeviceName))continue;
                 if(player?.Paused==true){nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);continue;}
                 if(!nextScene.TryGetValue(screen.DeviceName,out var due))nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);
-                else if(DateTime.Now>=due)Advance(screen,1);
+                else if(DateTime.Now>=due)Advance(screen,1,true);
             }
             catch(Exception e){Status.Text="Дисплей: "+e.Message;}
         }
@@ -225,12 +226,22 @@ public partial class MainWindow
     void MoodChanged(object sender,SelectionChangedEventArgs e){mood=(MoodPicker.SelectedItem as ComboBoxItem)?.Content as string??"Все настроения";RefreshFilter();}
     void PreviousClick(object sender,RoutedEventArgs e)=>Advance(SelectedScreen,-1);
     void NextClick(object sender,RoutedEventArgs e)=>Advance(SelectedScreen,1);
-    void Advance(Forms.Screen screen,int direction)
+    Wallpaper? NavigationTarget(Forms.Screen screen,int direction,bool automatic=false)
     {
-        var config=Config(screen);var available=config.Playlist.Where(key=>FindScene(key) is Wallpaper scene && File.Exists(scene.Path)).ToArray();
-        var key=PlaybackRules.Next(available,config.Scene,config.Shuffle,random,direction);
-        if(FindScene(key) is Wallpaper scene){ApplyScene(scene,screen);if(screen.DeviceName==SelectedScreen.DeviceName)Library.SelectedItem=scene;}
-        else {config.PlaylistEnabled=false;Save();Status.Text="Добавьте доступные сцены в плейлист";}
+        var config=Config(screen);bool playlist=automatic||config.PlaylistEnabled;
+        var candidates=playlist?config.Playlist.Select(FindScene).Where(s=>s is not null).Select(s=>s!):items.Where(s=>FilterScene(s));
+        var available=candidates.Where(s=>File.Exists(s.Path)&&(s.PresetId!=CityId||starAccess.Unlocked)).Select(PlaybackRules.Key).Distinct().ToArray();
+        string? current=pendingScenes.TryGetValue(screen.DeviceName,out var pending)?PlaybackRules.Key(pending):config.Scene;
+        if(current is null&&!automatic&&screen.DeviceName==SelectedScreen.DeviceName&&Library.SelectedItem is Wallpaper selected)current=PlaybackRules.Key(selected);
+        return FindScene(PlaybackRules.Next(available,current,playlist&&config.Shuffle,random,direction));
+    }
+    void Advance(Forms.Screen screen,int direction,bool automatic=false)
+    {
+        var scene=NavigationTarget(screen,direction,automatic);
+        if(scene is null){if(automatic){Config(screen).PlaylistEnabled=false;Save();}Status.Text=automatic?"В плейлисте нет доступных сцен":"В текущем фильтре нет доступных сцен";return;}
+        nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(Config(screen).IntervalMinutes);
+        ApplyScene(scene,screen);
+        if(screen.DeviceName==SelectedScreen.DeviceName){Library.SelectedItem=scene;Library.ScrollIntoView(scene);}
     }
     void SettingsClick(object sender,RoutedEventArgs e)
     {

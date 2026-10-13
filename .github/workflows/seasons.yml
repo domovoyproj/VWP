@@ -81,13 +81,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Reuse verified renders when all seasonal inputs are unchanged
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python tools/restore_season_cache.py --scene ${{ matrix.scene }}
+          if ($LASTEXITCODE -ne 0) { throw 'Seasonal render cache verification failed' }
       - name: Prepare renderer and encoder
         shell: pwsh
         run: |
@@ -98,6 +105,7 @@ jobs:
           dotnet build tools/live-check/live-check.csproj -c Release --nologo
           if ($LASTEXITCODE -ne 0) { throw 'Native renderer build failed' }
       - name: Render ${{ matrix.scene }} at 4K60
+        if: env.SEASON_CACHED != 'true'
         shell: pwsh
         run: |
           $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
@@ -135,9 +143,45 @@ jobs:
             artifacts/living-check/*-status.txt
             artifacts/living-check/*-motion.png
           retention-days: 14
+  basketball:
+    if: github.ref_type != 'tag'
+    needs: verify
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Render basketball without flat characters
+        shell: pwsh
+        run: |
+          python -m pip install imageio-ffmpeg==0.6.0
+          python tools/bootstrap_ffmpeg.py
+          if ($LASTEXITCODE -ne 0) { throw 'Encoder preparation failed' }
+          dotnet build tools/live-check/live-check.csproj -c Release --nologo
+          if ($LASTEXITCODE -ne 0) { throw 'Native checker build failed' }
+          $checker = (Resolve-Path tools/live-check/bin/Release/net8.0-windows/live-check.exe).Path
+          $check = Start-Process -FilePath $checker -ArgumentList '--basketball-check' -WindowStyle Hidden -PassThru -Wait
+          if ($check.ExitCode -ne 0) { throw 'Basketball character removal check failed' }
+          dotnet run --project tools/cinematic-render/cinematic-render.csproj -c Release -- 27 12 60 2160
+          if ($LASTEXITCODE -ne 0) { throw 'Basketball render failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: VWP-Basketball
+          path: assets/cinematic/27.mp4
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-Basketball-QA
+          path: artifacts/basketball-check/*
   package:
     if: github.ref_type != 'tag'
-    needs: [verify, seasons]
+    needs: [verify, seasons, basketball]
     runs-on: windows-latest
     timeout-minutes: 40
     steps:
@@ -155,6 +199,10 @@ jobs:
           pattern: VWP-Season-13*
           merge-multiple: true
           path: assets/seasons
+      - uses: actions/download-artifact@v4
+        with:
+          name: VWP-Basketball
+          path: assets/cinematic
       - name: Restore cinematic masters and validate media
         shell: pwsh
         run: |

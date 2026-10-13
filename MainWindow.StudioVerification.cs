@@ -28,6 +28,16 @@ public partial class MainWindow
             PauseClick(this,new());await Task.Delay(500);long frozen=host!.Position;await Task.Delay(500);Check("video pause stops playback",config.UserPaused&&host.Paused&&!host.Playing&&Math.Abs(host.Position-frozen)<150);PauseClick(this,new());
             var resumeClock=Stopwatch.StartNew();for(int i=0;i<100&&(!host.Playing||host.Position==frozen);i++)await Task.Delay(100);
             Check("video resumes",!config.UserPaused&&host.Playing&&host.Position!=frozen);results.Add(new{name="resume timing",milliseconds=resumeClock.ElapsedMilliseconds});
+            config.Playlist.Clear();config.PlaylistEnabled=false;category="Все сцены";mood="Все настроения";sceneFormat="Все форматы";SearchBox.Text="";RefreshFilter();
+            Check("manual navigation works without a playlist",NavigationTarget(screen,1)==items[1]);
+            config.Performance="Eco";Advance(screen,1);Advance(screen,1);Advance(screen,-1);
+            for(int i=0;i<300&&pendingScenes.ContainsKey(screen.DeviceName);i++)await Task.Delay(100);
+            Check("rapid next next previous applies the intended scene",config.Scene==PlaybackRules.Key(items[1])&&host.Active&&host.Healthy);
+            config.Playlist=new(){PlaybackRules.Key(items[0]),PlaybackRules.Key(items[2])};config.PlaylistEnabled=true;config.Scene=PlaybackRules.Key(items[0]);
+            Check("active playlist controls navigation",NavigationTarget(screen,1)==items[2]);
+            config.PlaylistEnabled=false;mood="Осень";config.Scene=null;Library.SelectedItem=null;
+            Check("manual navigation respects seasonal filter",NavigationTarget(screen,1)?.PresetId==1301);mood="Все настроения";config.Playlist.Clear();config.Performance="Quality";RefreshFilter();ApplyScene(items[0],screen);
+            for(int i=0;i<100&&pendingScenes.ContainsKey(screen.DeviceName);i++)await Task.Delay(100);
             byte[] samples=new byte[400];for(int i=0;i<100;i++)BitConverter.GetBytes(.25f).CopyTo(samples,i*4);Check("system audio amplitude",Math.Abs(AudioReaction.Measure(samples,samples.Length)-.75)<.01);
             audio.SetEnabled(true);await Task.Delay(250);results.Add(new{name="WASAPI device",available=audio.Error is null,error=audio.Error});
             audio.SetEnabled(false);

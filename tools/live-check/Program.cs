@@ -16,6 +16,7 @@ class Program
  [STAThread] static void Main(string[] args)
  {
   if(args.Length==1 && args[0]=="--overlay-check"){OverlayCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--basketball-check"){BasketballCheck.Run();return;}
   if(args.Length==1 && args[0]=="--transition-check"){TransitionCheck.Run();return;}
   if(args.Length==1 && args[0]=="--city-check"){CityCheck.Run();return;}
   if(args.Length==1 && args[0]=="--city-recovery-check"){CityRecoveryCheck.Run();return;}

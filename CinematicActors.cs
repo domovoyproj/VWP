@@ -199,11 +199,7 @@ public static class CinematicActors
     }
     static void Court(DrawingContext d,double t)
     {
-        double p=Cycle(t,5),x=650+p*540,y=725-240*Math.Sin(Math.PI*p);
-        Person(d,640+Math.Sin(t*.7)*90,895,.84,t,Brush("#353E53"));
-        Person(d,1260+Math.Sin(t*.5)*65,870,.8,t+1.8,Brush("#6A3E42"));
-        Ellipse(d,Brush("#D99146"),x,y,15,15);
-        Line(d,Brush("#6F3B29"),1.2,x-14,y,x+14,y);
-        Particles(d,t,13,Brush("#F7D5A7"),2);
+        // Keep the detailed rooftop plate free of flat runners and floating balls.
+        Particles(d,t,26,Brush("#F7D5A7"),2);
     }
 }

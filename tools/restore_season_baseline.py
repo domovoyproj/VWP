@@ -10,7 +10,7 @@ inputs=['assets/anime','assets/living','assets/cinematic','assets/vibes','assets
 diff=subprocess.run(['git','diff','--quiet',baseline,'--',*inputs],cwd=root)
 if diff.returncode!=0:raise SystemExit('Baseline artwork/rendering inputs changed; render fresh masters.')
 expected=[f'assets/{i}{suffix}' for i in range(18) for suffix in ('.mp4','.preview.mp4','.cover.jpg')]
-expected += [f'assets/cinematic/{i}.mp4' for i in range(18,28)]
+expected += [f'assets/cinematic/{i}.mp4' for i in range(18,27)] # Rooftop Basketball is rendered afresh.
 expected += [f'assets/living/{i}.{ext}' for i in range(1001,1004) for ext in ('mp4','png')]
 expected += [f'assets/anime/{i}.mp4' for i in range(1101,1116)]
 expected += [f'assets/vibes/{i}.{ext}' for i in range(1201,1221) for ext in ('mp4','poster.png','preview.mp4')]

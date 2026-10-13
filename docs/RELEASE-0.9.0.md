@@ -4,6 +4,12 @@ Six new living seasonal wallpapers with six matching themes and six native curso
 schemes. Autumn: Maple Afterglow, Rainy Chestnut, Copper Lake. Winter: Sapporo Blue,
 Snowfall Onsen, Winter Vinyl.
 
+Previous/next now browses the filtered library when no playlist is active, and
+uses the pending scene during preparation so rapid clicks advance consistently.
+The automatic playlist timer waits for preparation instead of cancelling it.
+Rooftop Basketball no longer overlays flat running characters or a floating ball;
+its detailed background and ambient drifting particles remain.
+
 Maple leaves turn and fall, snow drifts in depth, water ripples, rain falls outside
 the cafe, steam curls over hot water and coffee, and warm lights gently shimmer.
 Each scene has a seamless 12-second cycle, a 4K60 movie and a lightweight launcher
