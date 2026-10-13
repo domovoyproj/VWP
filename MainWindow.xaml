@@ -187,6 +187,8 @@
        </ComboBox>
        <ComboBox x:Name="MoodPicker" Width="132" Height="34" FontSize="10" Margin="0,0,0,6" SelectionChanged="MoodChanged">
         <ComboBoxItem Content="Все настроения" />
+        <ComboBoxItem Content="Осень" />
+        <ComboBoxItem Content="Зима" />
         <ComboBoxItem Content="Ночной Токио" />
         <ComboBoxItem Content="Спокойствие" />
         <ComboBoxItem Content="Космос" />
@@ -270,8 +272,8 @@
        <Slider x:Name="Volume" Minimum="0" Maximum="100" ValueChanged="VolumeChanged" Margin="0,6,0,0" />
       </StackPanel>
       <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-       <Button Content="←" FontSize="11" Width="28" Click="PreviousClick" ToolTip="Предыдущая сцена плейлиста" Padding="9,10" Background="Transparent" />
-       <Button Content="→" FontSize="11" Width="28" Click="NextClick" ToolTip="Следующая сцена плейлиста" Padding="9,10" Background="Transparent" />
+       <Button Content="←" FontSize="11" Width="28" Click="PreviousClick" ToolTip="Предыдущая сцена" Padding="9,10" Background="Transparent" />
+       <Button Content="→" FontSize="11" Width="28" Click="NextClick" ToolTip="Следующая сцена" Padding="9,10" Background="Transparent" />
        <Button x:Name="PauseButton" Click="PauseClick" ToolTip="Пауза / продолжить" Padding="9,10" Background="Transparent" FontSize="11">
         <StackPanel Orientation="Horizontal">
          <Path x:Name="PauseGlyph" Data="M 3 1 L 3 13 M 9 1 L 9 13" Width="10" Height="12" Stroke="{DynamicResource InkBrush}" StrokeThickness="2.2" Margin="0,0,7,0" />

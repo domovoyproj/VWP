@@ -46,7 +46,7 @@ public sealed partial class SpatialScene : Grid,IDisposable
         "3D · Астроном поворачивает телескоп",
         "3D · Манипулятор собирает робота на конвейере",
         "3D · Подводная станция, батискаф и дайвер",
-        "3D · Два игрока передают и бросают мяч"};
+        "Вечерняя площадка на крыше · мягкий свет и движение воздуха"};
     public SpatialScene(int id)
     {
         if(id<0||id>=SceneCount)throw new ArgumentOutOfRangeException(nameof(id));SceneId=id;random=new Random(740+id);

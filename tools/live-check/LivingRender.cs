@@ -16,7 +16,8 @@ static class LivingRender
         int scene=int.Parse(args[1]),height=args.Length>2?int.Parse(args[2]):720,fps=args.Length>3?int.Parse(args[3]):30;
         bool anime=scene is >=1101 and <=1115;
         bool vibe=scene is >=1201 and <=1220;
-        if((!anime&&!vibe&&!(scene is >=1001 and <=1003))||height is <360 or >2160||fps is <1 or >60)throw new ArgumentException("living-render <1001..1003|1101..1115|1201..1220> [height] [fps]");
+        bool season=scene is >=1301 and <=1306;
+        if((!anime&&!vibe&&!season&&!(scene is >=1001 and <=1003))||height is <360 or >2160||fps is <1 or >60)throw new ArgumentException("living-render <1001..1003|1101..1115|1201..1220|1301..1306> [height] [fps]");
         Forms.Application.SetHighDpiMode(Forms.HighDpiMode.PerMonitorV2);
         int width=height*16/9;string folder=Path.Combine(Environment.CurrentDirectory,"artifacts","living-check");Directory.CreateDirectory(folder);
         string output=Path.Combine(folder,$"{scene}-{height}p.mp4"),status=Path.Combine(folder,$"{scene}-status.txt");
@@ -28,7 +29,7 @@ static class LivingRender
             Process? encoder=null;
             try
             {
-                File.WriteAllText(status,"Loading textures");form.Show();form.Activate();if(vibe)await surface.InitializeVibe(scene);else if(anime)await surface.InitializeAnime(scene);else await surface.InitializeLiving(scene);await surface.SetExportViewport(width,height);
+                File.WriteAllText(status,"Loading textures");form.Show();form.Activate();if(season)await surface.InitializeSeason(scene);else if(vibe)await surface.InitializeVibe(scene);else if(anime)await surface.InitializeAnime(scene);else await surface.InitializeLiving(scene);await surface.SetExportViewport(width,height);
                 int sequence=0;TaskCompletionSource? pending=null;
                 surface.Message+=json=>{using var m=JsonDocument.Parse(json);if(m.RootElement.TryGetProperty("type",out var type)&&type.GetString()=="frame"&&m.RootElement.GetProperty("id").GetInt32()==sequence)pending?.TrySetResult();};
                 async Task Draw(double seconds)
@@ -66,10 +67,11 @@ static class LivingRender
                     }
                     await Draw(5);await surface.CaptureExport(Path.Combine(Environment.CurrentDirectory,"assets","vibes",scene+".poster.png"),width,height);
                 }
+                if(season){await Draw(5);await surface.CaptureExport(Path.Combine(Environment.CurrentDirectory,"assets","seasons",scene+".poster.png"),width,height);}
                 if(stills){File.WriteAllText(status,$"PASS: native {width}x{height} export viewport, changing pixels and seamless loop");return;}
                 string ffmpeg=Path.Combine(Environment.CurrentDirectory,"tools","ffmpeg.exe");
                 var start=new ProcessStartInfo(ffmpeg){UseShellExecute=false,CreateNoWindow=true,RedirectStandardInput=true};
-                foreach(string a in new[]{"-y","-v","error","-f","rawvideo","-pixel_format","bgra","-video_size",$"{width}x{height}","-framerate",fps.ToString(),"-i","pipe:0","-an","-c:v","libx264","-preset","veryfast","-crf",height>=2160?"18":"19","-pix_fmt","yuv420p","-movflags","+faststart",output})start.ArgumentList.Add(a);
+                foreach(string a in new[]{"-y","-v","error","-f","rawvideo","-pixel_format","bgra","-video_size",$"{width}x{height}","-framerate",fps.ToString(),"-i","pipe:0","-an","-c:v","libx264","-preset",season?"medium":"veryfast","-crf",height>=2160?"18":"19","-pix_fmt","yuv420p","-movflags","+faststart",output})start.ArgumentList.Add(a);
                 encoder=Process.Start(start)!;byte[] pixels=new byte[width*height*4];
                 for(int frame=0;frame<fps*12;frame++)
                 {
@@ -82,7 +84,7 @@ static class LivingRender
                     if(frame%fps==0)File.WriteAllText(status,$"Rendering {frame/fps}/12 s · {width}x{height} · {fps} FPS");
                 }
                 encoder.StandardInput.Close();await encoder.WaitForExitAsync();if(encoder.ExitCode!=0)throw new InvalidOperationException("Video encoder failed");
-                if(height==2160&&fps==60){string media=Path.Combine(Environment.CurrentDirectory,"assets",vibe?"vibes":anime?"anime":"living");File.Copy(output,Path.Combine(media,scene+".mp4"),true);if(!anime&&!vibe){await Draw(5);await surface.CaptureExport(Path.Combine(media,scene+".png"),width,height);}}
+                if(height==2160&&fps==60){string media=Path.Combine(Environment.CurrentDirectory,"assets",season?"seasons":vibe?"vibes":anime?"anime":"living");File.Copy(output,Path.Combine(media,scene+".mp4"),true);if(!anime&&!vibe&&!season){await Draw(5);await surface.CaptureExport(Path.Combine(media,scene+".png"),width,height);}}
                 File.WriteAllText(status,$"PASS: moving scene, seamless 12-second loop; {output}");
             }
             catch(Exception e){File.WriteAllText(status,e.ToString());Environment.ExitCode=1;}

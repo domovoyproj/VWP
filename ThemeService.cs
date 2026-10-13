@@ -35,7 +35,7 @@ public static class ThemeService
             if(atelier.TryGetValue(paletteName,out var custom))gaming=custom;
             if(gaming is not null){palette["CanvasBrush"]=gaming[0];palette["PanelBrush"]=gaming[1];palette["CardBrush"]=gaming[2];palette["ControlBrush"]=gaming[3];palette["SelectedBrush"]=gaming[3];}
         }
-        if(!dark && paletteName.StartsWith("Vibe-",StringComparison.Ordinal) && atelier.TryGetValue(paletteName,out var light) && light.Length>=4)
+        if(!dark && (paletteName.StartsWith("Vibe-",StringComparison.Ordinal)||paletteName.StartsWith("Season-",StringComparison.Ordinal)) && atelier.TryGetValue(paletteName,out var light) && light.Length>=4)
         {
             palette["CanvasBrush"]=light[0];palette["PanelBrush"]=light[1];palette["CardBrush"]=light[2];palette["ControlBrush"]=light[3];palette["SelectedBrush"]=light[3];
         }

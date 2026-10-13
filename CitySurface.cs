@@ -28,6 +28,7 @@ internal sealed class CitySurface : IDisposable
     internal Task InitializeLiving(int scene,bool manual=true)=>InitializeSource(Path.Combine(AppContext.BaseDirectory,"assets"),"living/index.html?scene="+scene+"&manual="+(manual?"1":"0"));
     internal Task InitializeAnime(int scene,bool manual=true)=>InitializeSource(Path.Combine(AppContext.BaseDirectory,"assets"),"anime/index.html?scene="+scene+"&manual="+(manual?"1":"0"));
     internal Task InitializeVibe(int scene,bool manual=true)=>InitializeSource(Path.Combine(AppContext.BaseDirectory,"assets"),"vibes/index.html?scene="+scene+"&manual="+(manual?"1":"0"));
+    internal Task InitializeSeason(int scene,bool manual=true)=>InitializeSource(Path.Combine(AppContext.BaseDirectory,"assets"),"seasons/index.html?scene="+scene+"&manual="+(manual?"1":"0"));
     internal Task InitializeCityRender(bool bake=false)=>InitializeSource(Folder,"index.html?quality=Quality&preview=0&manual=1"+(bake?"&bake=1":""));
     async Task InitializeSource(string folder,string entry,string? state=null)
     {
