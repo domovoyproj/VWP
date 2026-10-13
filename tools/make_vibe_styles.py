@@ -76,7 +76,7 @@ def main():
         palette='Vibe-'+e['style']
         if e['mode']=='Light':palettes[palette]=['#'+''.join(f'{round(c*factor+255*(1-factor)):02X}' for c in rgb) for factor in (.08,.13,.025,.20)]
         else:palettes[palette]=['#'+''.join(f'{round(c*factor+base):02X}' for c in rgb) for factor,base in ((.045,10),(.055,14),(.065,18),(.09,24))]
-        themes.append(dict(Id='vibe-'+e['style'],Name=e['name'],Description=e['description']+' Согласованные цвета и курсоры '+e['cursor']+'.',Author='VWP',License='VWP original artwork · AI-assisted',Source='https://github.com/domovoyproj/VWP',Mode=e['mode'],Accent=e['accent'],Palette=palette,Background='../vibes/'+str(e['id'])+'.poster.png',CursorId=ident))
+        themes.append(dict(Id='vibe-'+e['style'],Name=e['name'],Description=e['description']+' Согласованные цвета и курсоры '+e['cursor']+'.',Author='VWP',License='VWP original artwork',Source='https://github.com/domovoyproj/VWP',Mode=e['mode'],Accent=e['accent'],Palette=palette,Background='../vibes/'+str(e['id'])+'.poster.png',CursorId=ident))
     path.write_text(json.dumps(themes,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (ROOT/'assets/themes/palettes.json').write_text(json.dumps(palettes,indent=2)+'\n',encoding='utf-8')
     print('Generated 20 coordinated themes and 20 complete native cursor packs')
