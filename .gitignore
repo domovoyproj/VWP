@@ -15,6 +15,7 @@ assets/motion/*.json
 assets/motion/*.cover.jpg
 assets/cinematic/*.mp4
 assets/living/*.mp4
+assets/living/100?.png
 assets/anime/*.mp4
 assets/vibes/*.mp4
 assets/vibes/*.poster.png

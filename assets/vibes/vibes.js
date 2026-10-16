@@ -94,24 +94,11 @@ if(kind==9){
  planet=new T.Mesh(new T.SphereGeometry(settings.radius*2,96,64),planetMaterial);planet.position.set(settings.x*2.-1.,1.-settings.y*2.,.1);planet.scale.x=innerHeight/innerWidth;planet.userData.radius=settings.radius;planet.renderOrder=0;scene.add(planet);
 }
 
-// The character is an independent transparent layer. Its plate, scenery and props stay still.
-let character,characterMaterial;
-if(entry.character){
- const spec=entry.character,texture=await new T.TextureLoader().loadAsync('characters/'+spec.file);texture.colorSpace=T.SRGBColorSpace;
- const size=texture.image,box=spec.box||[0,0,1,1],aspect=(size.width*(box[2]-box[0]))/(size.height*(box[3]-box[1]));
- characterMaterial=new T.ShaderMaterial({transparent:true,depthTest:false,depthWrite:false,uniforms:{image:{value:texture},phase,clip:{value:new T.Vector4(...box)},eyes:{value:new T.Vector4(...(spec.eyes||[.48,.12,.57,.12]))},eyeRadius:{value:new T.Vector2(...(spec.eyeRadius||[.026,.012]))}},
-  vertexShader:`varying vec2 uvp;uniform float phase;void main(){uvp=uv;vec3 p=position;float y=uv.y;float breath=sin(phase*2.);p.x+=sin(phase)*.0035*y*y;p.y+=breath*.0025*smoothstep(.35,.75,y);gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}`,
-  fragmentShader:`uniform sampler2D image;uniform float phase;uniform vec4 clip,eyes;uniform vec2 eyeRadius;varying vec2 uvp;float mask(vec2 p,vec2 c,vec2 r){return 1.-smoothstep(.75,1.,length((p-c)/r));}void main(){vec2 p=vec2(uvp.x,1.-uvp.y),q=p;float hair=1.-smoothstep(.12,.34,p.y);q.x+=sin(phase*2.+p.y*17.)*.0035*hair;float chest=mask(p,vec2(.51,.35),vec2(.26,.19));q.x+=(p.x-.51)*sin(phase*2.)*.007*chest;float hand=mask(p,vec2(.47,.48),vec2(.22,.14));q.y+=sin(phase)*.004*hand;float blink=pow(max(0.,cos(phase*2.-.8)),48.);for(int n=0;n<2;n++){vec2 c=n==0?eyes.xy:eyes.zw;float m=mask(p,c,eyeRadius);float folded=c.y+(p.y-c.y)*(.9+blink*6.);q.y=mix(q.y,folded,m);}vec2 tex=vec2(mix(clip.x,clip.z,q.x),1.-mix(clip.y,clip.w,q.y));vec4 col=texture2D(image,clamp(tex,vec2(0.),vec2(1.)));if(col.a<.002)discard;gl_FragColor=col;#include <colorspace_fragment>}`.replace(';#include',';\n#include')});
- const height=spec.height*2,width=height*aspect*innerHeight/innerWidth;
- character=new T.Mesh(new T.PlaneGeometry(width,height,16,24),characterMaterial);character.position.set(spec.x*2.-1.,1.-spec.y*2.,.3);character.userData={aspect,height,x:spec.x,y:spec.y};character.renderOrder=1;scene.add(character);
-}
-
-let frames=0,time=0,paused=false,characterOnly=false;
-function resize(){renderer.setSize(innerWidth,innerHeight,false);viewport.value.set(innerWidth,innerHeight);if(planet)planet.scale.x=innerHeight/innerWidth;if(character){character.scale.x=(character.userData.height*character.userData.aspect*innerHeight/innerWidth)/character.geometry.parameters.width;}}
+let frames=0,time=0,paused=false;
+function resize(){renderer.setSize(innerWidth,innerHeight,false);viewport.value.set(innerWidth,innerHeight);if(planet)planet.scale.x=innerHeight/innerWidth;}
 addEventListener('resize',resize);resize();
-function renderAt(seconds){time=((seconds%12)+12)%12;phase.value=time/12*Math.PI*2;background.visible=!characterOnly;if(particles)particles.visible=!characterOnly;if(planet)planet.visible=!characterOnly;renderer.render(scene,camera);frames++;}
-window.living={renderAt,metrics:()=>({frames,time,resolution:renderer.getDrawingBufferSize(new T.Vector2()).toArray(),kind:entry.effect,particles:particles?.geometry.attributes.particle.count||0,character:!!character,planet:!!planet}),pause:value=>paused=value};
-if(manual)window.living.characterOnly=value=>{characterOnly=!!value;renderer.setClearColor(0x090c16,1);};
+function renderAt(seconds){time=((seconds%12)+12)%12;phase.value=time/12*Math.PI*2;renderer.render(scene,camera);frames++;}
+window.living={renderAt,metrics:()=>({frames,time,resolution:renderer.getDrawingBufferSize(new T.Vector2()).toArray(),kind:entry.effect,particles:particles?.geometry.attributes.particle.count||0,character:false,spriteOverlays:scene.children.filter(o=>o.isMesh&&o!==background&&o!==planet).length,planet:!!planet}),pause:value=>paused=value};
 window.chrome?.webview?.addEventListener('message',async e=>{if(e.data.type==='pause')paused=!!e.data.value;if(e.data.type==='render'){renderAt(e.data.time);if(manual)renderer.getContext().finish();await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));send({type:'frame',id:e.data.id});}});
 renderAt(0);send({type:'ready'});
 const start=performance.now();function animate(now){if(!paused)renderAt((now-start)/1000);requestAnimationFrame(animate);}if(!manual)requestAnimationFrame(animate);

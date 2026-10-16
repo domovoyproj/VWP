@@ -64,8 +64,8 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
     public void Configure(MonitorPreferences settings)
     {
         config=settings;timer.Interval=TimeSpan.FromSeconds(1.0/PerformanceProfile.Resolve(settings.Performance).Fps);
-        if(ObjectMotionActive && !CinematicActive && Spatial is null){Spatial=new SpatialScene(layers.MotionId!.Value);AddVisualChild(Spatial);AddLogicalChild(Spatial);InvalidateMeasure();}
-        else if((!ObjectMotionActive || CinematicActive) && Spatial is not null){RemoveVisualChild(Spatial);RemoveLogicalChild(Spatial);Spatial.Dispose();Spatial=null;InvalidateMeasure();}
+        // Missing artwork must never resurrect the retired procedural dioramas.
+        if(Spatial is not null){RemoveVisualChild(Spatial);RemoveLogicalChild(Spatial);Spatial.Dispose();Spatial=null;InvalidateMeasure();}
         if(ObjectMotionActive && Spatial is null && layers.MotionId is int id && settings.Performance!="Eco" && PlanetMotionEffect.Available(id))
         {planets??=new PlanetMotionEffect(id);Effect=planets;}
         else{Effect=null;planets=null;}

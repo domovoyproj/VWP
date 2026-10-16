@@ -1,16 +1,20 @@
 # VWP Studio — живые обои, темы и курсоры для Windows
 
-[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.9.0** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC / WebView2
+[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.9.1** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC / WebView2
 
 ![VWP Studio](docs/studio-themes.png)
 
-## Что нового в 0.9.0
+## Что нового в 0.9.1
+
+Убраны накладываемые плоские модели людей, животных и техники из рисованных обоев. Пересобраны затронутые видео, сохранены исходные фоны и движение окружения. Баскетбольная площадка остаётся без бегунов и мяча. [Подробности](docs/RELEASE-0.9.1.md).
+
+## Autumn & Winter
 
 **Autumn & Winter** — шесть новых живых обоев: три осенних и три зимних, плюс шесть подходящих тем и шесть наборов курсоров. Листья, снег, дождь, вода, пар и свет движутся в бесшовных 12-секундных циклах. Фильтры «Осень» и «Зима» находятся в меню настроения. [Сцены и видео](docs/SEASONS.md).
 
 ## Vibe Collection
 
-**Vibe Collection** — 20 новых живых сцен, 20 тем и 20 комплектов курсоров: аниме, ретро-неон, природа, космос, минимализм и фэнтези. В двух сценах — девушки в альтернативном стиле с анимацией волос, дыхания и моргания. [Коллекция](docs/VIBE-COLLECTION.md).
+**Vibe Collection** — 20 новых живых сцен, 20 тем и 20 комплектов курсоров: аниме, ретро-неон, природа, космос, минимализм и фэнтези. [Коллекция](docs/VIBE-COLLECTION.md).
 
 ## Afterlight и Anime Atelier
 
@@ -18,7 +22,7 @@
 
 **Afterlight** — бесконечный интерактивный 3D-город с каналами, мостами, лодками, поездами и людьми со скелетной анимацией. Можно гулять, летать и менять настроение района. Превью открыто всем; применение города к рабочему столу требует подтверждения звезды VWP у собственного GitHub-аккаунта.
 
-**Living Originals** — три новые сцены Rain District, Last Metro и Sakura Arcade с движением поездов, дождя, воды и лепестков. Новый лаунчер получил компактную коллекцию, векторные кнопки воспроизведения и заметную кнопку качества. [Видео города и снимки приложения](docs/NEON-CITY.md) · [Подробности релиза](docs/RELEASE-0.7.0.md).
+**Living Originals** — три новые сцены Rain District, Last Metro и Sakura Arcade с движением дождя, воды, облаков и лепестков. Новый лаунчер получил компактную коллекцию, векторные кнопки воспроизведения и заметную кнопку качества. [Видео города и снимки приложения](docs/NEON-CITY.md) · [Подробности релиза](docs/RELEASE-0.7.0.md).
 
 **Anime Atelier** — ещё 15 оригинальных рисованных сцен: лунный храм, неоновая улица, уютная комната, оранжерея в космосе, станция на закате и другие окружения. У каждой есть парная тема и комплект курсоров. Движутся вода, облака, дождь, снег, лепестки и свет; камера остаётся неподвижной. [Все 15 сцен](docs/ANIME-ATELIER.md) · [Исходное разрешение и промпты](assets/anime/ARTWORK.md).
 
@@ -64,7 +68,7 @@
 
 Встроенная библиотека содержит **91 запись**: 18 исходных видео, 18 вариантов живых сцен, 10 дополнительных анимированных сцен, три Living Originals, 15 Anime Atelier, 20 Vibe Collection, шесть Autumn & Winter и 3D-город Afterlight. Первые две группы используют общие исходные видео на рабочем столе; это не 91 уникальный видеоролик. Видео воспроизводятся через LibVLC, город — через локальный Three.js / WebView2, под иконками рабочего стола. Все три варианта города — Neon Ward, Sakura Quarter и Glacier District — требуют подтверждения звезды для применения и исследования; обычные видео и наборы персонализации доступны бесплатно. Постер выбранной сцены остаётся под плеером на стыке видеопетли и при Alt+Tab/Peek; при остановке и выходе возвращаются обычные обои Windows.
 
-Мастер-видео имеют **3840×2160 / 60 FPS**. Исходные иллюстрации около 1672×941 масштабируются при рендере: это не нативные 4K-рисунки. Движение создаётся из слоёв, локальных деформаций, объектов, света и частиц. Они не являются полноценной генеративной анимацией персонажей. В Alpine Express поезд едет по мосту. Превью и миниатюры облегчены для лаунчера.
+Мастер-видео имеют **3840×2160 / 60 FPS**. Исходные иллюстрации около 1672×941 масштабируются при рендере: это не нативные 4K-рисунки. Движение создаётся из слоёв, локальных деформаций, объектов, света и частиц. Они не являются полноценной генеративной анимацией персонажей. Превью и миниатюры облегчены для лаунчера.
 
 Профиль «Качество» воспроизводит мастер; «Баланс» создаёт копию до 1080p / 30 FPS, «Экономия» — до 720p / 15 FPS. При первом применении облегчённого профиля требуется время на подготовку. Частота воспроизведения зависит от устройства.
 
@@ -97,26 +101,35 @@ Catppuccin и Nord — адаптации палитр в VWP, не официа
 
 ## Сборка и проверка
 
-Нужны .NET 8 SDK, Python 3.12, WebView2 Runtime и Inno Setup 6 для установщика. Workflow **VWP seasonal collection** рендерит шесть сезонных сцен на отдельных облачных Windows-машинах, восстанавливает все неизменённые видео из официального portable 0.8.0 с проверкой SHA-256, проверяет медиа, персонализацию и воспроизведение, затем собирает полную дистрибуцию. Медиа не хранятся в Git; иллюстрации, промпты и код анимации сохраняются в репозитории.
+Нужны .NET 8 SDK, Python 3.12, WebView2 Runtime и Inno Setup 6 для установщика. Workflow **VWP clean scenery** рендерит заново 15 изменённых сцен (10 Cinematic, 3 Living Originals и 2 Vibe), восстанавливает остальные видео из официального portable 0.9.0 с проверкой SHA-256, проверяет медиа и собирает полную дистрибуцию. Точные команды рендера и проверки находятся в [.github/workflows/cleanup.yml](.github/workflows/cleanup.yml). Медиа не хранятся в Git; иллюстрации, промпты и код анимации сохраняются в репозитории.
 
 ```powershell
 python -m pip install Pillow imageio-ffmpeg==0.6.0
 python tools/bootstrap_ffmpeg.py
-python tools/restore_season_baseline.py
+python tools/restore_clean_media.py
 dotnet build tools/live-check/live-check.csproj -c Release
-foreach ($id in 1301..1306) {
+foreach ($id in 1001,1002,1003,1204,1206) {
     $render = Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList '--living-render',$id,'2160','60' -WindowStyle Hidden -PassThru -Wait
     if ($render.ExitCode -ne 0) { throw "Render failed: $id" }
-    ./tools/ffmpeg.exe -y -i "assets/seasons/$id.mp4" -vf 'scale=1280:720:flags=lanczos,fps=30' -an -c:v libx264 -crf 21 -pix_fmt yuv420p -movflags +faststart "assets/seasons/$id.preview.mp4"
+    $collection = if ($id -lt 1200) { 'living' } else { 'vibes' }
+    ./tools/ffmpeg.exe -y -i "assets/$collection/$id.mp4" -vf 'scale=1280:720:flags=lanczos,fps=30' -an -c:v libx264 -crf 21 -pix_fmt yuv420p -movflags +faststart "assets/$collection/$id.preview.mp4"
     if ($LASTEXITCODE -ne 0) { throw "Preview failed: $id" }
 }
-python tools/check_seasons.py --previews
+foreach ($id in 18..27) {
+    dotnet run --project tools/cinematic-render/cinematic-render.csproj -c Release -- $id 12 60 2160
+    if ($LASTEXITCODE -ne 0) { throw "Render failed: $id" }
+    ./tools/ffmpeg.exe -y -i "assets/cinematic/$id.mp4" -vf 'scale=1280:720:flags=lanczos,fps=30' -an -c:v libx264 -crf 21 -pix_fmt yuv420p -movflags +faststart "assets/cinematic/$id.preview.mp4"
+    if ($LASTEXITCODE -ne 0) { throw "Preview failed: $id" }
+}
+python tools/check_living.py
+python tools/check_cinematic.py
+python tools/check_vibes.py --previews
 python tools/check_personalization.py
 powershell -ExecutionPolicy Bypass -File build.ps1 -Installer
-python tools/package_release.py --version 0.9.0 --build dist/Release-0.9.0
+python tools/package_release.py --version 0.9.1 --build dist/Release-0.9.1
 ```
 
-Нативные рендеры на одном ПК запускаются последовательно. Тег `v0.9.0` публикует установщик, portable и шесть видео-превью из успешной полной сборки **того же коммита**, с повторной проверкой SHA-256. До загрузки всех файлов релиз остаётся черновиком.
+Нативные рендеры на одном ПК запускаются последовательно. Тег `v0.9.1` публикует установщик, portable и 15 видео-превью из успешной полной сборки **того же коммита**, с повторной проверкой SHA-256. До загрузки всех файлов релиз остаётся черновиком.
 
 `dotnet run --project tools/live-check -c Release -- --transition-check` проверяет видимое смешивание двух контрольных видео, отсутствие чёрных кадров и резкого скачка, быструю смену сцен, паузу, очистку слоёв и прямую замену фонового изображения. Проверка сама создаёт MP4 в `artifacts/transition-check/` через `tools/ffmpeg.exe` или FFmpeg из PATH (640×360, 30 FPS, 8 секунд). Ей нужен интерактивный рабочий стол Windows; контрольное окно на время проверки должно быть видно.
 
