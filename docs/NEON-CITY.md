@@ -6,13 +6,13 @@
 
 | Сцена | Движение |
 |---|---|
-| Rain District | Поезд над каналом, дождь, рябь воды и отражения |
-| Last Metro | Поезд на изогнутом мосту, облака и отражения |
-| Sakura Arcade | Поезд, пара под зонтом, дождь и лепестки |
+| Rain District | Дождь, рябь воды, облака и отражения |
+| Last Metro | Облака, отражения и мягкое свечение окон |
+| Sakura Arcade | Дождь, лепестки и отражения вывесок |
 
 Камера 2D-сцен неподвижна. Локальные эффекты не заменяют рисунок целиком. Исходные иллюстрации около 1672×941; экспорт 3840×2160 / 60 FPS масштабирует их и рассчитывает движение объектов в конечном разрешении. Это не нативные 4K-рисунки и не полноценная генеративная анимация героинь.
 
-Видео движения для согласования — 720p / 30 FPS: [Rain District](Rain-District-preview.mp4?raw=1), [Last Metro](Last-Metro-preview.mp4?raw=1), [Sakura Arcade](Sakura-Arcade-preview.mp4?raw=1). Локальные оригиналы находятся в `artifacts/living-check/`. Финальные мастеры создаются нативным рендерером:
+Обновлённые видео без отдельных моделей — 720p / 30 FPS: [Rain District](https://github.com/domovoyproj/VWP/releases/download/v0.9.1/VWP-0.9.1-1001.preview.mp4), [Last Metro](https://github.com/domovoyproj/VWP/releases/download/v0.9.1/VWP-0.9.1-1002.preview.mp4), [Sakura Arcade](https://github.com/domovoyproj/VWP/releases/download/v0.9.1/VWP-0.9.1-1003.preview.mp4). Локальные оригиналы находятся в `artifacts/living-check/`. Финальные мастеры создаются нативным рендерером:
 
 ```powershell
 dotnet build tools/live-check/live-check.csproj -c Release

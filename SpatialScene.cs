@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -18,35 +19,7 @@ public sealed partial class SpatialScene : Grid,IDisposable
     public int MovingGroups=>motions.Count;
     public double Time {get;private set;}
     public Viewport3D Viewport {get;}=new(){ClipToBounds=true,IsHitTestVisible=false};
-    public static readonly string[] Descriptions={
-        "3D · Прогулка под сакурой, городской поезд",
-        "3D · Пешеходы у канала, ночной экспресс",
-        "3D · Путница у храма, вращение алой луны",
-        "3D · Парусник на волнах, северное сияние",
-        "3D · Движение астронавта и орбитальных обломков",
-        "3D · Поезд прибывает, пассажир идёт к вагону",
-        "3D · Повар подаёт рамен посетителю",
-        "3D · Пловец, рыбы и пульсирующие медузы",
-        "3D · Лиса гуляет среди ворот и ручьёв",
-        "3D · Автомобиль проходит ночную трассу",
-        "3D · Путники на мосту между парящими островами",
-        "3D · Девушка у моря, две вращающиеся планеты",
-        "3D · Прогулка вдвоём под зонтом и снегом",
-        "3D · Ронин проходит храмовый двор",
-        "3D · Художник рисует и поднимает чашку",
-        "3D · Караван верблюдов пересекает пустыню",
-        "3D · Объёмный цветок раскрывает лепестки",
-        "3D · Кормление кои в лунном саду",
-        "3D · Садовник поливает орбитальную оранжерею",
-        "3D · Паром отходит от причала, кран переносит груз",
-        "3D · Бариста готовит кофе, посетители беседуют",
-        "3D · Поезд пересекает альпийский виадук",
-        "3D · Лодки и фонари на ночном фестивале",
-        "3D · Поезд метро прибывает на платформу",
-        "3D · Астроном поворачивает телескоп",
-        "3D · Манипулятор собирает робота на конвейере",
-        "3D · Подводная станция, батискаф и дайвер",
-        "Вечерняя площадка на крыше · мягкий свет и движение воздуха"};
+    public static readonly string[] Descriptions=System.Linq.Enumerable.Range(0,SceneCount).Select(SceneAtmosphere.Description).ToArray();
     public SpatialScene(int id)
     {
         if(id<0||id>=SceneCount)throw new ArgumentOutOfRangeException(nameof(id));SceneId=id;random=new Random(740+id);

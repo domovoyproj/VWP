@@ -37,6 +37,10 @@ Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\assets\motion"
 Type: filesandordirs; Name: "{app}\assets\spatial"
+Type: filesandordirs; Name: "{app}\assets\vibes\characters"
+Type: files; Name: "{app}\assets\living\commuter.png"
+Type: files; Name: "{app}\assets\living\couple.png"
+Type: files; Name: "{app}\assets\cinematic\train.png"
 [Icons]
 Name: "{userprograms}\VWP"; Filename: "{app}\VWP.exe"
 Name: "{userdesktop}\VWP"; Filename: "{app}\VWP.exe"; Tasks: desktopicon

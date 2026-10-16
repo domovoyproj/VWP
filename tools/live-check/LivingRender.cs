@@ -31,6 +31,12 @@ static class LivingRender
             {
                 File.WriteAllText(status,"Loading textures");form.Show();form.Activate();if(season)await surface.InitializeSeason(scene);else if(vibe)await surface.InitializeVibe(scene);else if(anime)await surface.InitializeAnime(scene);else await surface.InitializeLiving(scene);await surface.SetExportViewport(width,height);
                 int sequence=0;TaskCompletionSource? pending=null;
+                if(vibe||(!anime&&!season))
+                {
+                    using var metrics=JsonDocument.Parse(await surface.Control.CoreWebView2.ExecuteScriptAsync("window.living.metrics()"));
+                    if(metrics.RootElement.GetProperty("spriteOverlays").GetInt32()!=0)throw new InvalidOperationException("Retired sprite overlays are still present");
+                    File.WriteAllText(Path.Combine(folder,$"{scene}-renderer.json"),metrics.RootElement.GetRawText());
+                }
                 surface.Message+=json=>{using var m=JsonDocument.Parse(json);if(m.RootElement.TryGetProperty("type",out var type)&&type.GetString()=="frame"&&m.RootElement.GetProperty("id").GetInt32()==sequence)pending?.TrySetResult();};
                 async Task Draw(double seconds)
                 {
@@ -40,7 +46,11 @@ static class LivingRender
                 }
                 // Device-metrics resize and the first GPU upload can outlive the
                 // ready message. Warm the compositor before accepting any frame.
-                string capture=Path.Combine(folder,$"{scene}-frame.png");await Draw(0);await Task.Delay(250);await Draw(0);await surface.CaptureExport(Path.Combine(folder,$"{scene}-start.png"),width,height);
+                string capture=Path.Combine(folder,$"{scene}-frame.png");await Draw(0);await Task.Delay(250);
+                // The first DevTools capture can still contain the cleared surface
+                // while Chromium compiles the full-resolution shader. Flush it before QA.
+                await surface.CaptureExport(capture,width,height);
+                await Draw(0);await surface.CaptureExport(Path.Combine(folder,$"{scene}-start.png"),width,height);
                 await Draw(5);await surface.CaptureExport(Path.Combine(folder,$"{scene}-motion.png"),width,height);
                 await Draw(12);await surface.CaptureExport(Path.Combine(folder,$"{scene}-loop.png"),width,height);
                 using(var first=new Bitmap(Path.Combine(folder,$"{scene}-start.png")))using(var moved=new Bitmap(Path.Combine(folder,$"{scene}-motion.png")))using(var loop=new Bitmap(Path.Combine(folder,$"{scene}-loop.png")))
@@ -68,6 +78,7 @@ static class LivingRender
                     await Draw(5);await surface.CaptureExport(Path.Combine(Environment.CurrentDirectory,"assets","vibes",scene+".poster.png"),width,height);
                 }
                 if(season){await Draw(5);await surface.CaptureExport(Path.Combine(Environment.CurrentDirectory,"assets","seasons",scene+".poster.png"),width,height);}
+                if(!anime&&!vibe&&!season){await Draw(5);await surface.CaptureExport(Path.Combine(Environment.CurrentDirectory,"assets","living",scene+".png"),width,height);}
                 if(stills){File.WriteAllText(status,$"PASS: native {width}x{height} export viewport, changing pixels and seamless loop");return;}
                 string ffmpeg=Path.Combine(Environment.CurrentDirectory,"tools","ffmpeg.exe");
                 var start=new ProcessStartInfo(ffmpeg){UseShellExecute=false,CreateNoWindow=true,RedirectStandardInput=true};

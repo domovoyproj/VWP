@@ -41,7 +41,7 @@ def main():
         required += [f'VWP/assets/living/{scene_id}.{ext}' for scene_id in range(1001,1004) for ext in ('mp4','png')]
         required += [f'VWP/assets/anime/{scene_id}.{ext}' for scene_id in range(1101,1116) for ext in ('mp4','png')]
         required += [f'VWP/assets/vibes/{scene_id}.{ext}' for scene_id in range(1201,1221) for ext in ('mp4','png','poster.png','preview.mp4')]
-        required += ['VWP/assets/vibes/'+name for name in ('catalog.json','vibes.js','index.html','characters/record-girl.png','characters/rooftop-girl.png')]
+        required += ['VWP/assets/vibes/'+name for name in ('catalog.json','vibes.js','index.html')]
         required += [f'VWP/assets/seasons/{scene_id}.{ext}' for scene_id in range(1301,1307) for ext in ('mp4','png','poster.png','preview.mp4')]
         required += ['VWP/assets/seasons/'+name for name in ('catalog.json','seasons.js','index.html')]
         required += ['VWP/assets/anime/catalog.json','VWP/assets/anime/anime.js','VWP/assets/anime/index.html','VWP/assets/themes/palettes.json']
@@ -57,6 +57,8 @@ def main():
         names=archive.namelist()
         if any(name.startswith(('VWP/assets/motion/','VWP/assets/spatial/')) for name in names):
             raise SystemExit('Retired procedural or low-poly assets are present in the package.')
+        if any(name.startswith('VWP/assets/vibes/characters/') or name in ('VWP/assets/living/commuter.png','VWP/assets/living/couple.png','VWP/assets/cinematic/train.png') for name in names):
+            raise SystemExit('Retired figure or transport sprite in package.')
         for name in ['themes/themes.json','themes/obsidian.png','themes/glacier.png','themes/pearl.png']:
             if 'VWP/assets/'+name not in names:raise SystemExit('Personalization asset missing: '+name)
         if len([name for name in names if name.startswith('VWP/assets/cursors/') and name.endswith('/pack.json')])!=55:

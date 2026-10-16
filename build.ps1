@@ -15,7 +15,7 @@ if (Test-Path -LiteralPath 'assets/city/resources.json') {
 foreach ($scene in 1001,1002,1003) { $requiredAssets += "assets/living/$scene.mp4"; $requiredAssets += "assets/living/$scene.png" }
 foreach ($scene in 1101..1115) { $requiredAssets += "assets/anime/$scene.mp4"; $requiredAssets += "assets/anime/$scene.png" }
 foreach ($scene in 1201..1220) { foreach ($extension in 'mp4','png','poster.png','preview.mp4') { $requiredAssets += "assets/vibes/$scene.$extension" } }
-$requiredAssets += @('assets/vibes/catalog.json','assets/vibes/index.html','assets/vibes/vibes.js','assets/vibes/characters/record-girl.png','assets/vibes/characters/rooftop-girl.png')
+$requiredAssets += @('assets/vibes/catalog.json','assets/vibes/index.html','assets/vibes/vibes.js')
 foreach ($scene in 1301..1306) { foreach ($extension in 'mp4','png','poster.png','preview.mp4') { $requiredAssets += "assets/seasons/$scene.$extension" } }
 $requiredAssets += @('assets/seasons/catalog.json','assets/seasons/index.html','assets/seasons/seasons.js')
 foreach ($folder in (Get-ChildItem assets/cursors -Directory | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'pack.json') })) {
@@ -39,7 +39,6 @@ if (Test-Path 'assets/expansion.json') {
         $requiredAssets += "assets/cinematic/$($scene.id).png"
         $requiredAssets += "assets/cinematic/$($scene.id).mp4"
     }
-    $requiredAssets += 'assets/cinematic/train.png'
 }
 $missingAssets = @($requiredAssets | Where-Object { !(Test-Path -LiteralPath $_ -PathType Leaf) })
 if ($missingAssets.Count -gt 0) { throw "Incomplete wallpaper collection ($($missingAssets.Count) missing files). Run the Cloud wallpaper collection workflow, or render the media as described in README.md. First missing asset: $($missingAssets[0])" }
@@ -52,7 +51,7 @@ $output = Join-Path $PSScriptRoot "dist\Release-$version"
 & $sdk publish VWP.csproj -c Release -r win-x64 --self-contained true -o $output
 if ($LASTEXITCODE -ne 0) { throw 'Build failed' }
 # Publish can reuse a previous output directory. Retired media must never re-enter an update.
-foreach ($obsolete in @('assets/motion', 'assets/spatial')) {
+foreach ($obsolete in @('assets/motion', 'assets/spatial', 'assets/vibes/characters', 'assets/living/commuter.png', 'assets/living/couple.png', 'assets/cinematic/train.png')) {
     $target = [IO.Path]::GetFullPath((Join-Path $output $obsolete))
     if (!$target.StartsWith([IO.Path]::GetFullPath($output) + [IO.Path]::DirectorySeparatorChar)) { throw 'Invalid cleanup target' }
     if (Test-Path -LiteralPath $target) { Remove-Item -LiteralPath $target -Recurse -Force }

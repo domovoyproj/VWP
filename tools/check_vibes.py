@@ -7,7 +7,7 @@ from PIL import Image
 parser=argparse.ArgumentParser();parser.add_argument('--scene',type=int);parser.add_argument('--previews',action='store_true');args=parser.parse_args()
 root=Path(__file__).resolve().parents[1];entries=json.loads((root/'assets/vibes/catalog.json').read_text(encoding='utf-8'))
 assert len(entries)==20 and {e['id'] for e in entries}==set(range(1201,1221))
-assert sum('character' in e for e in entries)==2
+assert not any('character' in e for e in entries), 'Character sprite overlays must stay removed'
 for entry in entries:
     scene=entry['id']
     if args.scene and scene!=args.scene:continue

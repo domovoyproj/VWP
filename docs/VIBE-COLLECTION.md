@@ -2,7 +2,7 @@
 
 20 оригинальных живых сцен, 20 тем и 20 полных наборов курсоров.
 
-Мастер-видео: 3840 × 2160 / 60 FPS, цикл 12 секунд. Исходные иллюстрации 1672 × 941 масштабируются при экспорте. Персонажи используют анимацию отдельных слоёв.
+Мастер-видео: 3840 × 2160 / 60 FPS, цикл 12 секунд. Исходные иллюстрации 1672 × 941 масштабируются при экспорте. Движение создают погода, вода, свет и локальные эффекты.
 
 | Сцена | Стиль | Курсоры |
 |---|---|---|
@@ -27,20 +27,20 @@
 | Copper Cathedral | Фэнтези | Copper Quill |
 | Jade Dream | Фэнтези | Jade Lotus |
 
-## Две героини
+## Движение без наложенных моделей
 
-Midnight Record — девушка в наушниках с чашкой, дождь и винил. Summer Rooftop — девушка на скамье, вечерний ветер и закат. Движение персонажей проверяется отдельно от фона.
+Midnight Record — дождь, отражения и вращение винила. Summer Rooftop — вечерний ветер, вода и закат. В 0.9.1 отдельные спрайты персонажей удалены; исходные иллюстрации сохранены.
 
 ## Видео
 
-Превью 1280 × 720 / 30 FPS доступны в официальном релизе 0.8.0. Мастер 4K60 включён в установщик и portable.
+Превью 1280 × 720 / 30 FPS доступны в официальных релизах 0.8.0 и 0.9.1. Мастер 4K60 включён в установщик и portable.
 
 - [Amber Konbini — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1201.preview.mp4)
 - [Hoshizora Terrace — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1202.preview.mp4)
 - [Sakura Soda — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1203.preview.mp4)
-- [Midnight Record — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1204.preview.mp4)
+- [Midnight Record — видео](https://github.com/domovoyproj/VWP/releases/download/v0.9.1/VWP-0.9.1-1204.preview.mp4)
 - [Hydrangea Stop — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1205.preview.mp4)
-- [Summer Rooftop — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1206.preview.mp4)
+- [Summer Rooftop — видео](https://github.com/domovoyproj/VWP/releases/download/v0.9.1/VWP-0.9.1-1206.preview.mp4)
 - [Paper Lantern River — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1207.preview.mp4)
 - [Chrome Sunset — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1208.preview.mp4)
 - [VHS Motel — видео](https://github.com/domovoyproj/VWP/releases/download/v0.8.0/VWP-0.8.0-1209.preview.mp4)
