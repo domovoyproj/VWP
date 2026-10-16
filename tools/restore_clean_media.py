@@ -8,7 +8,8 @@ digest='50f8adf765ec00ba2f255d760aa039a2c011df6f6e7cf4388f6736bb9a39bc3d'
 inputs=['assets/presets.json','assets/scene-*.png','assets/layers','assets/anime','assets/seasons','assets/vibes']
 exclude=[':(exclude)**/*.md',':(exclude)**/*.prompt.txt',':(exclude)assets/vibes/vibes.js',':(exclude)assets/vibes/catalog.json',':(exclude)assets/vibes/characters/**']
 if subprocess.run(['git','diff','--quiet',baseline,'--',*inputs,*exclude],cwd=root).returncode:raise SystemExit('Protected source artwork changed; unchanged masters cannot be reused.')
-if hashlib.sha256((root/'assets/vibes/vibes.js').read_bytes()).hexdigest()!='68d812120883d93b0a8ee3e00cbdf0dca52d8b05ef39b940fd0edb3865c8f052':raise SystemExit('Unreviewed Vibe renderer change; render all Vibe movies instead.')
+renderer=(root/'assets/vibes/vibes.js').read_bytes().replace(b'\r\n',b'\n')
+if hashlib.sha256(renderer).hexdigest()!='f50a27c4d81173030c55aefc20d6b71cd2127b3245b3b703ef486608be27e7c7':raise SystemExit('Unreviewed Vibe renderer change; render all Vibe movies instead.')
 before={e['id']:e for e in json.loads(subprocess.check_output(['git','show',baseline+':assets/vibes/catalog.json'],cwd=root))}
 after=json.loads((root/'assets/vibes/catalog.json').read_text(encoding='utf-8'))
 assert len(after)==20
