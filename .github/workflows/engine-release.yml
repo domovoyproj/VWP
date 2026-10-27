@@ -147,7 +147,7 @@ jobs:
           if ($LASTEXITCODE -eq 0) {
             if (!(($existing | ConvertFrom-Json).isDraft)) { throw 'Refusing to overwrite an already published release' }
           } else {
-            gh release create $tag --repo $repo --target '${{ github.sha }}' --draft --title "VWP $version — Engine Studio" --notes-file "docs/RELEASE-$version.md"
+            gh release create $tag --repo $repo --target '${{ github.sha }}' --draft --title "VWP $version - Engine Studio" --notes-file "docs/RELEASE-$version.md"
             if ($LASTEXITCODE -ne 0) { throw 'Draft creation failed' }
           }
           $files = @(Get-ChildItem "dist/VWP-$version-Setup.exe","dist/VWP-$version-Portable-*.zip",'dist/*.sha256','dist/README-INSTALL.txt','dist/install-parts.json')
