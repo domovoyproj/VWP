@@ -17,6 +17,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            installer
+            .github
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -153,8 +158,11 @@ jobs:
           $files = @(Get-ChildItem "dist/VWP-$version-Setup.exe","dist/VWP-$version-Portable-*.zip",'dist/*.sha256','dist/README-INSTALL.txt','dist/install-parts.json')
           gh release upload $tag @($files.FullName) --repo $repo --clobber
           if ($LASTEXITCODE -ne 0) { throw 'Release asset upload failed' }
-          $release = gh api "repos/$repo/releases/tags/$tag" | ConvertFrom-Json
+          # A draft without a published Git tag is absent from releases/tags/{tag}.
+          $releases = gh api "repos/$repo/releases?per_page=100" | ConvertFrom-Json
           if ($LASTEXITCODE -ne 0) { throw 'Release asset verification query failed' }
+          $release = $releases | Where-Object tag_name -eq $tag | Select-Object -First 1
+          if (!$release -or !$release.draft) { throw 'Expected unique draft release was not found' }
           foreach ($file in $files) {
             $asset = $release.assets | Where-Object name -eq $file.Name
             $digest = 'sha256:'+(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
