@@ -62,6 +62,7 @@ public partial class MainWindow
     }
     SceneLayers? LayersFor(Wallpaper scene)
     {
+        if(StudioProject.IsProject(scene.Path))return null;
         if(scene.PresetId==CityId)return null;
         if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom)){custom.Video=custom.MotionId is not null?scene.Path:null;return custom;}
         if(scene.Thumbnail is null)return null;
@@ -90,6 +91,11 @@ public partial class MainWindow
     void UpdateLayerControls()
     {
         var selected=FindScene(Config(SelectedScreen).Scene)??Library.SelectedItem as Wallpaper;
+        if(selected is not null&&StudioProject.IsProject(selected.Path))
+        {
+            foreach(var control in new System.Windows.Controls.Control[]{Settings.SceneAnimation,Settings.Interactive,Settings.Music,Settings.Depth,Settings.BackgroundButton,Settings.ForegroundButton})control.IsEnabled=false;
+            Settings.LayersLabel.Text="Слои, движение и маски этой сцены настраиваются кнопкой «Настроить живую сцену» в библиотеке.";return;
+        }
         bool editable=selected is not null && selected.PresetId!=CityId;
         bool custom=editable && (selected!.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(selected)));
         foreach(var element in new System.Windows.Controls.Control[]{Settings.SceneAnimation,Settings.Interactive,Settings.Music,Settings.Depth})element.IsEnabled=custom;
@@ -122,11 +128,11 @@ public partial class MainWindow
     }
     void TickStudio()
     {
-        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&pair.Value.Interactive?.WantsAudio==true && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.Performance!="Eco")||IsVisible&&scenePreview?.WantsAudio==true&&Config(SelectedScreen).Performance!="Eco");
+        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&(pair.Value.Interactive?.WantsAudio==true||pair.Value.StudioAudio) && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.Performance!="Eco")||IsVisible&&scenePreview?.WantsAudio==true&&Config(SelectedScreen).Performance!="Eco");
         if(SettingsOverlay.Visibility==Visibility.Visible)UpdateResources();
         if(mini?.IsVisible==true)UpdateMini();
     }
-    void EditorClick(object sender,RoutedEventArgs e){if(Library.SelectedItem is not Wallpaper scene)return;if(LayersFor(scene)?.Realtime==true){CustomizeSceneClick(sender,e);return;}if(scene.IsSpatial){Status.Text="Редактор доступен для видеообоев. 3D-сцена рисуется в реальном времени.";return;}StopPreview();StopHover();Editor.Open(scene);EditorOverlay.Visibility=Visibility.Visible;}
+    void EditorClick(object sender,RoutedEventArgs e){if(Library.SelectedItem is not Wallpaper scene)return;if(StudioProject.IsProject(scene.Path)){OpenGpuEditor(scene);return;}if(LayersFor(scene)?.Realtime==true){CustomizeSceneClick(sender,e);return;}if(scene.IsSpatial){Status.Text="Редактор доступен для видеообоев. 3D-сцена рисуется в реальном времени.";return;}StopPreview();StopHover();Editor.Open(scene);EditorOverlay.Visibility=Visibility.Visible;}
     void ShowMini()
     {
         if(mini is null)
@@ -147,7 +153,7 @@ public partial class MainWindow
     {
         if(items.Any(s=>s.Path==path))return;preferences.Imports.Add(path);preferences.ImportNames[path]=name;
         if(cover is not null)preferences.ImportThumbnails[path]=cover;if(layers is not null)preferences.Layers[path]=layers;
-        var scene=new Wallpaper(name,path,cover,"LOCAL COLLECTION",IsSpatial:layers?.MotionId is not null);items.Add(scene);Library.SelectedItem=scene;Save();RefreshFilter();
+        var scene=new Wallpaper(name,path,cover,StudioProject.IsProject(path)?"МОЯ ЖИВАЯ СЦЕНА":"LOCAL COLLECTION",IsSpatial:StudioProject.IsProject(path)||layers?.MotionId is not null);items.Add(scene);Library.SelectedItem=scene;Save();RefreshFilter();
     }
     List<Wallpaper> ExportScenes()
     {

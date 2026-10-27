@@ -1,0 +1,19 @@
+{
+  "background": "Use case: photorealistic-natural. Asset type: background plate for a premium realtime desktop wallpaper, cinematic landscape, wide 16:9. Create an exceptionally beautiful natural photograph of a quiet northern Russian lake after summer rain at golden hour. Authentic small timber houses on the distant LEFT shoreline, modest countryside architecture, dark birch and pine woodland framing the distant bank, broad open mirrorlike lake occupying the lower half, rich subtle reflections of amber sky in cool blue teal water. A small bright gap in clouds near upper right horizon, luminous but controlled warm light, layered pearly storm clouds and lingering pale mist over distant treeline. Composition: horizon at about 45% height, foreground lake clear and unobstructed so animated reeds and branches can be composited later; no close foreground branches, no reeds or large objects across the frame; no people. Mood calm, expensive fine-art landscape photography, believable fine natural texture, no oversaturated neon colors, no exaggerated HDR, no painting look, no cartoon, no text, no symbols, no watermark, no logo. Image must hold up full screen: precise cabin timber, realistic distant trees, delicate cloud structure, clean natural reflections. Request native 3840x2160 landscape resolution if supported. Keep important subjects comfortably inside the frame.",
+  "foreground": [
+    {
+      "file": "birch.png",
+      "prompt": "Use case: compositing. Asset type: genuinely transparent foreground image layer for a photorealistic desktop wallpaper. Input image is a LIGHTING AND COLOR REFERENCE ONLY, not an edit target. Generate a new beautiful close birch branch hanging diagonally down from the upper RIGHT corner, many delicate small green birch leaves with fine natural serrated edges, thin believable twigs, a few leaves translucent in low warm sunset light coming from upper right, cool blue shadow sides, realistic natural photography and fine texture. Branch anchor exits at upper right edge, graceful leaf sprays reach toward lower left, organically sparse so a lake background remains visible between leaves. Entire rest of canvas genuinely transparent alpha; no lake, no sky, no colored backdrop, no checkerboard, no white matte, no contact shadow, no text. Clean anti-aliased detailed alpha edges suitable for compositing. Full branch visible except anchor at upper right; square composition. Avoid fake plastic leaves, repeated identical leaf shapes or a heavy dense canopy."
+    },
+    {
+      "file": "reeds.png",
+      "prompt": "Use case: compositing. Asset type: genuinely transparent foreground layer for the supplied photorealistic lake wallpaper. Input image is a LIGHTING AND COLOR REFERENCE ONLY. Generate a small natural sparse clump of lakeside sedges and reeds photographed very close, fine curved green blades and a few slim seed heads, subtly wet surfaces, low warm backlight from upper right with cool teal shadows. Roots and lower blades exit along the BOTTOM edge; tips rise irregularly to mid-frame, with ample genuine transparent space between blades and above them. Horizontal wide composition, most visual mass concentrated on LEFT half and lower edge. Photographic botanical detail, fine anti-aliased alpha edges for compositing. No background of any kind, no ground patch, no pot, no water, no horizon, no checkerboard, no white outline, no text, no symbols. Avoid oversized cattail heads and tropical plants."
+    }
+  ],
+  "generator": "built-in image_gen",
+  "sources": {
+    "background": "background.png",
+    "birch": "birch.png",
+    "reeds": "reeds.png"
+  }
+}

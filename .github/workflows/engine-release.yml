@@ -2,9 +2,9 @@ name: Engine Studio release
 on:
   workflow_dispatch:
   pull_request:
-    paths: ['tools/*release*', 'installer/VWP-Online.iss', 'VWP.csproj', '.github/workflows/engine-release.yml']
+    paths: ['**.cs', '**.xaml', 'assets/studio/**', 'assets/studio-originals/**', 'tools/*release*', 'tools/bootstrap_webview.ps1', 'build.ps1', 'installer/VWP-Online.iss', 'VWP.csproj', '.github/workflows/engine-release.yml']
   push:
-    tags: ['v0.10.*']
+    tags: ['v0.11.*']
 permissions:
   contents: read
   actions: read
@@ -32,7 +32,6 @@ jobs:
           python tools/check_release_packaging.py
           if ($LASTEXITCODE -ne 0) { throw 'Release package checks failed' }
   release:
-    if: github.event_name != 'pull_request'
     needs: plan
     runs-on: windows-latest
     timeout-minutes: 90
@@ -55,7 +54,7 @@ jobs:
         run: |
           [xml]$project = Get-Content VWP.csproj
           $version = $project.Project.PropertyGroup.Version
-          if ($version -notmatch '^0\.10\.\d+$') { throw 'Unexpected release version' }
+          if ($version -notmatch '^0\.11\.\d+$') { throw 'Unexpected release version' }
           if ('${{ github.ref_type }}' -eq 'tag' -and '${{ github.ref_name }}' -ne "v$version") { throw 'Tag/version mismatch' }
           "value=$version" >> $env:GITHUB_OUTPUT
       - name: Restore verified complete wallpaper library
@@ -65,6 +64,8 @@ jobs:
         run: |
           python -m pip install 'Pillow>=11,<13' imageio-ffmpeg==0.6.0 'numpy>=2,<3'
           if ($LASTEXITCODE -ne 0) { throw 'Media dependencies failed' }
+          ./tools/bootstrap_webview.ps1
+          if ($LASTEXITCODE -ne 0) { throw 'WebView2 bootstrap verification failed' }
           python tools/bootstrap_ffmpeg.py
           if ($LASTEXITCODE -ne 0) { throw 'FFmpeg verification failed' }
           python tools/restore_engine_release.py
@@ -85,11 +86,15 @@ jobs:
           $check = Start-Process $launcher -ArgumentList '--verify-engine' -WindowStyle Hidden -PassThru -Wait
           Get-Content "dist/Release-$version/verification/engine-ui-status.txt"
           if ($check.ExitCode -ne 0) { throw 'Published application UI verification failed' }
+          $quality = Start-Process $launcher -ArgumentList '--verify-quality' -WindowStyle Hidden -PassThru -Wait
+          Get-Content "dist/Release-$version/verification/quality-ui-status.txt"
+          if ($quality.ExitCode -ne 0) { throw 'Published GPU originals verification failed' }
           python tools/package_online_release.py --version $version --build "dist/Release-$version"
           if ($LASTEXITCODE -ne 0) { throw 'Complete distribution validation or volume packaging failed' }
           $qa = Join-Path $env:GITHUB_WORKSPACE 'artifacts/release-check'
           New-Item -ItemType Directory -Force -Path $qa | Out-Null
           Copy-Item -LiteralPath "dist/Release-$version/verification/engine-ui-status.txt" -Destination (Join-Path $qa 'published-ui.txt')
+          Copy-Item -LiteralPath "dist/Release-$version/verification/quality-ui-status.txt" -Destination (Join-Path $qa 'published-gpu-ui.txt')
           $staging = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE "dist/Release-$version"))
           $distributionRoot = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE 'dist'))+[IO.Path]::DirectorySeparatorChar
           if (!$staging.StartsWith($distributionRoot)) { throw 'Unexpected publish staging directory' }
@@ -115,7 +120,7 @@ jobs:
           $version = '${{ steps.version.outputs.value }}'
           $qa = Join-Path $env:GITHUB_WORKSPACE 'artifacts/release-check'
           New-Item -ItemType Directory -Force -Path $qa | Out-Null
-          $installDir = [IO.Path]::GetFullPath((Join-Path $env:RUNNER_TEMP 'VWP-0.10-install-check'))
+          $installDir = [IO.Path]::GetFullPath((Join-Path $env:RUNNER_TEMP 'VWP-0.11-install-check'))
           if (!$installDir.StartsWith([IO.Path]::GetFullPath($env:RUNNER_TEMP)+[IO.Path]::DirectorySeparatorChar)) { throw 'Unexpected smoke install directory' }
           $server = Start-Process python -ArgumentList '-m','http.server','8765','--bind','127.0.0.1','--directory','dist' -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $qa 'http.txt') -RedirectStandardError (Join-Path $qa 'http-error.txt')
           try {
@@ -133,6 +138,9 @@ jobs:
             $check = Start-Process $launcher -ArgumentList '--verify-engine' -WindowStyle Hidden -PassThru -Wait
             Copy-Item -LiteralPath (Join-Path $installDir 'verification/engine-ui-status.txt') -Destination (Join-Path $qa 'installed-ui.txt')
             if ($check.ExitCode -ne 0) { throw 'Installed application startup failed' }
+            $gpu = Start-Process $launcher -ArgumentList '--verify-quality' -WindowStyle Hidden -PassThru -Wait
+            Copy-Item -LiteralPath (Join-Path $installDir 'verification/quality-ui-status.txt') -Destination (Join-Path $qa 'installed-gpu.txt')
+            if ($gpu.ExitCode -ne 0) { throw 'Installed GPU scene startup failed' }
             $uninstall = Start-Process (Join-Path $installDir 'unins000.exe') -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -WindowStyle Hidden -PassThru -Wait
             if ($uninstall.ExitCode -ne 0) { throw 'Uninstaller failed' }
             for ($attempt=0; $attempt -lt 40 -and (Test-Path -LiteralPath $launcher); $attempt++) { Start-Sleep -Milliseconds 500 }
@@ -141,6 +149,7 @@ jobs:
             Get-Content (Join-Path $qa 'status.txt')
           } finally { if (!$server.HasExited) { Stop-Process -Id $server.Id } }
       - name: Publish verified official release
+        if: github.event_name != 'pull_request'
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
@@ -174,7 +183,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: VWP-0.10-Release-Checks
+          name: VWP-0.11-Release-Checks
           path: |
             artifacts/release-check/
             dist/Release-*/verification/engine-ui-status.txt

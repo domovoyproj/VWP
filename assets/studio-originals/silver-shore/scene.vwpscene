@@ -1,0 +1,221 @@
+{
+  "schema": 2,
+  "id": "silver-shore",
+  "name": "Серебряный берег",
+  "description": "Тихое озеро после дождя. Мягкий ветер в берёзах, отражения закатного неба и медленное течение облаков.",
+  "author": "VWP Studio",
+  "cover": "poster.png",
+  "duration": 24,
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.08,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.35,
+    "audioReactive": false,
+    "clock": false
+  },
+  "weather": {
+    "kind": "none",
+    "count": 0,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "color": "#EAF5FF"
+  },
+  "layers": [
+    {
+      "id": "lake",
+      "name": "Озеро и небо",
+      "source": "background.png",
+      "visible": true,
+      "rect": [
+        -0.025,
+        -0.025,
+        1.05,
+        1.05
+      ],
+      "opacity": 1,
+      "depth": 0.06,
+      "motion": "flow",
+      "anchor": "bottom",
+      "strength": 0.75,
+      "waterline": 0.48,
+      "sun": [
+        0.9,
+        0.34
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "feather": 0.012,
+          "points": [
+            [
+              0,
+              0.49
+            ],
+            [
+              0.2,
+              0.49
+            ],
+            [
+              0.44,
+              0.486
+            ],
+            [
+              0.7,
+              0.482
+            ],
+            [
+              1,
+              0.49
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "channel": 1,
+          "feather": 0.024,
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.31
+            ],
+            [
+              0.79,
+              0.33
+            ],
+            [
+              0.66,
+              0.36
+            ],
+            [
+              0.48,
+              0.35
+            ],
+            [
+              0.35,
+              0.31
+            ],
+            [
+              0.15,
+              0.27
+            ],
+            [
+              0,
+              0.22
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reeds",
+      "name": "Камыши у воды",
+      "source": "reeds.png",
+      "visible": true,
+      "rect": [
+        -0.025,
+        0.78,
+        0.5,
+        0.5
+      ],
+      "opacity": 1,
+      "depth": 0.85,
+      "motion": "foliage",
+      "anchor": "bottom",
+      "strength": 0.65,
+      "sun": [
+        0.9,
+        0.34
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "feather": 0.01,
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "birch",
+      "name": "Берёзовая ветка",
+      "source": "birch.png",
+      "visible": true,
+      "rect": [
+        0.75,
+        -0.25,
+        0.43,
+        0.765
+      ],
+      "opacity": 1,
+      "depth": 0.65,
+      "motion": "foliage",
+      "anchor": "top",
+      "strength": 0.6,
+      "sun": [
+        0.9,
+        0.34
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "feather": 0.01,
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@ name: Engine studio
 on:
   workflow_dispatch:
   pull_request:
-    paths: ['**.cs', '**.xaml', '.github/workflows/engine-studio.yml']
+    paths: ['**.cs', '**.xaml', 'assets/studio/**', 'assets/studio-originals/**', '.github/workflows/engine-studio.yml']
 permissions:
   contents: read
 jobs:
@@ -27,11 +27,27 @@ jobs:
           $check = Start-Process bin/Release/net8.0-windows/VWP.exe -ArgumentList '--verify-engine' -WindowStyle Hidden -PassThru -Wait
           Get-Content bin/Release/net8.0-windows/verification/engine-ui-status.txt
           if ($check.ExitCode -ne 0) { throw 'Library layout checks failed' }
+          $quality = Start-Process bin/Release/net8.0-windows/VWP.exe -ArgumentList '--verify-quality' -WindowStyle Hidden -PassThru -Wait
+          Get-Content bin/Release/net8.0-windows/verification/quality-ui-status.txt
+          if ($quality.ExitCode -ne 0) { throw 'GPU originals library verification failed' }
+      - name: Verify GPU projects, native rendering and recovery
+        shell: pwsh
+        run: |
+          foreach ($mode in '--studio-project-check','--studio-check-all','--studio-host-check','--studio-recovery-check') {
+            $check = Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList $mode -WindowStyle Hidden -PassThru -Wait
+            if ($check.ExitCode -ne 0) { throw "GPU Studio check failed: $mode" }
+          }
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: VWP-Engine-Studio-Checks
           path: |
             artifacts/engine-check/
+            artifacts/studio-project-check/status.txt
+            artifacts/studio-check/
+            artifacts/studio-host-check/
+            artifacts/studio-recovery/
             bin/Release/net8.0-windows/verification/engine-*.png
             bin/Release/net8.0-windows/verification/engine-ui-status.txt
+            bin/Release/net8.0-windows/verification/quality-*.png
+            bin/Release/net8.0-windows/verification/quality-ui-status.txt

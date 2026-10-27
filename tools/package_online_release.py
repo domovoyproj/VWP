@@ -15,6 +15,18 @@ def validate(source):
     for group in json.loads((ROOT/'tools/collections-plan.json').read_text(encoding='utf-8')):
         required += [f"assets/{group['folder']}/catalog.json"]
         for scene in group['entries']:required += [f"assets/{group['folder']}/{scene['id']}.{ext}" for ext in ('png','mp4','poster.png','preview.mp4')]
+    required += ['assets/studio/runtime/'+name for name in ('index.html','runtime.css','gl.js','masks.js','shaders.js','renderer.js')]
+    for scene in ('silver-shore','winter-lane','rainy-afternoon'):
+        project_path=source/'assets/studio-originals'/scene/'scene.vwpscene'
+        required += ['assets/studio-originals/'+scene+'/scene.vwpscene','assets/studio-originals/'+scene+'/ARTWORK.json']
+        if not project_path.is_file():raise SystemExit('Missing Studio original: '+scene)
+        project=json.loads(project_path.read_text(encoding='utf-8-sig'))
+        assets={project['cover']}
+        for layer in project['layers']:assets.add(layer['source']);assets.update(layer.get('maskFiles',{}).values())
+        for asset in assets:
+            resolved=(project_path.parent/asset).resolve()
+            if not resolved.is_relative_to(project_path.parent.resolve()):raise SystemExit('Studio asset escapes project')
+            required.append(str(resolved.relative_to(source.resolve())))
     city=source/'assets/city/resources.json'
     if not city.is_file():raise SystemExit('City resource manifest missing')
     required += ['assets/city/'+name for name in json.loads(city.read_text(encoding='utf-8-sig'))['files']]

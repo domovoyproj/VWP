@@ -14,7 +14,7 @@ using Microsoft.Win32;
 using LibVLCSharp.Shared;
 using Forms = System.Windows.Forms;
 namespace VWP;
-public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null,bool IsSpatial=false,bool Clock=false);
+public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null,bool IsSpatial=false,bool Clock=false,string? StudioId=null);
 public record PresetDefinition(int Id,string Name,string Category,string Description,string Accent,string Motion);
 public sealed class Preferences
 {
@@ -59,7 +59,7 @@ public partial class MainWindow : Window
     bool fullscreen;
     Rect compactBounds;
     string screenLayout="";
-    string category="Все сцены";
+    string category="Оригиналы VWP";
     Rect launchArea;
     public MainWindow()
     {
@@ -80,10 +80,12 @@ public partial class MainWindow : Window
         foreach(var preset in presets)items.Add(new(preset.Name+" · Живая сцена",System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"scene-{preset.Id}.png"),preset.Category+" · ЖИВАЯ СЦЕНА",preset.Category,SpatialScene.Descriptions[preset.Id],preset.Id,true));
         LoadExpansion(assets);
         LoadLiving(assets);
+        LoadStudioOriginals(assets);
         items.Add(new("Afterlight · Endless City",Path.Combine(assets,"city","index.html"),Path.Combine(assets,"city","cover.png"),"ЭКСКЛЮЗИВ · ИНТЕРАКТИВНЫЙ 3D", "Город","Бесконечный неоновый город. Прогулка, полёт, дождь, транспорт и три настроения. Открывается за звезду GitHub.",CityId,true));
         RemoveRetiredWallpapers();
-        foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),"LOCAL VIDEO",IsSpatial:preferences.Layers.GetValueOrDefault(path)?.MotionId is not null));
-        Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedIndex=0;CountLabel.Text=$"{items.Count} сцен";
+        foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),StudioProject.IsProject(path)?"МОЯ ЖИВАЯ СЦЕНА":"LOCAL VIDEO",IsSpatial:StudioProject.IsProject(path)||preferences.Layers.GetValueOrDefault(path)?.MotionId is not null));
+        if(!items.Any(s=>s.Category==category))category="Все сцены";
+        Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedItem=items.FirstOrDefault(s=>s.Category==category)??items.FirstOrDefault();CountLabel.Text=$"{items.Count} сцен";
         RefreshScreens(); Volume.Value=preferences.Volume; if(host is not null)host.Volume=preferences.Volume; Autostart.IsChecked=preferences.Autostart;
         var menu=new Forms.ContextMenuStrip();
         menu.Items.Add("Открыть VWP",null,(_,_)=>Dispatcher.Invoke(()=>{Show();Activate();}));
@@ -106,6 +108,7 @@ public partial class MainWindow : Window
             if(Environment.GetCommandLineArgs().Contains("--verify-ui")) VerifyUi();
             if(Environment.GetCommandLineArgs().Contains("--verify-redesign"))_ = VerifyRedesign();
             if(Environment.GetCommandLineArgs().Contains("--verify-engine"))_ = VerifyEngineStudio();
+            if(Environment.GetCommandLineArgs().Contains("--verify-quality"))_ = VerifyQualityStudio();
             if(preferences.Autostart && !Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal)))AutostartClick(this,new());
         };
     }
@@ -131,6 +134,8 @@ public partial class MainWindow : Window
     {
         StopPreview();StopHover();
         HeroTitle.Text=item.Name;
+        VideoEditorButton.Visibility=StudioProject.IsProject(item.Path)?Visibility.Collapsed:Visibility.Visible;
+        RestoreOriginalButton.Visibility=StudioProject.IsProject(item.Path)?Visibility.Collapsed:Visibility.Visible;
         HeroDescription.Text=item.Description;UpdateSceneActions();
         CustomizeButton.IsEnabled=item.PresetId!=CityId;
         RestoreOriginalButton.IsEnabled=item.PresetId is not null&&preferences.Layers.ContainsKey(PlaybackRules.Key(item));
@@ -142,7 +147,7 @@ public partial class MainWindow : Window
     void RoundCard(object sender,SizeChangedEventArgs e) {var element=(FrameworkElement)sender;element.Clip=new System.Windows.Media.RectangleGeometry(new Rect(0,0,element.ActualWidth,element.ActualHeight),8,8);}
     void ImportClick(object sender,RoutedEventArgs e)
     {
-        var dialog=new Microsoft.Win32.OpenFileDialog { Multiselect=true,Filter="Видео|*.mp4;*.webm;*.mkv;*.mov;*.avi" };
+        var dialog=new Microsoft.Win32.OpenFileDialog { Multiselect=true,Filter="Видео и проекты VWP|*.mp4;*.webm;*.mkv;*.mov;*.avi;*.vwpscene|Видео|*.mp4;*.webm;*.mkv;*.mov;*.avi|Проект VWP|*.vwpscene" };
         if(dialog.ShowDialog()==true)ImportFiles(dialog.FileNames);
     }
     void ApplyClick(object sender,RoutedEventArgs e)
@@ -158,7 +163,12 @@ public partial class MainWindow : Window
     bool FilterScene(object value) {var item=(Wallpaper)value;bool live=item.IsSpatial||preferences.Layers.GetValueOrDefault(PlaybackRules.Key(item))?.Realtime==true;return (sceneFormat=="Все форматы" || (sceneFormat=="3D")==live) && MatchesCollection(item) && LibrarySearch.Matches(item,SearchBox.Text);}
     void RefreshFilter() {if(Library.ItemsSource is null)return;var view=System.Windows.Data.CollectionViewSource.GetDefaultView(items);view.Refresh();CountLabel.Text=$"{view.Cast<Wallpaper>().Count()} / {items.Count} сцен";}
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
-    void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)if(button.Tag as string==category)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=System.Windows.Media.Brushes.Transparent;RefreshFilter();}
+    void CategoryClick(object sender,RoutedEventArgs e)=>SelectCategory((string)((Button)sender).Tag);
+    void SelectCategory(string value)
+    {
+        category=value;foreach(Button button in SidebarCategories.Children)if(button.Tag as string==category)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=System.Windows.Media.Brushes.Transparent;
+        RefreshFilter();if(Library.SelectedItem is not Wallpaper selected||!FilterScene(selected))Library.SelectedItem=items.FirstOrDefault(s=>FilterScene(s));
+    }
     void PauseClick(object sender,RoutedEventArgs e) {var config=Config(SelectedScreen);config.UserPaused=!config.UserPaused;host?.SetUserPaused(config.UserPaused);Save();UpdatePlaybackStatus();}
     void StopClick(object sender,RoutedEventArgs e) {CancelPendingApply(SelectedScreen.DeviceName);host?.Stop();var config=Config(SelectedScreen);config.Scene=null;config.PlaylistEnabled=false;LoadMonitorControls();Save();Status.Text="Обои остановлены";UpdatePauseUi(false);}
     void QuitClick(object sender,RoutedEventArgs e) { exiting=true;Close(); }
@@ -187,6 +197,7 @@ public partial class MainWindow : Window
     void VolumeChanged(object sender,RoutedPropertyChangedEventArgs<double> e) {if(!featuresReady || loadingControls)return;var config=Config(SelectedScreen);config.Volume=(int)e.NewValue;if(host is not null)host.Volume=config.Volume;Save();}
     async void PreviewClick(object sender,RoutedEventArgs e)
     {
+        if(Library.SelectedItem is Wallpaper gpu&&StudioProject.IsProject(gpu.Path)){PreviewGpuScene(gpu);return;}
         if(Library.SelectedItem is Wallpaper cityScene&&cityScene.PresetId==CityId){_ = ExploreCity(false);return;}
         StopHover();
         if(Library.SelectedItem is not Wallpaper item || !File.Exists(item.Path))return;
@@ -212,7 +223,7 @@ public partial class MainWindow : Window
     int previewGeneration;
     bool heroPreparing;
     CancellationTokenSource? previewCancellation;
-    void StopPreview() {previewGeneration++;previewCancellation?.Cancel();previewCancellation?.Dispose();previewCancellation=null;heroPreparing=false;scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Превью";}
+    void StopPreview() {studioPlayer?.Close();studioPlayer=null;previewGeneration++;previewCancellation?.Cancel();previewCancellation?.Dispose();previewCancellation=null;heroPreparing=false;scenePreview?.Dispose();scenePreview=null;HeroMotion.Children.Clear();HeroMotion.Visibility=Visibility.Collapsed;HeroVideo.Stop();HeroVideo.Source=null;HeroVideo.Visibility=Visibility.Collapsed;PreviewButton.Content="▷  Превью";}
     void AutostartClick(object sender,RoutedEventArgs e)
     {
         bool enabled=Autostart.IsChecked==true;

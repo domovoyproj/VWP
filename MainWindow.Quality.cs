@@ -21,7 +21,7 @@ public partial class MainWindow
             if(scene is not null&&(pendingScenes.ContainsKey(screen.DeviceName)||hosts.TryGetValue(screen.DeviceName,out var player)&&player.Active))ApplyScene(scene,screen);
         }
         Save();UpdateQualityUi();
-        Status.Text=mode=="Eco"?"Экономия включена · 15 FPS, облегчённые видео и 3D":"Режим применён ко всем экранам · "+QualityCaption(mode);
+        Status.Text=mode=="Eco"?"Экономия включена · облегчённые видео и живые сцены":"Режим применён ко всем экранам · "+QualityCaption(mode);
     }
     static string QualityCaption(string mode)=>mode switch{"Eco"=>"Экономия","Balance"=>"Баланс","Quality"=>"Максимум","Auto"=>"Авто",_=>"Вручную"};
     void UpdateQualityUi()

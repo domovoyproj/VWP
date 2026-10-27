@@ -8,6 +8,7 @@ obj/
 artifacts/
 *.tmp.mp4
 tools/ffmpeg.exe
+tools/MicrosoftEdgeWebview2Setup.exe
 graphify-out/
 assets/spatial/*-check-*.png
 assets/motion/*.mp4

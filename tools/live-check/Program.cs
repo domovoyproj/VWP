@@ -17,6 +17,16 @@ class Program
  {
   if(args.Length==1 && args[0]=="--electric-check"){ElectricCheck.Run();return;}
   if(args.Length==1 && args[0]=="--engine-check"){EngineCheck.Run();return;}
+  if(args.Length>=1 && args[0] is "--studio-check" or "--studio-check-all"){StudioCheck.Run(args);return;}
+  if(args.Length==1 && args[0]=="--studio-project-check"){StudioProjectCheck.Run().GetAwaiter().GetResult();return;}
+  if(args.Length>=2 && args[0]=="--studio-render"){StudioRender.Run(args);return;}
+  if(args.Length==1 && args[0]=="--studio-recovery-check"){StudioRecoveryCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--studio-host-check"){StudioHostCheck.Run();return;}
+  if(args.Length>=1 && args[0]=="--studio-editor-preview")
+  {
+   var studioApp=new Application();studioApp.Resources.MergedDictionaries.Add(new ResourceDictionary{Source=new Uri("/VWP;component/StudioResources.xaml",UriKind.Relative)});ThemeService.Apply("Dark","#A5C6FF");
+   var editor=new StudioEditor(StudioProject.Load(Path.GetFullPath(args.Length>1?args[1]:"assets/studio-originals/silver-shore/scene.vwpscene")));studioApp.ShutdownMode=ShutdownMode.OnExplicitShutdown;studioApp.Startup+=(_,_)=>{editor.ShowDialog();studioApp.Shutdown();};studioApp.Run();return;
+  }
   if(args.Length==1 && args[0]=="--collection-bundle-check")
   {
    string bundleCheckOutput=Path.Combine(Environment.CurrentDirectory,"artifacts","collection-bundle-check.txt");
