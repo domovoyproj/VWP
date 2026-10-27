@@ -1,0 +1,1203 @@
+[
+  {
+    "folder": "electric",
+    "category": "Аниме",
+    "start": 1401,
+    "style": "Professional Japanese anime key art, sophisticated crisp cel shading and precise elegant linework. A recognizable single character center-right, atmospheric detailed background, no collage.",
+    "entries": [
+      {
+        "id": 1401,
+        "name": "Киллуа · Blue Current",
+        "scene": "Killua white-haired anime portrait, icy blue eyes and soft blue background",
+        "effect": "lightning",
+        "accent": "#63CFFF",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Killua white-haired anime portrait, icy blue eyes and soft blue background. Style: Professional Japanese anime key art, sophisticated crisp cel shading and precise elegant linework. A recognizable single character center-right, atmospheric detailed background, no collage. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1402,
+        "name": "Киллуа · Midnight Voltage",
+        "scene": "Killua silver-haired portrait with turquoise rim lighting on dark indigo",
+        "effect": "lightning",
+        "accent": "#52DAFF",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Killua silver-haired portrait with turquoise rim lighting on dark indigo. Style: Professional Japanese anime key art, sophisticated crisp cel shading and precise elegant linework. A recognizable single character center-right, atmospheric detailed background, no collage. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1403,
+        "name": "Годжо · Limitless",
+        "scene": "Satoru Gojo, white hair, brilliant blue eyes, dark high collar, confident smile, blue night city",
+        "effect": "energy",
+        "accent": "#459CFF",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium anime LIVE desktop wallpaper BASE, landscape 16:9, request 2560x1440. Satoru Gojo from Jujutsu Kaisen, adult man with spiky white hair, uncovered brilliant ice-blue eyes, high dark collar, confident subtle smile, close-up three-quarter portrait. Deep midnight cobalt backdrop, rim-lit silver hair, luminous electric-blue atmosphere. Elegant high-contrast anime key visual. Leave a clean top band and leftmost 20% for a later clock and desktop icons. Professional hand-drawn Japanese anime key art, precise elegant ink outlines, sophisticated clean cel shading, carefully constructed face, beautiful eyes, cinematic composition center-right, highly polished illustration with rich restrained detail. Composition must work as a desktop background at 1920x1080. No words, text, numbers, clock, UI, symbols that resemble writing, watermarks or desktop icons. No lightning bolts, no streaking particles: animation will be composited later. One single character, anatomically coherent. No photographic rendering, no plastic 3D, no collage, no borders.",
+        "description": "Энергетические дуги, световые орбиты и свечение. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1404,
+        "name": "Саске · Violet Storm",
+        "scene": "Sasuke Uchiha young adult, black hair, violet Rinnegan and red Sharingan, dark high collar, purple storm mountains",
+        "effect": "lightning",
+        "accent": "#B18DFF",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium anime LIVE desktop wallpaper BASE, landscape 16:9, request 2560x1440. Sasuke Uchiha from Naruto as a young adult, black spiky hair, intense gaze, one violet ripple-pattern Rinnegan eye and one red Sharingan eye, dark high-collar outfit, chest-up three-quarter portrait facing left with a calm determined expression. Deep plum and midnight violet background, lavender edge light, restrained purple storm atmosphere. Leave top band and leftmost 20% quiet for clock and desktop icons. Professional hand-drawn Japanese anime key art, precise elegant ink outlines, sophisticated clean cel shading, carefully constructed face, beautiful eyes, cinematic composition center-right, highly polished illustration with rich restrained detail. Composition must work as a desktop background at 1920x1080. No words, text, numbers, clock, UI, symbols that resemble writing, watermarks or desktop icons. No lightning bolts, no streaking particles: animation will be composited later. One single character, anatomically coherent. No photographic rendering, no plastic 3D, no collage, no borders.",
+        "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1405,
+        "name": "Какаши · Silver Thunder",
+        "scene": "Kakashi Hatake, silver spiky hair, black face mask, leaf forehead protector over one eye, green vest, rain dusk mountains",
+        "effect": "rain",
+        "accent": "#98D7EE",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium anime LIVE desktop wallpaper BASE illustration, landscape 16:9, 2560x1440 requested. Kakashi Hatake from Naruto, silver spiky hair, black lower-face mask, slanted metal forehead protector with engraved leaf emblem over one eye, single visible sharp grey eye, dark navy shinobi outfit and green flak vest, chest-up three-quarter portrait. Rainy blue-grey dusk, distant layered mountains and pale thunderclouds, elegant silver-cyan highlights. Clean top-center space and quiet left side. Professional Japanese anime key art, precise clean ink outlines, elegant sophisticated cel shading, coherent anatomy, beautiful detailed face and hair, main portrait center-right, nuanced dramatic lighting and tasteful detail. One single recognizable character, no collage. No text, clock, date, watermark, desktop icons, UI or border. No lightning or streaking particles: these will be animated in a later layer. No photographic rendering, no 3D plastic. Compose a complete widescreen desktop artwork.",
+        "description": "Движущиеся дождевые струи и мягкая атмосфера. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1406,
+        "name": "Зеницу · Thunderclap",
+        "scene": "Zenitsu Agatsuma golden-orange hair, closed eyes, orange white-triangle haori, black uniform, sunset mountains",
+        "effect": "lightning",
+        "accent": "#FFD263",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium anime LIVE desktop wallpaper BASE illustration, landscape 16:9, 2560x1440 requested. Zenitsu Agatsuma from Demon Slayer, golden orange bowl-cut hair with angular layered ends, eyes gently closed with a calm focused expression, orange haori with small white triangular pattern over black uniform, chest-up portrait holding sheathed katana below frame with hands not visible. Amber golden dusk and dark mountain silhouettes, striking warm golden edge light, premium cinematic anime illustration. Clean upper-center space and left side. Professional Japanese anime key art, precise clean ink outlines, elegant sophisticated cel shading, coherent anatomy, beautiful detailed face and hair, main portrait center-right, nuanced dramatic lighting and tasteful detail. One single recognizable character, no collage. No text, clock, date, watermark, desktop icons, UI or border. No lightning or streaking particles: these will be animated in a later layer. No photographic rendering, no 3D plastic. Compose a complete widescreen desktop artwork.",
+        "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1407,
+        "name": "Итачи · Crimson Silence",
+        "scene": "Itachi Uchiha, long black hair, red eyes, scratched forehead protector, black Akatsuki cloak, scarlet moon and pines",
+        "effect": "embers",
+        "accent": "#FF665E",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium anime LIVE desktop wallpaper clean base, wide 16:9, 2560x1440 requested. Itachi Uchiha from Naruto, long black hair framing a pale elegant face, red Sharingan eyes, scratched leaf forehead protector, black Akatsuki cloak with red inner collar, stoic melancholy expression, chest-up three-quarter portrait on right. Crimson dusk through black pine silhouettes, soft red moon glow far left, muted charcoal and deep scarlet palette. Luxurious precise anime key art. Clean top-center clock space and leftmost 20 percent quiet. Exquisite professional Japanese anime illustration, sophisticated crisp cel shading, precise fine linework, rich controlled detail and coherent recognizable character anatomy. Main subject center-right, cinematic composition and dramatic atmospheric depth. No text, date, clock, watermark, desktop icons, UI, border or collage. No lightning or streaking particles: animated effects will be layered later. No photographic treatment, no plastic 3D.",
+        "description": "Тлеющие искры и мягкое свечение. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1408,
+        "name": "Райден · Eternal Violet",
+        "scene": "Raiden Shogun adult woman, long violet braid, purple eyes, ornate purple outfit, twilight garden and torii",
+        "effect": "energy",
+        "accent": "#C79DFF",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium anime LIVE desktop wallpaper clean base, wide 16:9, 2560x1440 requested. Raiden Shogun from Genshin Impact, adult woman with very long violet braided hair, purple eyes, ornate purple kimono-inspired battle outfit with subtle gold details and red cord, elegant shoulder-up portrait in three-quarter view, composed calm powerful gaze, nonsexual. Violet twilight garden silhouettes and a dim distant torii, soft lavender luminous haze, refined purple rim lighting. Clean top-center and quiet left side for desktop widgets. Exquisite professional Japanese anime illustration, sophisticated crisp cel shading, precise fine linework, rich controlled detail and coherent recognizable character anatomy. Main subject center-right, cinematic composition and dramatic atmospheric depth. No text, date, clock, watermark, desktop icons, UI, border or collage. No lightning or streaking particles: animated effects will be layered later. No photographic treatment, no plastic 3D.",
+        "description": "Энергетические дуги, световые орбиты и свечение. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1409,
+        "name": "Макима · Scarlet Hour",
+        "scene": "Makima from Chainsaw Man, adult woman, copper-red braid, golden concentric eyes, white shirt and black tie, calm enigmatic smile, red dusk urban skyline, fully clothed portrait",
+        "effect": "embers",
+        "accent": "#F68B77",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Makima from Chainsaw Man, adult woman, copper-red braid, golden concentric eyes, white shirt and black tie, calm enigmatic smile, red dusk urban skyline, fully clothed portrait. Style: Professional Japanese anime key art, sophisticated crisp cel shading and precise elegant linework. A recognizable single character center-right, atmospheric detailed background, no collage. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Тлеющие искры и мягкое свечение. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1410,
+        "name": "Леви · Emerald Wind",
+        "scene": "Levi Ackerman adult man, black undercut hair, steel grey eyes, dark green Scout cloak and white cravat, calm resolute chest-up portrait above old European rooftops in emerald blue dusk",
+        "effect": "wind",
+        "accent": "#78CFB0",
+        "category": "Аниме",
+        "format": "1080p · 30 FPS · FAN ART",
+        "clock": true,
+        "folder": "electric",
+        "prompt": "Use case: stylized-concept. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Levi Ackerman adult man, black undercut hair, steel grey eyes, dark green Scout cloak and white cravat, calm resolute chest-up portrait above old European rooftops in emerald blue dusk. Style: Professional Japanese anime key art, sophisticated crisp cel shading and precise elegant linework. A recognizable single character center-right, atmospheric detailed background, no collage. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкие частицы, движущиеся на ветру. День, дата и время ПК отдельным слоем.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "folder": "horizons",
+    "category": "Атмосфера",
+    "start": 1501,
+    "style": "Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon.",
+    "entries": [
+      {
+        "id": 1501,
+        "name": "Orbital Silence",
+        "scene": "Majestic ringed planet rising above a dark cratered icy moon, small isolated research station, vast navy space with restrained nebula glow, dramatic orbital vista",
+        "effect": "stars",
+        "accent": "#8FB6FF",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Majestic ringed planet rising above a dark cratered icy moon, small isolated research station, vast navy space with restrained nebula glow, dramatic orbital vista. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Тонкое мерцание звёзд.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1502,
+        "name": "Ocean Cathedral",
+        "scene": "Immense turquoise underwater cavern opening toward sunlit coral reef, soft shafts of light, natural elegant rock arches, deep peaceful blue underwater world",
+        "effect": "bubbles",
+        "accent": "#55DAD9",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Immense turquoise underwater cavern opening toward sunlit coral reef, soft shafts of light, natural elegant rock arches, deep peaceful blue underwater world. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Подводное преломление света и поднимающиеся пузырьки.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "crf": 0
+      },
+      {
+        "id": 1503,
+        "name": "Alpine Mirror",
+        "scene": "Photoreal alpine lake reflecting jagged snow-capped mountains at dawn, dark pine shores, emerald water with a broad clear foreground",
+        "effect": "water",
+        "accent": "#80C6C9",
+        "waterline": 0.62,
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Photoreal alpine lake reflecting jagged snow-capped mountains at dawn, dark pine shores, emerald water with a broad clear foreground. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Мягкая рябь воды и движущиеся отражения.",
+        "waterRect": [
+          0,
+          0.62,
+          1,
+          1
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1504,
+        "name": "Moss & Mist",
+        "scene": "Ancient lush temperate forest, moss-covered trunks, winding stone path, soft sun rays through light low fog, serene green depths",
+        "effect": "fireflies",
+        "accent": "#9DCF84",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Ancient lush temperate forest, moss-covered trunks, winding stone path, soft sun rays through light low fog, serene green depths. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Летающие светлячки с мягким мерцанием.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1505,
+        "name": "After Rain",
+        "scene": "Cinematic empty night city avenue, magenta and cyan window lights reflected on wet asphalt, elegant modern architecture, fine atmospheric rain, no readable signs",
+        "effect": "rain",
+        "accent": "#6ED7F4",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Cinematic empty night city avenue, magenta and cyan window lights reflected on wet asphalt, elegant modern architecture, fine atmospheric rain, no readable signs. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1506,
+        "name": "Midnight GT",
+        "scene": "Unbranded graphite performance coupe parked three-quarter rear beside a rain-soaked modern glass garage at night, tasteful red taillights and cool blue light, car photography",
+        "effect": "rain",
+        "accent": "#EC695E",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Unbranded graphite performance coupe parked three-quarter rear beside a rain-soaked modern glass garage at night, tasteful red taillights and cool blue light, car photography. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1507,
+        "name": "Liquid Chrome",
+        "scene": "Abstract sculptural ribbon of liquid brushed silver intertwined with translucent smoky violet glass, deep black backdrop, premium ray-traced studio light, fluid elegant folds",
+        "effect": "abstract",
+        "accent": "#AC9DF4",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Abstract sculptural ribbon of liquid brushed silver intertwined with translucent smoky violet glass, deep black backdrop, premium ray-traced studio light, fluid elegant folds. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Непрерывное мягкое течение формы и света.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "crf": 0
+      },
+      {
+        "id": 1508,
+        "name": "Dune Nocturne",
+        "scene": "Sweeping immaculate sand dunes under a huge star-filled desert sky, cool indigo shadows, narrow warm horizon glow, minimalist grand landscape",
+        "effect": "dust",
+        "accent": "#EAC08D",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Sweeping immaculate sand dunes under a huge star-filled desert sky, cool indigo shadows, narrow warm horizon glow, minimalist grand landscape. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Неспешное движение частиц в свете.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1509,
+        "name": "Rainy Reading Room",
+        "scene": "Beautiful cozy contemporary oak reading room, large rain-streaked window facing a dark pine forest, warm lamp, armchair, stacked books without readable titles, realistic interior photography",
+        "effect": "rain",
+        "accent": "#EDC58C",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Beautiful cozy contemporary oak reading room, large rain-streaked window facing a dark pine forest, warm lamp, armchair, stacked books without readable titles, realistic interior photography. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1510,
+        "name": "Skybound Citadel",
+        "scene": "Grand fantasy stone castle on floating islands, monumental waterfalls falling through clouds, distant mountain peaks in rose and gold dawn, painterly cinematic concept art, no characters",
+        "effect": "mist",
+        "accent": "#DAB5EF",
+        "category": "Атмосфера",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "horizons",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Grand fantasy stone castle on floating islands, monumental waterfalls falling through clouds, distant mountain peaks in rose and gold dawn, painterly cinematic concept art, no characters. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавное движение лёгкого тумана.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "folder": "winter",
+    "category": "Зима",
+    "start": 1601,
+    "style": "Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations.",
+    "entries": [
+      {
+        "id": 1601,
+        "name": "Полярная тишина",
+        "scene": "Snow-covered wooden cabin beside a still frozen fjord under flowing green aurora, dark arctic mountains, warm amber window, winter night",
+        "effect": "aurora",
+        "accent": "#80DBBA",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Snow-covered wooden cabin beside a still frozen fjord under flowing green aurora, dark arctic mountains, warm amber window, winter night. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Северное сияние и мягкий снег.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "chimneys": [
+          [
+            0.946,
+            0.269
+          ]
+        ]
+      },
+      {
+        "id": 1602,
+        "name": "Снежные ели",
+        "scene": "Deep pristine snow among tall spruce trees at blue hour, layers of frosted branches, peaceful narrow trail disappearing into soft mist",
+        "effect": "snow",
+        "accent": "#B7D8EF",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Deep pristine snow among tall spruce trees at blue hour, layers of frosted branches, peaceful narrow trail disappearing into soft mist. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1603,
+        "name": "Ледяное озеро",
+        "scene": "Transparent blue cracked lake ice revealing detailed bubbles and fine fractures, towering snowy mountains under a pale pastel sunrise",
+        "effect": "snow",
+        "accent": "#8BD5EA",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Transparent blue cracked lake ice revealing detailed bubbles and fine fractures, towering snowy mountains under a pale pastel sunrise. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "crf": 0
+      },
+      {
+        "id": 1604,
+        "name": "Красный экспресс",
+        "scene": "Elegant red passenger train rounding a curve on a magnificent snow-covered alpine viaduct, white mountains and pines, clear cold morning, train standing still in base",
+        "effect": "snow",
+        "accent": "#EA877C",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Elegant red passenger train rounding a curve on a magnificent snow-covered alpine viaduct, white mountains and pines, clear cold morning, train standing still in base. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1605,
+        "name": "Маяк на краю зимы",
+        "scene": "White lighthouse with red cap on a snow-covered rocky coast, dramatic dark northern sea, distant slate mountains, warm light in windows, winter dusk",
+        "effect": "snow",
+        "accent": "#9CC8D9",
+        "waterline": 0.65,
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: White lighthouse with red cap on a snow-covered rocky coast, dramatic dark northern sea, distant slate mountains, warm light in windows, winter dusk. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "waterRect": [
+          0,
+          0.59,
+          0.61,
+          1
+        ]
+      },
+      {
+        "id": 1606,
+        "name": "Тёплая долина",
+        "scene": "Charming alpine chalet village lit by amber windows beneath immense snowy mountains at twilight, delicate chimney smoke and deep powder",
+        "effect": "snow",
+        "accent": "#F1C792",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Charming alpine chalet village lit by amber windows beneath immense snowy mountains at twilight, delicate chimney smoke and deep powder. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "chimneys": [
+          [
+            0.104,
+            0.376
+          ]
+        ]
+      },
+      {
+        "id": 1607,
+        "name": "Северный мост",
+        "scene": "Stone bridge over a partly frozen river in snowy northern woods, low golden sun shining through fog, intricate hoarfrost",
+        "effect": "snow",
+        "accent": "#C6E2E4",
+        "waterline": 0.7,
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Stone bridge over a partly frozen river in snowy northern woods, low golden sun shining through fog, intricate hoarfrost. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "waterRect": [
+          0.14,
+          0.7,
+          0.85,
+          1
+        ]
+      },
+      {
+        "id": 1608,
+        "name": "Зимний рассвет",
+        "scene": "Wide snow-covered rolling hills with a single old oak, peach sun rising through soft low mist, beautiful long blue shadows",
+        "effect": "snow",
+        "accent": "#F2D5BD",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Wide snow-covered rolling hills with a single old oak, peach sun rising through soft low mist, beautiful long blue shadows. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1609,
+        "name": "Хрустальная ветка",
+        "scene": "Macro photography of intricate snow crystals and hoarfrost on a delicate pine branch, creamy blue and gold forest bokeh, exquisite detail",
+        "effect": "snow",
+        "accent": "#D3EAF3",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Macro photography of intricate snow crystals and hoarfrost on a delicate pine branch, creamy blue and gold forest bokeh, exquisite detail. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1610,
+        "name": "Белый лис",
+        "scene": "Beautiful arctic fox with thick immaculate white winter fur sitting on snow beside frosted grasses, natural alert pose, soft pastel arctic sky, wildlife photography, full animal anatomically correct",
+        "effect": "snow",
+        "accent": "#D5E4F0",
+        "category": "Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Beautiful arctic fox with thick immaculate white winter fur sitting on snow beside frosted grasses, natural alert pose, soft pastel arctic sky, wildlife photography, full animal anatomically correct. Style: Beautiful photorealistic winter landscape photography, exquisite natural light and composition, fine realistic textures, cinematic but believable, no anime or illustrations. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "crf": 0
+      }
+    ]
+  },
+  {
+    "folder": "village-winter",
+    "category": "Деревня · Зима",
+    "start": 1701,
+    "style": "Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime.",
+    "entries": [
+      {
+        "id": 1701,
+        "name": "Деревня под снегом",
+        "scene": "Quiet Russian village lane after fresh heavy snowfall, wooden izba houses with ornate carved window frames, blue painted fence, birches and warm windows, gentle blue hour",
+        "effect": "snow",
+        "accent": "#ADD6EE",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Quiet Russian village lane after fresh heavy snowfall, wooden izba houses with ornate carved window frames, blue painted fence, birches and warm windows, gentle blue hour. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "chimneys": [
+          [
+            0.175,
+            0.135
+          ]
+        ]
+      },
+      {
+        "id": 1702,
+        "name": "Морозное утро",
+        "scene": "Russian log house with carved turquoise window shutters and thick snow roof, frosted birches, faint chimney smoke against soft rosy sunrise",
+        "effect": "snow",
+        "accent": "#E5C7BE",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian log house with carved turquoise window shutters and thick snow roof, frosted birches, faint chimney smoke against soft rosy sunrise. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ],
+        "chimneys": [
+          [
+            0.826,
+            0.115
+          ]
+        ]
+      },
+      {
+        "id": 1703,
+        "name": "Зимняя речка",
+        "scene": "Small wooden footbridge over a narrow unfrozen dark river in a Russian snowy village, wooden houses and bare birches on banks, pale winter sun",
+        "effect": "snow",
+        "accent": "#9EC8DA",
+        "waterline": 0.68,
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Small wooden footbridge over a narrow unfrozen dark river in a Russian snowy village, wooden houses and bare birches on banks, pale winter sun. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "waterRect": [
+          0.37,
+          0.68,
+          0.94,
+          1
+        ],
+        "chimneys": [
+          [
+            0.932,
+            0.175
+          ]
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1704,
+        "name": "Баня у пруда",
+        "scene": "Traditional Russian log banya beside a frozen village pond, snow-covered woodpile and simple wooden fence, amber window, moonlit winter evening",
+        "effect": "snow",
+        "accent": "#B2C8E1",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Traditional Russian log banya beside a frozen village pond, snow-covered woodpile and simple wooden fence, amber window, moonlit winter evening. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "chimneys": [
+          [
+            0.281,
+            0.152
+          ]
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1705,
+        "name": "Тихий храм",
+        "scene": "Small historic rural Russian white church with blue onion dome rising behind wooden village houses, heavy snow, peaceful pale pink dawn, authentic modest proportions",
+        "effect": "snow",
+        "accent": "#D8C7E7",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Small historic rural Russian white church with blue onion dome rising behind wooden village houses, heavy snow, peaceful pale pink dawn, authentic modest proportions. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1706,
+        "name": "Улица детства",
+        "scene": "Snowy Russian village street lined by old wooden houses and green fences, tall power poles receding naturally, warm low winter sunlight, nostalgic photographic realism",
+        "effect": "snow",
+        "accent": "#E8CFAC",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Snowy Russian village street lined by old wooden houses and green fences, tall power poles receding naturally, warm low winter sunlight, nostalgic photographic realism. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "chimneys": [
+          [
+            0.039,
+            0.072
+          ]
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1707,
+        "name": "Сугробы и наличники",
+        "scene": "Close wide view of a beautifully weathered Russian wooden izba facade with intricate carved white nalichniki, blue wall boards, huge snowdrifts, warm golden window",
+        "effect": "snow",
+        "accent": "#B5D1E5",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Close wide view of a beautifully weathered Russian wooden izba facade with intricate carved white nalichniki, blue wall boards, huge snowdrifts, warm golden window. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1708,
+        "name": "Вечер в деревне",
+        "scene": "Russian rural winter panorama from a low hill, scattered timber houses and smoking chimneys amid soft snow, pink and violet sunset, distant pine forest",
+        "effect": "snow",
+        "accent": "#DDB4D5",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian rural winter panorama from a low hill, scattered timber houses and smoking chimneys amid soft snow, pink and violet sunset, distant pine forest. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "chimneys": [
+          [
+            0.221,
+            0.49
+          ],
+          [
+            0.506,
+            0.635
+          ],
+          [
+            0.867,
+            0.686
+          ]
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1709,
+        "name": "У лесной опушки",
+        "scene": "Tiny Russian log homestead at edge of a snowy birch forest, wooden hay shed and snow-covered fence, crisp brilliant winter morning, cozy isolated atmosphere",
+        "effect": "snow",
+        "accent": "#C8DEEB",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Tiny Russian log homestead at edge of a snowy birch forest, wooden hay shed and snow-covered fence, crisp brilliant winter morning, cozy isolated atmosphere. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "chimneys": [
+          [
+            0.753,
+            0.295
+          ]
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1710,
+        "name": "Зимняя луна",
+        "scene": "Russian rural wooden house under a large clear winter moon, deep indigo night, snow-covered apple trees and golden window glow, subtle chimney plume",
+        "effect": "snow",
+        "accent": "#B7BFEF",
+        "category": "Деревня · Зима",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-winter",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian rural wooden house under a large clear winter moon, deep indigo night, snow-covered apple trees and golden window glow, subtle chimney plume. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "folder": "village-summer",
+    "category": "Деревня · Лето",
+    "start": 1801,
+    "style": "Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text.",
+    "entries": [
+      {
+        "id": 1801,
+        "name": "Ромашковое поле",
+        "scene": "Wide meadow of daisies and cornflowers beside an old blue wooden Russian izba, carved white window trim, birch trees and a winding dirt path, bright gentle summer morning",
+        "effect": "pollen",
+        "accent": "#E5D693",
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Wide meadow of daisies and cornflowers beside an old blue wooden Russian izba, carved white window trim, birch trees and a winding dirt path, bright gentle summer morning. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкая летняя пыльца в солнечном свете.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1802,
+        "name": "Река за огородом",
+        "scene": "Quiet Russian village on a slow winding river, timber houses and vegetable gardens behind simple fences, grassy banks reflected in water, golden summer evening",
+        "effect": "water",
+        "accent": "#99C9A9",
+        "waterline": 0.61,
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Quiet Russian village on a slow winding river, timber houses and vegetable gardens behind simple fences, grassy banks reflected in water, golden summer evening. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Мягкая рябь воды и движущиеся отражения.",
+        "waterRect": [
+          0,
+          0.61,
+          1,
+          1
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1803,
+        "name": "Сенокос",
+        "scene": "Fresh golden haystacks in a vast Russian summer meadow, distant wooden village and a small rural church, long warm evening light, wildflowers in foreground",
+        "effect": "pollen",
+        "accent": "#EBD18A",
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Fresh golden haystacks in a vast Russian summer meadow, distant wooden village and a small rural church, long warm evening light, wildflowers in foreground. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкая летняя пыльца в солнечном свете.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1804,
+        "name": "Берёзовая тропа",
+        "scene": "Sunlit birch grove bordering a small Russian village, winding grassy path, glimpses of old wooden houses and blue fences, luminous green foliage and soft rays",
+        "effect": "pollen",
+        "accent": "#AFD891",
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Sunlit birch grove bordering a small Russian village, winding grassy path, glimpses of old wooden houses and blue fences, luminous green foliage and soft rays. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкая летняя пыльца в солнечном свете.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1805,
+        "name": "Лето у бабушки",
+        "scene": "Cozy Russian wooden house porch with painted turquoise railings, potted geraniums and a simple linen-covered table, lush garden and apple trees beyond, soft sunny morning",
+        "effect": "pollen",
+        "accent": "#E6BFA1",
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Cozy Russian wooden house porch with painted turquoise railings, potted geraniums and a simple linen-covered table, lush garden and apple trees beyond, soft sunny morning. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкая летняя пыльца в солнечном свете.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1806,
+        "name": "Перед грозой",
+        "scene": "Russian village dirt road between weathered wooden fences and houses, towering dramatic indigo storm clouds over golden summer fields, sunlight breaking beneath clouds",
+        "effect": "rain",
+        "accent": "#B9B4D5",
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian village dirt road between weathered wooden fences and houses, towering dramatic indigo storm clouds over golden summer fields, sunlight breaking beneath clouds. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1807,
+        "name": "Подсолнухи у забора",
+        "scene": "Sunflowers and tall hollyhocks beside a rustic blue wooden village fence, warm timber izba in background, buzzing golden midsummer atmosphere",
+        "effect": "pollen",
+        "accent": "#EED27E",
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Sunflowers and tall hollyhocks beside a rustic blue wooden village fence, warm timber izba in background, buzzing golden midsummer atmosphere. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкая летняя пыльца в солнечном свете.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1808,
+        "name": "Озеро на закате",
+        "scene": "Russian rural lake with a small wooden dock and old rowboat tied beside it, distant timber houses and birch silhouettes, pink-orange summer sunset mirrored on calm water",
+        "effect": "water",
+        "accent": "#E6B4B3",
+        "waterline": 0.57,
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian rural lake with a small wooden dock and old rowboat tied beside it, distant timber houses and birch silhouettes, pink-orange summer sunset mirrored on calm water. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Мягкая рябь воды и движущиеся отражения.",
+        "waterRect": [
+          0,
+          0.57,
+          1,
+          1
+        ],
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1809,
+        "name": "Яблоневый сад",
+        "scene": "Old orchard laden with summer apples around a modest Russian wooden country house, dappled sunlight across grass, wooden bench and pale blue shutters, peaceful rural scene",
+        "effect": "pollen",
+        "accent": "#BFD29A",
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Old orchard laden with summer apples around a modest Russian wooden country house, dappled sunlight across grass, wooden bench and pale blue shutters, peaceful rural scene. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкая летняя пыльца в солнечном свете.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1810,
+        "name": "Туман над лугом",
+        "scene": "Wide Russian village meadow at summer dawn, mist hanging above a winding stream, wooden homes and church steeple in distance, dew on grasses, soft peach sunlight",
+        "effect": "mist",
+        "accent": "#D8D1AE",
+        "waterline": 0.74,
+        "category": "Деревня · Лето",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "village-summer",
+        "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Wide Russian village meadow at summer dawn, mist hanging above a winding stream, wooden homes and church steeple in distance, dew on grasses, soft peach sunlight. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавное движение лёгкого тумана.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      }
+    ]
+  },
+  {
+    "folder": "muses",
+    "category": "Рисованные девушки",
+    "start": 1901,
+    "style": "Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D.",
+    "entries": [
+      {
+        "id": 1901,
+        "name": "Сад после дождя",
+        "scene": "Charming adult brunette woman with soft wavy shoulder-length hair and kind green eyes, elegant cream dress and light cardigan, seated among blooming peonies in a lush sunlit greenhouse, waist-up portrait right, gentle smile",
+        "effect": "petals",
+        "accent": "#E8B8CB",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Charming adult brunette woman with soft wavy shoulder-length hair and kind green eyes, elegant cream dress and light cardigan, seated among blooming peonies in a lush sunlit greenhouse, waist-up portrait right, gentle smile. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Медленно кружащиеся цветочные лепестки.",
+        "realismEditPrompt": "Use case: precise-object-edit. EDIT TARGET: supplied generated desktop image. Replace ONLY the depicted woman with a NEW fictional person: beautiful adult 20-year-old woman with long softly waved dark brown hair, clear warm hazel eyes, a softly oval youthful face, delicate harmonious features and a lovely relaxed smile. She is explicitly an ADULT, approximately twenty years old, with naturally youthful adult facial anatomy. The user's key request is a very pretty, sweet, feminine, fresh and young-adult face. Make her distinctly different from the older-looking face in the reference. Use flattering natural editorial portrait lighting, natural-sized expressive eyes, softly defined nose and lips, subtle tasteful makeup, healthy fresh skin without visible age lines, dark circles, heavy freckles, tired expression, exaggerated pores or harsh skin texture. Maintain convincing photographic realism, never anime, doll or cartoon proportions. Preserve the exact beautiful background, location, camera framing, wide 16:9 composition, clothing, fully clothed tasteful styling and overall pose. Correct hands naturally if visible. No text, signatures, logos, watermarks, clock or extra particles. A realistic fictional adult woman of about age 20, not a teenager.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1902,
+        "name": "У окна со снегом",
+        "scene": "Cute adult woman with chestnut bob haircut and freckles, cozy oversized ivory sweater, holding a ceramic mug naturally with two hands, warm reading nook beside a snowy window, rich books and amber lamplight, waist-up right portrait",
+        "effect": "snow",
+        "accent": "#DCC5AE",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Cute adult woman with chestnut bob haircut and freckles, cozy oversized ivory sweater, holding a ceramic mug naturally with two hands, warm reading nook beside a snowy window, rich books and amber lamplight, waist-up right portrait. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно падающий снег в нескольких планах.",
+        "realismEditPrompt": "Edit this fictional generated artwork. Replace only the woman with a new beautiful ADULT woman approximately 20 years old: fresh youthful soft oval face, clear green eyes of natural size, chestnut bob haircut, healthy clear skin, sweet natural smile, delicate harmonious features. Convincing realistic digital art with flattering natural light, no doll-like proportions, no age lines or tired expression. Keep the original snowy-window background, fully clothed ivory sweater, mug, composition and wide framing. No text, watermark or clock.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1903,
+        "name": "Морской ветер",
+        "scene": "Beautiful adult woman with flowing dark-blonde hair and bright blue eyes, tasteful pale blue summer dress, on a Mediterranean terrace overlooking turquoise sea and bougainvillea, warm gentle sunlight, waist-up portrait right",
+        "effect": "wind",
+        "accent": "#A8D7DC",
+        "waterline": 0.66,
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Beautiful adult woman with flowing dark-blonde hair and bright blue eyes, tasteful pale blue summer dress, on a Mediterranean terrace overlooking turquoise sea and bougainvillea, warm gentle sunlight, waist-up portrait right. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкие частицы, движущиеся на ветру.",
+        "waterRect": [
+          0,
+          0.66,
+          0.49,
+          1
+        ],
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely honey-blonde young adult woman with fresh clear blue eyes, delicate oval face and a gentle charming smile. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1904,
+        "name": "Лавандовый вечер",
+        "scene": "Charming adult woman with auburn braided hair, freckles and a gentle thoughtful smile, linen lilac dress, lavender field and old stone cottage at rose-gold sunset, shoulder-up right portrait",
+        "effect": "petals",
+        "accent": "#CEB5E2",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Charming adult woman with auburn braided hair, freckles and a gentle thoughtful smile, linen lilac dress, lavender field and old stone cottage at rose-gold sunset, shoulder-up right portrait. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Медленно кружащиеся цветочные лепестки.",
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely auburn-haired young adult woman with a braid, green eyes, softly rounded youthful cheeks and delicate harmonious features. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1905,
+        "name": "Тихая библиотека",
+        "scene": "Adult woman with short dark curly hair, round thin glasses, warm brown eyes and lovely natural smile, elegant moss-green blouse, in a grand cozy library with arched windows and soft golden afternoon rays, waist-up right portrait",
+        "effect": "dust",
+        "accent": "#D6BE8D",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Adult woman with short dark curly hair, round thin glasses, warm brown eyes and lovely natural smile, elegant moss-green blouse, in a grand cozy library with arched windows and soft golden afternoon rays, waist-up right portrait. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Неспешное движение частиц в свете.",
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely young adult woman with dark curly hair, fine round glasses, clear brown eyes and a bright gentle smile. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1906,
+        "name": "Вишнёвый дождь",
+        "scene": "Beautiful adult woman with long straight black hair, a modest cream trench coat and muted rose scarf, holding an umbrella, elegant wet park walkway with flowering cherry trees and reflections at dusk, waist-up right portrait",
+        "effect": "rain",
+        "accent": "#D4B5C9",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Beautiful adult woman with long straight black hair, a modest cream trench coat and muted rose scarf, holding an umbrella, elegant wet park walkway with flowering cherry trees and reflections at dusk, waist-up right portrait. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely East Asian young adult woman with long black hair, naturally proportioned dark eyes and a delicate elegant youthful face. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1907,
+        "name": "Ночной поезд",
+        "scene": "Cute adult woman with copper pixie haircut and expressive hazel eyes, deep blue knitted cardigan and ivory shirt, sitting by a night train window with distant city lights and soft rain outside, painterly intimate warm lighting",
+        "effect": "rain",
+        "accent": "#C5BCD9",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Cute adult woman with copper pixie haircut and expressive hazel eyes, deep blue knitted cardigan and ivory shirt, sitting by a night train window with distant city lights and soft rain outside, painterly intimate warm lighting. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely young adult woman with soft copper pixie hair, clear hazel eyes, a delicate heart-shaped face and cheerful subtle smile. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1908,
+        "name": "Подсолнухи",
+        "scene": "Beautiful adult woman with long honey-blonde braid, natural freckles and gentle smile, tasteful white linen blouse and ochre sundress, summer sunflower field and tiny rural cottage under warm evening sky, waist-up right portrait",
+        "effect": "pollen",
+        "accent": "#E6CF8F",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Beautiful adult woman with long honey-blonde braid, natural freckles and gentle smile, tasteful white linen blouse and ochre sundress, summer sunflower field and tiny rural cottage under warm evening sky, waist-up right portrait. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Лёгкая летняя пыльца в солнечном свете.",
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely honey-blonde young adult woman with a long braid, green eyes, fresh healthy skin and a radiant gentle smile. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1909,
+        "name": "Звёздный балкон",
+        "scene": "Elegant adult woman with dark wavy hair and soft blue eyes, modest flowing midnight-blue dress and light shawl, on a balcony amid pale roses overlooking a quiet moonlit city and distant hills, romantic painterly portrait right",
+        "effect": "stars",
+        "accent": "#B5C3E7",
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Elegant adult woman with dark wavy hair and soft blue eyes, modest flowing midnight-blue dress and light shawl, on a balcony amid pale roses overlooking a quiet moonlit city and distant hills, romantic painterly portrait right. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Тонкое мерцание звёзд.",
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely young adult woman with dark chestnut waves, clear blue eyes, soft youthful features and a tender natural expression. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      },
+      {
+        "id": 1910,
+        "name": "Осенний свет",
+        "scene": "Charming adult woman with red-brown wavy bob and green eyes, rust-colored coat and cream scarf, a lovely old European riverside park with golden autumn leaves and softly lit stone bridge, warm gentle painterly portrait right",
+        "effect": "leaves",
+        "accent": "#E3B27E",
+        "waterline": 0.76,
+        "category": "Рисованные девушки",
+        "format": "1080p · 30 FPS",
+        "clock": false,
+        "folder": "muses",
+        "prompt": "Use case: illustration-story. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Charming adult woman with red-brown wavy bob and green eyes, rust-colored coat and cream scarf, a lovely old European riverside park with golden autumn leaves and softly lit stone bridge, warm gentle painterly portrait right. Style: Beautiful hand-drawn painterly digital illustration of an adult woman, sophisticated semi-realistic editorial art, soft expressive face and natural proportions, subtle brush textures, exquisite harmonious background, fully clothed, warm and charming. Not anime, not photoreal, not 3D. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+        "description": "Плавно опадающие осенние листья.",
+        "waterRect": [
+          0,
+          0.76,
+          0.43,
+          1
+        ],
+        "realismEditPrompt": "Edit the supplied generated desktop artwork. Replace ONLY the woman's face and hair as needed with a NEW fictional adult person: a lovely young adult woman with reddish-brown waves, green eyes, a delicate youthful oval face and a warm charming smile. Her age is about 20 years, explicitly an ADULT. The user wants a noticeably prettier, sweet, feminine and youthful twenty-year-old appearance, not the older-looking face in the reference. Normal adult human facial proportions, naturally sized expressive eyes, balanced nose and lips, fresh clear skin, subtle tasteful makeup. No tired expression, age lines, dark under-eye circles, heavy freckles, harsh pore texture or gaunt cheeks. Maintain realistic photographic digital-art quality and flattering natural soft light. Preserve the beautiful original background, full outfit, fully clothed tasteful styling, pose, framing and widescreen 16:9 composition. No anime eyes, doll proportions, plastic skin, text, clock, watermark, logo or signature.",
+        "sourceResolution": [
+          1672,
+          941
+        ]
+      }
+    ]
+  }
+]

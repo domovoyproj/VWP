@@ -1,0 +1,229 @@
+[
+  {
+    "id": 1701,
+    "name": "Деревня под снегом",
+    "scene": "Quiet Russian village lane after fresh heavy snowfall, wooden izba houses with ornate carved window frames, blue painted fence, birches and warm windows, gentle blue hour",
+    "effect": "snow",
+    "accent": "#ADD6EE",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Quiet Russian village lane after fresh heavy snowfall, wooden izba houses with ornate carved window frames, blue painted fence, birches and warm windows, gentle blue hour. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "sourceResolution": [
+      1672,
+      941
+    ],
+    "chimneys": [
+      [
+        0.175,
+        0.135
+      ]
+    ]
+  },
+  {
+    "id": 1702,
+    "name": "Морозное утро",
+    "scene": "Russian log house with carved turquoise window shutters and thick snow roof, frosted birches, faint chimney smoke against soft rosy sunrise",
+    "effect": "snow",
+    "accent": "#E5C7BE",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian log house with carved turquoise window shutters and thick snow roof, frosted birches, faint chimney smoke against soft rosy sunrise. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "sourceResolution": [
+      1672,
+      941
+    ],
+    "chimneys": [
+      [
+        0.826,
+        0.115
+      ]
+    ]
+  },
+  {
+    "id": 1703,
+    "name": "Зимняя речка",
+    "scene": "Small wooden footbridge over a narrow unfrozen dark river in a Russian snowy village, wooden houses and bare birches on banks, pale winter sun",
+    "effect": "snow",
+    "accent": "#9EC8DA",
+    "waterline": 0.68,
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Small wooden footbridge over a narrow unfrozen dark river in a Russian snowy village, wooden houses and bare birches on banks, pale winter sun. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "waterRect": [
+      0.37,
+      0.68,
+      0.94,
+      1
+    ],
+    "chimneys": [
+      [
+        0.932,
+        0.175
+      ]
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1704,
+    "name": "Баня у пруда",
+    "scene": "Traditional Russian log banya beside a frozen village pond, snow-covered woodpile and simple wooden fence, amber window, moonlit winter evening",
+    "effect": "snow",
+    "accent": "#B2C8E1",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Traditional Russian log banya beside a frozen village pond, snow-covered woodpile and simple wooden fence, amber window, moonlit winter evening. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "chimneys": [
+      [
+        0.281,
+        0.152
+      ]
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1705,
+    "name": "Тихий храм",
+    "scene": "Small historic rural Russian white church with blue onion dome rising behind wooden village houses, heavy snow, peaceful pale pink dawn, authentic modest proportions",
+    "effect": "snow",
+    "accent": "#D8C7E7",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Small historic rural Russian white church with blue onion dome rising behind wooden village houses, heavy snow, peaceful pale pink dawn, authentic modest proportions. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1706,
+    "name": "Улица детства",
+    "scene": "Snowy Russian village street lined by old wooden houses and green fences, tall power poles receding naturally, warm low winter sunlight, nostalgic photographic realism",
+    "effect": "snow",
+    "accent": "#E8CFAC",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Snowy Russian village street lined by old wooden houses and green fences, tall power poles receding naturally, warm low winter sunlight, nostalgic photographic realism. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "chimneys": [
+      [
+        0.039,
+        0.072
+      ]
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1707,
+    "name": "Сугробы и наличники",
+    "scene": "Close wide view of a beautifully weathered Russian wooden izba facade with intricate carved white nalichniki, blue wall boards, huge snowdrifts, warm golden window",
+    "effect": "snow",
+    "accent": "#B5D1E5",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Close wide view of a beautifully weathered Russian wooden izba facade with intricate carved white nalichniki, blue wall boards, huge snowdrifts, warm golden window. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1708,
+    "name": "Вечер в деревне",
+    "scene": "Russian rural winter panorama from a low hill, scattered timber houses and smoking chimneys amid soft snow, pink and violet sunset, distant pine forest",
+    "effect": "snow",
+    "accent": "#DDB4D5",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian rural winter panorama from a low hill, scattered timber houses and smoking chimneys amid soft snow, pink and violet sunset, distant pine forest. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "chimneys": [
+      [
+        0.221,
+        0.49
+      ],
+      [
+        0.506,
+        0.635
+      ],
+      [
+        0.867,
+        0.686
+      ]
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1709,
+    "name": "У лесной опушки",
+    "scene": "Tiny Russian log homestead at edge of a snowy birch forest, wooden hay shed and snow-covered fence, crisp brilliant winter morning, cozy isolated atmosphere",
+    "effect": "snow",
+    "accent": "#C8DEEB",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Tiny Russian log homestead at edge of a snowy birch forest, wooden hay shed and snow-covered fence, crisp brilliant winter morning, cozy isolated atmosphere. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "chimneys": [
+      [
+        0.753,
+        0.295
+      ]
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1710,
+    "name": "Зимняя луна",
+    "scene": "Russian rural wooden house under a large clear winter moon, deep indigo night, snow-covered apple trees and golden window glow, subtle chimney plume",
+    "effect": "snow",
+    "accent": "#B7BFEF",
+    "category": "Деревня · Зима",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-winter",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian rural wooden house under a large clear winter moon, deep indigo night, snow-covered apple trees and golden window glow, subtle chimney plume. Style: Authentic rural Russia, photorealistic cinematic landscape photography, believable lived-in wooden architecture with subtle weathering, honest regional details, beautiful light. No modern high-rises, no text, no anime. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  }
+]

@@ -144,7 +144,7 @@ public partial class MainWindow
             try{if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;player.Play(path,screen,FramedCover(scene,screen,config),true,previous);}
             finally{if(previous is not null)try{File.Delete(previous);}catch{}}
         }
-            player.SetFraming(playback);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
+            player.SetFraming(playback);player.ShowClock(scene.Clock);player.Volume=config.Volume;player.SetUserPaused(config.UserPaused);EvaluatePause(screen,player);
             config.Scene=PlaybackRules.Key(scene);preferences.Last=scene.Path;preferences.LastPresetId=scene.PresetId;preferences.Monitor=screen.DeviceName;
             nextScene[screen.DeviceName]=DateTime.Now.AddMinutes(config.IntervalMinutes);Save();applied=true;
         }
@@ -220,7 +220,7 @@ public partial class MainWindow
     bool MatchesCollection(Wallpaper scene)
     {
         bool collection=category switch{"Все сцены"=>true,"Избранное"=>preferences.Favorites.Contains(PlaybackRules.Key(scene)),"Плейлист"=>Config(SelectedScreen).Playlist.Contains(PlaybackRules.Key(scene)),_=>scene.Category==category};
-        return collection && (mood switch{"Осень"=>scene.PresetId is >=1301 and <=1303,"Зима"=>scene.PresetId is >=1304 and <=1306,"Ночной Токио"=>scene.PresetId is 0 or 1 or 6 or 9 or 14,"Спокойствие"=>scene.PresetId is 3 or 5 or 7 or 8 or 10 or 12 or 17,"Космос"=>scene.Category=="Космос","Работа"=>scene.PresetId is 5 or 8 or 10 or 14 or 15,_=>true});
+        return collection && (mood switch{"Осень"=>scene.PresetId is >=1301 and <=1303 or 1910,"Зима"=>scene.PresetId is >=1304 and <=1306 or >=1601 and <=1710 or 1902,"Ночной Токио"=>scene.PresetId is 0 or 1 or 6 or 9 or 14 or 1505,"Спокойствие"=>scene.PresetId is 3 or 5 or 7 or 8 or 10 or 12 or 17 or >=1701 and <=1810,"Космос"=>scene.Category=="Космос"||scene.PresetId==1501,"Работа"=>scene.PresetId is 5 or 8 or 10 or 14 or 15 or 1509,_=>true});
     }
     void FormatChanged(object sender,SelectionChangedEventArgs e){sceneFormat=(FormatPicker.SelectedItem as ComboBoxItem)?.Content as string??"Все форматы";if(sceneFormat=="Живые сцены")sceneFormat="3D";if(Library is not null)RefreshFilter();}
     void MoodChanged(object sender,SelectionChangedEventArgs e){mood=(MoodPicker.SelectedItem as ComboBoxItem)?.Content as string??"Все настроения";RefreshFilter();}

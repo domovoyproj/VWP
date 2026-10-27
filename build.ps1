@@ -5,6 +5,13 @@ $dotnetCommand = Get-Command dotnet -ErrorAction SilentlyContinue
 $sdk = if ($dotnetCommand) { $dotnetCommand.Source } elseif (Test-Path 'C:\momp\dotnet\dotnet.exe') { 'C:\momp\dotnet\dotnet.exe' } else { throw 'Install .NET 8 SDK' }
 [xml]$project = Get-Content VWP.csproj
 $version = $project.Project.PropertyGroup.Version
+$newCollections = Get-Content 'tools/collections-plan.json' -Raw | ConvertFrom-Json
+$newMediaMissing = @($newCollections | ForEach-Object { $collectionFolder=$_.folder; $_.entries | ForEach-Object { foreach ($suffix in 'mp4','poster.png','preview.mp4') { if (!(Test-Path "assets/$collectionFolder/$($_.id).$suffix")) { $_.id } } } })
+if ($newMediaMissing.Count -gt 0) {
+    $electricPython = if (Test-Path .venv\Scripts\python.exe) { Join-Path $PSScriptRoot '.venv\Scripts\python.exe' } else { 'python' }
+    & $electricPython tools\render_collections.py
+    if ($LASTEXITCODE -ne 0) { throw 'New collections render failed; install Pillow, numpy and imageio-ffmpeg==0.6.0.' }
+}
 $requiredAssets = @('assets/presets.json', 'assets/themes/themes.json', 'assets/themes/palettes.json', 'assets/themes/obsidian.png', 'assets/themes/glacier.png', 'assets/themes/pearl.png', 'assets/anime/catalog.json', 'assets/anime/anime.js', 'assets/anime/index.html')
 $requiredAssets += @('assets/city/index.html','assets/city/city.js','assets/city/cover.png','assets/city/vendor/three.module.js','assets/city/vendor/three.core.js','assets/city/vendor/Reflector.js','assets/city/vendor/BufferGeometryUtils.js','assets/city/vendor/LICENSE.txt','assets/living/catalog.json')
 $requiredAssets += @('assets/city/city.css','assets/city/textures/apartment.png','assets/city/textures/townhouse.png','assets/city/textures/shop.png','assets/city/textures/tree.png','assets/city/textures/commuter.png','assets/city/textures/office-color.jpg')
@@ -18,6 +25,10 @@ foreach ($scene in 1201..1220) { foreach ($extension in 'mp4','png','poster.png'
 $requiredAssets += @('assets/vibes/catalog.json','assets/vibes/index.html','assets/vibes/vibes.js')
 foreach ($scene in 1301..1306) { foreach ($extension in 'mp4','png','poster.png','preview.mp4') { $requiredAssets += "assets/seasons/$scene.$extension" } }
 $requiredAssets += @('assets/seasons/catalog.json','assets/seasons/index.html','assets/seasons/seasons.js')
+foreach ($collection in $newCollections) {
+    $requiredAssets += "assets/$($collection.folder)/catalog.json"
+    foreach ($scene in $collection.entries) { foreach ($extension in 'mp4','png','poster.png','preview.mp4') { $requiredAssets += "assets/$($collection.folder)/$($scene.id).$extension" } }
+}
 foreach ($folder in (Get-ChildItem assets/cursors -Directory | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'pack.json') })) {
     $id = $folder.Name
     $manifest = "assets/cursors/$id/pack.json"

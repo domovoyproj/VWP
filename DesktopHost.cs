@@ -264,6 +264,7 @@ public sealed partial class DesktopHost : IDisposable
     void DeleteTransitionSnapshot(){if(transitionSnapshot is not null)try{System.IO.File.Delete(transitionSnapshot);}catch{}transitionSnapshot=null;}
     void StopPlayback(bool restore,bool preserveTransition=false)
     {
+        ShowClock(false);
         citySurface?.Dispose();citySurface=null;cityReady=false;cityGeneration++;
         interactiveVisual?.Dispose();visualSource?.Dispose();interactiveVisual=null;visualSource=null;sceneLayers=null;audioReaction=null;
         fadeTimer?.Stop();fadeTimer=null;transitionWaiting=false;

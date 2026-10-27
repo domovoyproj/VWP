@@ -44,6 +44,9 @@ def main():
         required += ['VWP/assets/vibes/'+name for name in ('catalog.json','vibes.js','index.html')]
         required += [f'VWP/assets/seasons/{scene_id}.{ext}' for scene_id in range(1301,1307) for ext in ('mp4','png','poster.png','preview.mp4')]
         required += ['VWP/assets/seasons/'+name for name in ('catalog.json','seasons.js','index.html')]
+        for collection in json.loads((root/'tools'/'collections-plan.json').read_text(encoding='utf-8')):
+            required += [f"VWP/assets/{collection['folder']}/catalog.json"]
+            required += [f"VWP/assets/{collection['folder']}/{scene['id']}.{ext}" for scene in collection['entries'] for ext in ('png','mp4','poster.png','preview.mp4')]
         required += ['VWP/assets/anime/catalog.json','VWP/assets/anime/anime.js','VWP/assets/anime/index.html','VWP/assets/themes/palettes.json']
         required += ['VWP/assets/living/catalog.json','VWP/assets/city/index.html','VWP/assets/city/city.js','VWP/assets/city/vendor/three.core.js','VWP/assets/city/vendor/BufferGeometryUtils.js','VWP/assets/city/vendor/LICENSE.txt']
         required += ['VWP/assets/city/'+name for name in ('city.css','cover.png','vendor/three.module.js','vendor/Reflector.js','textures/apartment.png','textures/townhouse.png','textures/shop.png','textures/tree.png','textures/commuter.png','textures/office-color.jpg')]

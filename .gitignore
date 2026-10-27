@@ -23,3 +23,16 @@ assets/seasons/*.mp4
 assets/seasons/*.poster.png
 assets/cursors/sources/
 .codex/hooks.json
+assets/electric/*.mp4
+assets/electric/*.poster.png
+assets/horizons/*.mp4
+assets/horizons/*.poster.png
+assets/winter/*.mp4
+assets/winter/*.poster.png
+assets/village-winter/*.mp4
+assets/village-winter/*.poster.png
+assets/village-summer/*.mp4
+assets/village-summer/*.poster.png
+assets/muses/*.mp4
+assets/muses/*.poster.png
+tools/generated-artwork.json
