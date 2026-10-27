@@ -1,0 +1,37 @@
+name: Engine studio
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ['**.cs', '**.xaml', '.github/workflows/engine-studio.yml']
+permissions:
+  contents: read
+jobs:
+  studio-check:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet build tools/live-check/live-check.csproj -c Release --nologo
+      - name: Verify realtime scenes and portable image projects
+        shell: pwsh
+        run: |
+          $check = Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList '--engine-check' -WindowStyle Hidden -PassThru -Wait
+          Get-Content artifacts/engine-check/status.txt
+          if ($check.ExitCode -ne 0) { throw 'Realtime scene checks failed' }
+      - name: Verify library layout
+        shell: pwsh
+        run: |
+          $check = Start-Process bin/Release/net8.0-windows/VWP.exe -ArgumentList '--verify-engine' -WindowStyle Hidden -PassThru -Wait
+          Get-Content bin/Release/net8.0-windows/verification/engine-ui-status.txt
+          if ($check.ExitCode -ne 0) { throw 'Library layout checks failed' }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-Engine-Studio-Checks
+          path: |
+            artifacts/engine-check/
+            bin/Release/net8.0-windows/verification/engine-*.png
+            bin/Release/net8.0-windows/verification/engine-ui-status.txt

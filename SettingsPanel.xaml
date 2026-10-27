@@ -33,6 +33,10 @@
      <TextBlock Text="Источник онлайн-галереи · HTTPS-каталог" FontSize="11"/><TextBox x:Name="GallerySource" Padding="10,8" Margin="0,6,0,18"/>
      <TextBlock Text="Производительность и лаунчер" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,12"/>
      <CheckBox x:Name="PauseFullscreen" Content="Пауза при полноэкранном приложении на дисплее" Margin="0,0,0,12"/>
+     <CheckBox x:Name="PauseMaximized" Content="Пауза при развёрнутом окне на дисплее" Margin="0,0,0,12"/>
+     <TextBlock Text="Пауза, пока запущены приложения" FontSize="12" FontWeight="SemiBold"/>
+     <TextBox x:Name="PauseApplications" Padding="10,8" Margin="0,7,0,5"/>
+     <TextBlock Text="Имена EXE через запятую, например cs2.exe, blender.exe. Обои продолжатся после закрытия приложений." TextWrapping="Wrap" FontSize="10" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,14"/>
      <CheckBox x:Name="PauseBattery" Content="Пауза при работе от батареи" Margin="0,0,0,12"/>
      <CheckBox x:Name="HoverPreview" Content="Тихое превью при наведении на карточку" Margin="0,0,0,12"/>
      <CheckBox x:Name="CheckUpdates" Content="Проверять обновления при запуске" Margin="0,0,0,16"/>

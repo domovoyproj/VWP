@@ -45,7 +45,11 @@ public static class BundleService
                     var item=new BundleScene{Name=scene.Name};item.Video=Add(scene.Path,"video",item.Id);
                     if(scene.Thumbnail is not null && File.Exists(scene.Thumbnail))item.Cover=Add(scene.Thumbnail,"cover",item.Id);
                     var layered=layers(scene);
-                    if(layered?.Background is not null && File.Exists(layered.Background))item.Layers=new(){Background=Add(layered.Background,"background",item.Id),Foreground=layered.Foreground is not null && File.Exists(layered.Foreground)?Add(layered.Foreground,"foreground",item.Id):null,Accent=layered.Accent,Effect=layered.Effect,MotionId=layered.MotionId};
+                    if(layered?.Background is not null && File.Exists(layered.Background))
+                    {
+                        item.Layers=layered.Copy();item.Layers.Background=Add(layered.Background,"background",item.Id);
+                        item.Layers.Foreground=layered.Foreground is not null && File.Exists(layered.Foreground)?Add(layered.Foreground,"foreground",item.Id):null;
+                    }
                     manifest.Scenes.Add(item);mapping[PlaybackRules.Key(scene)]=item.Id;
                 }
                 manifest.Settings.Scene=config.Scene is not null?mapping.GetValueOrDefault(config.Scene):null;
@@ -65,7 +69,7 @@ public static class BundleService
             if(manifest.Format!=1||manifest.Scenes.Count==0)throw new InvalidDataException("Формат набора не поддерживается.");
             if(manifest.Scenes.Count>200 || manifest.Scenes.Select(s=>s.Id).Distinct().Count()!=manifest.Scenes.Count)throw new InvalidDataException("Неверный список сцен.");
             foreach(var scene in manifest.Scenes)
-                if(scene.Name.Length>256||scene.Layers is not null && (!Regex.IsMatch(scene.Layers.Accent,"^#[0-9a-fA-F]{6}$")||scene.Layers.MotionId is <0 or >=SpatialScene.SceneCount))throw new InvalidDataException("Неверные настройки сцены.");
+                if(scene.Name.Length>256||scene.Layers is not null && (!scene.Layers.ValidProperties()||!Regex.IsMatch(scene.Layers.Accent,"^#[0-9a-fA-F]{6}$")||scene.Layers.MotionId is <0 or >=SpatialScene.SceneCount))throw new InvalidDataException("Неверные настройки сцены.");
             var settings=manifest.Settings;
             if(!double.IsFinite(settings.Depth)||settings.Depth<0||settings.Depth>1||!double.IsFinite(settings.FocusX)||settings.FocusX<0||settings.FocusX>1||!double.IsFinite(settings.FocusY)||settings.FocusY<0||settings.FocusY>1||settings.Volume<0||settings.Volume>100||settings.IntervalMinutes<1||settings.IntervalMinutes>1440)
                 throw new InvalidDataException("Настройки набора выходят за допустимые границы.");
@@ -86,7 +90,9 @@ public static class BundleService
             }
             foreach(var scene in manifest.Scenes)
             {
-                scene.Video=Extract(scene.Video);if(!new[]{".mp4",".webm",".mkv",".mov",".avi"}.Contains(Path.GetExtension(scene.Video)))throw new InvalidDataException("В наборе должен быть видеофайл.");
+                string extension=Path.GetExtension(scene.Video).ToLowerInvariant();
+                if(!new[]{".mp4",".webm",".mkv",".mov",".avi"}.Contains(extension)&&!(scene.Layers?.Realtime==true&&new[]{".png",".jpg",".jpeg",".bmp"}.Contains(extension)))throw new InvalidDataException("Неподдерживаемый файл сцены.");
+                scene.Video=Extract(scene.Video);
                 if(scene.Cover is not null)scene.Cover=Extract(scene.Cover);
                 if(scene.Layers?.Background is not null){scene.Layers.Background=Extract(scene.Layers.Background);if(scene.Layers.Foreground is not null)scene.Layers.Foreground=Extract(scene.Layers.Foreground);}
             }

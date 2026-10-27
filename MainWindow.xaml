@@ -105,21 +105,22 @@
      </StackPanel>
     </Grid>
    </Border>
-   <Grid x:Name="WallpaperPage" Grid.Column="1" Margin="26,18,26,18">
+   <Grid x:Name="WallpaperPage" Grid.Column="1" Margin="24,18,24,18">
+    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="300"/></Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
      <RowDefinition Height="68" />
-     <RowDefinition Height="{Binding ActualHeight,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource HeroHeight}}" />
      <RowDefinition Height="*" />
+     <RowDefinition Height="0" />
      <RowDefinition Height="92" />
     </Grid.RowDefinitions>
-    <Grid>
+    <Grid Grid.ColumnSpan="2">
      <Grid.ColumnDefinitions>
       <ColumnDefinition />
       <ColumnDefinition Width="Auto" />
      </Grid.ColumnDefinitions>
      <StackPanel>
-      <TextBlock Text="Твоё пространство" FontSize="28" FontWeight="SemiBold" />
-      <TextBlock Text="Выбери настроение рабочего стола." Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,6,0,0" />
+      <TextBlock Text="Библиотека обоев" FontSize="28" FontWeight="SemiBold" />
+      <TextBlock Text="Твой рабочий стол. Твои сцены." Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,6,0,0" />
      </StackPanel>
      <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="12,3,0,0" VerticalAlignment="Top">
       <Border Width="150" Background="{DynamicResource ControlBrush}" CornerRadius="12" Padding="11,10" Margin="0,0,8,0">
@@ -139,79 +140,38 @@
         </TextBlock>
        </Grid>
       </Border>
-      <Button Content="＋ Добавить" Click="ImportClick" Padding="13,10" FontSize="11" Background="{DynamicResource CardBrush}" />
+      <Button Content="Создать сцену" Click="CreateSceneClick" Padding="13,10" FontSize="11" Background="{DynamicResource PrimaryBrush}" Foreground="White" Margin="0,0,8,0"/>
+      <Button Content="＋ Импорт" Click="ImportClick" Padding="13,10" FontSize="11" Background="{DynamicResource CardBrush}" />
      </StackPanel>
     </Grid>
-    <Border x:Name="Hero" Grid.Row="1" CornerRadius="20" Background="#141329" SizeChanged="RoundHero" Margin="0,0,0,18">
-     <Grid>
-      <Image x:Name="HeroImage" Stretch="UniformToFill" />
-      <MediaElement x:Name="HeroVideo" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Close" Volume="0" Stretch="UniformToFill" />
-      <Grid x:Name="HeroMotion" Visibility="Collapsed" IsHitTestVisible="False" />
-      <Border>
-       <Border.Background>
-        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-         <GradientStop Color="#DC111322" Offset="0" />
-         <GradientStop Color="#80111322" Offset="0.43" />
-         <GradientStop Color="#00111322" Offset="1" />
-        </LinearGradientBrush>
-       </Border.Background>
-      </Border>
-      <Border HorizontalAlignment="Right" VerticalAlignment="Top" Background="#35FFFFFF" CornerRadius="12" Margin="0,18,18,0" Padding="12,6">
-       <TextBlock Text="VWP ORIGINAL" Foreground="#F2F0FA" FontSize="9" FontWeight="Medium" />
-      </Border>
-      <StackPanel VerticalAlignment="Center" Margin="24,15,24,15">
-       <TextBlock Text="ВЫБРАННАЯ СЦЕНА" Foreground="#C2BBD8" FontSize="8" />
-       <TextBlock x:Name="HeroTitle" Text="Sakura Midnight" Foreground="White" FontSize="30" FontWeight="SemiBold" Margin="0,7,0,6" TextTrimming="CharacterEllipsis" MaxWidth="540" HorizontalAlignment="Left" />
-       <TextBlock x:Name="HeroDescription" Text="Тихий город. Свет. Бесконечный цикл." Foreground="#C5C3D3" FontSize="11" MaxWidth="510" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" />
-       <StackPanel Orientation="Horizontal">
-        <Button x:Name="PreviewButton" Content="▷  Превью" Click="PreviewClick" Background="#30FFFFFF" Foreground="White" FontSize="11" Padding="12,8" HorizontalAlignment="Left" Margin="0,12,0,0" />
-        <Button x:Name="FavoriteButton" Content="♡" Click="FavoriteClick" Background="#30FFFFFF" Foreground="White" Padding="12,8" Margin="8,12,0,0" FontSize="11" ToolTip="Добавить в избранное" />
-        <Button x:Name="PlaylistButton" Content="＋ Плейлист" Click="PlaylistClick" Background="#30FFFFFF" Foreground="White" FontSize="11" Padding="12,8" Margin="8,12,0,0" />
-        <Button Content="Редактор" Click="EditorClick" Background="#30FFFFFF" Foreground="White" FontSize="11" Padding="12,8" Margin="8,12,0,0" />
-       </StackPanel>
-      </StackPanel>
+    <Border x:Name="Hero" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" CornerRadius="18" Background="{DynamicResource CardBrush}" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" SizeChanged="RoundHero" Margin="16,0,0,16">
+     <Grid><Grid.RowDefinitions><RowDefinition Height="166"/><RowDefinition/></Grid.RowDefinitions>
+      <Grid ClipToBounds="True" Background="#0B0E15"><Image x:Name="HeroImage" Stretch="Uniform"/><MediaElement x:Name="HeroVideo" Visibility="Collapsed" LoadedBehavior="Manual" UnloadedBehavior="Close" Volume="0" Stretch="UniformToFill"/><Grid x:Name="HeroMotion" Visibility="Collapsed" IsHitTestVisible="False"/>
+       <Border VerticalAlignment="Top" HorizontalAlignment="Left" Background="#B00D1422" CornerRadius="8" Padding="9,5" Margin="14"><TextBlock Text="ПРЕДПРОСМОТР" Foreground="White" FontSize="9"/></Border>
+      </Grid>
+      <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><StackPanel Margin="18,18,18,16">
+       <TextBlock Text="ВЫБРАННАЯ СЦЕНА" Foreground="{DynamicResource MutedBrush}" FontSize="9"/>
+       <TextBlock x:Name="HeroTitle" FontSize="23" FontWeight="SemiBold" Margin="0,9,0,9" TextWrapping="Wrap"/>
+       <TextBlock x:Name="HeroDescription" Foreground="{DynamicResource MutedBrush}" FontSize="11" TextWrapping="Wrap" LineHeight="17"/>
+       <WrapPanel Margin="0,18,0,12"><Button x:Name="PreviewButton" Content="▷ Превью" Click="PreviewClick" FontSize="11" Padding="12,8" Margin="0,0,7,7"/><Button x:Name="FavoriteButton" Content="♡" Click="FavoriteClick" Padding="12,8" Margin="0,0,7,7" ToolTip="Избранное"/><Button x:Name="PlaylistButton" Content="＋ Плейлист" Click="PlaylistClick" FontSize="11" Padding="12,8" Margin="0,0,0,7"/></WrapPanel>
+       <Button x:Name="CustomizeButton" Content="Настроить живую сцену" Click="CustomizeSceneClick" Padding="12,11" Background="{DynamicResource PrimaryBrush}" Foreground="White" Margin="0,0,0,8"/>
+       <Button Content="Редактор видео" Click="EditorClick" Padding="12,9" Margin="0,0,0,8"/>
+       <Button x:Name="RestoreOriginalButton" Content="Вернуть оригинал" Click="ResetSceneClick" Padding="12,7" Background="Transparent" FontSize="11"/>
+      </StackPanel></ScrollViewer>
      </Grid>
     </Border>
-    <Grid Grid.Row="2" Margin="0,0,0,14">
+    <Grid Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0,14">
      <Grid.RowDefinitions>
-      <RowDefinition Height="44" />
+      <RowDefinition Height="108" />
       <RowDefinition />
      </Grid.RowDefinitions>
-     <Grid>
-      <Grid.ColumnDefinitions>
-       <ColumnDefinition Width="Auto" />
-       <ColumnDefinition />
-       <ColumnDefinition Width="Auto" />
-      </Grid.ColumnDefinitions>
-      <TextBlock Text="Коллекция" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,12,6" />
-      <StackPanel Grid.Column="1" Orientation="Horizontal">
-       <ComboBox x:Name="FormatPicker" Width="113" Height="34" FontSize="10" Margin="0,0,7,6" SelectionChanged="FormatChanged" SelectedIndex="0">
-        <ComboBoxItem Content="Все форматы" />
-        <ComboBoxItem Content="Видео" />
-        <ComboBoxItem Content="Живые сцены" />
-       </ComboBox>
-       <ComboBox x:Name="MoodPicker" Width="132" Height="34" FontSize="10" Margin="0,0,0,6" SelectionChanged="MoodChanged">
-        <ComboBoxItem Content="Все настроения" />
-        <ComboBoxItem Content="Осень" />
-        <ComboBoxItem Content="Зима" />
-        <ComboBoxItem Content="Ночной Токио" />
-        <ComboBoxItem Content="Спокойствие" />
-        <ComboBoxItem Content="Космос" />
-        <ComboBoxItem Content="Работа" />
-       </ComboBox>
-      </StackPanel>
-      <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,6">
-       <TextBlock x:Name="CountLabel" Foreground="{DynamicResource MutedBrush}" FontSize="10" VerticalAlignment="Center" Margin="0,0,8,0" />
-       <Button x:Name="BundleApplyButton" Content="Применить набор" Click="ApplyBundleClick" Padding="8,6" FontSize="10" Visibility="Collapsed" />
-       <Button Content="⋯" ToolTip="Наборы сцен" Click="CollectionMenuClick" FontSize="17" Padding="9,2">
-        <Button.ContextMenu>
-         <ContextMenu>
-          <MenuItem Header="Экспортировать набор" Click="ExportBundleClick" />
-          <MenuItem Header="Импортировать набор" Click="ImportBundleClick" />
-         </ContextMenu>
-        </Button.ContextMenu>
-       </Button>
-      </StackPanel>
+     <Grid Margin="0,0,0,10"><Grid.RowDefinitions><RowDefinition Height="30"/><RowDefinition Height="38"/><RowDefinition Height="30"/></Grid.RowDefinitions>
+      <DockPanel><Button Content="⋯" DockPanel.Dock="Right" ToolTip="Наборы сцен" Click="CollectionMenuClick" FontSize="17" Padding="9,2"><Button.ContextMenu><ContextMenu><MenuItem Header="Экспортировать набор" Click="ExportBundleClick"/><MenuItem Header="Импортировать набор" Click="ImportBundleClick"/></ContextMenu></Button.ContextMenu></Button><TextBlock Text="Установленные" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center"/></DockPanel>
+      <WrapPanel Grid.Row="1"><ComboBox x:Name="FormatPicker" Width="105" Height="30" FontSize="10" Margin="0,0,6,0" SelectionChanged="FormatChanged" SelectedIndex="0"><ComboBoxItem Content="Все форматы"/><ComboBoxItem Content="Видео"/><ComboBoxItem Content="Живые сцены"/></ComboBox>
+       <ComboBox x:Name="MoodPicker" Width="120" Height="30" FontSize="10" Margin="0,0,6,0" SelectionChanged="MoodChanged"><ComboBoxItem Content="Все настроения"/><ComboBoxItem Content="Осень"/><ComboBoxItem Content="Зима"/><ComboBoxItem Content="Ночной Токио"/><ComboBoxItem Content="Спокойствие"/><ComboBoxItem Content="Космос"/><ComboBoxItem Content="Работа"/></ComboBox>
+       <ComboBox x:Name="LibrarySort" Width="126" Height="30" FontSize="10" SelectionChanged="LibrarySortChanged"><ComboBoxItem Content="По названию"/><ComboBoxItem Content="Недавние"/><ComboBoxItem Content="Избранные сверху"/><ComboBoxItem Content="По коллекциям"/></ComboBox>
+      </WrapPanel>
+      <DockPanel Grid.Row="2"><Button x:Name="BundleApplyButton" Content="Применить набор" Click="ApplyBundleClick" DockPanel.Dock="Right" Padding="8,4" FontSize="10" Visibility="Collapsed"/><TextBlock x:Name="CountLabel" Foreground="{DynamicResource MutedBrush}" FontSize="10" VerticalAlignment="Center"/></DockPanel>
      </Grid>
      <ListBox x:Name="Library" Grid.Row="1" SelectionChanged="SelectionChanged" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False" Padding="0">
       <ListBox.ItemsPanel>
@@ -247,17 +207,17 @@
       <ListBox.ItemTemplate>
        <DataTemplate>
         <StackPanel>
-         <Grid Height="{Binding ActualHeight,RelativeSource={RelativeSource AncestorType=Window},Converter={StaticResource CardImageHeight}}" Background="#182130" SizeChanged="RoundCard" MouseEnter="CardEnter" MouseLeave="CardLeave">
+         <Grid Height="{Binding ActualWidth,RelativeSource={RelativeSource Self},Converter={StaticResource CardImageHeight}}" Background="#182130" SizeChanged="RoundCard" MouseEnter="CardEnter" MouseLeave="CardLeave">
           <Image Source="{Binding Thumbnail,Converter={StaticResource ThumbnailImage}}" Stretch="UniformToFill" />
          </Grid>
          <TextBlock Text="{Binding Name}" Foreground="{DynamicResource InkBrush}" FontSize="12" FontWeight="SemiBold" Margin="10,11,10,5" TextTrimming="CharacterEllipsis" />
-         <TextBlock Text="{Binding Subtitle}" FontSize="9" Foreground="{DynamicResource MutedBrush}" Margin="10,0,10,12" />
+         <TextBlock Text="{Binding Subtitle}" TextTrimming="CharacterEllipsis" FontSize="9" Foreground="{DynamicResource MutedBrush}" Margin="10,0,10,12" />
         </StackPanel>
        </DataTemplate>
       </ListBox.ItemTemplate>
      </ListBox>
     </Grid>
-    <Border Grid.Row="3" Background="{DynamicResource CardBrush}" CornerRadius="16" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Padding="14,10">
+    <Border Grid.Row="3" Grid.ColumnSpan="2" Background="{DynamicResource CardBrush}" CornerRadius="16" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Padding="14,10">
      <Grid>
       <Grid.RowDefinitions>
        <RowDefinition />

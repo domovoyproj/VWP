@@ -23,6 +23,10 @@ public sealed class Preferences
     public Dictionary<string,string> ImportNames {get;set;}=new();
     public Dictionary<string,string> ImportThumbnails {get;set;}=new();
     public Dictionary<string,SceneLayers> Layers {get;set;}=new();
+    public string LibraryOrder {get;set;}="Name";
+    public List<string> RecentScenes {get;set;}=new();
+    public bool PauseMaximized {get;set;}
+    public List<string> PauseApplications {get;set;}=new();
     public string Theme {get;set;}="Dark";
     public string AppearanceAccent {get;set;}="#A3BCF7";
     public string AppearancePalette {get;set;}="";
@@ -90,6 +94,7 @@ public partial class MainWindow : Window
         tray.DoubleClick+=(_,_)=>Dispatcher.Invoke(()=>{Show();Activate();});
         InitializeFeatures();
         InitializeStudio();
+        InitializeEngineLibrary();
         InitializeAppearance();
         InitializeCity();
         Microsoft.Win32.SystemEvents.DisplaySettingsChanged+=DisplayChanged;
@@ -100,6 +105,7 @@ public partial class MainWindow : Window
             if(Environment.GetCommandLineArgs().Contains("--verify")) Verify();
             if(Environment.GetCommandLineArgs().Contains("--verify-ui")) VerifyUi();
             if(Environment.GetCommandLineArgs().Contains("--verify-redesign"))_ = VerifyRedesign();
+            if(Environment.GetCommandLineArgs().Contains("--verify-engine"))_ = VerifyEngineStudio();
             if(preferences.Autostart && !Environment.GetCommandLineArgs().Any(a=>a.StartsWith("--verify",StringComparison.Ordinal)))AutostartClick(this,new());
         };
     }
@@ -119,11 +125,17 @@ public partial class MainWindow : Window
     void DisplayChanged(object? sender,EventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(ScreenLayout()==screenLayout)return;CancelAllApplies();foreach(var player in hosts.Values)player.Dispose();hosts.Clear();RefreshScreens();Restore();Status.Text="Обои восстановлены после смены дисплеев";}));
     void SelectionChanged(object sender,SelectionChangedEventArgs e)
     {
-        if(Library.SelectedItem is not Wallpaper item)return;
+        if(Library.SelectedItem is Wallpaper item)PresentScene(item);
+    }
+    void PresentScene(Wallpaper item)
+    {
         StopPreview();StopHover();
         HeroTitle.Text=item.Name;
         HeroDescription.Text=item.Description;UpdateSceneActions();
-        HeroImage.Source=item.Thumbnail is not null && File.Exists(item.Thumbnail)?new BitmapImage(new Uri(item.Thumbnail)):null;
+        CustomizeButton.IsEnabled=item.PresetId!=CityId;
+        RestoreOriginalButton.IsEnabled=item.PresetId is not null&&preferences.Layers.ContainsKey(PlaybackRules.Key(item));
+        string? cover=LayersFor(item) is {Realtime:true} custom?custom.Background:item.Thumbnail;
+        HeroImage.Source=cover is not null && File.Exists(cover)?new BitmapImage(new Uri(cover)):null;
         UpdateTheme();
     }
     void RoundHero(object sender,SizeChangedEventArgs e) { Hero.Clip=new System.Windows.Media.RectangleGeometry(new Rect(0,0,Hero.ActualWidth,Hero.ActualHeight),22,22); }
@@ -143,7 +155,7 @@ public partial class MainWindow : Window
             if(preferences.Monitors.TryGetValue(screen.DeviceName,out var config) && FindScene(config.Scene) is Wallpaper scene)ApplyScene(scene,screen);
         LoadMonitorControls();
     }
-    bool FilterScene(object value) {var item=(Wallpaper)value;return (sceneFormat=="Все форматы" || sceneFormat=="3D" == item.IsSpatial) && MatchesCollection(item) && item.Name.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase);}
+    bool FilterScene(object value) {var item=(Wallpaper)value;bool live=item.IsSpatial||preferences.Layers.GetValueOrDefault(PlaybackRules.Key(item))?.Realtime==true;return (sceneFormat=="Все форматы" || (sceneFormat=="3D")==live) && MatchesCollection(item) && LibrarySearch.Matches(item,SearchBox.Text);}
     void RefreshFilter() {if(Library.ItemsSource is null)return;var view=System.Windows.Data.CollectionViewSource.GetDefaultView(items);view.Refresh();CountLabel.Text=$"{view.Cast<Wallpaper>().Count()} / {items.Count} сцен";}
     void SearchChanged(object sender,TextChangedEventArgs e) {if(Library is not null)RefreshFilter();}
     void CategoryClick(object sender,RoutedEventArgs e) {category=(string)((Button)sender).Tag;foreach(Button button in SidebarCategories.Children)if(button.Tag as string==category)button.SetResourceReference(Control.BackgroundProperty,"SelectedBrush");else button.Background=System.Windows.Media.Brushes.Transparent;RefreshFilter();}
@@ -179,7 +191,7 @@ public partial class MainWindow : Window
         StopHover();
         if(Library.SelectedItem is not Wallpaper item || !File.Exists(item.Path))return;
         if(HeroVideo.Visibility==Visibility.Visible || scenePreview is not null || heroPreparing){StopPreview();return;}
-        if((item.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(item) is SceneLayers layers && layers.MotionId is not null)
+        if(LayersFor(item) is SceneLayers layers && (layers.Realtime || (item.IsSpatial || Config(SelectedScreen).SceneAnimation) && layers.MotionId is not null))
         {
             scenePreview=new InteractiveVisual(layers,PlaybackConfig(item,Config(SelectedScreen)),SelectedScreen,audio);
             HeroMotion.Children.Add(scenePreview);HeroMotion.Visibility=Visibility.Visible;

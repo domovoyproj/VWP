@@ -122,11 +122,11 @@ public partial class MainWindow
     }
     void TickStudio()
     {
-        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&pair.Value.Interactive is not null && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.Performance!="Eco"&&config.MusicReactive));
+        if(!studioReady)return;audio.SetEnabled(hosts.Any(pair=>pair.Value.Active&&!pair.Value.Paused&&pair.Value.Interactive?.WantsAudio==true && preferences.Monitors.TryGetValue(pair.Key,out var config)&&config.Performance!="Eco")||IsVisible&&scenePreview?.WantsAudio==true&&Config(SelectedScreen).Performance!="Eco");
         if(SettingsOverlay.Visibility==Visibility.Visible)UpdateResources();
         if(mini?.IsVisible==true)UpdateMini();
     }
-    void EditorClick(object sender,RoutedEventArgs e){if(Library.SelectedItem is not Wallpaper scene)return;if(scene.IsSpatial){Status.Text="Редактор доступен для видеообоев. 3D-сцена рисуется в реальном времени.";return;}StopPreview();StopHover();Editor.Open(scene);EditorOverlay.Visibility=Visibility.Visible;}
+    void EditorClick(object sender,RoutedEventArgs e){if(Library.SelectedItem is not Wallpaper scene)return;if(LayersFor(scene)?.Realtime==true){CustomizeSceneClick(sender,e);return;}if(scene.IsSpatial){Status.Text="Редактор доступен для видеообоев. 3D-сцена рисуется в реальном времени.";return;}StopPreview();StopHover();Editor.Open(scene);EditorOverlay.Visibility=Visibility.Visible;}
     void ShowMini()
     {
         if(mini is null)
