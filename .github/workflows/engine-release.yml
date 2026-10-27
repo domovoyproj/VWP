@@ -82,6 +82,13 @@ jobs:
           if ($check.ExitCode -ne 0) { throw 'Published application UI verification failed' }
           python tools/package_online_release.py --version $version --build "dist/Release-$version"
           if ($LASTEXITCODE -ne 0) { throw 'Complete distribution validation or volume packaging failed' }
+          $qa = Join-Path $env:GITHUB_WORKSPACE 'artifacts/release-check'
+          New-Item -ItemType Directory -Force -Path $qa | Out-Null
+          Copy-Item -LiteralPath "dist/Release-$version/verification/engine-ui-status.txt" -Destination (Join-Path $qa 'published-ui.txt')
+          $staging = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE "dist/Release-$version"))
+          $distributionRoot = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE 'dist'))+[IO.Path]::DirectorySeparatorChar
+          if (!$staging.StartsWith($distributionRoot)) { throw 'Unexpected publish staging directory' }
+          Remove-Item -LiteralPath $staging -Recurse -Force
       - name: Compile production and test installers
         shell: pwsh
         run: |

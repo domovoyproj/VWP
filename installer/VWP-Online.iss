@@ -31,6 +31,7 @@ CloseApplications=yes
 RestartApplications=no
 AppMutex=Local\DomovoyVWP
 DisableProgramGroupPage=yes
+DisableWelcomePage=no
 [Languages]
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
