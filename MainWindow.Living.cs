@@ -4,10 +4,10 @@ using System.Text.Json;
 namespace VWP;
 public partial class MainWindow
 {
-    sealed record LivingDefinition(int Id,string Name,string Category,string Description,string Accent,string? Season=null);
+    sealed record LivingDefinition(int Id,string Name,string Category,string Description,string Accent,string? Season=null,string Format="4K · 60 FPS · ORIGINAL",bool Clock=false);
     void LoadLiving(string assets)
     {
-        foreach(string collection in new[]{"living","anime","vibes","seasons"})LoadArtworkCollection(assets,collection);
+        foreach(string collection in new[]{"living","anime","vibes","seasons","electric","horizons","winter","village-winter","village-summer","muses"})LoadArtworkCollection(assets,collection);
     }
     void LoadArtworkCollection(string assets,string collection)
     {
@@ -18,8 +18,8 @@ public partial class MainWindow
         foreach(var scene in catalog)
         {
             string poster=Path.Combine(folder,scene.Id+".poster.png");if(!File.Exists(poster))poster=Path.Combine(folder,scene.Id+".png");
-            string label=(scene.Season is null?"":scene.Season+" · ")+scene.Category+" · 4K · 60 FPS · ORIGINAL";
-            items.Add(new(scene.Name,Path.Combine(folder,scene.Id+".mp4"),poster,label,scene.Category,scene.Description,scene.Id));
+            string label=(scene.Season is null?"":scene.Season+" · ")+scene.Category+" · "+scene.Format;
+            items.Add(new(scene.Name,Path.Combine(folder,scene.Id+".mp4"),poster,label,scene.Category,scene.Description,scene.Id,Clock:scene.Clock));
         }
     }
 }

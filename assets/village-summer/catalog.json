@@ -1,0 +1,187 @@
+[
+  {
+    "id": 1801,
+    "name": "Ромашковое поле",
+    "scene": "Wide meadow of daisies and cornflowers beside an old blue wooden Russian izba, carved white window trim, birch trees and a winding dirt path, bright gentle summer morning",
+    "effect": "pollen",
+    "accent": "#E5D693",
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Wide meadow of daisies and cornflowers beside an old blue wooden Russian izba, carved white window trim, birch trees and a winding dirt path, bright gentle summer morning. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1802,
+    "name": "Река за огородом",
+    "scene": "Quiet Russian village on a slow winding river, timber houses and vegetable gardens behind simple fences, grassy banks reflected in water, golden summer evening",
+    "effect": "water",
+    "accent": "#99C9A9",
+    "waterline": 0.61,
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Quiet Russian village on a slow winding river, timber houses and vegetable gardens behind simple fences, grassy banks reflected in water, golden summer evening. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Мягкая рябь воды и движущиеся отражения.",
+    "waterRect": [
+      0,
+      0.61,
+      1,
+      1
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1803,
+    "name": "Сенокос",
+    "scene": "Fresh golden haystacks in a vast Russian summer meadow, distant wooden village and a small rural church, long warm evening light, wildflowers in foreground",
+    "effect": "pollen",
+    "accent": "#EBD18A",
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Fresh golden haystacks in a vast Russian summer meadow, distant wooden village and a small rural church, long warm evening light, wildflowers in foreground. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1804,
+    "name": "Берёзовая тропа",
+    "scene": "Sunlit birch grove bordering a small Russian village, winding grassy path, glimpses of old wooden houses and blue fences, luminous green foliage and soft rays",
+    "effect": "pollen",
+    "accent": "#AFD891",
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Sunlit birch grove bordering a small Russian village, winding grassy path, glimpses of old wooden houses and blue fences, luminous green foliage and soft rays. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1805,
+    "name": "Лето у бабушки",
+    "scene": "Cozy Russian wooden house porch with painted turquoise railings, potted geraniums and a simple linen-covered table, lush garden and apple trees beyond, soft sunny morning",
+    "effect": "pollen",
+    "accent": "#E6BFA1",
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Cozy Russian wooden house porch with painted turquoise railings, potted geraniums and a simple linen-covered table, lush garden and apple trees beyond, soft sunny morning. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1806,
+    "name": "Перед грозой",
+    "scene": "Russian village dirt road between weathered wooden fences and houses, towering dramatic indigo storm clouds over golden summer fields, sunlight breaking beneath clouds",
+    "effect": "rain",
+    "accent": "#B9B4D5",
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian village dirt road between weathered wooden fences and houses, towering dramatic indigo storm clouds over golden summer fields, sunlight breaking beneath clouds. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1807,
+    "name": "Подсолнухи у забора",
+    "scene": "Sunflowers and tall hollyhocks beside a rustic blue wooden village fence, warm timber izba in background, buzzing golden midsummer atmosphere",
+    "effect": "pollen",
+    "accent": "#EED27E",
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Sunflowers and tall hollyhocks beside a rustic blue wooden village fence, warm timber izba in background, buzzing golden midsummer atmosphere. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1808,
+    "name": "Озеро на закате",
+    "scene": "Russian rural lake with a small wooden dock and old rowboat tied beside it, distant timber houses and birch silhouettes, pink-orange summer sunset mirrored on calm water",
+    "effect": "water",
+    "accent": "#E6B4B3",
+    "waterline": 0.57,
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Russian rural lake with a small wooden dock and old rowboat tied beside it, distant timber houses and birch silhouettes, pink-orange summer sunset mirrored on calm water. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Мягкая рябь воды и движущиеся отражения.",
+    "waterRect": [
+      0,
+      0.57,
+      1,
+      1
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1809,
+    "name": "Яблоневый сад",
+    "scene": "Old orchard laden with summer apples around a modest Russian wooden country house, dappled sunlight across grass, wooden bench and pale blue shutters, peaceful rural scene",
+    "effect": "pollen",
+    "accent": "#BFD29A",
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Old orchard laden with summer apples around a modest Russian wooden country house, dappled sunlight across grass, wooden bench and pale blue shutters, peaceful rural scene. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1810,
+    "name": "Туман над лугом",
+    "scene": "Wide Russian village meadow at summer dawn, mist hanging above a winding stream, wooden homes and church steeple in distance, dew on grasses, soft peach sunlight",
+    "effect": "mist",
+    "accent": "#D8D1AE",
+    "waterline": 0.74,
+    "category": "Деревня · Лето",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "village-summer",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Wide Russian village meadow at summer dawn, mist hanging above a winding stream, wooden homes and church steeple in distance, dew on grasses, soft peach sunlight. Style: Authentic Russian countryside, exquisite photorealistic landscape photography, natural beautiful summer light, believable rural wooden architecture and regional vegetation, subtle lived-in details. No anime, no text. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавное движение лёгкого тумана.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  }
+]

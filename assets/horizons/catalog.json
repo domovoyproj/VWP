@@ -1,0 +1,181 @@
+[
+  {
+    "id": 1501,
+    "name": "Orbital Silence",
+    "scene": "Majestic ringed planet rising above a dark cratered icy moon, small isolated research station, vast navy space with restrained nebula glow, dramatic orbital vista",
+    "effect": "stars",
+    "accent": "#8FB6FF",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Majestic ringed planet rising above a dark cratered icy moon, small isolated research station, vast navy space with restrained nebula glow, dramatic orbital vista. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Тонкое мерцание звёзд.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1502,
+    "name": "Ocean Cathedral",
+    "scene": "Immense turquoise underwater cavern opening toward sunlit coral reef, soft shafts of light, natural elegant rock arches, deep peaceful blue underwater world",
+    "effect": "bubbles",
+    "accent": "#55DAD9",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Immense turquoise underwater cavern opening toward sunlit coral reef, soft shafts of light, natural elegant rock arches, deep peaceful blue underwater world. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Подводное преломление света и поднимающиеся пузырьки.",
+    "sourceResolution": [
+      1672,
+      941
+    ],
+    "crf": 0
+  },
+  {
+    "id": 1503,
+    "name": "Alpine Mirror",
+    "scene": "Photoreal alpine lake reflecting jagged snow-capped mountains at dawn, dark pine shores, emerald water with a broad clear foreground",
+    "effect": "water",
+    "accent": "#80C6C9",
+    "waterline": 0.62,
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Photoreal alpine lake reflecting jagged snow-capped mountains at dawn, dark pine shores, emerald water with a broad clear foreground. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Мягкая рябь воды и движущиеся отражения.",
+    "waterRect": [
+      0,
+      0.62,
+      1,
+      1
+    ],
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1504,
+    "name": "Moss & Mist",
+    "scene": "Ancient lush temperate forest, moss-covered trunks, winding stone path, soft sun rays through light low fog, serene green depths",
+    "effect": "fireflies",
+    "accent": "#9DCF84",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Ancient lush temperate forest, moss-covered trunks, winding stone path, soft sun rays through light low fog, serene green depths. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Летающие светлячки с мягким мерцанием.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1505,
+    "name": "After Rain",
+    "scene": "Cinematic empty night city avenue, magenta and cyan window lights reflected on wet asphalt, elegant modern architecture, fine atmospheric rain, no readable signs",
+    "effect": "rain",
+    "accent": "#6ED7F4",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Cinematic empty night city avenue, magenta and cyan window lights reflected on wet asphalt, elegant modern architecture, fine atmospheric rain, no readable signs. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1506,
+    "name": "Midnight GT",
+    "scene": "Unbranded graphite performance coupe parked three-quarter rear beside a rain-soaked modern glass garage at night, tasteful red taillights and cool blue light, car photography",
+    "effect": "rain",
+    "accent": "#EC695E",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Unbranded graphite performance coupe parked three-quarter rear beside a rain-soaked modern glass garage at night, tasteful red taillights and cool blue light, car photography. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1507,
+    "name": "Liquid Chrome",
+    "scene": "Abstract sculptural ribbon of liquid brushed silver intertwined with translucent smoky violet glass, deep black backdrop, premium ray-traced studio light, fluid elegant folds",
+    "effect": "abstract",
+    "accent": "#AC9DF4",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Abstract sculptural ribbon of liquid brushed silver intertwined with translucent smoky violet glass, deep black backdrop, premium ray-traced studio light, fluid elegant folds. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Непрерывное мягкое течение формы и света.",
+    "sourceResolution": [
+      1672,
+      941
+    ],
+    "crf": 0
+  },
+  {
+    "id": 1508,
+    "name": "Dune Nocturne",
+    "scene": "Sweeping immaculate sand dunes under a huge star-filled desert sky, cool indigo shadows, narrow warm horizon glow, minimalist grand landscape",
+    "effect": "dust",
+    "accent": "#EAC08D",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Sweeping immaculate sand dunes under a huge star-filled desert sky, cool indigo shadows, narrow warm horizon glow, minimalist grand landscape. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Неспешное движение частиц в свете.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1509,
+    "name": "Rainy Reading Room",
+    "scene": "Beautiful cozy contemporary oak reading room, large rain-streaked window facing a dark pine forest, warm lamp, armchair, stacked books without readable titles, realistic interior photography",
+    "effect": "rain",
+    "accent": "#EDC58C",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Beautiful cozy contemporary oak reading room, large rain-streaked window facing a dark pine forest, warm lamp, armchair, stacked books without readable titles, realistic interior photography. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  },
+  {
+    "id": 1510,
+    "name": "Skybound Citadel",
+    "scene": "Grand fantasy stone castle on floating islands, monumental waterfalls falling through clouds, distant mountain peaks in rose and gold dawn, painterly cinematic concept art, no characters",
+    "effect": "mist",
+    "accent": "#DAB5EF",
+    "category": "Атмосфера",
+    "format": "1080p · 30 FPS",
+    "clock": false,
+    "folder": "horizons",
+    "prompt": "Use case: photorealistic-natural. Asset: premium live desktop wallpaper BASE illustration, wide landscape 16:9, 2560x1440 requested. Scene: Grand fantasy stone castle on floating islands, monumental waterfalls falling through clouds, distant mountain peaks in rose and gold dawn, painterly cinematic concept art, no characters. Style: Premium cinematic photorealistic environment art, physically plausible materials, expertly composed wide desktop wallpaper, rich atmospheric depth, refined color grading. No anime, no cartoon. Composition: thoughtfully composed complete wide desktop image with visual depth, quiet space left for icons, exquisite lighting, polished professional quality. Animation will be added separately. No words, dates, clock, readable letters, captions, watermark, signature, UI, collage, borders or desktop icons. No prepainted streaking particles. Keep clean graceful details and avoid clutter.",
+    "description": "Плавное движение лёгкого тумана.",
+    "sourceResolution": [
+      1672,
+      941
+    ]
+  }
+]

@@ -14,7 +14,7 @@ using Microsoft.Win32;
 using LibVLCSharp.Shared;
 using Forms = System.Windows.Forms;
 namespace VWP;
-public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null,bool IsSpatial=false);
+public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null,bool IsSpatial=false,bool Clock=false);
 public record PresetDefinition(int Id,string Name,string Category,string Description,string Accent,string Motion);
 public sealed class Preferences
 {

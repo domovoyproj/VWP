@@ -15,6 +15,21 @@ class Program
  static void Check(bool ok,string message){if(!ok)throw new Exception(message);}
  [STAThread] static void Main(string[] args)
  {
+  if(args.Length==1 && args[0]=="--electric-check"){ElectricCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--collection-bundle-check")
+  {
+   string bundleCheckOutput=Path.Combine(Environment.CurrentDirectory,"artifacts","collection-bundle-check.txt");
+   try
+   {
+    string bundle=Path.GetFullPath(Path.Combine("..","VWP-60-Live-Wallpapers","VWP-All-60.vwpbundle"));
+    var manifest=BundleService.Import(bundle,Path.Combine(Environment.CurrentDirectory,"artifacts","imported-sixty")).GetAwaiter().GetResult();
+    Check(manifest.Scenes.Count==60,"All sixty scenes import");
+    foreach(var scene in manifest.Scenes)Check(File.Exists(scene.Video)&&new FileInfo(scene.Video).Length>10000&&scene.Cover is not null&&File.Exists(scene.Cover),"Imported video and poster: "+scene.Name);
+    File.WriteAllText(bundleCheckOutput,"PASS: VWP BundleService imported all sixty videos and covers with SHA-256 verification");
+   }
+   catch(Exception e){File.WriteAllText(bundleCheckOutput,e.ToString());Environment.ExitCode=1;}
+   return;
+  }
   if(args.Length==1 && args[0]=="--overlay-check"){OverlayCheck.Run();return;}
   if(args.Length==1 && args[0]=="--basketball-check"){BasketballCheck.Run();return;}
   if(args.Length==1 && args[0]=="--atmosphere-check"){AtmosphereCheck.Run();return;}

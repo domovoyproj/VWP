@@ -77,6 +77,11 @@
         <Button Content="Избранное" Tag="Избранное" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Плейлист" Tag="Плейлист" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Аниме" Tag="Аниме" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
+        <Button Content="Атмосфера" Tag="Атмосфера" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
+        <Button Content="Зимние пейзажи" Tag="Зима" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
+        <Button Content="Деревня · Зима" Tag="Деревня · Зима" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
+        <Button Content="Деревня · Лето" Tag="Деревня · Лето" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
+        <Button Content="Рисованные девушки" Tag="Рисованные девушки" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Город" Tag="Город" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Природа" Tag="Природа" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Космос" Tag="Космос" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
