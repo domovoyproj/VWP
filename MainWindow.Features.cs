@@ -71,7 +71,7 @@ public partial class MainWindow
     }
     void SessionChanged(object? sender,SessionSwitchEventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(e.Reason==SessionSwitchReason.SessionLock){sessionLocked=true;StopPreview();StopHover();}else if(e.Reason==SessionSwitchReason.SessionUnlock)sessionLocked=false;TickFeatures();}));
     void PowerChanged(object sender,PowerModeChangedEventArgs e)=>Dispatcher.BeginInvoke(new Action(()=>{if(e.Mode==PowerModes.Suspend){suspended=true;StopPreview();StopHover();}else if(e.Mode==PowerModes.Resume)suspended=false;TickFeatures();}));
-    void EvaluatePause(Forms.Screen screen,DesktopHost player)=>player.SetAutomaticPause(PausePolicy.Reason(screen,preferences.PauseFullscreen,preferences.PauseBattery,sessionLocked||suspended,preferences.PauseExceptions));
+    void EvaluatePause(Forms.Screen screen,DesktopHost player)=>player.SetAutomaticPause(PausePolicy.Reason(screen,preferences.PauseFullscreen,preferences.PauseBattery,sessionLocked||suspended,preferences.PauseExceptions,preferences.PauseMaximized,preferences.PauseApplications));
     void TickFeatures()
     {
         foreach(var screen in Forms.Screen.AllScreens)
@@ -124,7 +124,7 @@ public partial class MainWindow
         if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
         var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);
         var layers=LayersFor(scene);
-        if(config.Interactive && (scene.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(scene))) && layers?.Background is string background && File.Exists(background))
+        if((layers?.Realtime==true || config.Interactive && (scene.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(scene)))) && layers?.Background is string background && File.Exists(background))
         {
             player.PlayInteractive(layers,screen,playback,audio,FramedCover(scene,screen,config));
         }
@@ -155,7 +155,7 @@ public partial class MainWindow
             if(applyCancellations.TryGetValue(screen.DeviceName,out var current)&&ReferenceEquals(current,cancellation))
             {
                 applyCancellations.Remove(screen.DeviceName);pendingScenes.Remove(screen.DeviceName);
-                if(applied&&!exiting)UpdatePlaybackStatus();
+                if(applied&&!exiting){RememberScene(scene);UpdatePlaybackStatus();}
             }
         }
     }
@@ -253,6 +253,7 @@ public partial class MainWindow
         Settings.PlaylistName.Text=config.PlaylistName;Settings.PlaylistEnabled.IsChecked=config.PlaylistEnabled;Settings.Shuffle.IsChecked=config.Shuffle;
         Settings.Interval.Text=config.IntervalMinutes.ToString();Settings.ScheduleStart.Text=config.ScheduleStart;Settings.ScheduleEnd.Text=config.ScheduleEnd;
         Settings.PauseFullscreen.IsChecked=preferences.PauseFullscreen;Settings.PauseBattery.IsChecked=preferences.PauseBattery;Settings.HoverPreview.IsChecked=preferences.HoverPreview;Settings.CheckUpdates.IsChecked=preferences.CheckUpdates;
+        Settings.PauseMaximized.IsChecked=preferences.PauseMaximized;Settings.PauseApplications.Text=string.Join(", ",preferences.PauseApplications.Select(name=>name+".exe"));
         LoadStudioSettings();
         ShowPlaylistEntries();Settings.Error.Text="";SettingsOverlay.Visibility=Visibility.Visible;Settings.RenderCrop();
         Settings.BeginAnimation(OpacityProperty,new DoubleAnimation(0,1,TimeSpan.FromMilliseconds(180)));
@@ -271,6 +272,7 @@ public partial class MainWindow
         config.Fit=Settings.FitMode.SelectedIndex==1?"Fit":"Fill";config.FocusX=Settings.FocusX.Value;config.FocusY=Settings.FocusY.Value;
         config.PlaylistName=string.IsNullOrWhiteSpace(Settings.PlaylistName.Text)?"Мой плейлист":Settings.PlaylistName.Text.Trim();config.IntervalMinutes=interval;config.ScheduleStart=Settings.ScheduleStart.Text;config.ScheduleEnd=Settings.ScheduleEnd.Text;config.PlaylistEnabled=Settings.PlaylistEnabled.IsChecked==true;config.Shuffle=Settings.Shuffle.IsChecked==true;
         preferences.PauseFullscreen=Settings.PauseFullscreen.IsChecked==true;preferences.PauseBattery=Settings.PauseBattery.IsChecked==true;preferences.HoverPreview=Settings.HoverPreview.IsChecked==true;preferences.CheckUpdates=Settings.CheckUpdates.IsChecked==true;
+        preferences.PauseMaximized=Settings.PauseMaximized.IsChecked==true;preferences.PauseApplications=PausePolicy.ApplicationNames(Settings.PauseApplications.Text).ToList();
         SaveStudioSettings();
         RefreshScenePresentations();
         Save();SettingsOverlay.Visibility=Visibility.Collapsed;
@@ -306,7 +308,7 @@ public partial class MainWindow
         if(!featuresReady||Config(SelectedScreen).Performance=="Eco"||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||scene.PresetId==CityId||!File.Exists(scene.Path))return;
         StopHover();int generation=hoverGeneration;await Task.Delay(650);
         if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible||scenePreview is not null)return;
-        if((scene.IsSpatial || Config(SelectedScreen).SceneAnimation) && LayersFor(scene) is SceneLayers layers && layers.MotionId is not null)
+        if(LayersFor(scene) is SceneLayers layers && (layers.Realtime || (scene.IsSpatial || Config(SelectedScreen).SceneAnimation) && layers.MotionId is not null))
         {
             hoverMotion=new InteractiveVisual(layers,new MonitorPreferences{Performance="Balance",SceneAnimation=true},SelectedScreen,audio){IsHitTestVisible=false};
             card.Children.Add(hoverMotion);return;

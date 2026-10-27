@@ -16,6 +16,7 @@ class Program
  [STAThread] static void Main(string[] args)
  {
   if(args.Length==1 && args[0]=="--electric-check"){ElectricCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--engine-check"){EngineCheck.Run();return;}
   if(args.Length==1 && args[0]=="--collection-bundle-check")
   {
    string bundleCheckOutput=Path.Combine(Environment.CurrentDirectory,"artifacts","collection-bundle-check.txt");

@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Forms=System.Windows.Forms;
 namespace VWP;
-public sealed class InteractiveVisual : FrameworkElement,IDisposable
+public sealed partial class InteractiveVisual : FrameworkElement,IDisposable
 {
     readonly DispatcherTimer timer=new();
     readonly Forms.Screen screen;
@@ -16,7 +16,7 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
     readonly SceneLayers layers;
     readonly BitmapSource background;
     readonly BitmapSource? foreground;
-    readonly Color accent;
+    Color accent;
     MonitorPreferences config;
     double x,y,phase,beat;
     bool paused;
@@ -32,6 +32,7 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
     protected override Size ArrangeOverride(Size size){Spatial?.Arrange(new Rect(size));return size;}
     public string? VideoError {get;private set;}
     public bool HasMovingBackground=>videoReady;
+    public bool WantsAudio=>layers.AudioReactive||config.MusicReactive;
     public double VideoSeconds=>motionVideo?.Position.TotalSeconds??0;
     public double AnimationSeconds=>clock.Elapsed.TotalSeconds;
     public bool ObjectMotionActive=>layers.MotionId is >=0 and <SpatialScene.SceneCount && config.SceneAnimation;
@@ -71,6 +72,7 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
         else{Effect=null;planets=null;}
         InvalidateVisual();
     }
+    public void RefreshEnvironment(){accent=(Color)ColorConverter.ConvertFromString(layers.Accent);InvalidateVisual();}
     public void SetPaused(bool value){if(disposed)return;paused=value;if(value){timer.Stop();clock.Stop();motionVideo?.Pause();}else{clock.Start();timer.Start();motionVideo?.Play();}}
     // Drive deterministic frames for the packaged video renderer.
     public void RenderAt(double seconds){if(disposed)throw new ObjectDisposedException(nameof(InteractiveVisual));phase=seconds;Spatial?.Update(seconds);if(planets is not null)planets.Time=seconds;InvalidateVisual();}
@@ -86,6 +88,7 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
         }
         DrawPlane(drawing,background,.025);
         if(foreground is not null)DrawPlane(drawing,foreground,.06);
+        if(layers.Realtime){DrawEnvironment(drawing,phase);drawing.Pop();return;}
         double music=config.MusicReactive&&config.Performance!="Eco"?beat:0;
         var glow=new RadialGradientBrush(Color.FromArgb((byte)(18+music*55),accent.R,accent.G,accent.B),Colors.Transparent){Center=new Point(.72,.4),GradientOrigin=new Point(.72,.4)};
         drawing.DrawRectangle(glow,null,new Rect(0,0,ActualWidth,ActualHeight));
@@ -128,10 +131,11 @@ public sealed class InteractiveVisual : FrameworkElement,IDisposable
     }
     void DrawPlane(DrawingContext drawing,BitmapSource image,double depth)
     {
-        double scale=Math.Max(ActualWidth/image.PixelWidth,ActualHeight/image.PixelHeight)*1.08;
+        double depthAmount=layers.Realtime?layers.Parallax:config.Interactive?config.Depth:0;
+        double scale=(config.Fit=="Fit"?Math.Min(ActualWidth/image.PixelWidth,ActualHeight/image.PixelHeight):Math.Max(ActualWidth/image.PixelWidth,ActualHeight/image.PixelHeight))*(1+.08*depthAmount);
         double width=image.PixelWidth*scale,height=image.PixelHeight*scale;
-        double dx=(ActualWidth-width)*config.FocusX+x*ActualWidth*depth*config.Depth;
-        double dy=(ActualHeight-height)*config.FocusY+y*ActualHeight*depth*config.Depth;
+        double dx=(ActualWidth-width)*config.FocusX+x*ActualWidth*depth*depthAmount;
+        double dy=(ActualHeight-height)*config.FocusY+y*ActualHeight*depth*depthAmount;
         drawing.DrawImage(image,new Rect(dx,dy,width,height));
     }
     static double Fraction(double value)=>value-Math.Floor(value);
