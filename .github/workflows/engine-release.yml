@@ -1,0 +1,165 @@
+name: Engine Studio release
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ['tools/*release*', 'installer/VWP-Online.iss', 'VWP.csproj', '.github/workflows/engine-release.yml']
+  push:
+    tags: ['v0.10.*']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: vwp-engine-release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  plan:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check volume reconstruction and release scripts
+        run: |
+          python -m py_compile tools/restore_engine_release.py tools/package_online_release.py
+          if ($LASTEXITCODE -ne 0) { throw 'Release script syntax check failed' }
+          python tools/check_release_packaging.py
+          if ($LASTEXITCODE -ne 0) { throw 'Release package checks failed' }
+  release:
+    if: github.event_name != 'pull_request'
+    needs: plan
+    runs-on: windows-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read release version
+        id: version
+        shell: pwsh
+        run: |
+          [xml]$project = Get-Content VWP.csproj
+          $version = $project.Project.PropertyGroup.Version
+          if ($version -notmatch '^0\.10\.\d+$') { throw 'Unexpected release version' }
+          if ('${{ github.ref_type }}' -eq 'tag' -and '${{ github.ref_name }}' -ne "v$version") { throw 'Tag/version mismatch' }
+          "value=$version" >> $env:GITHUB_OUTPUT
+      - name: Restore verified complete wallpaper library
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m pip install 'Pillow>=11,<13' imageio-ffmpeg==0.6.0 'numpy>=2,<3'
+          if ($LASTEXITCODE -ne 0) { throw 'Media dependencies failed' }
+          python tools/bootstrap_ffmpeg.py
+          if ($LASTEXITCODE -ne 0) { throw 'FFmpeg verification failed' }
+          python tools/restore_engine_release.py
+          if ($LASTEXITCODE -ne 0) { throw 'Verified media restore failed' }
+      - name: Publish self-contained Windows build
+        shell: pwsh
+        run: |
+          ./build.ps1
+          if ($LASTEXITCODE -ne 0) { throw 'Self-contained publish failed' }
+          $temporaryBuild = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE 'bin/Release'))
+          if (!$temporaryBuild.StartsWith([IO.Path]::GetFullPath($env:GITHUB_WORKSPACE)+[IO.Path]::DirectorySeparatorChar)) { throw 'Unexpected build cleanup directory' }
+          if (Test-Path -LiteralPath $temporaryBuild) { Remove-Item -LiteralPath $temporaryBuild -Recurse -Force }
+      - name: Check published library and build portable volumes
+        shell: pwsh
+        run: |
+          $version = '${{ steps.version.outputs.value }}'
+          $launcher = (Resolve-Path "dist/Release-$version/VWP.exe").Path
+          $check = Start-Process $launcher -ArgumentList '--verify-engine' -WindowStyle Hidden -PassThru -Wait
+          Get-Content "dist/Release-$version/verification/engine-ui-status.txt"
+          if ($check.ExitCode -ne 0) { throw 'Published application UI verification failed' }
+          python tools/package_online_release.py --version $version --build "dist/Release-$version"
+          if ($LASTEXITCODE -ne 0) { throw 'Complete distribution validation or volume packaging failed' }
+      - name: Compile production and test installers
+        shell: pwsh
+        run: |
+          choco upgrade innosetup --yes --no-progress --limit-output
+          if ($LASTEXITCODE -ne 0) { throw 'Inno Setup preparation failed' }
+          $compiler = Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6/ISCC.exe'
+          if (!(Test-Path -LiteralPath $compiler)) { throw 'Inno Setup compiler not found' }
+          $version = '${{ steps.version.outputs.value }}'
+          & $compiler "/DAppVersion=$version" installer/VWP-Online.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Production installer compilation failed' }
+          & $compiler "/DAppVersion=$version" '/DReleaseBaseURL=http://127.0.0.1:8765' '/DTestBuild' installer/VWP-Online.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Test installer compilation failed' }
+          $setup = "dist/VWP-$version-Setup.exe"
+          $digest = (Get-FileHash -LiteralPath $setup -Algorithm SHA256).Hash.ToLowerInvariant()
+          Set-Content -LiteralPath ($setup+'.sha256') -Value ($digest+'  '+(Split-Path $setup -Leaf)) -Encoding ascii
+      - name: Verify online download, installation, startup and uninstallation
+        shell: pwsh
+        run: |
+          $version = '${{ steps.version.outputs.value }}'
+          $qa = Join-Path $env:GITHUB_WORKSPACE 'artifacts/release-check'
+          New-Item -ItemType Directory -Force -Path $qa | Out-Null
+          $installDir = [IO.Path]::GetFullPath((Join-Path $env:RUNNER_TEMP 'VWP-0.10-install-check'))
+          if (!$installDir.StartsWith([IO.Path]::GetFullPath($env:RUNNER_TEMP)+[IO.Path]::DirectorySeparatorChar)) { throw 'Unexpected smoke install directory' }
+          $server = Start-Process python -ArgumentList '-m','http.server','8765','--bind','127.0.0.1','--directory','dist' -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $qa 'http.txt') -RedirectStandardError (Join-Path $qa 'http-error.txt')
+          try {
+            for ($attempt=0; $attempt -lt 20; $attempt++) {
+              try { Invoke-WebRequest 'http://127.0.0.1:8765/install-parts.json' -UseBasicParsing | Out-Null; break } catch { Start-Sleep -Milliseconds 500 }
+            }
+            $setup = (Resolve-Path "dist/VWP-$version-Test-Setup.exe").Path
+            $install = Start-Process $setup -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-','/NOICONS',"/DIR=$installDir",("/LOG="+(Join-Path $qa 'install.log')) -WindowStyle Hidden -PassThru -Wait
+            if ($install.ExitCode -ne 0) { throw "Installer failed: $($install.ExitCode)" }
+            python tools/package_online_release.py --version $version --build $installDir --validate-only
+            if ($LASTEXITCODE -ne 0) { throw 'Installed library is incomplete' }
+            $launcher = Join-Path $installDir 'VWP.exe'
+            $product = (Get-Item -LiteralPath $launcher).VersionInfo.ProductVersion
+            if (!$product.StartsWith($version)) { throw "Installed version mismatch: $product" }
+            $check = Start-Process $launcher -ArgumentList '--verify-engine' -WindowStyle Hidden -PassThru -Wait
+            Copy-Item -LiteralPath (Join-Path $installDir 'verification/engine-ui-status.txt') -Destination (Join-Path $qa 'installed-ui.txt')
+            if ($check.ExitCode -ne 0) { throw 'Installed application startup failed' }
+            $uninstall = Start-Process (Join-Path $installDir 'unins000.exe') -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -WindowStyle Hidden -PassThru -Wait
+            if ($uninstall.ExitCode -ne 0) { throw 'Uninstaller failed' }
+            for ($attempt=0; $attempt -lt 40 -and (Test-Path -LiteralPath $launcher); $attempt++) { Start-Sleep -Milliseconds 500 }
+            if (Test-Path -LiteralPath $launcher) { throw 'Application remained after uninstall' }
+            'PASS: downloaded archives, SHA-256 checks, complete installation, native startup and uninstallation.' | Set-Content (Join-Path $qa 'status.txt')
+            Get-Content (Join-Path $qa 'status.txt')
+          } finally { if (!$server.HasExited) { Stop-Process -Id $server.Id } }
+      - name: Publish verified official release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = '${{ steps.version.outputs.value }}'
+          $tag = "v$version"
+          $repo = '${{ github.repository }}'
+          $existing = gh release view $tag --repo $repo --json isDraft 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            if (!(($existing | ConvertFrom-Json).isDraft)) { throw 'Refusing to overwrite an already published release' }
+          } else {
+            gh release create $tag --repo $repo --target '${{ github.sha }}' --draft --title "VWP $version — Engine Studio" --notes-file "docs/RELEASE-$version.md"
+            if ($LASTEXITCODE -ne 0) { throw 'Draft creation failed' }
+          }
+          $files = @(Get-ChildItem "dist/VWP-$version-Setup.exe","dist/VWP-$version-Portable-*.zip",'dist/*.sha256','dist/README-INSTALL.txt','dist/install-parts.json')
+          gh release upload $tag @($files.FullName) --repo $repo --clobber
+          if ($LASTEXITCODE -ne 0) { throw 'Release asset upload failed' }
+          $release = gh api "repos/$repo/releases/tags/$tag" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { throw 'Release asset verification query failed' }
+          foreach ($file in $files) {
+            $asset = $release.assets | Where-Object name -eq $file.Name
+            $digest = 'sha256:'+(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            if (!$asset -or $asset.state -ne 'uploaded' -or $asset.size -ne $file.Length -or $asset.digest -ne $digest) { throw "Uploaded asset verification failed: $($file.Name)" }
+          }
+          gh release edit $tag --repo $repo --draft=false --prerelease=false --latest
+          if ($LASTEXITCODE -ne 0) { throw 'Official publication failed' }
+          "Published https://github.com/$repo/releases/tag/$tag" >> $env:GITHUB_STEP_SUMMARY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-0.10-Release-Checks
+          path: |
+            artifacts/release-check/
+            dist/Release-*/verification/engine-ui-status.txt

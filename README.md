@@ -42,7 +42,12 @@
 [Деревня летом](assets/village-summer/ARTWORK.md), [Девушки](assets/muses/ARTWORK.md).
 Иллюстрации созданы встроенным imagegen; персонажи франшиз — fan art.
 
-[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.9.1** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC / WebView2
+[Скачать установщик или portable](https://github.com/domovoyproj/VWP/releases/latest) · **0.10.0** · Windows 10/11 x64 · C# / .NET 8 / WPF / LibVLC / WebView2
+
+Установщик `VWP-0.10.0-Setup.exe` сам скачивает и проверяет все пакеты: для установки
+нужен интернет. Для portable скачайте все `VWP-0.10.0-Portable-*.zip`, распакуйте
+в одну общую папку и запустите `VWP.exe`. .NET включён. Полные ролики сохранены;
+разделение архивов позволяет уложиться в лимит GitHub на отдельный файл.
 
 ![VWP Studio](docs/studio-themes.png)
 

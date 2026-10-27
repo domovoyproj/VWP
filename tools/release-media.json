@@ -1,0 +1,14 @@
+{
+  "baseline": {
+    "ref": "v0.9.1",
+    "url": "https://github.com/domovoyproj/VWP/releases/download/v0.9.1/VWP-0.9.1-win-x64.zip",
+    "sha256": "c7ab19942d698871da7d0f3c0804e0b2480638874354718fab02e2770db02e5b"
+  },
+  "collection": {
+    "source": "724cee9a6d9dd46fd94e76fb5a6cb9468ded91e8",
+    "run": 40469169549,
+    "artifact": 12718710790,
+    "name": "VWP-Sixty-Live-Wallpapers",
+    "sha256": "b91dea4c0a4cb6bed4ff43feea813f1ad7402195befc128cfadc542601724e33"
+  }
+}
