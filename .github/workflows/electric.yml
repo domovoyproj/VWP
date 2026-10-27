@@ -34,10 +34,16 @@ jobs:
           $check = Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList '--collection-bundle-check' -WindowStyle Hidden -PassThru -Wait
           Get-Content artifacts/collection-bundle-check.txt
           if ($check.ExitCode -ne 0) { throw 'Bundle import failed' }
+      - name: Resolve bundle output directory
+        id: bundle-output
+        shell: pwsh
+        run: |
+          $bundlePath = (Resolve-Path -LiteralPath '../VWP-60-Live-Wallpapers').Path
+          "path=$bundlePath" >> $env:GITHUB_OUTPUT
       - uses: actions/upload-artifact@v4
         with:
           name: VWP-Sixty-Live-Wallpapers
           path: |
-            ../VWP-60-Live-Wallpapers/
+            ${{ steps.bundle-output.outputs.path }}/
             artifacts/electric-check/
             artifacts/collection-bundle-check.txt
