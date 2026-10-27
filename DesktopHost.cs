@@ -36,7 +36,7 @@ public sealed partial class DesktopHost : IDisposable
     SceneLayers? sceneLayers;
     AudioReaction? audioReaction;
     public InteractiveVisual? Interactive=>interactiveVisual;
-    public bool Active => currentMedia is not null || interactiveVisual is not null || citySurface is not null;
+    public bool Active => currentMedia is not null || interactiveVisual is not null || citySurface is not null || studioSurface is not null;
     public bool Paused { get; private set; }
     public event Action? Failed;
     public event Action? LoopRequired;
@@ -52,7 +52,7 @@ public sealed partial class DesktopHost : IDisposable
     }
     public int Volume { set => player.Volume = value; }
     public bool Healthy => !Active || (IsWindow(parent) && IsWindow(window));
-    internal bool Playing => interactiveVisual is not null||citySurface is not null?!Paused:player.IsPlaying;
+    internal bool Playing => interactiveVisual is not null||citySurface is not null||studioSurface is not null?!Paused:player.IsPlaying;
     internal long Position => player.Time;
     public void Play(string path, Forms.Screen screen,string? cover=null,bool transition=false,string? previousFrame=null)
     {
@@ -75,7 +75,7 @@ public sealed partial class DesktopHost : IDisposable
     string? PrepareTransition(Forms.Screen screen,string? previousFrame=null)
     {
         if(!Active||!Healthy)return null;
-        string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","transitions");System.IO.Directory.CreateDirectory(folder);
+        string folder=Environment.GetCommandLineArgs().AnyVerification()?System.IO.Path.Combine(StudioProject.DataRoot,"transitions"):System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","transitions");System.IO.Directory.CreateDirectory(folder);
         string file=System.IO.Path.Combine(folder,Guid.NewGuid().ToString("N")+".png");
         string? snapshot=null;
         if(previousFrame is not null&&System.IO.File.Exists(previousFrame)){System.IO.File.Copy(previousFrame,file);snapshot=file;}
@@ -142,6 +142,7 @@ public sealed partial class DesktopHost : IDisposable
     public void Recover()
     {
         if(Healthy || !Active || targetScreen is null)return;
+        if(studioSurface is not null){RecoverStudio();return;}
         if(citySurface is not null){RecoverCity();return;}
         if(sceneTransition is not null)FinishTransition();
         if(interactiveVisual is not null)
@@ -158,6 +159,7 @@ public sealed partial class DesktopHost : IDisposable
     public void CompleteRecovery()
     {
         UpdateFrame();
+        if(studioSurface is not null){studioSurface.SetPaused(Paused);return;}
         if(citySurface is not null){citySurface.SetPaused(Paused);return;}
         if(Active && interactiveVisual is null && (userPaused||automaticPaused) && !transitionWaiting)player.SetPause(true);
         if(!recoveryPending || !Active)return;
@@ -176,7 +178,7 @@ public sealed partial class DesktopHost : IDisposable
             {
                 uint width=0,height=0;player.Size(0,ref width,ref height);
                 // Playing precedes the first displayed frame. Keep the old image during decoder warm-up.
-                bool ready=waiting.ElapsedMilliseconds>=180 && (citySurface is not null?cityReady:width>0&&height>0&&player.Time>0);
+                bool ready=waiting.ElapsedMilliseconds>=180 && (studioSurface is not null?studioSurface.Ready:citySurface is not null?cityReady:width>0&&height>0&&player.Time>0);
                 if(!ready && waiting.ElapsedMilliseconds<8000)return;
                 UpdateFrame();transitionWaiting=false;if(Paused&&citySurface is null)player.SetPause(true);blend=Stopwatch.StartNew();
             }
@@ -205,12 +207,12 @@ public sealed partial class DesktopHost : IDisposable
     public void TogglePause() { SetUserPaused(!userPaused); }
     public void SetUserPaused(bool value) {userPaused=value;SyncPause();}
     public void SetAutomaticPause(string? reason) {PauseReason=reason;automaticPaused=reason is not null;SyncPause();}
-    void SyncPause() {if(!Active)return;bool value=userPaused||automaticPaused;if(Paused==value)return;Paused=value;if(citySurface is not null)citySurface.SetPaused(value);else if(interactiveVisual is not null)interactiveVisual.SetPaused(value);else if(!transitionWaiting)player.SetPause(value);}
-    public void SetFraming(MonitorPreferences settings) {framing=settings;interactiveVisual?.Configure(settings);UpdateFrame();}
+    void SyncPause() {if(!Active)return;bool value=userPaused||automaticPaused;if(Paused==value)return;Paused=value;if(studioSurface is not null)studioSurface.SetPaused(value);else if(citySurface is not null)citySurface.SetPaused(value);else if(interactiveVisual is not null)interactiveVisual.SetPaused(value);else if(!transitionWaiting)player.SetPause(value);}
+    public void SetFraming(MonitorPreferences settings) {framing=settings;interactiveVisual?.Configure(settings);studioSurface?.SetFraming(settings);UpdateFrame();}
     public void RefreshFrame()=>UpdateFrame();
     void UpdateFrame()
     {
-        if(targetScreen is null || videoWindow==IntPtr.Zero || interactiveVisual is not null || citySurface is not null)return;
+        if(targetScreen is null || videoWindow==IntPtr.Zero || interactiveVisual is not null || citySurface is not null || studioSurface is not null)return;
         uint width=0,height=0;player.Size(0,ref width,ref height);
         if(width==0||height==0)return;
         var next=PlaybackRules.Frame((int)width,(int)height,targetScreen.Bounds.Width,targetScreen.Bounds.Height,framing.Fit,framing.FocusX,framing.FocusY);
@@ -265,6 +267,8 @@ public sealed partial class DesktopHost : IDisposable
     void StopPlayback(bool restore,bool preserveTransition=false)
     {
         ShowClock(false);
+        StudioError=null;
+        studioSurface?.Dispose();studioSurface=null;studioProject=null;studioGeneration++;
         citySurface?.Dispose();citySurface=null;cityReady=false;cityGeneration++;
         interactiveVisual?.Dispose();visualSource?.Dispose();interactiveVisual=null;visualSource=null;sceneLayers=null;audioReaction=null;
         fadeTimer?.Stop();fadeTimer=null;transitionWaiting=false;

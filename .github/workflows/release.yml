@@ -1,7 +1,7 @@
 name: Windows release
 on:
   push:
-    tags: ['v*', '!vwp-pack-*', '!v0.5.*', '!v0.6.*', '!v0.7.*', '!v0.8.*', '!v0.9.*', '!v0.10.*']
+    tags: ['v*', '!vwp-pack-*', '!v0.5.*', '!v0.6.*', '!v0.7.*', '!v0.8.*', '!v0.9.*', '!v0.10.*', '!v0.11.*']
   workflow_dispatch:
 permissions:
   contents: write

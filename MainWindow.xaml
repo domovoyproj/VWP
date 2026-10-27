@@ -9,19 +9,14 @@
   </Grid.RowDefinitions>
   <Grid Background="{DynamicResource CanvasBrush}">
    <Border Background="{DynamicResource PanelBrush}" Width="188" HorizontalAlignment="Left" />
-   <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="22,0,0,0" shell:WindowChrome.IsHitTestVisibleInChrome="True">
-    <Button Style="{StaticResource TrafficLight}" Background="#FF6058" ToolTip="Закрыть VWP" Click="QuitClick">
-     <TextBlock Text="×" />
-    </Button>
-    <Button Style="{StaticResource TrafficLight}" Background="#FFBD2E" ToolTip="Свернуть в трей" Click="TrayClick" Margin="8,0,0,0">
-     <TextBlock Text="−" />
-    </Button>
-    <Button Style="{StaticResource TrafficLight}" Background="#28C840" ToolTip="Полноэкранный / компактный режим" Click="ModeClick" Margin="8,0,0,0">
-     <TextBlock Text="↗" />
-    </Button>
-   </StackPanel>
+   <TextBlock Text="VWP  /  STUDIO" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource MutedBrush}" Margin="24,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False" />
    <TextBlock x:Name="ModeLabel" Text="VWP Studio" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" Foreground="{DynamicResource MutedBrush}" IsHitTestVisible="False" />
-   <Button x:Name="QualityButton" Click="QualityClick" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,26,0" Padding="12,7" ToolTip="Качество и нагрузка на ПК" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+   <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,12,0" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+    <Button Content="−" ToolTip="Свернуть в трей" Click="TrayClick" Background="Transparent" Padding="13,8" FontSize="15" />
+    <Button Content="□" ToolTip="Полноэкранный режим" Click="ModeClick" Background="Transparent" Padding="13,8" FontSize="14" />
+    <Button Content="×" ToolTip="Закрыть VWP" Click="QuitClick" Background="Transparent" Padding="13,8" FontSize="17" />
+   </StackPanel>
+   <Button x:Name="QualityButton" Click="QualityClick" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,162,0" Padding="12,7" ToolTip="Качество и нагрузка на ПК" shell:WindowChrome.IsHitTestVisibleInChrome="True">
     <StackPanel Orientation="Horizontal">
      <Path Data="M 1 9 A 8 8 0 0 1 17 9 M 9 9 L 13 4" Width="16" Height="13" Stretch="Uniform" Stroke="{DynamicResource InkBrush}" StrokeThickness="1.5" Margin="0,0,8,0" />
      <TextBlock x:Name="QualityLabel" Text="Режим · Авто" FontSize="11" />
@@ -73,6 +68,7 @@
       <StackPanel>
        <TextBlock x:Name="CollectionHeading" Text="КОЛЛЕКЦИЯ" FontSize="8" Foreground="{DynamicResource MutedBrush}" Margin="13,4,0,10" />
        <StackPanel x:Name="SidebarCategories">
+        <Button Content="Оригиналы VWP" Tag="Оригиналы VWP" Click="CategoryClick" Background="{DynamicResource SelectedBrush}" HorizontalContentAlignment="Left" FontSize="11" Padding="12,9" Margin="0,0,0,8" FontWeight="SemiBold" />
         <Button Content="Все сцены" Tag="Все сцены" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Избранное" Tag="Избранное" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Плейлист" Tag="Плейлист" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
@@ -155,7 +151,7 @@
        <TextBlock x:Name="HeroDescription" Foreground="{DynamicResource MutedBrush}" FontSize="11" TextWrapping="Wrap" LineHeight="17"/>
        <WrapPanel Margin="0,18,0,12"><Button x:Name="PreviewButton" Content="▷ Превью" Click="PreviewClick" FontSize="11" Padding="12,8" Margin="0,0,7,7"/><Button x:Name="FavoriteButton" Content="♡" Click="FavoriteClick" Padding="12,8" Margin="0,0,7,7" ToolTip="Избранное"/><Button x:Name="PlaylistButton" Content="＋ Плейлист" Click="PlaylistClick" FontSize="11" Padding="12,8" Margin="0,0,0,7"/></WrapPanel>
        <Button x:Name="CustomizeButton" Content="Настроить живую сцену" Click="CustomizeSceneClick" Padding="12,11" Background="{DynamicResource PrimaryBrush}" Foreground="White" Margin="0,0,0,8"/>
-       <Button Content="Редактор видео" Click="EditorClick" Padding="12,9" Margin="0,0,0,8"/>
+       <Button x:Name="VideoEditorButton" Content="Редактор видео" Click="EditorClick" Padding="12,9" Margin="0,0,0,8"/>
        <Button x:Name="RestoreOriginalButton" Content="Вернуть оригинал" Click="ResetSceneClick" Padding="12,7" Background="Transparent" FontSize="11"/>
       </StackPanel></ScrollViewer>
      </Grid>
@@ -176,7 +172,7 @@
      <ListBox x:Name="Library" Grid.Row="1" SelectionChanged="SelectionChanged" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False" Padding="0">
       <ListBox.ItemsPanel>
        <ItemsPanelTemplate>
-        <WrapPanel ItemWidth="{Binding ViewportWidth,RelativeSource={RelativeSource AncestorType=ScrollViewer},Converter={StaticResource CardWidth}}" />
+        <WrapPanel ItemWidth="{Binding ViewportWidth,RelativeSource={RelativeSource AncestorType=ScrollViewer},Converter={StaticResource CardWidth},ConverterParameter=wallpaper}" />
        </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
       <ListBox.ItemContainerStyle>
@@ -280,7 +276,7 @@
      <Button x:Name="QualityEco" Tag="Eco" Click="QualityPresetClick" HorizontalContentAlignment="Left" Padding="12,10" Margin="0,0,0,7">
       <StackPanel>
        <TextBlock Text="Экономия" FontWeight="SemiBold" />
-       <TextBlock Text="Для слабого ПК · до 15 FPS / 720p" FontSize="10" Foreground="{DynamicResource MutedBrush}" Margin="0,4,0,0" />
+       <TextBlock Text="720p · видео до 15, живые сцены до 30 FPS" FontSize="10" Foreground="{DynamicResource MutedBrush}" Margin="0,4,0,0" />
        <TextBlock Text="Без теней и отражений, упрощённый 3D." FontSize="10" Foreground="{DynamicResource MutedBrush}" Margin="0,3,0,0" />
       </StackPanel>
      </Button>
@@ -293,7 +289,7 @@
      <Button x:Name="QualityBalance" Tag="Balance" Click="QualityPresetClick" HorizontalContentAlignment="Left" Padding="12,10" Margin="0,0,0,7">
       <StackPanel>
        <TextBlock Text="Баланс" FontWeight="SemiBold" />
-       <TextBlock Text="До 30 FPS / 1080p · умеренная нагрузка" FontSize="10" Foreground="{DynamicResource MutedBrush}" Margin="0,4,0,0" />
+       <TextBlock Text="1080p · видео до 30, живые сцены до 60 FPS" FontSize="10" Foreground="{DynamicResource MutedBrush}" Margin="0,4,0,0" />
       </StackPanel>
      </Button>
      <Button x:Name="QualityHigh" Tag="Quality" Click="QualityPresetClick" HorizontalContentAlignment="Left" Padding="12,10" Margin="0,0,0,7">

@@ -241,7 +241,7 @@
    <Setter Property="Template">
     <Setter.Value>
      <ControlTemplate TargetType="CheckBox">
-      <StackPanel Orientation="Horizontal">
+      <StackPanel Orientation="Horizontal" Background="Transparent">
        <Grid Width="28" Height="16" Margin="0,0,8,0">
         <Border x:Name="Switch" Background="{DynamicResource ControlBrush}" CornerRadius="8" />
         <Ellipse x:Name="Dot" Fill="White" Width="12" Height="12" HorizontalAlignment="Left" Margin="2,0" />
@@ -250,7 +250,7 @@
       </StackPanel>
       <ControlTemplate.Triggers>
        <Trigger Property="IsChecked" Value="True">
-        <Setter TargetName="Switch" Property="Background" Value="#7873A6" />
+        <Setter TargetName="Switch" Property="Background" Value="{DynamicResource PrimaryBrush}" />
         <Setter TargetName="Dot" Property="HorizontalAlignment" Value="Right" />
        </Trigger>
       </ControlTemplate.Triggers>

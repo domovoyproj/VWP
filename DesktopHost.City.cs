@@ -53,6 +53,7 @@ public sealed partial class DesktopHost
     internal async Task<string> CityState()=>citySurface is null?"null":await citySurface.State();
     internal async Task<string?> CitySnapshot()
     {
+        if(studioSurface is not null)return await StudioSnapshot();
         var city=citySurface;if(city is null||!cityReady)return null;
         string folder=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","transitions");Directory.CreateDirectory(folder);
         string file=Path.Combine(folder,"city-"+Guid.NewGuid().ToString("N")+".png");

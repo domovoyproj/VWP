@@ -1,0 +1,219 @@
+{
+  "schema": 2,
+  "id": "rainy-afternoon",
+  "name": "Дождливый полдень",
+  "description": "Тёплая комната, дождь на стекле и мягкий свет окна. Отдельный слой взрослой героини: естественное дыхание и лёгкое движение волос.",
+  "author": "VWP",
+  "cover": "poster.png",
+  "duration": 24,
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.06,
+    "motion": 1,
+    "wind": 0.4,
+    "parallax": 0.2,
+    "audioReactive": false,
+    "clock": false
+  },
+  "weather": {
+    "kind": "none",
+    "count": 0,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "color": "#FFF0DC"
+  },
+  "layers": [
+    {
+      "id": "room",
+      "name": "Дождь за окном",
+      "source": "background.png",
+      "maskFiles": {},
+      "visible": true,
+      "rect": [
+        -0.025,
+        -0.025,
+        1.05,
+        1.05
+      ],
+      "opacity": 1,
+      "depth": 0.025,
+      "motion": "rain",
+      "anchor": "bottom",
+      "strength": 0.7,
+      "waterline": 1,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "feather": 0.01,
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              0.425,
+              0
+            ],
+            [
+              0.43,
+              0.71
+            ],
+            [
+              0,
+              0.8
+            ]
+          ]
+        },
+        {
+          "channel": 0,
+          "feather": 0.008,
+          "points": [
+            [
+              0.475,
+              0.08
+            ],
+            [
+              0.55,
+              0.15
+            ],
+            [
+              0.55,
+              0.63
+            ],
+            [
+              0.48,
+              0.68
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "portrait",
+      "name": "Волосы и дыхание",
+      "source": "character.png",
+      "maskFiles": {},
+      "visible": true,
+      "rect": [
+        -0.025,
+        -0.025,
+        1.05,
+        1.05
+      ],
+      "opacity": 1,
+      "depth": 0.16,
+      "motion": "character",
+      "anchor": "bottom",
+      "strength": 0.65,
+      "waterline": 1,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "feather": 0.02,
+          "points": [
+            [
+              0.635,
+              0.2
+            ],
+            [
+              0.66,
+              0.28
+            ],
+            [
+              0.65,
+              0.43
+            ],
+            [
+              0.68,
+              0.52
+            ],
+            [
+              0.64,
+              0.57
+            ],
+            [
+              0.605,
+              0.5
+            ],
+            [
+              0.61,
+              0.34
+            ]
+          ]
+        },
+        {
+          "channel": 2,
+          "feather": 0.015,
+          "points": [
+            [
+              0.776,
+              0.18
+            ],
+            [
+              0.806,
+              0.23
+            ],
+            [
+              0.825,
+              0.34
+            ],
+            [
+              0.829,
+              0.4
+            ],
+            [
+              0.805,
+              0.39
+            ],
+            [
+              0.79,
+              0.3
+            ]
+          ]
+        },
+        {
+          "channel": 3,
+          "feather": 0.03,
+          "points": [
+            [
+              0.68,
+              0.42
+            ],
+            [
+              0.77,
+              0.43
+            ],
+            [
+              0.81,
+              0.5
+            ],
+            [
+              0.78,
+              0.65
+            ],
+            [
+              0.68,
+              0.63
+            ],
+            [
+              0.65,
+              0.55
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

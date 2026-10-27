@@ -46,12 +46,12 @@ public partial class MainWindow
     }
     void CreateSceneClick(object sender,RoutedEventArgs e)
     {
-        var dialog=new OpenFileDialog{Title="Фон новой живой сцены",Filter="Изображения|*.png;*.jpg;*.jpeg;*.bmp"};
-        if(dialog.ShowDialog()==true)OpenSceneDesigner(null,new(){Background=dialog.FileName,Effect="Snow",Accent="#CCE9FF",Realtime=true});
+        CreateGpuScene();
     }
     void CustomizeSceneClick(object sender,RoutedEventArgs e)
     {
         if(Library.SelectedItem is not Wallpaper scene)return;
+        if(StudioProject.IsProject(scene.Path)){OpenGpuEditor(scene);return;}
         if(scene.PresetId==CityId){Status.Text="Настройки города находятся в разделе «Эксклюзивы».";return;}
         var layers=LayersFor(scene)?.Copy()??new SceneLayers();
         string source=Path.ChangeExtension(scene.Path,".png");
@@ -75,7 +75,7 @@ public partial class MainWindow
             }
             catch(JsonException){}
         }
-        OpenSceneDesigner(scene,layers);
+        OpenArtworkStudio(scene,layers);
     }
     void OpenSceneDesigner(Wallpaper? scene,SceneLayers layers)
     {

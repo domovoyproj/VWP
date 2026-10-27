@@ -30,7 +30,7 @@ public sealed class MonitorPreferences
 
 public static class PlaybackRules
 {
-    public static string Key(Wallpaper scene) => scene.PresetId is int id ? (scene.IsSpatial?"spatial:":"preset:") + id : scene.Path;
+    public static string Key(Wallpaper scene) => scene.StudioId is string studio?"studio:"+studio:scene.PresetId is int id ? (scene.IsSpatial?"spatial:":"preset:") + id : scene.Path;
     public static bool InSchedule(DateTime now, string start, string end)
     {
         if (!TimeSpan.TryParseExact(start, @"hh\:mm", null, out var from) || !TimeSpan.TryParseExact(end, @"hh\:mm", null, out var to)) return false;

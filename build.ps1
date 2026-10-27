@@ -16,6 +16,20 @@ $requiredAssets = @('assets/presets.json', 'assets/themes/themes.json', 'assets/
 $requiredAssets += @('assets/city/index.html','assets/city/city.js','assets/city/cover.png','assets/city/vendor/three.module.js','assets/city/vendor/three.core.js','assets/city/vendor/Reflector.js','assets/city/vendor/BufferGeometryUtils.js','assets/city/vendor/LICENSE.txt','assets/living/catalog.json')
 $requiredAssets += @('assets/city/city.css','assets/city/textures/apartment.png','assets/city/textures/townhouse.png','assets/city/textures/shop.png','assets/city/textures/tree.png','assets/city/textures/commuter.png','assets/city/textures/office-color.jpg')
 $requiredAssets += 'assets/city/resources.json'
+$requiredAssets += @('assets/studio/runtime/index.html','assets/studio/runtime/runtime.css','assets/studio/runtime/gl.js','assets/studio/runtime/shaders.js','assets/studio/runtime/masks.js','assets/studio/runtime/renderer.js')
+foreach ($id in 'silver-shore','winter-lane','rainy-afternoon') {
+    $manifest = "assets/studio-originals/$id/scene.vwpscene"
+    $requiredAssets += $manifest
+    $requiredAssets += "assets/studio-originals/$id/ARTWORK.json"
+    if (Test-Path -LiteralPath $manifest) {
+        $projectData = Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json
+        $requiredAssets += "assets/studio-originals/$id/$($projectData.cover)"
+        foreach ($layer in $projectData.layers) {
+            $requiredAssets += "assets/studio-originals/$id/$($layer.source)"
+            foreach ($mask in $layer.maskFiles.PSObject.Properties.Value) { $requiredAssets += "assets/studio-originals/$id/$mask" }
+        }
+    }
+}
 if (Test-Path -LiteralPath 'assets/city/resources.json') {
     foreach ($file in (Get-Content -LiteralPath 'assets/city/resources.json' -Raw | ConvertFrom-Json).files) { $requiredAssets += "assets/city/$file" }
 }

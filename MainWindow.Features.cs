@@ -103,6 +103,7 @@ public partial class MainWindow
         if(pendingScenes.TryGetValue(SelectedScreen.DeviceName,out var pending)){Status.Text="Готовлю сцену · "+pending.Name;return;}
         if(player?.Active==true)
         {
+            if(player.StudioError is string failure){Status.Text="Показан статичный фон · "+failure;return;}
             var config=Config(SelectedScreen);var scene=FindScene(config.Scene);
             Status.Text=(player.PauseReason is not null?"Автопауза · "+player.PauseReason:config.UserPaused?"Пауза":"На рабочем столе")+" · "+(scene?.Name??"Видео")+(config.PlaylistEnabled?" · ♫ "+config.PlaylistName:"");
         }
@@ -124,7 +125,12 @@ public partial class MainWindow
         if(!File.Exists(scene.Path)){Status.Text="Файл не найден: "+scene.Name;return;}
         var config=Config(screen);var playback=PlaybackConfig(scene,config);var player=GetHost(screen);
         var layers=LayersFor(scene);
-        if((layers?.Realtime==true || config.Interactive && (scene.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(scene)))) && layers?.Background is string background && File.Exists(background))
+        if(StudioProject.IsProject(scene.Path))
+        {
+            await player.PlayStudio(StudioProject.Load(scene.Path),screen,config.Performance,audio,cancellation.Token);
+            if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
+        }
+        else if((layers?.Realtime==true || config.Interactive && (scene.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(scene)))) && layers?.Background is string background && File.Exists(background))
         {
             player.PlayInteractive(layers,screen,playback,audio,FramedCover(scene,screen,config));
         }
@@ -197,7 +203,7 @@ public partial class MainWindow
     void LoadMonitorControls()
     {
         if(!featuresReady)return;loadingControls=true;var config=Config(SelectedScreen);Volume.Value=config.Volume;RefreshScenePresentations();
-        if(FindScene(config.Scene) is Wallpaper scene)Library.SelectedItem=scene;
+        if(FindScene(config.Scene) is Wallpaper scene&&FilterScene(scene))Library.SelectedItem=scene;
         loadingControls=false;UpdateSceneActions();UpdatePlaybackStatus();RefreshFilter();UpdateQualityUi();
     }
     void RefreshScenePresentations(){StopHover();StopPreview();}
@@ -282,10 +288,15 @@ public partial class MainWindow
     }
     async void ImportFiles(IEnumerable<string> paths)
     {
-        if(importing)return;importing=true;StopHover();
+        if(importing)return;var files=paths.ToArray();paths=files.Where(File.Exists).Where(p=>StudioProject.IsProject(p)||new[]{".mp4",".webm",".mkv",".mov",".avi"}.Contains(Path.GetExtension(p).ToLowerInvariant())).ToArray();
+        if(!paths.Any()){if(files.Length>0)Status.Text="Для изображения используй «Создать сцену».";return;}importing=true;StopHover();
         try
         {
             string folder=System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP","library");Directory.CreateDirectory(folder);
+            foreach(string path in paths.Where(File.Exists).Where(StudioProject.IsProject))
+            {
+                var project=StudioProject.Load(path).CloneTo(Path.Combine(StudioProject.DataRoot,Guid.NewGuid().ToString("N")));AddLocalScene(project.FileName,project.Name,project.Asset(project.Cover));
+            }
             foreach(string path in paths.Where(File.Exists).Where(p=>new[]{".mp4",".webm",".mkv",".mov",".avi"}.Contains(System.IO.Path.GetExtension(p).ToLowerInvariant())))
             {
                 Status.Text="Импорт · "+System.IO.Path.GetFileName(path);
@@ -296,7 +307,7 @@ public partial class MainWindow
                 string? cover=null;try{string thumbnail=Path.ChangeExtension(destination,".jpg");await VideoRender.Thumbnail(destination,thumbnail);cover=thumbnail;preferences.ImportThumbnails[destination]=thumbnail;}catch{}
                 var scene=new Wallpaper(System.IO.Path.GetFileNameWithoutExtension(path),destination,cover,"LOCAL VIDEO");items.Add(scene);Library.SelectedItem=scene;Save();
             }
-            RefreshFilter();Status.Text="Видео сохранены в библиотеку VWP";
+            SelectCategory("Все сцены");Status.Text="Импорт завершён · файлы сохранены в библиотеку VWP";
         }
         catch(Exception e){Status.Text="Импорт: "+e.Message;}
         finally{importing=false;}
@@ -305,7 +316,7 @@ public partial class MainWindow
     void FilesDragOver(object sender,DragEventArgs e){e.Effects=e.Data.GetDataPresent(DataFormats.FileDrop)?DragDropEffects.Copy:DragDropEffects.None;e.Handled=true;}
     async void CardEnter(object sender,MouseEventArgs e)
     {
-        if(!featuresReady||Config(SelectedScreen).Performance=="Eco"||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||scene.PresetId==CityId||!File.Exists(scene.Path))return;
+        if(!featuresReady||Config(SelectedScreen).Performance=="Eco"||!preferences.HoverPreview||SettingsOverlay.Visibility==Visibility.Visible||sender is not Grid card||card.DataContext is not Wallpaper scene||scene.PresetId==CityId||StudioProject.IsProject(scene.Path)||!File.Exists(scene.Path))return;
         StopHover();int generation=hoverGeneration;await Task.Delay(650);
         if(generation!=hoverGeneration||!card.IsMouseOver||!IsVisible||HeroVideo.Visibility==Visibility.Visible||scenePreview is not null)return;
         if(LayersFor(scene) is SceneLayers layers && (layers.Realtime || (scene.IsSpatial || Config(SelectedScreen).SceneAnimation) && layers.MotionId is not null))
