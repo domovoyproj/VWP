@@ -2,7 +2,7 @@ name: Engine Studio release
 on:
   workflow_dispatch:
   pull_request:
-    paths: ['tools/*release*', 'tools/bootstrap_webview.ps1', 'build.ps1', 'installer/VWP-Online.iss', 'VWP.csproj', '.github/workflows/engine-release.yml']
+    paths: ['**.cs', '**.xaml', 'assets/studio/**', 'assets/studio-originals/**', 'tools/*release*', 'tools/bootstrap_webview.ps1', 'build.ps1', 'installer/VWP-Online.iss', 'VWP.csproj', '.github/workflows/engine-release.yml']
   push:
     tags: ['v0.11.*']
 permissions:

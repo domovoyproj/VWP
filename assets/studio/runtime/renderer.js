@@ -122,13 +122,14 @@ class Renderer{
   masks(){return this.layers.map(layer=>layer.masks.export())}
   state(){return {project:this.project,settings:this.settings,masks:this.masks(),time:this.time,paused:this.paused}}
   async restore(state){
+    const wasPaused=this.paused;this.pause(true);
     if(state.project){this.project=state.project;state.project.layers.forEach((definition,i)=>{if(this.layers[i])this.layers[i].definition=definition})}
     if(state.settings)Object.assign(this.settings,state.settings);
     for(let i=0;i<(state.masks||[]).length;i++)for(let channel=0;channel<4;channel++){
       const value=state.masks[i][channels[channel]];if(!value||!this.layers[i])continue;
       const img=await image('data:image/png;base64,'+value);this.layers[i].masks.canvases[channel].getContext('2d').drawImage(img,0,0,1024,576);
     }
-    this.layers.forEach(layer=>layer.masks.upload());this.time=state.time||0;this.render();
+    this.layers.forEach(layer=>layer.masks.upload());this.time=state.time||0;this.pause(state.paused??wasPaused);
   }
   dispose(){
     this.disposed=true;cancelAnimationFrame(this.animation);const gl=this.gl;this.layers.forEach(layer=>{gl.deleteTexture(layer.texture);layer.masks.dispose()});this.buffers.forEach(buffer=>buffer.dispose());[this.layerShader,this.bloomShader,this.finalShader,this.particleShader].forEach(p=>p.dispose());this.mesh.dispose();this.quad.dispose();gl.deleteVertexArray(this.particleVao);gl.deleteBuffer(this.particleBuffer);

@@ -111,7 +111,7 @@ internal sealed class StudioSurface : IDisposable
         try{await Execute("window.studio.restore("+value+").then(()=>window.chrome.webview.postMessage({type:'state-restored'}))");await stateRestored.Task.WaitAsync(TimeSpan.FromSeconds(30));cachedState=value;}
         finally{stateRestored=null;}
     }
-    public async Task<StudioStatistics> ReadStatistics()=>JsonSerializer.Deserialize<StudioStatistics>(await Execute("window.studio.stats()"),StudioProject.Json)??new();
+    public async Task<StudioStatistics> ReadStatistics()=>Statistics=JsonSerializer.Deserialize<StudioStatistics>(await Execute("window.studio.stats()"),StudioProject.Json)??new();
     public Task Seek(double seconds)=>Execute("window.studio.seek("+JsonSerializer.Serialize(seconds)+")");
     public Task Tool(int layer,int channel,double radius,bool erase)=>Execute("window.studio.tool("+JsonSerializer.Serialize(new{layer,channel,radius,erase})+")");
     public Task StopTool()=>Execute("window.studio.tool(null)");
