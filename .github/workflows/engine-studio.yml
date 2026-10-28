@@ -33,7 +33,7 @@ jobs:
       - name: Verify GPU projects, native rendering and recovery
         shell: pwsh
         run: |
-          foreach ($mode in '--studio-project-check','--studio-library-data-check','--studio-check-all','--studio-library-check','--studio-host-check','--studio-visibility-check','--studio-recovery-check') {
+          foreach ($mode in '--studio-project-check','--studio-library-data-check','--studio-editor-controls-check','--studio-check-all','--studio-library-check','--studio-host-check','--studio-visibility-check','--studio-recovery-check') {
             $check = Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList $mode -WindowStyle Hidden -PassThru -Wait
             if ($check.ExitCode -ne 0) { throw "GPU Studio check failed: $mode" }
           }
@@ -47,6 +47,7 @@ jobs:
             artifacts/studio-check/
             artifacts/studio-host-check/
             artifacts/studio-visibility-check/
+            artifacts/studio-editor-controls-check/
             artifacts/studio-recovery/
             artifacts/studio-library-data-check/status.txt
             artifacts/studio-library-check/**/*.json

@@ -87,7 +87,12 @@ public partial class StudioEditor : Window
     }
     async void WeatherChanged(object sender,RoutedEventArgs e)
     {
-        if(loading)return;working.Weather.Kind=weatherKinds[Math.Max(0,Weather.SelectedIndex)];working.Weather.AfterLayer=WeatherPlacement.SelectedIndex==1?0:-1;
+        if(loading)return;working.Weather.Kind=weatherKinds[Math.Max(0,Weather.SelectedIndex)];
+        if(ReferenceEquals(sender,WeatherPlacement))
+        {
+            int subject=working.Layers.FindIndex(l=>l.Motion=="character");
+            working.Weather.AfterLayer=WeatherPlacement.SelectedIndex==1?Math.Max(0,subject>0?subject-1:working.Layers.Count-2):-1;
+        }
         if(ReferenceEquals(sender,Weather)){if(working.Weather.Kind!="none"&&ParticleCount.Value<1){loading=true;ParticleCount.Value=80;loading=false;}working.Weather.Color=working.Weather.Kind switch{"fireflies"=>"#D7F6AA","dust"=>"#ECD8B6","petals"=>"#F8C7DD","leaves"=>"#D39244","embers"=>"#FFC07B",_=>"#DFEFFF"};}
         working.Weather.Count=(int)ParticleCount.Value;dirty=true;
         if(ready&&surface is not null)try{await surface.Execute("window.studio.weather("+JsonSerializer.Serialize(working.Weather,StudioProject.Json)+")");}catch(Exception error){Status.Text=error.Message;}
@@ -116,8 +121,12 @@ public partial class StudioEditor : Window
     async Task Rebuild(Action change,int selection)
     {
         if(busy)return;busy=true;StudioProject? before=null;int oldSelection=LayerList.SelectedIndex;
-        try{if(ready&&surface is not null)playbackTime=(await surface.ReadStatistics()).Time;await PersistMasks();before=working.Copy();change();working.Save(working.FileName);RefreshLayers(selection);dirty=true;await StartSurface();}
-        catch(Exception error){if(before is not null){working.Layers=before.Layers;RefreshLayers(oldSelection);}Status.Text=error.Message;}finally{busy=false;}
+        try{if(ready&&surface is not null)playbackTime=(await surface.ReadStatistics()).Time;await PersistMasks();before=working.Copy();
+            int weatherIndex=working.Weather.AfterLayer;string? weatherAnchor=weatherIndex>=0&&weatherIndex<working.Layers.Count?working.Layers[weatherIndex].Id:null;
+            change();
+            if(weatherAnchor is not null){int moved=working.Layers.FindIndex(l=>l.Id==weatherAnchor);working.Weather.AfterLayer=moved>=0?moved:Math.Max(0,Math.Min(weatherIndex-1,working.Layers.Count-1));}
+            working.Save(working.FileName);RefreshLayers(selection);dirty=true;await StartSurface();}
+        catch(Exception error){if(before is not null){working.Layers=before.Layers;working.Weather=before.Weather;RefreshLayers(oldSelection);}Status.Text=error.Message;}finally{busy=false;}
     }
     async void AddClick(object sender,RoutedEventArgs e)
     {

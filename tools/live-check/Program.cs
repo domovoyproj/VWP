@@ -26,6 +26,7 @@ class Program
   if(args.Length==1 && args[0]=="--studio-recovery-check"){StudioRecoveryCheck.Run();return;}
   if(args.Length==1 && args[0]=="--studio-host-check"){StudioHostCheck.Run();return;}
   if(args.Length==1 && args[0]=="--studio-visibility-check"){StudioVisibilityCheck.Run();return;}
+  if(args.Length==1 && args[0]=="--studio-editor-controls-check"){StudioEditorControlsCheck.Run();return;}
   if(args.Length>=1 && args[0]=="--studio-editor-preview")
   {
    var studioApp=new Application();studioApp.Resources.MergedDictionaries.Add(new ResourceDictionary{Source=new Uri("/VWP;component/StudioResources.xaml",UriKind.Relative)});ThemeService.Apply("Dark","#A5C6FF");
