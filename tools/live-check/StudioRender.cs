@@ -26,8 +26,7 @@ internal static class StudioRender
                 for(int frame=0;frame<count;frame++)
                 {
                     await surface.Seek((double)frame/fps);
-                    string screenshot=await surface.Control.CoreWebView2.CallDevToolsProtocolMethodAsync("Page.captureScreenshot",JsonSerializer.Serialize(new{format="png",fromSurface=true,captureBeyondViewport=true,clip=new{x=0,y=0,width,height,scale=1}}));
-                    using var capture=JsonDocument.Parse(screenshot);await encoder.StandardInput.BaseStream.WriteAsync(Convert.FromBase64String(capture.RootElement.GetProperty("data").GetString()!));
+                    await encoder.StandardInput.BaseStream.WriteAsync(await surface.ExportFrame(width,height));
                     if(frame%fps==0)File.WriteAllText(Path.Combine(folder,"status.txt"),$"Rendering {frame/fps}/{project.Duration:0} seconds at {width}x{height}, {fps} FPS.");
                 }
                 encoder.StandardInput.Close();await encoder.WaitForExitAsync();if(encoder.ExitCode!=0)throw new Exception(await errors);

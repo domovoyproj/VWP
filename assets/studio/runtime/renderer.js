@@ -125,6 +125,7 @@ class Renderer{
   }
   pause(value){this.paused=value;this.cancelFrame();this.lastTick=0;this.lastDraw=0;if(!value)this.schedule();else this.render()}
   seek(seconds){this.time=Math.max(0,seconds);this.render();return {time:this.time,frames:this.frames}}
+  capture(){this.resize();this.render();return {width:canvas.width,height:canvas.height,png:canvas.toDataURL('image/png').split(',')[1]}}
   settingsChanged(value){Object.assign(this.settings,value);Object.assign(this.project.settings,value);this.render();updateClock()}
   weatherChanged(value){this.project.weather=structuredClone(value);this.makeParticles();this.render()}
   layerChanged(index,value){if(!this.layers[index])return;Object.assign(this.layers[index].definition,value);Object.assign(this.project.layers[index],value);this.render()}
@@ -160,7 +161,7 @@ async function load(payload){
 function fail(error){const label=document.querySelector('#failure');label.hidden=false;label.textContent=String(error.message||error);notify({type:'error',message:label.textContent})}
 function updateClock(){const element=document.querySelector('#clock');element.hidden=!current?.settings.clock;if(element.hidden)return;const now=new Date();element.querySelector('strong').textContent=now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});element.querySelector('span').textContent=now.toLocaleDateString('ru-RU',{weekday:'long',day:'numeric',month:'long'})}
 
-window.studio={load,live:()=>{if(current){current.manual=false;current.pause(false)}},seek:seconds=>current?.seek(seconds),pause:value=>current?.pause(value),settings:value=>current?.settingsChanged(value),weather:value=>current?.weatherChanged(value),layer:(index,value)=>current?.layerChanged(index,value),stats:()=>current?.stats(),project:()=>current?.project,state:()=>current?.state(),restore:state=>current?.restore(state),masks:()=>current?.masks(),weatherMask:()=>current?.weatherMasks.export().water,quality:value=>current?.changeQuality(value),tool:value=>{if(current){current.maskTool=value;brush.hidden=!value;current.render()}},undo:()=>{if(current?.maskTool){current.selectedMask().history(true);current.render();notify({type:'dirty'})}},redo:()=>{if(current?.maskTool){current.selectedMask().history(false);current.render();notify({type:'dirty'})}}};
+window.studio={load,live:()=>{if(current){current.manual=false;current.pause(false)}},seek:seconds=>current?.seek(seconds),pause:value=>current?.pause(value),settings:value=>current?.settingsChanged(value),weather:value=>current?.weatherChanged(value),layer:(index,value)=>current?.layerChanged(index,value),stats:()=>current?.stats(),capture:()=>current?.capture(),project:()=>current?.project,state:()=>current?.state(),restore:state=>current?.restore(state),masks:()=>current?.masks(),weatherMask:()=>current?.weatherMasks.export().water,quality:value=>current?.changeQuality(value),tool:value=>{if(current){current.maskTool=value;brush.hidden=!value;current.render()}},undo:()=>{if(current?.maskTool){current.selectedMask().history(true);current.render();notify({type:'dirty'})}},redo:()=>{if(current?.maskTool){current.selectedMask().history(false);current.render();notify({type:'dirty'})}}};
 window.chrome?.webview?.addEventListener('message',event=>{
   const data=event.data;
   if(data.type==='load')load(data);
