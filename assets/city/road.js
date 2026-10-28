@@ -2,14 +2,14 @@ import * as T from 'three';
 import { Reflector } from './vendor/Reflector.js';
 
 export function createRoad(scene, high, eco, fogColor) {
-    const origin = { value: new T.Vector2() }, time = { value: 0 };
+    const origin = { value: new T.Vector2() }, time = { value: 0 }, rainStrength={value:1};
     const material = new T.MeshStandardMaterial({ color: 0x24333d, roughness: .38, metalness: .2 });
     material.onBeforeCompile = shader => {
-        shader.uniforms.worldOrigin=origin;shader.uniforms.time=time;
+        shader.uniforms.worldOrigin=origin;shader.uniforms.time=time;shader.uniforms.rainStrength=rainStrength;
         shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nuniform vec2 worldOrigin;varying vec3 roadWorld;');
         shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nroadWorld=(modelMatrix*vec4(position,1.)).xyz+vec3(worldOrigin.x,0.,worldOrigin.y);');
         shader.fragmentShader=shader.fragmentShader.replace('#include <common>',`#include <common>
-            varying vec3 roadWorld;uniform float time;
+            varying vec3 roadWorld;uniform float time;uniform float rainStrength;
             float roadHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
             float roadNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(roadHash(i),roadHash(i+vec2(1.,0.)),f.x),mix(roadHash(i+vec2(0.,1.)),roadHash(i+1.),f.x),f.y);}`);
         shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
@@ -28,6 +28,22 @@ export function createRoad(scene, high, eco, fogColor) {
         shader.fragmentShader=shader.fragmentShader.replace('#include <roughnessmap_fragment>',`#include <roughnessmap_fragment>
             float puddles=smoothstep(.48,.66,roadNoise(roadWorld.xz*.43)+roadNoise(roadWorld.xz*.13)*.12);
             roughnessFactor=mix(.67,.17,puddles)*(.97+roadHash(floor(roadWorld.xz*200.))*.03);`);
+        // World-space rain rings perturb specular reflections instead of painting
+        // bright circles over the pavement. The pattern survives origin rebasing.
+        shader.fragmentShader=shader.fragmentShader.replace('#include <normal_fragment_maps>',`#include <normal_fragment_maps>
+            vec2 surface=roadWorld.xz;
+            vec2 slope=vec2(roadNoise(surface*38.),roadNoise(surface.yx*41.+7.))*.055-vec2(.0275);
+            vec2 cell=floor(surface*1.3),local=fract(surface*1.3);
+            for(int ring=0;ring<2;ring++){
+                float seed=roadHash(cell+float(ring)*17.);
+                vec2 center=vec2(roadHash(cell+3.+float(ring)),roadHash(cell+11.+float(ring)));
+                vec2 delta=local-center;float radius=length(delta);
+                float age=fract(time*.65+seed);float front=radius-age*.62;
+                float envelope=exp(-front*front*280.)*sin(front*95.)*(1.-age);
+                slope+=delta/max(radius,.025)*envelope*.026*rainStrength;
+            }
+            float wet=smoothstep(.48,.66,roadNoise(surface*.43)+roadNoise(surface*.13)*.12);
+            normal=normalize(normal+mat3(viewMatrix)*vec3(-slope.x,0.,-slope.y)*mix(.35,1.,wet));`);
     };
     const ground=new T.Mesh(new T.PlaneGeometry(900,900),material);ground.rotation.x=-Math.PI/2;ground.position.y=.025;ground.receiveShadow=true;scene.add(ground);
     const waterUniforms={...Reflector.ReflectorShader.uniforms,textureMatrix:{value:new T.Matrix4()},worldOrigin:origin,time,fog:{value:new T.Color(fogColor)}};
@@ -50,8 +66,9 @@ export function createRoad(scene, high, eco, fogColor) {
     }else water=new Reflector(new T.PlaneGeometry(900,900),{textureWidth:high?1024:512,textureHeight:high?1024:512,multisample:0,shader:{uniforms:waterUniforms,vertexShader,fragmentShader}});
     water.rotation.x=-Math.PI/2;water.position.y=-3.05;scene.add(water);
     return { ground, reflection:eco?null:water,
-        update(seconds,camera,floatingOrigin,fog){
+        update(seconds,camera,floatingOrigin,fog,raining=true){
             origin.value.set(floatingOrigin.x,floatingOrigin.z);time.value=seconds;
+            rainStrength.value=raining?1:0;
             ground.position.x=water.position.x=camera.position.x;ground.position.z=water.position.z=camera.position.z;
             water.material.uniforms.worldOrigin.value.copy(origin.value);water.material.uniforms.time.value=seconds;water.material.uniforms.fog.value.setHex(fog);
         }

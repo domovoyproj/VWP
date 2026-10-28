@@ -1,0 +1,183 @@
+{
+  "schema": 3,
+  "id": "library-1607",
+  "name": "Северный мост",
+  "description": "Плавно падающий снег в нескольких планах.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1607.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1607-background",
+      "name": "Окружение",
+      "source": "winter/1607.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 8716,
+      "waterline": 0.53,
+      "sun": [
+        0.56,
+        0.31
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.73
+            ],
+            [
+              0.24,
+              0.64
+            ],
+            [
+              0.45,
+              0.55
+            ],
+            [
+              0.57,
+              0.57
+            ],
+            [
+              0.75,
+              0.66
+            ],
+            [
+              1.0,
+              0.73
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.43,
+              0.0
+            ],
+            [
+              0.83,
+              0.0
+            ],
+            [
+              0.77,
+              0.2
+            ],
+            [
+              0.62,
+              0.27
+            ],
+            [
+              0.46,
+              0.23
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "1607-material-0",
+      "name": "Атмосфера · mist",
+      "source": "winter/1607.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.24,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 41787,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.34,
+              0.57
+            ],
+            [
+              0.52,
+              0.48
+            ],
+            [
+              0.71,
+              0.56
+            ],
+            [
+              0.65,
+              0.65
+            ],
+            [
+              0.46,
+              0.69
+            ]
+          ],
+          "feather": 0.025,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 66,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

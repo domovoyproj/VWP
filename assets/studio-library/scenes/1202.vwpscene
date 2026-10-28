@@ -1,0 +1,170 @@
+{
+  "schema": 3,
+  "id": "library-1202",
+  "name": "Hoshizora Terrace",
+  "description": "Терраса над спящим городом. Облака и мерцание звёзд.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1202.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1202-background",
+      "name": "Окружение",
+      "source": "vibes/1202.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "stars",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.45,
+      "seed": 13762,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.73,
+              0.0
+            ],
+            [
+              0.72,
+              0.35
+            ],
+            [
+              0.51,
+              0.35
+            ],
+            [
+              0.39,
+              0.29
+            ],
+            [
+              0.21,
+              0.38
+            ],
+            [
+              0.07,
+              0.32
+            ],
+            [
+              0.0,
+              0.37
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.63,
+              0.08
+            ],
+            [
+              0.69,
+              0.08
+            ],
+            [
+              0.69,
+              0.21
+            ],
+            [
+              0.63,
+              0.21
+            ]
+          ],
+          "feather": 0.015,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.84,
+              0.52
+            ],
+            [
+              0.86,
+              0.52
+            ],
+            [
+              0.87,
+              0.57
+            ],
+            [
+              0.83,
+              0.57
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "meteors",
+    "count": 3,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.0104,
+            0.0104
+          ],
+          [
+            0.551,
+            0.0104
+          ],
+          [
+            0.551,
+            0.2144
+          ],
+          [
+            0.0104,
+            0.2144
+          ]
+        ],
+        "feather": 0.008,
+        "erase": false
+      }
+    ],
+    "color": "#CDE4FF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

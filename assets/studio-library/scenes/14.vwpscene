@@ -1,0 +1,371 @@
+{
+  "schema": 3,
+  "id": "library-14",
+  "name": "Lo-Fi Atelier",
+  "description": "Уютная мастерская над вечерним городом.",
+  "author": "VWP",
+  "cover": "studio-library/posters/14.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "14-background",
+      "name": "Окружение",
+      "source": "studio-library/art/14-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "rain",
+      "light": "fire",
+      "tint": "#FFCE9B",
+      "surfaceStrength": 0.65,
+      "lightStrength": 0.65,
+      "seed": 4299,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.365,
+              0.02
+            ],
+            [
+              0.592,
+              0.02
+            ],
+            [
+              0.592,
+              0.38
+            ],
+            [
+              0.365,
+              0.38
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.614,
+              0.02
+            ],
+            [
+              0.806,
+              0.02
+            ],
+            [
+              0.806,
+              0.21
+            ],
+            [
+              0.614,
+              0.21
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.294,
+              0.03
+            ],
+            [
+              0.336,
+              0.03
+            ],
+            [
+              0.336,
+              0.29
+            ],
+            [
+              0.294,
+              0.29
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.025,
+              0.77
+            ],
+            [
+              0.033,
+              0.77
+            ],
+            [
+              0.033,
+              0.81
+            ],
+            [
+              0.025,
+              0.81
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.28,
+              0.19
+            ],
+            [
+              0.29,
+              0.19
+            ],
+            [
+              0.29,
+              0.22
+            ],
+            [
+              0.28,
+              0.22
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.56,
+              0.51
+            ],
+            [
+              0.58,
+              0.51
+            ],
+            [
+              0.58,
+              0.54
+            ],
+            [
+              0.56,
+              0.54
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.96,
+              0.54
+            ],
+            [
+              0.97,
+              0.54
+            ],
+            [
+              0.97,
+              0.57
+            ],
+            [
+              0.96,
+              0.57
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "14-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/14-character.png",
+      "rect": [
+        0.41472873,
+        0.15267337,
+        0.50144362,
+        0.51059384
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.35,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 14798,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.658242,
+              0.200799
+            ],
+            [
+              0.719266,
+              0.120892
+            ],
+            [
+              0.800631,
+              0.120892
+            ],
+            [
+              0.881996,
+              0.240752
+            ],
+            [
+              0.861655,
+              0.400566
+            ],
+            [
+              0.800631,
+              0.380589
+            ],
+            [
+              0.78029,
+              0.260729
+            ],
+            [
+              0.719266,
+              0.300682
+            ],
+            [
+              0.678583,
+              0.44052
+            ],
+            [
+              0.658242,
+              0.380589
+            ]
+          ],
+          "feather": 0.007,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.709095,
+              0.320659
+            ],
+            [
+              0.892167,
+              0.320659
+            ],
+            [
+              0.892167,
+              0.600334
+            ],
+            [
+              0.709095,
+              0.600334
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.475171,
+              0.780124
+            ],
+            [
+              0.556536,
+              0.740171
+            ],
+            [
+              0.637901,
+              0.860031
+            ],
+            [
+              0.617559,
+              0.979892
+            ],
+            [
+              0.475171,
+              0.999868
+            ]
+          ],
+          "feather": 0.018,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.709095,
+              0.320659
+            ],
+            [
+              0.892167,
+              0.320659
+            ],
+            [
+              0.892167,
+              0.600334
+            ],
+            [
+              0.709095,
+              0.600334
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 20,
+    "region": [
+      0.1,
+      0.15,
+      0.7000000000000001,
+      0.65
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": 0
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

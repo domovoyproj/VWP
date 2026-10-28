@@ -1,0 +1,219 @@
+{
+  "schema": 3,
+  "id": "library-18",
+  "name": "Orbital Garden",
+  "description": "Орбитальная оранжерея: вода, листва и прохладный свет.",
+  "author": "VWP",
+  "cover": "studio-library/posters/18.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "18-background",
+      "name": "Окружение",
+      "source": "cinematic/18.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.35,
+      "surface": "water",
+      "light": "cool",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 61537,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.02,
+              0.63
+            ],
+            [
+              0.26,
+              0.5
+            ],
+            [
+              0.33,
+              0.51
+            ],
+            [
+              0.1,
+              0.83
+            ],
+            [
+              0.0,
+              0.87
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.72,
+              0.53
+            ],
+            [
+              0.78,
+              0.52
+            ],
+            [
+              1.0,
+              0.73
+            ],
+            [
+              1.0,
+              0.91
+            ],
+            [
+              0.83,
+              0.77
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.0,
+              0.02
+            ],
+            [
+              0.25,
+              0.0
+            ],
+            [
+              0.31,
+              0.12
+            ],
+            [
+              0.23,
+              0.24
+            ],
+            [
+              0.12,
+              0.32
+            ],
+            [
+              0.0,
+              0.28
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.79,
+              0.09
+            ],
+            [
+              1.0,
+              0.04
+            ],
+            [
+              1.0,
+              0.29
+            ],
+            [
+              0.91,
+              0.35
+            ],
+            [
+              0.81,
+              0.25
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.11,
+              0.62
+            ],
+            [
+              0.2,
+              0.62
+            ],
+            [
+              0.2,
+              0.64
+            ],
+            [
+              0.11,
+              0.64
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.82,
+              0.64
+            ],
+            [
+              0.93,
+              0.64
+            ],
+            [
+              0.93,
+              0.67
+            ],
+            [
+              0.82,
+              0.67
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 25,
+    "region": [
+      0,
+      0.35,
+      1,
+      0.45000000000000007
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

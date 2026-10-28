@@ -1,0 +1,779 @@
+[
+  {
+    "file": "1901-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "ccbdd09fc7e0d7bcc3386aa452012affa340cd534e5e0f173e62d86dc2631a84",
+    "reference": "assets/muses/1901.png"
+  },
+  {
+    "file": "1901-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "9e3c8e079065f51ab1c31add4c0d223fbc573cc6024121ba25a73ba2ce1be2de",
+    "reference": "assets/muses/1901.png"
+  },
+  {
+    "file": "1902-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands and her held ceramic mug onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person or held mug must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "2cf92626669e3144b8496b3ea0db85108251c138a9e6273ab89975856c0940f1",
+    "reference": "assets/muses/1902.png"
+  },
+  {
+    "file": "1902-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing and the mug she is holding. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "1c2c18fa3cad0983852a7b95c935b1a16123f59f614e61a06f75b6621fc7e054",
+    "reference": "assets/muses/1902.png"
+  },
+  {
+    "file": "1903-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "1eb5d68e1a67e382ffb21b3022204f7f67a96163139e13ceb203600267fb31ab",
+    "reference": "assets/muses/1903.png"
+  },
+  {
+    "file": "1903-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "578ce629ffab215b74c3c06ebf9b7aefc68ef426647d84306be052a1021afad6",
+    "reference": "assets/muses/1903.png"
+  },
+  {
+    "file": "1001-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: photorealistic-natural. Asset: a very high quality cinematic live desktop wallpaper base image, one complete widescreen 16:9 frame. Rain District: a quiet Japanese urban canal at blue hour after rain, a small arched footbridge in the middle distance, detailed old wood and modern apartments, warm restrained shop lights reflected in the still deep teal water, a few willow branches at the upper right. Water occupies the lower half with a clearly readable shoreline. Carefully balanced realistic photography, natural atmospheric perspective, exceptionally beautiful muted teal and amber color, crisp architectural detail without artificial oversharpening, soft cinematic light, believable reflections and material texture. No people or vehicles, no text, signs with readable lettering, clock, logos, watermark, UI, borders, no collage, no prepainted rain streaks or particles. Foreground framing is delicate, the left side has calm usable dark space for desktop icons. Maximum available landscape resolution. This is final production artwork, not a sketch.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "34fd8b333d9af5821b0cb8b056ec4dca353a864a2dd2e09e842a034fb1547e51"
+  },
+  {
+    "file": "1002-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: photorealistic-natural. Asset: final premium live desktop wallpaper, complete 16:9 landscape composition. Last Metro: a peaceful empty elevated Tokyo railway platform at late blue hour, tracks sweeping gently from lower left toward the distant skyline, a beautifully detailed dark wood waiting shelter on the right, warm amber pendant light, distant glass skyscrapers and a lavender moonlit sky with soft layered clouds, delicate wisteria growing along the upper corner. Deep realistic photography with elegant Japanese film color grading, beautiful material textures, natural light, meticulous believable architecture and perspective, tranquil spacious composition. No people, no train in motion, no readable writing, clock, logos, watermark, UI, borders, collage or particles. Avoid a generic neon cyberpunk oversaturated scene. Keep open sky upper third for separately animated clouds; preserve straight rigid architecture. Maximum available landscape resolution, polished final artwork.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "d035f036dc527f3998a81025b8a7adb9ababe42c3964a690990df14997023421"
+  },
+  {
+    "file": "1003-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: photorealistic-natural. Asset: one final production live desktop wallpaper base, 16:9 widescreen. Sakura Arcade: a beautiful small Japanese shopping lane at night just after spring rain. Cherry trees with soft pale pink blossoms arch over the street, warmly illuminated small wooden storefronts with discreet teal and rose colored glass lights; wet stone paving occupies the lower third, detailed distant city architecture recedes in the middle, quiet storefront alcove at right. Refined realistic cinematography, realistic botanical detail, exquisite but restrained pink-blue-amber color balance, believable wet reflections, deep spatial composition, no harsh glow or oversharpening. No people or vehicles, no readable lettering, no baked-in falling petals or rain streaks, no clock, watermark, logos, UI, border, collage. The image must look elegant and expensive at desktop size, not like a cartoon or video-game screenshot. Maximum available wide landscape resolution.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "c389fab42b8c6ed02d5e66f234153ca072f3b7a07654a0b086d48dcb76944e29"
+  },
+  {
+    "file": "1904-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "01d2dcd8c9b9670bfafef655d41f26653d77b2968bdd75b44fa9b8096af59aac",
+    "reference": "assets/muses/1904.png"
+  },
+  {
+    "file": "1904-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "2296ee88b1ad13ae9c8fdd12a1dc31daef6213d5ddf56caf698cafc62bde9513",
+    "reference": "assets/muses/1904.png"
+  },
+  {
+    "file": "1905-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "2033b80040e64cf4842889e1484fc8cd84e042a55b85a56af927fcafbb4fb65e",
+    "reference": "assets/muses/1905.png"
+  },
+  {
+    "file": "1905-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "34dea4774ec110f124a0823288d30202e8b1176ece830be935cc8836c4ab6b54",
+    "reference": "assets/muses/1905.png"
+  },
+  {
+    "file": "1906-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman together with her complete held umbrella (including its translucent canopy and handle), all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1671,
+      941
+    ],
+    "transparent": true,
+    "sha256": "2148c0ae5d81eae4a553252bf2b7003a463bcd9ac04697d054bd61755a984600",
+    "reference": "assets/muses/1906.png"
+  },
+  {
+    "file": "1906-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman and her umbrella (canopy and handle), her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "8ff8d48c8494b88e81e3683a515e723d62b4785db0f7b1788152157d5de2d881",
+    "reference": "assets/muses/1906.png"
+  },
+  {
+    "file": "1907-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "68a1110f02f32e222add090d2386d318154c503cf2afccc956efceb934f236e7",
+    "reference": "assets/muses/1907.png"
+  },
+  {
+    "file": "1907-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "dc37653600557db3c2f76c4e3bf599a3010611f51817b90716f54c391806973e",
+    "reference": "assets/muses/1907.png"
+  },
+  {
+    "file": "1908-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1671,
+      941
+    ],
+    "transparent": true,
+    "sha256": "d7b4bd13994583253e2534fd9c254723f68fa5ee08e911109f0a328dc6951368",
+    "reference": "assets/muses/1908.png"
+  },
+  {
+    "file": "1908-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "9192c81aee9a6df52a156125a21f2cf060546d3a36f8532aaa3c6199d5a2c9e0",
+    "reference": "assets/muses/1908.png"
+  },
+  {
+    "file": "1909-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "de6e6805b89ff2dc7267549adfdc2c3c35f6221cec9fad65756d714bb40478ec",
+    "reference": "assets/muses/1909.png"
+  },
+  {
+    "file": "1909-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "8120d6cd4a77c1849e1d4af13e13f1529f68899ac85d39629c2aee084aa4cf2c",
+    "reference": "assets/muses/1909.png"
+  },
+  {
+    "file": "1910-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: background-extraction. EDIT TARGET: the supplied fictional adult woman desktop artwork. Extract ONLY the visible woman, all her visible hair and clothing and hands onto a genuinely transparent alpha background. Keep her exact identity (adult about 20 years old), beautiful face, expression, pose, anatomical proportions, lighting, clothing textures, and the exact size and position within the ORIGINAL 16:9 canvas. Do not center, crop, zoom, move, or change her face. Preserve every fine hair strand and soft edges without halos. Exclude furniture, plants, flowers, windows, scenery and table from the cutout; preserve natural occlusion boundaries where these objects hide her. Do not reconstruct hidden body parts. All pixels not belonging to the visible person must be transparent, not painted white, black or checkerboard. Output one full-frame 16:9 transparent layer, aligned pixel-for-pixel as closely as possible to the supplied image. Final production layer for subtle hair/breathing animation.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "fb88c99ef75f6306f7dc79996eb79f39d73379597e01357f07279f675126fa2e",
+    "reference": "assets/muses/1910.png"
+  },
+  {
+    "file": "1910-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied desktop artwork. Produce a clean background plate by removing ONLY the woman, her visible body, hair and clothing. Naturally reconstruct the chair/cushion and the part of the scene hidden behind her, with believable background objects and perspective. Preserve the exact wide 16:9 camera, architecture, window frames, furniture, plants and flowers in their original positions, preserve the lighting, colors, photographic realism and detailed textures of every unchanged region. Keep foreground objects such as table and flowers which are NOT part of her. No people, ghosts, silhouettes or leftover hair, no added props, no text, no watermark. Output the complete same-size wide background, not a cropped area. This must match a separately extracted full-frame character layer.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "3862d89690ba771bc772ab937a7cb26b79e036a835617c6ba4999e32568876e3",
+    "reference": "assets/muses/1910.png"
+  },
+  {
+    "file": "1401-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: a clear soft powder-blue field with the same quiet gradient, no figure, no new subjects. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "35735f2e82c9612dc358f8c01a66dd09425e50ed06f6fce09756729f01b342bf",
+    "reference": "assets/electric/1401.png"
+  },
+  {
+    "file": "1401-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "2cc989fddecee1be8d9c62dfb9ddc0f87e0b9012513afd472cb2c8adaf281776",
+    "reference": "assets/electric/1401.png"
+  },
+  {
+    "file": "1402-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: deep navy blue storm clouds with delicate cobalt atmospheric rim light, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "874781a524b407da704609282188f42263be9b1400254c1e93d0486711576fd8",
+    "reference": "assets/electric/1402.png"
+  },
+  {
+    "file": "1402-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "9512af7295d05ecafc448a05b6a86584809179ad22568e24689b2f76d4ae5e7c",
+    "reference": "assets/electric/1402.png"
+  },
+  {
+    "file": "1403-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete cobalt night sky, mountain horizon and city lights, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "5e14732b36f225f320b565ae6d352e749877fab58b93799513cd0eec86b2fcd8",
+    "reference": "assets/electric/1403.png"
+  },
+  {
+    "file": "1403-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "12bd817a3ab2041703c6db07a90c4e9acaf8f42dbef429ed873fbfc26438e7b3",
+    "reference": "assets/electric/1403.png"
+  },
+  {
+    "file": "1404-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete violet storm sky and rugged misty valley cliffs, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "bfb93cb09ac7469e3d01bb137eeca92d83774dfb6f299584872a98afa52cd7cb",
+    "reference": "assets/electric/1404.png"
+  },
+  {
+    "file": "1404-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "22c09624a9e693badfa224592a6b222ef0a534dbbe289ce06a0c999804ff51e5",
+    "reference": "assets/electric/1404.png"
+  },
+  {
+    "file": "1405-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete rainy blue-grey valley, distant water and village with sculpted cliff, retaining wooden architecture at the right edge, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1671,
+      941
+    ],
+    "transparent": false,
+    "sha256": "c99d248c248f4b996d8ba7afa703b2b55c9a8adf172f96c2c23f6f219b90c375",
+    "reference": "assets/electric/1405.png"
+  },
+  {
+    "file": "1405-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "2e85543f9581244d1c8b30cf907c8f9e0490c1cb46cfcea08aff226a14bf526a",
+    "reference": "assets/electric/1405.png"
+  },
+  {
+    "file": "1406-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete glowing golden sunset sky, cloud layers and mountain valley with lakes and forests, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "d96518a2e103b9ee2377cb93dc29b5a7aae6bfe47edede6d1fcae38ff37728b6",
+    "reference": "assets/electric/1406.png"
+  },
+  {
+    "file": "1406-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "b4571888a28663e858ebd6058987301bf22c218de343ad688e1985acb7152ff0",
+    "reference": "assets/electric/1406.png"
+  },
+  {
+    "file": "1407-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete crimson moon, red twilight, cliff castle and misty forest valley, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "57d1e4fdaa51abced7b01e3d4e6b6760f56d03c6b7ae46975792833f5fb9667b",
+    "reference": "assets/electric/1407.png"
+  },
+  {
+    "file": "1407-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1671,
+      941
+    ],
+    "transparent": true,
+    "sha256": "2b6fe596d4e2cd0f7c308be515600cfe33056b9fdd4058b909db3b80b5195a99",
+    "reference": "assets/electric/1407.png"
+  },
+  {
+    "file": "1408-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete violet dusk gardens, torii gate, lanterns, sakura and reflective pond, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "88fd50a328b4b6f32e03b1ca8fa96234515b7d373c5e25f85f6b3985d4f8ddbe",
+    "reference": "assets/electric/1408.png"
+  },
+  {
+    "file": "1408-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "2504a847549cc06e5e347e850982011b8d49dd7b0f990e4cc8f2f4c814dab626",
+    "reference": "assets/electric/1408.png"
+  },
+  {
+    "file": "1409-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete crimson sunset city and river, with balcony railing and window architecture; leave the chair as furniture, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "cab0d3d78fd228b30c1b52937a57dc1e0f312f1e64707dc5bab7f05e7e29966e",
+    "reference": "assets/electric/1409.png"
+  },
+  {
+    "file": "1409-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "e673631f4efb575f46104b448c59e528347eb86284efa5c05e11a501a4711769",
+    "reference": "assets/electric/1409.png"
+  },
+  {
+    "file": "1410-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Create a clean background plate for a premium animated wallpaper. Remove only the foreground anime character and every part of their hair, clothing and equipment. Reconstruct the occluded scenery naturally: the complete blue dusk walled city, rooftops, mountain horizon and stone balcony architecture, no figure. Preserve the original 1672x941 canvas dimensions, exact camera, composition, colors, painterly anime rendering, light and all existing unobstructed scenery pixel aligned as closely as possible. No new characters, no words, no logo, no added effects or lightning. The area formerly covered by the person must be fully completed background, without silhouette or ghosting. This is the background layer of the original scene, not a new composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "bb2079f13bffcc9b6c29f3952743381b5d237049b361780c8c2c3f9f8b69765c",
+    "reference": "assets/electric/1410.png"
+  },
+  {
+    "file": "1410-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Use the provided image as the edit target. Extract the one existing foreground anime character as a clean, production-quality alpha layer for an animated wallpaper. Keep every visible part of the original person, hair strands, face, clothing, armor, and any carried equipment, with the same exact pose, original appearance, light, size and placement on the original 1672x941 canvas. Do not crop, recenter, change expression, redraw features, invent hidden anatomy, extend the image, or include any scenery, furniture, railing, sky or decorative effects. Preserve crisp cel-art lines and fine hair tips, soft anti-aliased edges without blue/purple background fringe. Everything except the visible character must be genuinely transparent alpha, not a checkerboard or solid color. Output a full original-size transparent PNG with the person aligned exactly to the reference.",
+    "size": [
+      1671,
+      941
+    ],
+    "transparent": true,
+    "sha256": "a376dcb618e8fca8e218866134fe805a00f6d5f14da8aa97c93cc9703daae61a",
+    "reference": "assets/electric/1410.png"
+  },
+  {
+    "file": "0-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete pink-blue twilight Tokyo skyline, river, trains and the foreground balcony and sakura branch, retaining the small distant cat. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "419143b1f82d2e538a1a56d7448bd64f0f75005856ef2db185a14957c1e06045",
+    "reference": "assets/scene-0.png"
+  },
+  {
+    "file": "0-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "7abe5e1819becef89bd4fcd3b3c272fd858020aa210aba831c6b5d1f78b2885a",
+    "reference": "assets/scene-0.png"
+  },
+  {
+    "file": "1-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete blue rainy Tokyo canal, rail bridge, trains, stone riverside path, lamp, railings and right wall. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "ad5613aa76c4847245567071f2aa63fa53383e6e17bb9a19955881068ceaa19b",
+    "reference": "assets/scene-1.png"
+  },
+  {
+    "file": "1-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "3afa14cb40db168b126cd5643be624050bb9e52241e90e9b15debd638a44393d",
+    "reference": "assets/scene-1.png"
+  },
+  {
+    "file": "2-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete red moon, mountain shrine landscape, stairs, torii gates, lanterns and autumn trees. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "7c9b1733891125f4a237cb999daa5e731106d099d50ff838658830073e20e88b",
+    "reference": "assets/scene-2.png"
+  },
+  {
+    "file": "2-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "638058eee7209e7dc04608d7c22ea3fc1047c29059ba8e81df2d1d6aa8fa977e",
+    "reference": "assets/scene-2.png"
+  },
+  {
+    "file": "4-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the floating astronaut, complete spacesuit, backpack and helmet. Reconstruct the background naturally where the subject was: the complete purple galactic star field, asteroid belt, distant planet and orbital structures. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "04d751cfaca5025f71c506d6c1e3594dff39e31b4412c5a479ca405b224f4068",
+    "reference": "assets/scene-4.png"
+  },
+  {
+    "file": "4-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the floating astronaut, complete spacesuit, backpack and helmet. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1671,
+      941
+    ],
+    "transparent": true,
+    "sha256": "018b1efc335a4cb194ac93a97a91952e7acdf6c7fed332432769a16e9e938aa2",
+    "reference": "assets/scene-4.png"
+  },
+  {
+    "file": "5-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete golden sunset countryside station with rice fields, hills, rails, wooden platform and bench; retain the backpack on the bench. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "7c883fd2445e753c1e5c598bf4faf3436da041bd0af25f6d4cf4db31bc6c8d50",
+    "reference": "assets/scene-5.png"
+  },
+  {
+    "file": "5-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "e31cb8f38ff94f77a63bf6776d678477416b8fd56d6eac647351d1d40a16fd07",
+    "reference": "assets/scene-5.png"
+  },
+  {
+    "file": "7-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete blue underwater ruined city, cathedral arches, statues, jellyfish, fish, rocks and submerged stairway. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "418c143b7ce28a60228bf5bf1b58ff280b48f6262e2a9f7329fd9dbdf951ad25",
+    "reference": "assets/scene-7.png"
+  },
+  {
+    "file": "7-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "35a6c85f11d28870616dc31f903b3990fceda4a47ef6e00115dc65281a349cfd",
+    "reference": "assets/scene-7.png"
+  },
+  {
+    "file": "11-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete alien violet sunset coastline, waves, dark rocks, giant planets and shoreline. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "3c85ef38313b199b29d800ba69d2d09e9dad528e974009159ff731f06acdf6c8",
+    "reference": "assets/scene-11.png"
+  },
+  {
+    "file": "11-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "405c1d368b05ed94b26a20266b58546518e9dde70f4a7056f95031629b6fe24c",
+    "reference": "assets/scene-11.png"
+  },
+  {
+    "file": "12-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the two foreground people together and their held red umbrella. Reconstruct the background naturally where the subject was: the complete snowy Japanese village with winding river, bridge, mountains, lantern-lit stone path and wooden houses. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "ce3a0b39bd15d1421b50db931552f88abe0d402dbbe0e0394ddd42b7d9300492",
+    "reference": "assets/scene-12.png"
+  },
+  {
+    "file": "12-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the two foreground people together and their held red umbrella. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "bbc7ac5fbb82396c2e0f99fe2adb74c4722f5e8daa8df1ca6b935d10667bd475",
+    "reference": "assets/scene-12.png"
+  },
+  {
+    "file": "13-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete warm sunset mountain shrines, cliffs, lake, stone stairs, torii gates and lanterns. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "4e2715fcea04f2059503519099176a2c9d3c92945ab46be0ec7ce220418ecb46",
+    "reference": "assets/scene-13.png"
+  },
+  {
+    "file": "13-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "932816142d718be5640237c05a90835dddbffbda22458264300a08e6d349325e",
+    "reference": "assets/scene-13.png"
+  },
+  {
+    "file": "14-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the seated woman, her hair, visible arms, hands and clothes, but not the writing pen or table or draped chair cardigan. Reconstruct the background naturally where the subject was: the complete cozy rainy artist studio, windows, city skyline, easel, table, papers, pen, mug, furniture, draped cardigan, candles and plants; retain the cat on the bed. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1671,
+      941
+    ],
+    "transparent": false,
+    "sha256": "bfd0029e308512e2f091a359d745f04d65a02ea94d1397cdf23e3c726472d833",
+    "reference": "assets/scene-14.png"
+  },
+  {
+    "file": "14-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the seated woman, her hair, visible arms, hands and clothes, but not the writing pen or table or draped chair cardigan. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "81561e70d8476d961849845cbad53189c25136d3b05ef492a839c12d3b046e1f",
+    "reference": "assets/scene-14.png"
+  },
+  {
+    "file": "17-background.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided image. Create the clean background plate of this animated wallpaper by removing only the one main foreground person, including visible hair, clothing and worn or carried equipment. Reconstruct the background naturally where the subject was: the complete moonlit Japanese garden with pond, koi fish, bridge, waterfall, wisteria, stone ledge and house. Preserve the exact original 1672x941 canvas, camera perspective, original environment, anime illustration style, colors and lighting. Preserve all unobstructed objects and background pixel aligned as closely as possible. No new figures, new scenery, labels, logos or new effects. Fill every removed area completely with continuous natural environment, with no silhouette or ghost. This is a background layer, not a redesigned composition.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": false,
+    "sha256": "791389f52be456d5eee758e48cf23a2c015467360edb90a37f56996b147d06c9",
+    "reference": "assets/scene-17.png"
+  },
+  {
+    "file": "17-character.png",
+    "generator": "built-in imagegen",
+    "prompt": "Edit target: the provided illustration. Make a precision alpha extraction for a premium animated wallpaper. Keep ONLY the one main foreground person, including visible hair, clothing and worn or carried equipment. Preserve the exact original identity, face, expression, age, pose, scale, original position and visible silhouette on the full 1672x941 canvas. Keep only the parts visible in the reference; don't invent hidden anatomy, don't recenter or crop or extend anything. Preserve crisp original anime lines, delicate hair strands and lighting. Remove all scenery, architecture, water, chairs, railing, foreground vegetation, background effects and unrelated objects to genuine transparent alpha. Do not include floating petals or snow. Edges must be clean antialiased, without colored fringe or background remnants. Output a full-canvas transparent PNG suitable for compositing exactly back over the matching background.",
+    "size": [
+      1672,
+      941
+    ],
+    "transparent": true,
+    "sha256": "76359e7c6f0bd4978605cca5f32030d7130c1f26127cbcf4a8b815a3137d4f56",
+    "reference": "assets/scene-17.png"
+  }
+]

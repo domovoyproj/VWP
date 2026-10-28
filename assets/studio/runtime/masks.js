@@ -6,11 +6,12 @@ export class Masks{
     this.canvases=channels.map(()=>{const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;const context=canvas.getContext('2d',{willReadFrequently:true});context.fillStyle='black';context.fillRect(0,0,width,height);return canvas});
     this.texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,this.texture);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
   }
-  async load(layer,base){
+  async load(layer,base,fill=false){
     for(let channel=0;channel<4;channel++){
       const canvas=this.canvases[channel],ctx=canvas.getContext('2d');
+      ctx.fillStyle=fill&&channel===0?'white':'black';ctx.fillRect(0,0,this.width,this.height);
       if(layer.maskFiles?.[channels[channel]]){const source=await image(new URL(layer.maskFiles[channels[channel]],base));ctx.drawImage(source,0,0,this.width,this.height);continue}
-      for(const shape of layer.masks||[]){if(shape.channel!==channel)continue;ctx.save();ctx.filter=`blur(${shape.feather*this.height}px)`;ctx.fillStyle='white';ctx.beginPath();shape.points.forEach(([x,y],i)=>i?ctx.lineTo(x*this.width,y*this.height):ctx.moveTo(x*this.width,y*this.height));ctx.closePath();ctx.fill();ctx.restore()}
+      for(const shape of layer.masks||[]){if(shape.channel!==channel)continue;ctx.save();ctx.filter=`blur(${shape.feather*this.height}px)`;ctx.fillStyle=shape.erase?'black':'white';ctx.beginPath();shape.points.forEach(([x,y],i)=>i?ctx.lineTo(x*this.width,y*this.height):ctx.moveTo(x*this.width,y*this.height));ctx.closePath();ctx.fill();ctx.restore()}
     }
     this.upload();
   }

@@ -2,13 +2,13 @@ name: Engine studio
 on:
   workflow_dispatch:
   pull_request:
-    paths: ['**.cs', '**.xaml', 'assets/studio/**', 'assets/studio-originals/**', '.github/workflows/engine-studio.yml']
+    paths: ['**.cs', '**.xaml', 'assets/studio/**', 'assets/studio-originals/**', 'assets/studio-library/**', 'assets/city/**', 'tools/*studio_library*', 'tools/library_directions.py', '.github/workflows/engine-studio.yml']
 permissions:
   contents: read
 jobs:
   studio-check:
     runs-on: windows-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -33,7 +33,7 @@ jobs:
       - name: Verify GPU projects, native rendering and recovery
         shell: pwsh
         run: |
-          foreach ($mode in '--studio-project-check','--studio-check-all','--studio-host-check','--studio-recovery-check') {
+          foreach ($mode in '--studio-project-check','--studio-library-data-check','--studio-check-all','--studio-library-check','--studio-host-check','--studio-visibility-check','--studio-recovery-check') {
             $check = Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList $mode -WindowStyle Hidden -PassThru -Wait
             if ($check.ExitCode -ne 0) { throw "GPU Studio check failed: $mode" }
           }
@@ -46,8 +46,40 @@ jobs:
             artifacts/studio-project-check/status.txt
             artifacts/studio-check/
             artifacts/studio-host-check/
+            artifacts/studio-visibility-check/
             artifacts/studio-recovery/
+            artifacts/studio-library-data-check/status.txt
+            artifacts/studio-library-check/**/*.json
+            artifacts/studio-library-check/status.txt
+            artifacts/studio-library-check/progress.txt
+            artifacts/studio-library-check/1902/frame-4.png
+            artifacts/studio-library-check/1701/frame-4.png
+            artifacts/studio-library-check/1401/frame-4.png
+            artifacts/studio-library-check/1112/frame-4.png
             bin/Release/net8.0-windows/verification/engine-*.png
             bin/Release/net8.0-windows/verification/engine-ui-status.txt
             bin/Release/net8.0-windows/verification/quality-*.png
             bin/Release/net8.0-windows/verification/quality-ui-status.txt
+  city-quality:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet build tools/live-check/live-check.csproj -c Release --nologo
+      - name: Verify city materials, animation and Eco rendering
+        shell: pwsh
+        run: |
+          foreach ($mode in '--city-check','--city-check-eco') {
+            $check = Start-Process tools/live-check/bin/Release/net8.0-windows/live-check.exe -ArgumentList $mode -WindowStyle Hidden -PassThru -Wait
+            if ($check.ExitCode -ne 0) { throw "City quality check failed: $mode" }
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: VWP-City-Quality-Checks
+          path: |
+            artifacts/city-check/
+            artifacts/city-check-eco/

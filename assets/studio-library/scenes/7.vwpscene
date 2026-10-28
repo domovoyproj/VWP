@@ -1,0 +1,322 @@
+{
+  "schema": 3,
+  "id": "library-7",
+  "name": "Ocean Sonata",
+  "description": "Подводное царство светящихся медуз.",
+  "author": "VWP",
+  "cover": "studio-library/posters/7.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "7-background",
+      "name": "Окружение",
+      "source": "studio-library/art/7-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.3,
+      "surface": "ocean",
+      "light": "cool",
+      "tint": "#91DDE9",
+      "surfaceStrength": 0.3,
+      "lightStrength": 0.3,
+      "seed": 52769,
+      "waterline": 0.66,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.5,
+              0.68
+            ],
+            [
+              0.62,
+              0.68
+            ],
+            [
+              0.71,
+              0.77
+            ],
+            [
+              0.72,
+              0.88
+            ],
+            [
+              0.67,
+              1.0
+            ],
+            [
+              0.43,
+              1.0
+            ],
+            [
+              0.39,
+              0.88
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.06,
+              0.4
+            ],
+            [
+              0.11,
+              0.33
+            ],
+            [
+              0.14,
+              0.39
+            ],
+            [
+              0.15,
+              0.54
+            ],
+            [
+              0.09,
+              0.65
+            ],
+            [
+              0.05,
+              0.57
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.5,
+              0.02
+            ],
+            [
+              0.78,
+              0.0
+            ],
+            [
+              0.81,
+              0.14
+            ],
+            [
+              0.69,
+              0.22
+            ],
+            [
+              0.55,
+              0.16
+            ]
+          ],
+          "feather": 0.025,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "7-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/7-character.png",
+      "rect": [
+        0.18331293,
+        0.07617762,
+        0.79717142,
+        0.80749511
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.4,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 9780,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.717144,
+              0.133279
+            ],
+            [
+              0.793916,
+              0.108016
+            ],
+            [
+              0.832302,
+              0.171174
+            ],
+            [
+              0.857892,
+              0.297491
+            ],
+            [
+              0.819506,
+              0.310122
+            ],
+            [
+              0.768325,
+              0.209069
+            ],
+            [
+              0.717144,
+              0.234333
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.793916,
+              0.259596
+            ],
+            [
+              0.921868,
+              0.259596
+            ],
+            [
+              1,
+              0.335386
+            ],
+            [
+              1,
+              0.486966
+            ],
+            [
+              0.909073,
+              0.449071
+            ],
+            [
+              0.806711,
+              0.360649
+            ]
+          ],
+          "feather": 0.013,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.665963,
+              0.171174
+            ],
+            [
+              0.768325,
+              0.171174
+            ],
+            [
+              0.768325,
+              0.310122
+            ],
+            [
+              0.665963,
+              0.310122
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.704349,
+              0.436439
+            ],
+            [
+              0.742735,
+              0.411176
+            ],
+            [
+              0.781121,
+              0.524861
+            ],
+            [
+              0.768325,
+              0.625914
+            ],
+            [
+              0.704349,
+              0.600651
+            ]
+          ],
+          "feather": 0.015,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.665963,
+              0.171174
+            ],
+            [
+              0.768325,
+              0.171174
+            ],
+            [
+              0.768325,
+              0.310122
+            ],
+            [
+              0.665963,
+              0.310122
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "bubbles",
+    "count": 68,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#BBDFED",
+    "afterLayer": 0
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

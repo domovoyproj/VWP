@@ -1,0 +1,275 @@
+{
+  "schema": 3,
+  "id": "library-1109",
+  "name": "Scarlet Citadel",
+  "description": "Алая цитадель. Искры, ветер и свет фонарей.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1109.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1109-background",
+      "name": "Окружение",
+      "source": "anime/1109.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 64298,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.55,
+              0.0
+            ],
+            [
+              0.52,
+              0.24
+            ],
+            [
+              0.37,
+              0.27
+            ],
+            [
+              0.23,
+              0.38
+            ],
+            [
+              0.07,
+              0.34
+            ],
+            [
+              0.0,
+              0.4
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.13,
+              0.02
+            ],
+            [
+              0.29,
+              0.02
+            ],
+            [
+              0.29,
+              0.23
+            ],
+            [
+              0.13,
+              0.23
+            ]
+          ],
+          "feather": 0.02,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.68,
+              0.45
+            ],
+            [
+              0.71,
+              0.45
+            ],
+            [
+              0.71,
+              0.48
+            ],
+            [
+              0.68,
+              0.48
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.81,
+              0.65
+            ],
+            [
+              0.87,
+              0.65
+            ],
+            [
+              0.87,
+              0.69
+            ],
+            [
+              0.81,
+              0.69
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.57,
+              0.63
+            ],
+            [
+              0.59,
+              0.63
+            ],
+            [
+              0.59,
+              0.68
+            ],
+            [
+              0.57,
+              0.68
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.09,
+              0.57
+            ],
+            [
+              0.12,
+              0.57
+            ],
+            [
+              0.12,
+              0.64
+            ],
+            [
+              0.09,
+              0.64
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "1109-material-0",
+      "name": "Атмосфера · mist",
+      "source": "anime/1109.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.21,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 4700,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.63
+            ],
+            [
+              0.19,
+              0.58
+            ],
+            [
+              0.35,
+              0.6
+            ],
+            [
+              0.45,
+              0.73
+            ],
+            [
+              0.39,
+              0.86
+            ],
+            [
+              0.2,
+              0.82
+            ],
+            [
+              0.0,
+              0.88
+            ]
+          ],
+          "feather": 0.035,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "embers",
+    "count": 44,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#FFBD79",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

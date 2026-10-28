@@ -36,8 +36,11 @@ internal sealed class CitySurface : IDisposable
         entryUrl="https://vwp-city.local/"+entry;
         profile=entry.Contains("quality=",StringComparison.Ordinal)?entry.Split("quality=",2)[1].Split('&')[0]:"offline";
         lastState=state??"null";
-        string data=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP",browserDataName??(offline?"living-render-browser":"city-browser"));
-        string arguments="--autoplay-policy=no-user-gesture-required"+(offline?" --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows":"");
+        bool verification=Environment.GetCommandLineArgs().AnyVerification()||Array.Exists(Environment.GetCommandLineArgs(),a=>a.StartsWith("--city-",StringComparison.Ordinal));
+        string data=verification?Path.Combine(Environment.CurrentDirectory,"artifacts","city-browser-"+Environment.ProcessId):Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"VWP",browserDataName??(offline?"living-render-browser":"city-browser-v4"));
+        // VWP owns pause policy. Chromium must not freeze a desktop child window
+        // merely because another window covers it or a native test has no focus.
+        string arguments="--autoplay-policy=no-user-gesture-required --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows";
         var environment=await CoreWebView2Environment.CreateAsync(null,data,new CoreWebView2EnvironmentOptions(arguments));
         if(disposed)return;
         await Control.EnsureCoreWebView2Async(environment);if(disposed)return;

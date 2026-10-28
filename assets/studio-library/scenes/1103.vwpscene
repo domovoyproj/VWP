@@ -1,0 +1,200 @@
+{
+  "schema": 3,
+  "id": "library-1103",
+  "name": "Quiet Tape",
+  "description": "Тёплая лофи-комната. Дождь за окном и мягкий свет.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1103.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1103-background",
+      "name": "Окружение",
+      "source": "anime/1103.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "rain",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.6,
+      "lightStrength": 0.65,
+      "seed": 62236,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.016,
+              0.03
+            ],
+            [
+              0.24,
+              0.03
+            ],
+            [
+              0.24,
+              0.5
+            ],
+            [
+              0.016,
+              0.5
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.265,
+              0.03
+            ],
+            [
+              0.55,
+              0.03
+            ],
+            [
+              0.55,
+              0.5
+            ],
+            [
+              0.265,
+              0.5
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.56,
+              0.18
+            ],
+            [
+              0.6,
+              0.18
+            ],
+            [
+              0.6,
+              0.29
+            ],
+            [
+              0.56,
+              0.29
+            ]
+          ],
+          "feather": 0.006,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.82,
+              0.56
+            ],
+            [
+              0.85,
+              0.56
+            ],
+            [
+              0.85,
+              0.61
+            ],
+            [
+              0.82,
+              0.61
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "rain",
+    "count": 95,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            0.2348,
+            0
+          ],
+          [
+            0.2348,
+            0.5102
+          ],
+          [
+            0,
+            0.5102
+          ]
+        ],
+        "feather": 0.002,
+        "erase": false
+      },
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.26234,
+            0
+          ],
+          [
+            0.551,
+            0
+          ],
+          [
+            0.551,
+            0.5102
+          ],
+          [
+            0.26234,
+            0.5102
+          ]
+        ],
+        "feather": 0.002,
+        "erase": false
+      }
+    ],
+    "color": "#CBDCED",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

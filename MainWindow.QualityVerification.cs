@@ -24,7 +24,11 @@ public partial class MainWindow
             {
                 Width=size.Width;Height=size.Height;await Task.Delay(250);UpdateLayout();if(Hero.ActualWidth<200||Library.ActualWidth<300)throw new Exception("Originals library is too narrow.");RenderVerification("quality-library-"+(int)size.Width);
             }
-            SelectCategory("Все сцены");if(items.Count(s=>s.PresetId is not null)<151)throw new Exception("Legacy wallpaper library was reduced.");
+            SelectCategory("Все сцены");
+            var fullLibrary=items.Where(s=>s.StudioId?.StartsWith("library-",StringComparison.Ordinal)==true).ToArray();
+            var catalogue=StudioLibrary.Read(Path.Combine(AppContext.BaseDirectory,"assets"));
+            if(fullLibrary.Length!=132||fullLibrary.Select(s=>s.PresetId).Distinct().Count()!=132||catalogue.Any(e=>!fullLibrary.Any(s=>s.StudioId=="library-"+e.Id)))throw new Exception("The complete 132-scene library is missing compositions.");
+            Width=1480;Height=900;Library.SelectedItem=fullLibrary.First(s=>s.PresetId==1802);PresentScene((Wallpaper)Library.SelectedItem);await Task.Delay(200);UpdateLayout();RenderVerification("quality-complete-library");
             var source=StudioProject.Load(originals[0].Path);var first=source.CloneTo(Path.Combine(StudioProject.DataRoot,"qa-personal-"+Guid.NewGuid().ToString("N")));var personal=RegisterGpuEdit(first,originals[0]);
             string originalKey=PlaybackRules.Key(personal);preferences.Favorites.Add(originalKey);preferences.RecentScenes.Add(originalKey);var config=Config(SelectedScreen);config.Scene=originalKey;config.Playlist.Add(originalKey);
             int count=items.Count;var next=first.CloneTo(Path.Combine(StudioProject.DataRoot,"qa-edit-"+Guid.NewGuid().ToString("N")));var edited=RegisterGpuEdit(next,personal);string nextKey=PlaybackRules.Key(edited);
@@ -41,7 +45,7 @@ public partial class MainWindow
                 }
                 finally{preview.Close();}
             }
-            File.WriteAllText(Path.Combine(folder,"quality-ui-status.txt"),"PASS: three editable GPU originals; relevant actions; library at 980/1160/1480; legacy catalogue preserved; personal edits retain favorites/playlist/selection without duplicates; packaged application renders native GPU scene.");
+            File.WriteAllText(Path.Combine(folder,"quality-ui-status.txt"),"PASS: all 132 unique library compositions and three editable originals; relevant actions; library at 980/1160/1480; personal edits retain favorites/playlist/selection without duplicates; packaged application renders native GPU scene.");
         }
         catch(Exception error){File.WriteAllText(Path.Combine(folder,"quality-ui-status.txt"),error.ToString());Environment.ExitCode=1;}
         finally{exiting=true;Close();}

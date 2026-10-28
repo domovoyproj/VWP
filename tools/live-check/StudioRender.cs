@@ -10,7 +10,7 @@ internal static class StudioRender
 {
     public static void Run(string[] args)
     {
-        var project=StudioProject.Load(Path.GetFullPath(args[1]));int height=args.Length>2?int.Parse(args[2]):720,fps=30,width=height*16/9;
+        var project=StudioLibrary.Load(Path.GetFullPath(args[1]));project.Settings.Clock=false;int height=args.Length>2?int.Parse(args[2]):720,fps=30,width=height*16/9;
         if(height is <360 or >2160)throw new ArgumentException("studio-render project [height]");
         string folder=Path.GetFullPath(Path.Combine("artifacts","studio-video",project.Id));Directory.CreateDirectory(folder);
         using var form=new Forms.Form{ClientSize=new System.Drawing.Size(960,540),ShowInTaskbar=false,StartPosition=Forms.FormStartPosition.CenterScreen};using var surface=new StudioSurface();form.Controls.Add(surface.Control);

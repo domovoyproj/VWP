@@ -1,0 +1,256 @@
+{
+  "schema": 3,
+  "id": "library-1106",
+  "name": "Kitsune Grove",
+  "description": "Зачарованный лес. Светлячки, туман и лунные блики.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1106.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1106-background",
+      "name": "Окружение",
+      "source": "anime/1106.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.45,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 6720,
+      "waterline": 0.7,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.28,
+              0.75
+            ],
+            [
+              0.46,
+              0.7
+            ],
+            [
+              0.67,
+              0.75
+            ],
+            [
+              0.8,
+              0.84
+            ],
+            [
+              0.69,
+              1.0
+            ],
+            [
+              0.23,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.0,
+              0.53
+            ],
+            [
+              0.13,
+              0.5
+            ],
+            [
+              0.29,
+              0.61
+            ],
+            [
+              0.29,
+              0.81
+            ],
+            [
+              0.14,
+              0.88
+            ],
+            [
+              0.0,
+              0.78
+            ]
+          ],
+          "feather": 0.017,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.74,
+              0.44
+            ],
+            [
+              0.86,
+              0.41
+            ],
+            [
+              1.0,
+              0.47
+            ],
+            [
+              1.0,
+              0.69
+            ],
+            [
+              0.84,
+              0.75
+            ],
+            [
+              0.77,
+              0.61
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.63,
+              0.54
+            ],
+            [
+              0.65,
+              0.54
+            ],
+            [
+              0.65,
+              0.61
+            ],
+            [
+              0.63,
+              0.61
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.74,
+              0.62
+            ],
+            [
+              0.76,
+              0.62
+            ],
+            [
+              0.76,
+              0.67
+            ],
+            [
+              0.74,
+              0.67
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "1106-material-0",
+      "name": "Атмосфера · waterfall",
+      "source": "anime/1106.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.7,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "waterfall",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.55,
+      "lightStrength": 0.65,
+      "seed": 35050,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.46,
+              0.59
+            ],
+            [
+              0.53,
+              0.59
+            ],
+            [
+              0.55,
+              0.7
+            ],
+            [
+              0.48,
+              0.74
+            ],
+            [
+              0.44,
+              0.69
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "fireflies",
+    "count": 54,
+    "region": [
+      0,
+      0.4,
+      1,
+      0.6
+    ],
+    "masks": [],
+    "color": "#E2F6B4",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

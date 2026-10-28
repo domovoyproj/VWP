@@ -1,0 +1,166 @@
+{
+  "schema": 3,
+  "id": "library-1213",
+  "name": "Golden Dunes",
+  "description": "Золотые дюны. Пыль, ветер и мягкий свет.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1213.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1213-background",
+      "name": "Окружение",
+      "source": "vibes/1213.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.18,
+      "lightStrength": 0.65,
+      "seed": 62150,
+      "waterline": 0.48,
+      "sun": [
+        0.06,
+        0.23
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.15,
+              0.55
+            ],
+            [
+              0.35,
+              0.46
+            ],
+            [
+              0.52,
+              0.5
+            ],
+            [
+              0.67,
+              0.43
+            ],
+            [
+              0.78,
+              0.54
+            ],
+            [
+              0.6,
+              0.66
+            ],
+            [
+              0.35,
+              0.65
+            ],
+            [
+              0.13,
+              0.73
+            ]
+          ],
+          "feather": 0.04,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.17
+            ],
+            [
+              0.85,
+              0.18
+            ],
+            [
+              0.68,
+              0.12
+            ],
+            [
+              0.52,
+              0.21
+            ],
+            [
+              0.31,
+              0.19
+            ],
+            [
+              0.16,
+              0.27
+            ],
+            [
+              0.0,
+              0.24
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.01,
+              0.17
+            ],
+            [
+              0.11,
+              0.17
+            ],
+            [
+              0.11,
+              0.29
+            ],
+            [
+              0.01,
+              0.29
+            ]
+          ],
+          "feather": 0.015,
+          "erase": true
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 35,
+    "region": [
+      0,
+      0.45,
+      1,
+      0.49999999999999994
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

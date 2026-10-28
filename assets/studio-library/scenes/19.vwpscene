@@ -1,0 +1,200 @@
+{
+  "schema": 3,
+  "id": "library-19",
+  "name": "Harbor Departures",
+  "description": "Вечерняя гавань: рябь и отражения огней.",
+  "author": "VWP",
+  "cover": "studio-library/posters/19.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "19-background",
+      "name": "Окружение",
+      "source": "cinematic/19.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 65098,
+      "waterline": 0.43,
+      "sun": [
+        0.46,
+        0.29
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.12,
+              0.48
+            ],
+            [
+              0.34,
+              0.47
+            ],
+            [
+              0.51,
+              0.44
+            ],
+            [
+              0.74,
+              0.47
+            ],
+            [
+              1.0,
+              0.43
+            ],
+            [
+              1.0,
+              0.78
+            ],
+            [
+              0.84,
+              0.83
+            ],
+            [
+              0.67,
+              0.89
+            ],
+            [
+              0.64,
+              1.0
+            ],
+            [
+              0.16,
+              1.0
+            ],
+            [
+              0.05,
+              0.87
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.2
+            ],
+            [
+              0.84,
+              0.21
+            ],
+            [
+              0.74,
+              0.15
+            ],
+            [
+              0.63,
+              0.24
+            ],
+            [
+              0.42,
+              0.18
+            ],
+            [
+              0.26,
+              0.25
+            ],
+            [
+              0.0,
+              0.17
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.04,
+              0.35
+            ],
+            [
+              0.12,
+              0.35
+            ],
+            [
+              0.12,
+              0.39
+            ],
+            [
+              0.04,
+              0.39
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.82,
+              0.35
+            ],
+            [
+              0.97,
+              0.35
+            ],
+            [
+              0.97,
+              0.4
+            ],
+            [
+              0.82,
+              0.4
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "none",
+    "count": 0,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "color": "#DFEFFF",
+    "masks": []
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

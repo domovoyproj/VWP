@@ -39,17 +39,23 @@
      <TextBlock Text="СВОЙСТВА СЛОЯ" Foreground="#7F96B9" FontSize="10"/>
      <TextBox x:Name="LayerName" Margin="0,12,0,12" TextChanged="LayerNameChanged"/>
      <CheckBox x:Name="LayerVisible" Content="Показывать слой" Click="PropertiesChanged" Foreground="#EBEFF7"/>
-     <TextBlock Text="Анимация" Style="{StaticResource Label}"/><ComboBox x:Name="Motion" SelectionChanged="PropertiesChanged"><ComboBoxItem Content="Без деформации"/><ComboBoxItem Content="Поток · вода и облака"/><ComboBoxItem Content="Ветви и листва"/><ComboBoxItem Content="Ткань"/><ComboBoxItem Content="Персонаж · волосы и дыхание"/><ComboBoxItem Content="Капли на стекле"/></ComboBox>
+     <TextBlock Text="Анимация" Style="{StaticResource Label}"/><ComboBox x:Name="Motion" SelectionChanged="PropertiesChanged"><ComboBoxItem Content="Без деформации"/><ComboBoxItem Content="Поток · вода и облака"/><ComboBoxItem Content="Ветви и листва"/><ComboBoxItem Content="Ткань"/><ComboBoxItem Content="Персонаж · волосы и дыхание"/><ComboBoxItem Content="Капли на стекле"/><ComboBoxItem Content="Пейзаж · ветер по маске"/></ComboBox>
      <TextBlock Text="Точка закрепления" Style="{StaticResource Label}"/><ComboBox x:Name="Anchor" SelectionChanged="PropertiesChanged"><ComboBoxItem Content="Сверху"/><ComboBoxItem Content="Снизу"/><ComboBoxItem Content="По центру"/></ComboBox>
      <TextBlock Text="Сила движения" Style="{StaticResource Label}"/><Slider x:Name="Strength" Minimum="0" Maximum="3" ValueChanged="PropertiesChanged"/>
      <TextBlock Text="Глубина параллакса" Style="{StaticResource Label}"/><Slider x:Name="Depth" Minimum="0" Maximum="2" ValueChanged="PropertiesChanged"/>
      <TextBlock Text="Непрозрачность" Style="{StaticResource Label}"/><Slider x:Name="LayerOpacity" Minimum="0" Maximum="1" ValueChanged="PropertiesChanged"/>
      <TextBlock Text="Положение X / Y" Style="{StaticResource Label}"/><Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions><Slider x:Name="LayerX" Minimum="-2" Maximum="2" ValueChanged="PropertiesChanged" Margin="0,0,8,0"/><Slider x:Name="LayerY" Grid.Column="1" Minimum="-2" Maximum="2" ValueChanged="PropertiesChanged"/></Grid>
      <TextBlock Text="Размер слоя" Style="{StaticResource Label}"/><Slider x:Name="LayerScale" Minimum="0.1" Maximum="3" ValueChanged="ScaleChanged"/>
+     <TextBlock Text="Поверхность" Style="{StaticResource Label}"/><ComboBox x:Name="SurfaceKind" SelectionChanged="PropertiesChanged"><ComboBoxItem Content="Спокойная вода"/><ComboBoxItem Content="Морские волны"/><ComboBoxItem Content="Дождь на стекле"/><ComboBoxItem Content="Туман"/><ComboBoxItem Content="Северное сияние"/><ComboBoxItem Content="Космическое свечение"/><ComboBoxItem Content="Стекло и кристалл"/><ComboBoxItem Content="Энергия"/><ComboBoxItem Content="Водопад"/><ComboBoxItem Content="Зеркальные блики"/></ComboBox>
+     <TextBlock Text="Сила эффекта поверхности" Style="{StaticResource Label}"/><Slider x:Name="SurfaceAmount" Minimum="0" Maximum="2" ValueChanged="PropertiesChanged"/>
+     <CheckBox x:Name="SurfaceClip" Content="Видна только область поверхности" Click="PropertiesChanged" Foreground="#EBEFF7" Margin="0,12,0,0"/>
+     <TextBlock Text="Подсветка" Style="{StaticResource Label}"/><ComboBox x:Name="LightKind" SelectionChanged="PropertiesChanged"><ComboBoxItem Content="Тёплый свет"/><ComboBoxItem Content="Холодный свет"/><ComboBoxItem Content="Звёзды"/><ComboBoxItem Content="Электрические разряды"/><ComboBoxItem Content="Огонь и свечи"/></ComboBox>
+     <TextBlock Text="Сила подсветки" Style="{StaticResource Label}"/><Slider x:Name="LightAmount" Minimum="0" Maximum="2" ValueChanged="PropertiesChanged"/>
+     <TextBlock Text="Цвет эффекта · #RRGGBB" Style="{StaticResource Label}"/><TextBox x:Name="MaterialTint" LostFocus="PropertiesChanged"/>
      </StackPanel></ScrollViewer></TabItem>
      <TabItem Header="Маски"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="4,4,4,20">
      <TextBlock Text="МАСКИ ДВИЖЕНИЯ" Foreground="#7F96B9" FontSize="10"/><TextBlock Text="Закрась область эффекта прямо на изображении. Голубой цвет показывает маску." FontSize="10" LineHeight="16" Margin="0,9,0,10"/>
-     <ComboBox x:Name="MaskChannel" SelectionChanged="BrushChanged"><ComboBoxItem Content="Вода · преломление"/><ComboBoxItem Content="Облака · течение"/><ComboBoxItem Content="Ветер · волосы, ткань, ветви"/><ComboBoxItem Content="Свет / дыхание персонажа"/></ComboBox>
+     <ComboBox x:Name="MaskChannel" SelectionChanged="BrushChanged"><ComboBoxItem Content="Поверхность · вода, туман, сияние"/><ComboBoxItem Content="Облака · течение"/><ComboBoxItem Content="Ветер · волосы, ткань, ветви"/><ComboBoxItem Content="Свет / дыхание персонажа"/><ComboBoxItem Content="Область погоды"/></ComboBox>
      <CheckBox x:Name="Painting" Content="Рисовать маску" Click="BrushChanged" Margin="0,12,0,8" Foreground="#EBEFF7"/><CheckBox x:Name="Erase" Content="Стирать" Click="BrushChanged" Foreground="#EBEFF7"/>
      <TextBlock Text="Размер мягкой кисти" Style="{StaticResource Label}"/><Slider x:Name="BrushRadius" Minimum="0.008" Maximum="0.15" Value="0.045" ValueChanged="BrushChanged"/>
      <WrapPanel Margin="0,12,0,0"><Button Content="Отменить" Click="UndoClick" Margin="0,0,8,0"/><Button Content="Повторить" Click="RedoClick"/></WrapPanel>
@@ -63,7 +69,8 @@
      <TextBlock Text="Параллакс курсора" Style="{StaticResource Label}"/><Slider x:Name="Parallax" Minimum="0" Maximum="1" ValueChanged="SettingsChanged"/>
      <TextBlock Text="Экспозиция" Style="{StaticResource Label}"/><Slider x:Name="Exposure" Minimum="-1" Maximum="1" ValueChanged="SettingsChanged"/>
      <TextBlock Text="Свечение ярких участков" Style="{StaticResource Label}"/><Slider x:Name="Bloom" Minimum="0" Maximum="0.4" ValueChanged="SettingsChanged"/>
-     <TextBlock Text="Атмосфера" Style="{StaticResource Label}"/><ComboBox x:Name="Weather" SelectionChanged="WeatherChanged"><ComboBoxItem Content="Без частиц"/><ComboBoxItem Content="Снег"/><ComboBoxItem Content="Пылинки"/><ComboBoxItem Content="Светлячки"/></ComboBox>
+     <TextBlock Text="Атмосфера" Style="{StaticResource Label}"/><ComboBox x:Name="Weather" SelectionChanged="WeatherChanged"><ComboBoxItem Content="Без частиц"/><ComboBoxItem Content="Снег"/><ComboBoxItem Content="Пылинки"/><ComboBoxItem Content="Светлячки"/><ComboBoxItem Content="Дождь"/><ComboBoxItem Content="Лепестки"/><ComboBoxItem Content="Осенние листья"/><ComboBoxItem Content="Искры"/><ComboBoxItem Content="Метеоры"/><ComboBoxItem Content="Пузырьки под водой"/></ComboBox>
+     <TextBlock Text="Расположение погоды" Style="{StaticResource Label}"/><ComboBox x:Name="WeatherPlacement" SelectionChanged="WeatherChanged"><ComboBoxItem Content="Перед всеми слоями"/><ComboBoxItem Content="За передним планом"/></ComboBox>
      <TextBlock Text="Количество частиц" Style="{StaticResource Label}"/><Slider x:Name="ParticleCount" Minimum="0" Maximum="400" ValueChanged="WeatherChanged"/>
      <CheckBox x:Name="Clock" Content="Часы" Click="SettingsChanged" Foreground="#EBEFF7" Margin="0,15,0,8"/>
      </StackPanel></ScrollViewer></TabItem>

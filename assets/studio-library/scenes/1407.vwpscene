@@ -1,0 +1,395 @@
+{
+  "schema": 3,
+  "id": "library-1407",
+  "name": "Итачи · Crimson Silence",
+  "description": "Тлеющие искры и мягкое свечение. День, дата и время ПК отдельным слоем.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1407.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1407-background",
+      "name": "Окружение",
+      "source": "studio-library/art/1407-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 27378,
+      "waterline": 0.62,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.09,
+              0.65
+            ],
+            [
+              0.24,
+              0.63
+            ],
+            [
+              0.36,
+              0.65
+            ],
+            [
+              0.42,
+              0.69
+            ],
+            [
+              0.36,
+              0.72
+            ],
+            [
+              0.16,
+              0.73
+            ],
+            [
+              0.07,
+              0.7
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.2
+            ],
+            [
+              0.8,
+              0.27
+            ],
+            [
+              0.64,
+              0.21
+            ],
+            [
+              0.48,
+              0.32
+            ],
+            [
+              0.28,
+              0.25
+            ],
+            [
+              0.13,
+              0.33
+            ],
+            [
+              0.0,
+              0.29
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.1,
+              0.34
+            ],
+            [
+              0.22,
+              0.34
+            ],
+            [
+              0.22,
+              0.54
+            ],
+            [
+              0.1,
+              0.54
+            ]
+          ],
+          "feather": 0.025,
+          "erase": true
+        }
+      ]
+    },
+    {
+      "id": "1407-material-0",
+      "name": "Атмосфера · mist",
+      "source": "studio-library/art/1407-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.19,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 11988,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.18,
+              0.65
+            ],
+            [
+              0.37,
+              0.58
+            ],
+            [
+              0.57,
+              0.64
+            ],
+            [
+              0.68,
+              0.72
+            ],
+            [
+              0.58,
+              0.81
+            ],
+            [
+              0.35,
+              0.78
+            ],
+            [
+              0.17,
+              0.84
+            ]
+          ],
+          "feather": 0.035,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    },
+    {
+      "id": "1407-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/1407-character.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.32,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 38496,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.57,
+              0.11
+            ],
+            [
+              0.64,
+              0.03
+            ],
+            [
+              0.76,
+              0
+            ],
+            [
+              0.88,
+              0.06
+            ],
+            [
+              0.92,
+              0.19
+            ],
+            [
+              0.87,
+              0.31
+            ],
+            [
+              0.82,
+              0.24
+            ],
+            [
+              0.77,
+              0.15
+            ],
+            [
+              0.7,
+              0.22
+            ],
+            [
+              0.64,
+              0.18
+            ],
+            [
+              0.6,
+              0.32
+            ],
+            [
+              0.57,
+              0.49
+            ],
+            [
+              0.54,
+              0.53
+            ],
+            [
+              0.54,
+              0.3
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.62,
+              0.2
+            ],
+            [
+              0.8,
+              0.2
+            ],
+            [
+              0.8,
+              0.6
+            ],
+            [
+              0.62,
+              0.6
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.68,
+              0.78
+            ],
+            [
+              0.78,
+              0.7
+            ],
+            [
+              0.9,
+              0.74
+            ],
+            [
+              0.98,
+              0.86
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.68,
+              1
+            ]
+          ],
+          "feather": 0.026,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.62,
+              0.2
+            ],
+            [
+              0.8,
+              0.2
+            ],
+            [
+              0.8,
+              0.6
+            ],
+            [
+              0.62,
+              0.6
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "embers",
+    "count": 20,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#FFBD79",
+    "afterLayer": 1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

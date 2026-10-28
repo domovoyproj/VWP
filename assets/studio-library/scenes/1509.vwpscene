@@ -1,0 +1,189 @@
+{
+  "schema": 3,
+  "id": "library-1509",
+  "name": "Rainy Reading Room",
+  "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1509.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1509-background",
+      "name": "Окружение",
+      "source": "horizons/1509.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "rain",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 57307,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.35,
+              0.03
+            ],
+            [
+              0.84,
+              0.03
+            ],
+            [
+              0.84,
+              0.63
+            ],
+            [
+              0.76,
+              0.67
+            ],
+            [
+              0.65,
+              0.68
+            ],
+            [
+              0.45,
+              0.66
+            ],
+            [
+              0.35,
+              0.59
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.42,
+              0.09
+            ],
+            [
+              0.71,
+              0.09
+            ],
+            [
+              0.71,
+              0.24
+            ],
+            [
+              0.42,
+              0.24
+            ]
+          ],
+          "feather": 0.015,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.11,
+              0.29
+            ],
+            [
+              0.15,
+              0.29
+            ],
+            [
+              0.15,
+              0.4
+            ],
+            [
+              0.11,
+              0.4
+            ]
+          ],
+          "feather": 0.005,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.22,
+              0.12
+            ],
+            [
+              0.25,
+              0.12
+            ],
+            [
+              0.25,
+              0.24
+            ],
+            [
+              0.22,
+              0.24
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 26,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.1124,
+            0.245
+          ],
+          [
+            0.3368,
+            0.2654
+          ],
+          [
+            0.4286,
+            0.8162
+          ],
+          [
+            0.1328,
+            0.8978
+          ]
+        ],
+        "feather": 0.04,
+        "erase": false
+      }
+    ],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

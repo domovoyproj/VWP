@@ -1,0 +1,1064 @@
+[
+  {
+    "id": 0,
+    "name": "Sakura Midnight",
+    "category": "Аниме",
+    "description": "Сакура над ночным Токио.",
+    "project": "0.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 1,
+    "name": "Neon Tokyo",
+    "category": "Город",
+    "description": "Неон, дождь и ночные поезда.",
+    "project": "1.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 2,
+    "name": "Crimson Moon",
+    "category": "Аниме",
+    "description": "Красная луна над горным храмом.",
+    "project": "2.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 3,
+    "name": "Aurora Voyage",
+    "category": "Природа",
+    "description": "Северное сияние над снежным фьордом.",
+    "project": "3.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 4,
+    "name": "Astral Drift",
+    "category": "Космос",
+    "description": "Невесомость на орбите далёкой планеты.",
+    "project": "4.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 5,
+    "name": "Golden Hour",
+    "category": "Природа",
+    "description": "Последний поезд сквозь золотые поля.",
+    "project": "5.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 6,
+    "name": "Rainy Ramen",
+    "category": "Город",
+    "description": "Тёплый свет в дождливом переулке.",
+    "project": "6.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 7,
+    "name": "Ocean Sonata",
+    "category": "Фэнтези",
+    "description": "Подводное царство светящихся медуз.",
+    "project": "7.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 8,
+    "name": "Forest Shrine",
+    "category": "Фэнтези",
+    "description": "Лесной храм, лис и светлячки.",
+    "project": "8.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 9,
+    "name": "Skyline Racer",
+    "category": "Город",
+    "description": "Ночные трассы футуристического города.",
+    "project": "9.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 10,
+    "name": "Cloud Sanctuary",
+    "category": "Фэнтези",
+    "description": "Парящий сад над морем облаков.",
+    "project": "10.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 11,
+    "name": "Violet Horizon",
+    "category": "Космос",
+    "description": "Фиолетовые миры над зеркальным берегом.",
+    "project": "11.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 12,
+    "name": "Winter Letters",
+    "category": "Природа",
+    "description": "Снежная деревня и красный зонт.",
+    "project": "12.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 13,
+    "name": "Ember Ronin",
+    "category": "Аниме",
+    "description": "Одинокий ронин среди осенних огней.",
+    "project": "13.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 14,
+    "name": "Lo-Fi Atelier",
+    "category": "Город",
+    "description": "Уютная мастерская над вечерним городом.",
+    "project": "14.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 15,
+    "name": "Desert Mirage",
+    "category": "Природа",
+    "description": "Путешествие сквозь розовые дюны.",
+    "project": "15.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 16,
+    "name": "Electric Bloom",
+    "category": "Абстракция",
+    "description": "Стеклянные лепестки и световые ленты.",
+    "project": "16.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 17,
+    "name": "Moonlit Garden",
+    "category": "Природа",
+    "description": "Серебряный сад под полной луной.",
+    "project": "17.vwpscene",
+    "group": "base"
+  },
+  {
+    "id": 18,
+    "name": "Orbital Garden",
+    "category": "Космос",
+    "description": "Орбитальная оранжерея: вода, листва и прохладный свет.",
+    "project": "18.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 19,
+    "name": "Harbor Departures",
+    "category": "Город",
+    "description": "Вечерняя гавань: рябь и отражения огней.",
+    "project": "19.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 20,
+    "name": "Clockwork Cafe",
+    "category": "Город",
+    "description": "Тёплое кафе: дождь за стеклом и мягкий свет ламп.",
+    "project": "20.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 21,
+    "name": "Alpine Express",
+    "category": "Природа",
+    "description": "Альпийский виадук: снег и туман в долине.",
+    "project": "21.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 22,
+    "name": "Lantern Festival",
+    "category": "Город",
+    "description": "Ночной фестиваль: фонари, лепестки и отражения в реке.",
+    "project": "22.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 23,
+    "name": "Metro Loop",
+    "category": "Город",
+    "description": "Ночная станция: холодный свет и отражения на платформе.",
+    "project": "23.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 24,
+    "name": "Quiet Observatory",
+    "category": "Космос",
+    "description": "Обсерватория: звёзды и медленное свечение туманности.",
+    "project": "24.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 25,
+    "name": "Robot Workshop",
+    "category": "Фэнтези",
+    "description": "Мастерская: свет панелей и пыль в лучах.",
+    "project": "25.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 26,
+    "name": "Coral Research",
+    "category": "Природа",
+    "description": "Подводная станция: вода и пузырьки за стеклом.",
+    "project": "26.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 27,
+    "name": "Rooftop Basketball",
+    "category": "Город",
+    "description": "Баскетбольная площадка: дождь, прожекторы и мокрый асфальт.",
+    "project": "27.vwpscene",
+    "group": "cinematic"
+  },
+  {
+    "id": 1001,
+    "name": "Rain District",
+    "category": "Город",
+    "description": "Ночной канал, дождь и живые отражения.",
+    "project": "1001.vwpscene",
+    "group": "living"
+  },
+  {
+    "id": 1002,
+    "name": "Last Metro",
+    "category": "Аниме",
+    "description": "Крыша над Токио, лунные облака и мерцание города.",
+    "project": "1002.vwpscene",
+    "group": "living"
+  },
+  {
+    "id": 1003,
+    "name": "Sakura Arcade",
+    "category": "Город",
+    "description": "Неоновая улица, дождь и лепестки сакуры.",
+    "project": "1003.vwpscene",
+    "group": "living"
+  },
+  {
+    "id": 1101,
+    "name": "Tsukimi Shrine",
+    "category": "Аниме",
+    "description": "Лунный храм. Живая вода, ветер и лепестки сакуры.",
+    "project": "1101.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1102,
+    "name": "Neon District",
+    "category": "Город",
+    "description": "Дождливый неоновый канал. Движущиеся отражения и дождь.",
+    "project": "1102.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1103,
+    "name": "Quiet Tape",
+    "category": "Аниме",
+    "description": "Тёплая лофи-комната. Дождь за окном и мягкий свет.",
+    "project": "1103.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1104,
+    "name": "Astral Greenhouse",
+    "category": "Космос",
+    "description": "Орбитальный сад. Световые потоки, звёзды и вода.",
+    "project": "1104.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1105,
+    "name": "Blue Hour Platform",
+    "category": "Аниме",
+    "description": "Станция в синий час. Ветер, облака и свет платформы.",
+    "project": "1105.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1106,
+    "name": "Kitsune Grove",
+    "category": "Фэнтези",
+    "description": "Зачарованный лес. Светлячки, туман и лунные блики.",
+    "project": "1106.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1107,
+    "name": "Summer Afterglow",
+    "category": "Аниме",
+    "description": "Японский город на закате. Плывущие облака и летний свет.",
+    "project": "1107.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1108,
+    "name": "Tidebound Temple",
+    "category": "Природа",
+    "description": "Храм над океаном. Волны, морской ветер и облака.",
+    "project": "1108.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1109,
+    "name": "Scarlet Citadel",
+    "category": "Фэнтези",
+    "description": "Алая цитадель. Искры, ветер и свет фонарей.",
+    "project": "1109.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1110,
+    "name": "Snowglass Atelier",
+    "category": "Аниме",
+    "description": "Зимняя мастерская. Снег за окном и тёплое освещение.",
+    "project": "1110.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1111,
+    "name": "Violet Sanctuary",
+    "category": "Фэнтези",
+    "description": "Сказочная библиотека. Световая пыль и мягкое сияние.",
+    "project": "1111.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1112,
+    "name": "Aqua Terminal",
+    "category": "Фэнтези",
+    "description": "Подводная станция. Живые каустики, пузырьки и синий свет.",
+    "project": "1112.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1113,
+    "name": "Moonlit Rooftops",
+    "category": "Город",
+    "description": "Лунные крыши Токио. Облака, ветер и огни города.",
+    "project": "1113.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1114,
+    "name": "Manga Electric",
+    "category": "Абстракция",
+    "description": "Графичный ночной город. Тушь, дождь и цветные огни.",
+    "project": "1114.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1115,
+    "name": "Golden Courtyard",
+    "category": "Природа",
+    "description": "Золотой японский сад. Вода, светлячки и тёплые листья.",
+    "project": "1115.vwpscene",
+    "group": "anime"
+  },
+  {
+    "id": 1201,
+    "name": "Amber Konbini",
+    "category": "Аниме",
+    "description": "Тёплый ночной магазин. Дождь и живые отражения.",
+    "project": "1201.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1202,
+    "name": "Hoshizora Terrace",
+    "category": "Аниме",
+    "description": "Терраса над спящим городом. Облака и мерцание звёзд.",
+    "project": "1202.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1203,
+    "name": "Sakura Soda",
+    "category": "Аниме",
+    "description": "Пастельный канал. Вода и летящие лепестки.",
+    "project": "1203.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1204,
+    "name": "Midnight Record",
+    "category": "Аниме",
+    "description": "Дождь за окном, вращающаяся пластинка и тёплый свет.",
+    "project": "1204.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1205,
+    "name": "Hydrangea Stop",
+    "category": "Аниме",
+    "description": "Дождливая остановка среди гортензий. Капли и блики.",
+    "project": "1205.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1206,
+    "name": "Summer Rooftop",
+    "category": "Аниме",
+    "description": "Тёплый вечер над морем, облака и блики на воде.",
+    "project": "1206.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1207,
+    "name": "Paper Lantern River",
+    "category": "Аниме",
+    "description": "Тихая набережная. Волны, светлячки и фонари.",
+    "project": "1207.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1208,
+    "name": "Chrome Sunset",
+    "category": "Город",
+    "description": "Ретрофутуристическая набережная. Морская рябь и закат.",
+    "project": "1208.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1209,
+    "name": "VHS Motel",
+    "category": "Город",
+    "description": "Винтажный мотель после дождя. Неон и мокрый асфальт.",
+    "project": "1209.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1210,
+    "name": "Arcade Hours",
+    "category": "Город",
+    "description": "Ночная аркадная галерея. Сияние экранов и пыль в лучах.",
+    "project": "1210.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1211,
+    "name": "Moss & Mist",
+    "category": "Природа",
+    "description": "Лесной ручей. Текущая вода и медленный туман.",
+    "project": "1211.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1212,
+    "name": "Quiet Fjord",
+    "category": "Природа",
+    "description": "Скандинавский фьорд на рассвете. Волны и облака.",
+    "project": "1212.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1213,
+    "name": "Golden Dunes",
+    "category": "Природа",
+    "description": "Золотые дюны. Пыль, ветер и мягкий свет.",
+    "project": "1213.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1214,
+    "name": "Orbital Bath",
+    "category": "Космос",
+    "description": "Панорамная орбитальная терраса. Вращающаяся планета и вода.",
+    "project": "1214.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1215,
+    "name": "Signal Garden",
+    "category": "Космос",
+    "description": "Оранжерея далёкой станции. Звёзды и сигнальные огни.",
+    "project": "1215.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1216,
+    "name": "Aurora Relay",
+    "category": "Космос",
+    "description": "Полярная обсерватория. Движение северного сияния.",
+    "project": "1216.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1217,
+    "name": "Soft Monolith",
+    "category": "Абстракция",
+    "description": "Архитектурная тишина. Вода, свет и стеклянные каустики.",
+    "project": "1217.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1218,
+    "name": "Glass Horizon",
+    "category": "Абстракция",
+    "description": "Иридисцентное стекло. Текучие формы и мягкие переливы.",
+    "project": "1218.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1219,
+    "name": "Copper Cathedral",
+    "category": "Фэнтези",
+    "description": "Медный собор. Искры, свет свечей и воздушная пыль.",
+    "project": "1219.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1220,
+    "name": "Jade Dream",
+    "category": "Фэнтези",
+    "description": "Нефритовый сад над облаками. Вода, ветер и светлячки.",
+    "project": "1220.vwpscene",
+    "group": "vibes"
+  },
+  {
+    "id": 1301,
+    "name": "Maple Afterglow",
+    "category": "Аниме",
+    "description": "Осенний Киото: кружатся кленовые листья, течёт канал и мерцают фонари.",
+    "project": "1301.vwpscene",
+    "group": "seasons",
+    "season": "Осень"
+  },
+  {
+    "id": 1302,
+    "name": "Rainy Chestnut",
+    "category": "Аниме",
+    "description": "Дождь за окном кофейни, тёплый свет и пар над чашкой.",
+    "project": "1302.vwpscene",
+    "group": "seasons",
+    "season": "Осень"
+  },
+  {
+    "id": 1303,
+    "name": "Copper Lake",
+    "category": "Природа",
+    "description": "Медный лес, ветер в листве, рябь озера и медленно плывущий туман.",
+    "project": "1303.vwpscene",
+    "group": "seasons",
+    "season": "Осень"
+  },
+  {
+    "id": 1304,
+    "name": "Sapporo Blue",
+    "category": "Аниме",
+    "description": "Снегопад на ночной улице, синие сумерки и тёплый свет японских ресторанов.",
+    "project": "1304.vwpscene",
+    "group": "seasons",
+    "season": "Зима"
+  },
+  {
+    "id": 1305,
+    "name": "Snowfall Onsen",
+    "category": "Аниме",
+    "description": "Горячий источник среди снега: волны, пар и снежинки на фоне гор.",
+    "project": "1305.vwpscene",
+    "group": "seasons",
+    "season": "Зима"
+  },
+  {
+    "id": 1306,
+    "name": "Winter Vinyl",
+    "category": "Аниме",
+    "description": "Уютная комната, снег за окном, пар от кофе и мягкий вечерний свет.",
+    "project": "1306.vwpscene",
+    "group": "seasons",
+    "season": "Зима"
+  },
+  {
+    "id": 1401,
+    "name": "Киллуа · Blue Current",
+    "category": "Аниме",
+    "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+    "project": "1401.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1402,
+    "name": "Киллуа · Midnight Voltage",
+    "category": "Аниме",
+    "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+    "project": "1402.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1403,
+    "name": "Годжо · Limitless",
+    "category": "Аниме",
+    "description": "Энергетические дуги, световые орбиты и свечение. День, дата и время ПК отдельным слоем.",
+    "project": "1403.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1404,
+    "name": "Саске · Violet Storm",
+    "category": "Аниме",
+    "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+    "project": "1404.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1405,
+    "name": "Какаши · Silver Thunder",
+    "category": "Аниме",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера. День, дата и время ПК отдельным слоем.",
+    "project": "1405.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1406,
+    "name": "Зеницу · Thunderclap",
+    "category": "Аниме",
+    "description": "Светящиеся молнии и ветвящиеся электрические разряды. День, дата и время ПК отдельным слоем.",
+    "project": "1406.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1407,
+    "name": "Итачи · Crimson Silence",
+    "category": "Аниме",
+    "description": "Тлеющие искры и мягкое свечение. День, дата и время ПК отдельным слоем.",
+    "project": "1407.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1408,
+    "name": "Райден · Eternal Violet",
+    "category": "Аниме",
+    "description": "Энергетические дуги, световые орбиты и свечение. День, дата и время ПК отдельным слоем.",
+    "project": "1408.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1409,
+    "name": "Макима · Scarlet Hour",
+    "category": "Аниме",
+    "description": "Тлеющие искры и мягкое свечение. День, дата и время ПК отдельным слоем.",
+    "project": "1409.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1410,
+    "name": "Леви · Emerald Wind",
+    "category": "Аниме",
+    "description": "Лёгкие частицы, движущиеся на ветру. День, дата и время ПК отдельным слоем.",
+    "project": "1410.vwpscene",
+    "group": "electric"
+  },
+  {
+    "id": 1501,
+    "name": "Orbital Silence",
+    "category": "Атмосфера",
+    "description": "Тонкое мерцание звёзд.",
+    "project": "1501.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1502,
+    "name": "Ocean Cathedral",
+    "category": "Атмосфера",
+    "description": "Подводное преломление света и поднимающиеся пузырьки.",
+    "project": "1502.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1503,
+    "name": "Alpine Mirror",
+    "category": "Атмосфера",
+    "description": "Мягкая рябь воды и движущиеся отражения.",
+    "project": "1503.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1504,
+    "name": "Moss & Mist",
+    "category": "Атмосфера",
+    "description": "Летающие светлячки с мягким мерцанием.",
+    "project": "1504.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1505,
+    "name": "After Rain",
+    "category": "Атмосфера",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "project": "1505.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1506,
+    "name": "Midnight GT",
+    "category": "Атмосфера",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "project": "1506.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1507,
+    "name": "Liquid Chrome",
+    "category": "Атмосфера",
+    "description": "Непрерывное мягкое течение формы и света.",
+    "project": "1507.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1508,
+    "name": "Dune Nocturne",
+    "category": "Атмосфера",
+    "description": "Неспешное движение частиц в свете.",
+    "project": "1508.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1509,
+    "name": "Rainy Reading Room",
+    "category": "Атмосфера",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "project": "1509.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1510,
+    "name": "Skybound Citadel",
+    "category": "Атмосфера",
+    "description": "Плавное движение лёгкого тумана.",
+    "project": "1510.vwpscene",
+    "group": "horizons"
+  },
+  {
+    "id": 1601,
+    "name": "Полярная тишина",
+    "category": "Зима",
+    "description": "Северное сияние и мягкий снег.",
+    "project": "1601.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1602,
+    "name": "Снежные ели",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1602.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1603,
+    "name": "Ледяное озеро",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1603.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1604,
+    "name": "Красный экспресс",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1604.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1605,
+    "name": "Маяк на краю зимы",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1605.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1606,
+    "name": "Тёплая долина",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1606.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1607,
+    "name": "Северный мост",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1607.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1608,
+    "name": "Зимний рассвет",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1608.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1609,
+    "name": "Хрустальная ветка",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1609.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1610,
+    "name": "Белый лис",
+    "category": "Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1610.vwpscene",
+    "group": "winter"
+  },
+  {
+    "id": 1701,
+    "name": "Деревня под снегом",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1701.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1702,
+    "name": "Морозное утро",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1702.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1703,
+    "name": "Зимняя речка",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1703.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1704,
+    "name": "Баня у пруда",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1704.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1705,
+    "name": "Тихий храм",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1705.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1706,
+    "name": "Улица детства",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1706.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1707,
+    "name": "Сугробы и наличники",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1707.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1708,
+    "name": "Вечер в деревне",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1708.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1709,
+    "name": "У лесной опушки",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1709.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1710,
+    "name": "Зимняя луна",
+    "category": "Деревня · Зима",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1710.vwpscene",
+    "group": "village-winter"
+  },
+  {
+    "id": 1801,
+    "name": "Ромашковое поле",
+    "category": "Деревня · Лето",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "project": "1801.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1802,
+    "name": "Река за огородом",
+    "category": "Деревня · Лето",
+    "description": "Мягкая рябь воды и движущиеся отражения.",
+    "project": "1802.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1803,
+    "name": "Сенокос",
+    "category": "Деревня · Лето",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "project": "1803.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1804,
+    "name": "Берёзовая тропа",
+    "category": "Деревня · Лето",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "project": "1804.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1805,
+    "name": "Лето у бабушки",
+    "category": "Деревня · Лето",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "project": "1805.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1806,
+    "name": "Перед грозой",
+    "category": "Деревня · Лето",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "project": "1806.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1807,
+    "name": "Подсолнухи у забора",
+    "category": "Деревня · Лето",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "project": "1807.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1808,
+    "name": "Озеро на закате",
+    "category": "Деревня · Лето",
+    "description": "Мягкая рябь воды и движущиеся отражения.",
+    "project": "1808.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1809,
+    "name": "Яблоневый сад",
+    "category": "Деревня · Лето",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "project": "1809.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1810,
+    "name": "Туман над лугом",
+    "category": "Деревня · Лето",
+    "description": "Плавное движение лёгкого тумана.",
+    "project": "1810.vwpscene",
+    "group": "village-summer"
+  },
+  {
+    "id": 1901,
+    "name": "Сад после дождя",
+    "category": "Рисованные девушки",
+    "description": "Медленно кружащиеся цветочные лепестки.",
+    "project": "1901.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1902,
+    "name": "У окна со снегом",
+    "category": "Рисованные девушки",
+    "description": "Плавно падающий снег в нескольких планах.",
+    "project": "1902.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1903,
+    "name": "Морской ветер",
+    "category": "Рисованные девушки",
+    "description": "Лёгкие частицы, движущиеся на ветру.",
+    "project": "1903.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1904,
+    "name": "Лавандовый вечер",
+    "category": "Рисованные девушки",
+    "description": "Медленно кружащиеся цветочные лепестки.",
+    "project": "1904.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1905,
+    "name": "Тихая библиотека",
+    "category": "Рисованные девушки",
+    "description": "Неспешное движение частиц в свете.",
+    "project": "1905.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1906,
+    "name": "Вишнёвый дождь",
+    "category": "Рисованные девушки",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "project": "1906.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1907,
+    "name": "Ночной поезд",
+    "category": "Рисованные девушки",
+    "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+    "project": "1907.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1908,
+    "name": "Подсолнухи",
+    "category": "Рисованные девушки",
+    "description": "Лёгкая летняя пыльца в солнечном свете.",
+    "project": "1908.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1909,
+    "name": "Звёздный балкон",
+    "category": "Рисованные девушки",
+    "description": "Тонкое мерцание звёзд.",
+    "project": "1909.vwpscene",
+    "group": "muses"
+  },
+  {
+    "id": 1910,
+    "name": "Осенний свет",
+    "category": "Рисованные девушки",
+    "description": "Плавно опадающие осенние листья.",
+    "project": "1910.vwpscene",
+    "group": "muses"
+  }
+]

@@ -1,0 +1,176 @@
+{
+  "schema": 3,
+  "id": "library-21",
+  "name": "Alpine Express",
+  "description": "Альпийский виадук: снег и туман в долине.",
+  "author": "VWP",
+  "cover": "studio-library/posters/21.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "21-background",
+      "name": "Окружение",
+      "source": "cinematic/21.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 1122,
+      "waterline": 0.48,
+      "sun": [
+        0.47,
+        0.24
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.12,
+              0.0
+            ],
+            [
+              0.75,
+              0.0
+            ],
+            [
+              0.75,
+              0.09
+            ],
+            [
+              0.66,
+              0.13
+            ],
+            [
+              0.57,
+              0.06
+            ],
+            [
+              0.49,
+              0.14
+            ],
+            [
+              0.34,
+              0.05
+            ],
+            [
+              0.26,
+              0.15
+            ],
+            [
+              0.17,
+              0.13
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "21-material-0",
+      "name": "Атмосфера · mist",
+      "source": "cinematic/21.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.13,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 516,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.06,
+              0.45
+            ],
+            [
+              0.3,
+              0.38
+            ],
+            [
+              0.5,
+              0.46
+            ],
+            [
+              0.69,
+              0.42
+            ],
+            [
+              0.86,
+              0.51
+            ],
+            [
+              0.73,
+              0.6
+            ],
+            [
+              0.43,
+              0.56
+            ],
+            [
+              0.2,
+              0.6
+            ],
+            [
+              0.07,
+              0.53
+            ]
+          ],
+          "feather": 0.035,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 110,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema": 3,
+  "id": "library-23",
+  "name": "Metro Loop",
+  "description": "Ночная станция: холодный свет и отражения на платформе.",
+  "author": "VWP",
+  "cover": "studio-library/posters/23.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "23-background",
+      "name": "Окружение",
+      "source": "cinematic/23.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mirror",
+      "light": "cool",
+      "tint": "#CADCEB",
+      "surfaceStrength": 0.25,
+      "lightStrength": 0.65,
+      "seed": 33254,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.5,
+              0.75
+            ],
+            [
+              0.63,
+              0.71
+            ],
+            [
+              0.88,
+              0.83
+            ],
+            [
+              1.0,
+              0.93
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.6,
+              1.0
+            ]
+          ],
+          "feather": 0.014,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.28,
+              0.48
+            ],
+            [
+              0.39,
+              0.48
+            ],
+            [
+              0.39,
+              0.49
+            ],
+            [
+              0.28,
+              0.49
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.75,
+              0.11
+            ],
+            [
+              0.78,
+              0.11
+            ],
+            [
+              0.78,
+              0.25
+            ],
+            [
+              0.75,
+              0.25
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.87,
+              0.38
+            ],
+            [
+              0.89,
+              0.38
+            ],
+            [
+              0.89,
+              0.47
+            ],
+            [
+              0.87,
+              0.47
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 16,
+    "region": [
+      0.4,
+      0.35,
+      0.6,
+      0.5800000000000001
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "schema": 3,
+  "id": "library-5",
+  "name": "Golden Hour",
+  "description": "Последний поезд сквозь золотые поля.",
+  "author": "VWP",
+  "cover": "studio-library/posters/5.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "5-background",
+      "name": "Окружение",
+      "source": "studio-library/art/5-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.45,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 34592,
+      "waterline": 0.48,
+      "sun": [
+        0.696,
+        0.34
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.65,
+              0.0
+            ],
+            [
+              0.65,
+              0.24
+            ],
+            [
+              0.49,
+              0.27
+            ],
+            [
+              0.34,
+              0.21
+            ],
+            [
+              0.19,
+              0.3
+            ],
+            [
+              0.0,
+              0.22
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.0,
+              0.65
+            ],
+            [
+              0.22,
+              0.62
+            ],
+            [
+              0.44,
+              0.65
+            ],
+            [
+              0.62,
+              0.62
+            ],
+            [
+              0.66,
+              0.7
+            ],
+            [
+              0.45,
+              0.8
+            ],
+            [
+              0.25,
+              0.88
+            ],
+            [
+              0.0,
+              0.95
+            ]
+          ],
+          "feather": 0.022,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "5-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/5-character.png",
+      "rect": [
+        0.16391154,
+        0.09356862,
+        0.84311959,
+        0.8354148
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.4,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 55587,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.809954,
+              0.401036
+            ],
+            [
+              0.846248,
+              0.376617
+            ],
+            [
+              0.870444,
+              0.413245
+            ],
+            [
+              0.870444,
+              0.462083
+            ],
+            [
+              0.846248,
+              0.474293
+            ],
+            [
+              0.809954,
+              0.449874
+            ]
+          ],
+          "feather": 0.006,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.803905,
+              0.425455
+            ],
+            [
+              0.870444,
+              0.425455
+            ],
+            [
+              0.870444,
+              0.510921
+            ],
+            [
+              0.803905,
+              0.510921
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.822052,
+              0.523131
+            ],
+            [
+              0.870444,
+              0.498712
+            ],
+            [
+              0.89464,
+              0.584179
+            ],
+            [
+              0.858346,
+              0.657436
+            ],
+            [
+              0.809954,
+              0.633017
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.803905,
+              0.425455
+            ],
+            [
+              0.870444,
+              0.425455
+            ],
+            [
+              0.870444,
+              0.510921
+            ],
+            [
+              0.803905,
+              0.510921
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 30,
+    "region": [
+      0,
+      0.4,
+      1,
+      0.6
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": 0
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

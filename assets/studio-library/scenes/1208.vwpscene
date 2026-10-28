@@ -1,0 +1,189 @@
+{
+  "schema": 3,
+  "id": "library-1208",
+  "name": "Chrome Sunset",
+  "description": "Ретрофутуристическая набережная. Морская рябь и закат.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1208.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1208-background",
+      "name": "Окружение",
+      "source": "vibes/1208.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.35,
+      "surface": "ocean",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 25895,
+      "waterline": 0.5,
+      "sun": [
+        0.28,
+        0.38
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.54
+            ],
+            [
+              0.23,
+              0.51
+            ],
+            [
+              0.47,
+              0.53
+            ],
+            [
+              0.62,
+              0.6
+            ],
+            [
+              0.6,
+              0.78
+            ],
+            [
+              0.45,
+              0.93
+            ],
+            [
+              0.38,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.78,
+              0.0
+            ],
+            [
+              0.75,
+              0.21
+            ],
+            [
+              0.6,
+              0.26
+            ],
+            [
+              0.42,
+              0.2
+            ],
+            [
+              0.22,
+              0.29
+            ],
+            [
+              0.09,
+              0.23
+            ],
+            [
+              0.0,
+              0.3
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.23,
+              0.34
+            ],
+            [
+              0.32,
+              0.34
+            ],
+            [
+              0.32,
+              0.44
+            ],
+            [
+              0.23,
+              0.44
+            ]
+          ],
+          "feather": 0.015,
+          "erase": true
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.82,
+              0.0
+            ],
+            [
+              0.87,
+              0.02
+            ],
+            [
+              0.88,
+              0.22
+            ],
+            [
+              0.85,
+              0.26
+            ],
+            [
+              0.82,
+              0.15
+            ]
+          ],
+          "feather": 0.01,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 14,
+    "region": [
+      0.6,
+      0.4,
+      0.4,
+      0.6
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

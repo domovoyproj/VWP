@@ -17,7 +17,7 @@ public sealed class StudioProject
         if(!full.StartsWith(root,StringComparison.OrdinalIgnoreCase)||!Guid.TryParseExact(name,"N",out _)||!Directory.Exists(full))return;
         try{if((File.GetAttributes(full)&FileAttributes.ReparsePoint)==0)Directory.Delete(full,true);}catch{/* A browser may still be releasing a file; never remove unrelated data. */}
     }
-    public int Schema {get;set;}=2;
+    public int Schema {get;set;}=3;
     public string Id {get;set;}=Guid.NewGuid().ToString("N");
     public string Name {get;set;}="Новая сцена";
     public string Description {get;set;}="";
@@ -28,7 +28,8 @@ public sealed class StudioProject
     public StudioSettings Settings {get;set;}=new();
     public StudioWeather Weather {get;set;}=new();
     [JsonIgnore] public string FileName {get;private set;}="";
-    [JsonIgnore] public string Folder=>Path.GetDirectoryName(FileName)!;
+    [JsonIgnore] string? bundledAssets;
+    [JsonIgnore] public string Folder=>bundledAssets??Path.GetDirectoryName(FileName)!;
     public static readonly JsonSerializerOptions Json=new(){PropertyNamingPolicy=JsonNamingPolicy.CamelCase,PropertyNameCaseInsensitive=true,WriteIndented=true};
     public static bool IsProject(string path)=>Path.GetExtension(path).Equals(".vwpscene",StringComparison.OrdinalIgnoreCase);
     internal static double[] ImageRect(string file,bool fill)
@@ -46,13 +47,18 @@ public sealed class StudioProject
         if(frame.PixelWidth>4096||frame.PixelHeight>4096)throw new InvalidDataException("Максимальный размер изображения — 4096 пикселей по каждой стороне.");
     }
     public static StudioProject Load(string file,bool requireAssets=true)
+        =>Read(file,requireAssets,null);
+    // Only the application catalogue can grant a shared, installed asset root.
+    // This value is never read from project JSON or accepted by bundle import.
+    internal static StudioProject LoadBundled(string file,string assets)=>Read(file,true,Path.GetFullPath(assets));
+    static StudioProject Read(string file,bool requireAssets,string? assets)
     {
         if(new FileInfo(file).Length>256*1024)throw new InvalidDataException("Файл проекта превышает 256 КБ.");
         var project=JsonSerializer.Deserialize<StudioProject>(File.ReadAllText(file),Json)??throw new InvalidDataException("Проект повреждён.");
-        project.FileName=Path.GetFullPath(file);project.Validate(requireAssets);return project;
+        project.FileName=Path.GetFullPath(file);project.bundledAssets=assets;project.Validate(requireAssets);return project;
     }
-    public StudioProject Copy(){var copy=JsonSerializer.Deserialize<StudioProject>(JsonSerializer.Serialize(this,Json),Json)!;copy.FileName=FileName;return copy;}
-    public IEnumerable<string> Assets()=>new[]{Cover}.Concat(Layers.SelectMany(l=>new[]{l.Source}.Concat(l.MaskFiles.Values))).Distinct(StringComparer.OrdinalIgnoreCase);
+    public StudioProject Copy(){var copy=JsonSerializer.Deserialize<StudioProject>(JsonSerializer.Serialize(this,Json),Json)!;copy.FileName=FileName;copy.bundledAssets=bundledAssets;return copy;}
+    public IEnumerable<string> Assets()=>new[]{Cover}.Concat(Layers.SelectMany(l=>new[]{l.Source}.Concat(l.MaskFiles.Values))).Concat(Weather.MaskFile is string mask?new[]{mask}:Array.Empty<string>()).Distinct(StringComparer.OrdinalIgnoreCase);
     public string Asset(string relative)
     {
         if(string.IsNullOrWhiteSpace(relative)||Path.IsPathRooted(relative)||relative.IndexOfAny(new[]{':','?','#','%','\0'})>=0)throw new InvalidDataException("Неверный путь ресурса сцены.");
@@ -64,7 +70,7 @@ public sealed class StudioProject
     }
     public void Validate(bool requireAssets=true)
     {
-        if(Schema!=2||Name is null||Name.Length is <1 or >120||Description is null||Description.Length>1000||Id is null||Id.Length is <1 or >100||Settings is null||Weather is null||Layers is null||Layers.Any(l=>l is null)||Layers.Count is <1 or >12||!double.IsFinite(Duration)||Duration<4||Duration>120)throw new InvalidDataException("Неподдерживаемые параметры проекта.");
+        if(Schema is not (2 or 3)||Name is null||Name.Length is <1 or >120||Description is null||Description.Length>1000||Id is null||Id.Length is <1 or >100||Settings is null||Weather is null||Layers is null||Layers.Any(l=>l is null)||Layers.Count is <1 or >12||!double.IsFinite(Duration)||Duration<4||Duration>120)throw new InvalidDataException("Неподдерживаемые параметры проекта.");
         if(Layers.Select(l=>l.Id).Distinct().Count()!=Layers.Count)throw new InvalidDataException("Идентификаторы слоёв должны различаться.");
         Settings.Validate();Weather.Validate();
         foreach(var layer in Layers)layer.Validate();
@@ -82,6 +88,7 @@ public sealed class StudioProject
     public void ReplaceAsset(string before,string after)
     {
         if(Cover.Equals(before,StringComparison.OrdinalIgnoreCase))Cover=after;
+        if(Weather.MaskFile?.Equals(before,StringComparison.OrdinalIgnoreCase)==true)Weather.MaskFile=after;
         foreach(var layer in Layers){if(layer.Source.Equals(before,StringComparison.OrdinalIgnoreCase))layer.Source=after;foreach(string key in layer.MaskFiles.Keys.ToArray())if(layer.MaskFiles[key].Equals(before,StringComparison.OrdinalIgnoreCase))layer.MaskFiles[key]=after;}
     }
     public StudioProject CloneTo(string folder)
@@ -95,7 +102,7 @@ public sealed class StudioProject
     }
     public void Save(string file)
     {
-        FileName=Path.GetFullPath(file);Validate();Directory.CreateDirectory(Folder);
+        FileName=Path.GetFullPath(file);bundledAssets=null;Schema=3;Validate();Directory.CreateDirectory(Folder);
         File.WriteAllText(FileName+".tmp",JsonSerializer.Serialize(this,Json));File.Move(FileName+".tmp",FileName,true);
     }
 }
@@ -109,8 +116,15 @@ public sealed class StudioLayer
     public bool Visible {get;set;}=true;
     public double[] Rect {get;set;}=new[]{0d,0,1,1};
     public double Opacity {get;set;}=1;
+    public bool ClipToSurface {get;set;}
     public double Depth {get;set;}=.1;
     public string Motion {get;set;}="still";
+    public string Surface {get;set;}="water";
+    public string Light {get;set;}="warm";
+    public string Tint {get;set;}="#B5D7F5";
+    public int Seed {get;set;}
+    public double SurfaceStrength {get;set;}=1;
+    public double LightStrength {get;set;}=1;
     public string Anchor {get;set;}="bottom";
     public double Strength {get;set;}=1;
     public double Waterline {get;set;}=.48;
@@ -119,7 +133,8 @@ public sealed class StudioLayer
     public void Validate()
     {
         if(Id is null||Id.Length is <1 or >100||Name is null||Name.Length>120||Rect is null||Rect.Length!=4||Rect.Any(v=>!double.IsFinite(v))||Rect[0]<-2||Rect[1]<-2||Rect[0]>2||Rect[1]>2||Rect[2]<=0||Rect[3]<=0||Rect[2]>4||Rect[3]>4||!double.IsFinite(Opacity)||Opacity<0||Opacity>1||!double.IsFinite(Depth)||Depth<0||Depth>2||!double.IsFinite(Strength)||Strength<0||Strength>3||Sun is null||Sun.Length!=2||Sun.Any(v=>!double.IsFinite(v)||v<0||v>1))throw new InvalidDataException("Неверные свойства слоя.");
-        if(!new[]{"still","flow","foliage","cloth","character","rain"}.Contains(Motion)||!new[]{"top","bottom","center"}.Contains(Anchor))throw new InvalidDataException("Неподдерживаемая анимация слоя.");
+        if(!new[]{"still","flow","foliage","cloth","character","rain","landscape"}.Contains(Motion)||!new[]{"top","bottom","center"}.Contains(Anchor))throw new InvalidDataException("Неподдерживаемая анимация слоя.");
+        if(!new[]{"water","ocean","rain","mist","aurora","cosmic","glass","energy","waterfall","mirror"}.Contains(Surface)||!new[]{"warm","cool","stars","lightning","fire"}.Contains(Light)||Tint is null||!System.Text.RegularExpressions.Regex.IsMatch(Tint,"^#[0-9a-fA-F]{6}$")||Seed is <0 or >65535||!double.IsFinite(SurfaceStrength)||SurfaceStrength is <0 or >2||!double.IsFinite(LightStrength)||LightStrength is <0 or >2)throw new InvalidDataException("Неверные свойства поверхности и света.");
         if(MaskFiles is null||MaskFiles.Count>4||MaskFiles.Keys.Any(k=>!new[]{"water","clouds","wind","light"}.Contains(k))||!double.IsFinite(Waterline)||Waterline<0||Waterline>1||Masks is null||Masks.Any(m=>m is null)||Masks.Count>32)throw new InvalidDataException("Неверные маски слоя.");foreach(var mask in Masks)mask.Validate();
     }
 }
@@ -128,6 +143,7 @@ public sealed class StudioMask
 {
     public int Channel {get;set;}
     public double Feather {get;set;}=.02;
+    public bool Erase {get;set;}
     public List<double[]> Points {get;set;}=new();
     public void Validate()
     {
@@ -157,9 +173,13 @@ public sealed class StudioWeather
     public int Count {get;set;}=80;
     public double[] Region {get;set;}=new[]{0d,0,1,1};
     public string Color {get;set;}="#EAF5FF";
+    public string? MaskFile {get;set;}
+    public List<StudioMask> Masks {get;set;}=new();
+    public int AfterLayer {get;set;}=-1;
     public void Validate()
     {
-        if(!new[]{"none","snow","dust","fireflies"}.Contains(Kind)||Count<0||Count>400||Region is null||Region.Length!=4||Region.Any(v=>!double.IsFinite(v)||v<0||v>1)||Region[2]<=0||Region[3]<=0||Color is null||!System.Text.RegularExpressions.Regex.IsMatch(Color,"^#[0-9a-fA-F]{6}$"))throw new InvalidDataException("Неверные параметры частиц.");
+        if(!new[]{"none","snow","dust","fireflies","rain","petals","leaves","embers","meteors","bubbles"}.Contains(Kind)||Count<0||Count>400||Region is null||Region.Length!=4||Region.Any(v=>!double.IsFinite(v)||v<0||v>1)||Region[2]<=0||Region[3]<=0||Color is null||!System.Text.RegularExpressions.Regex.IsMatch(Color,"^#[0-9a-fA-F]{6}$")||AfterLayer is < -1 or >11||Masks is null||Masks.Count>64||Masks.Any(m=>m is null||m.Channel!=0))throw new InvalidDataException("Неверные параметры частиц.");
+        foreach(var mask in Masks)mask.Validate();
     }
 }
 

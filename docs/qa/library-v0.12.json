@@ -1,0 +1,3905 @@
+{
+  "version": "0.12.0",
+  "scope": "132 unique catalogue compositions; native WebView2/WebGL2 render at 1920x1080",
+  "nativeChecks": {
+    "complete": true,
+    "count": 132,
+    "results": [
+      {
+        "id": 0,
+        "name": "Sakura Midnight",
+        "motionPixels": 268652,
+        "motionMean": 1.8203999485596707,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806099999999992,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1,
+        "name": "Neon Tokyo",
+        "motionPixels": 177180,
+        "motionMean": 1.0584014917695472,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 108,
+          "time": 5.793900000000002,
+          "paused": false,
+          "textureMb": 33.0074462890625,
+          "targetMb": 23.73046875,
+          "fps": 54.997474605757915,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 2,
+        "name": "Crimson Moon",
+        "motionPixels": 176117,
+        "motionMean": 1.3764983603395062,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.800000000000002,
+          "paused": false,
+          "textureMb": 43.259928385416664,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 4,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "name": "Aurora Voyage",
+        "motionPixels": 252444,
+        "motionMean": 1.0486344200102882,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.79400000000001,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.00056123021663,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "name": "Astral Drift",
+        "motionPixels": 89065,
+        "motionMean": 0.372421875,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8001,
+          "paused": false,
+          "textureMb": 22.750178019205727,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 5,
+        "name": "Golden Hour",
+        "motionPixels": 336738,
+        "motionMean": 1.5925538515946502,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794100000000015,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.994388327721644,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 6,
+        "name": "Rainy Ramen",
+        "motionPixels": 422765,
+        "motionMean": 2.5978192515432097,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.7941000000000145,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9913023960496,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 7,
+        "name": "Ocean Sonata",
+        "motionPixels": 52329,
+        "motionMean": 0.3397318672839506,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000009,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 8,
+        "name": "Forest Shrine",
+        "motionPixels": 46854,
+        "motionMean": 0.2289456340020576,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000012,
+          "paused": false,
+          "textureMb": 33.0074462890625,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 9,
+        "name": "Skyline Racer",
+        "motionPixels": 209771,
+        "motionMean": 1.0474588477366256,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8060000000000205,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 10,
+        "name": "Cloud Sanctuary",
+        "motionPixels": 228755,
+        "motionMean": 1.9524033886316872,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000014,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 11,
+        "name": "Violet Horizon",
+        "motionPixels": 135499,
+        "motionMean": 0.8160312178497943,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.798800000000002,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.480764954414056,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 12,
+        "name": "Winter Letters",
+        "motionPixels": 98226,
+        "motionMean": 0.751241640946502,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000005,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 13,
+        "name": "Ember Ronin",
+        "motionPixels": 142461,
+        "motionMean": 1.0235910172325102,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000001,
+          "paused": false,
+          "textureMb": 33.0074462890625,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 14,
+        "name": "Lo-Fi Atelier",
+        "motionPixels": 59832,
+        "motionMean": 0.29484519675925924,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.799999999999991,
+          "paused": false,
+          "textureMb": 22.750178019205727,
+          "targetMb": 23.73046875,
+          "fps": 55.000000000000014,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.3000001907348633,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 15,
+        "name": "Desert Mirage",
+        "motionPixels": 128479,
+        "motionMean": 0.9336355452674897,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.812299999999997,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 16,
+        "name": "Electric Bloom",
+        "motionPixels": 506909,
+        "motionMean": 2.921056455761317,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806000000000011,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.00305572531807,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 17,
+        "name": "Moonlit Garden",
+        "motionPixels": 147751,
+        "motionMean": 0.970037454989712,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806099999999999,
+          "paused": false,
+          "textureMb": 33.0074462890625,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 18,
+        "name": "Orbital Garden",
+        "motionPixels": 196972,
+        "motionMean": 1.4806230709876542,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794000000000011,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99438832772168,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 19,
+        "name": "Harbor Departures",
+        "motionPixels": 293723,
+        "motionMean": 1.8952256944444446,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000003,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 20,
+        "name": "Clockwork Cafe",
+        "motionPixels": 59327,
+        "motionMean": 0.3991811342592593,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8001000000000085,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 21,
+        "name": "Alpine Express",
+        "motionPixels": 47752,
+        "motionMean": 0.3580301568930041,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.799100000000015,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.02751375687844,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 22,
+        "name": "Lantern Festival",
+        "motionPixels": 269837,
+        "motionMean": 2.3268751607510287,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.792800000000011,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.034536979839395,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 23,
+        "name": "Metro Loop",
+        "motionPixels": 1190,
+        "motionMean": 0.027845132458847736,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.7988000000000035,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.03669112741827,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 24,
+        "name": "Quiet Observatory",
+        "motionPixels": 153066,
+        "motionMean": 0.7754140946502057,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000007,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 25,
+        "name": "Robot Workshop",
+        "motionPixels": 885,
+        "motionMean": 0.026640464248971193,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.800099999999998,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 26,
+        "name": "Coral Research",
+        "motionPixels": 89483,
+        "motionMean": 0.374331757973251,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.793900000000008,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.00056123021663,
+          "frameP95": 18.299999999999727,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 27,
+        "name": "Rooftop Basketball",
+        "motionPixels": 339846,
+        "motionMean": 2.474696662808642,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.80610000000001,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1001,
+        "name": "Rain District",
+        "motionPixels": 236061,
+        "motionMean": 2.1610492219650204,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.80020000000001,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99388956782578,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1002,
+        "name": "Last Metro",
+        "motionPixels": 210681,
+        "motionMean": 1.1746723894032922,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000005,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1003,
+        "name": "Sakura Arcade",
+        "motionPixels": 197439,
+        "motionMean": 1.781980452674897,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000017,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1101,
+        "name": "Tsukimi Shrine",
+        "motionPixels": 185792,
+        "motionMean": 1.8313061021090535,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800000000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1102,
+        "name": "Neon District",
+        "motionPixels": 133959,
+        "motionMean": 0.6748680234053498,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794100000000004,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99438832772168,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1103,
+        "name": "Quiet Tape",
+        "motionPixels": 115323,
+        "motionMean": 0.7883212770061728,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000008,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1104,
+        "name": "Astral Greenhouse",
+        "motionPixels": 199716,
+        "motionMean": 1.229075038580247,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.80620000000001,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1105,
+        "name": "Blue Hour Platform",
+        "motionPixels": 228590,
+        "motionMean": 1.3721079282407407,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.800100000000012,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1106,
+        "name": "Kitsune Grove",
+        "motionPixels": 232703,
+        "motionMean": 1.1667660108024691,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.798900000000013,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.03363166379452,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1107,
+        "name": "Summer Afterglow",
+        "motionPixels": 471382,
+        "motionMean": 3.8135599922839507,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000014,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1108,
+        "name": "Tidebound Temple",
+        "motionPixels": 500350,
+        "motionMean": 3.4845000643004114,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1109,
+        "name": "Scarlet Citadel",
+        "motionPixels": 178524,
+        "motionMean": 1.2976157407407407,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.806300000000009,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99388956782578,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1110,
+        "name": "Snowglass Atelier",
+        "motionPixels": 2806,
+        "motionMean": 0.019872363683127572,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1111,
+        "name": "Violet Sanctuary",
+        "motionPixels": 188400,
+        "motionMean": 1.235499453446502,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806000000000019,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1112,
+        "name": "Aqua Terminal",
+        "motionPixels": 48848,
+        "motionMean": 0.30702273019547327,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800299999999994,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99083486085653,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1113,
+        "name": "Moonlit Rooftops",
+        "motionPixels": 381729,
+        "motionMean": 2.634717399691358,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.812200000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.000000000000014,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1114,
+        "name": "Manga Electric",
+        "motionPixels": 155265,
+        "motionMean": 0.8504475308641976,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.812200000000025,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1115,
+        "name": "Golden Courtyard",
+        "motionPixels": 330358,
+        "motionMean": 2.612800282921811,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.81100000000002,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.665930425179454,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1201,
+        "name": "Amber Konbini",
+        "motionPixels": 174420,
+        "motionMean": 0.9462995113168724,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1202,
+        "name": "Hoshizora Terrace",
+        "motionPixels": 289555,
+        "motionMean": 2.077125128600823,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.799000000000011,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.03057254030016,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1203,
+        "name": "Sakura Soda",
+        "motionPixels": 250091,
+        "motionMean": 1.9465022183641976,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000022,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1204,
+        "name": "Midnight Record",
+        "motionPixels": 93521,
+        "motionMean": 0.628750803755144,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1205,
+        "name": "Hydrangea Stop",
+        "motionPixels": 297869,
+        "motionMean": 1.9444429976851851,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000024,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1206,
+        "name": "Summer Rooftop",
+        "motionPixels": 359341,
+        "motionMean": 2.146105324074074,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.80010000000002,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1207,
+        "name": "Paper Lantern River",
+        "motionPixels": 234368,
+        "motionMean": 1.5005023469650205,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.80010000000003,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1208,
+        "name": "Chrome Sunset",
+        "motionPixels": 221104,
+        "motionMean": 1.0805045974794238,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1209,
+        "name": "VHS Motel",
+        "motionPixels": 61472,
+        "motionMean": 0.2901125257201646,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.798700000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.03975093122812,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1210,
+        "name": "Arcade Hours",
+        "motionPixels": 19430,
+        "motionMean": 0.05514981995884774,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000017,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1211,
+        "name": "Moss & Mist",
+        "motionPixels": 351699,
+        "motionMean": 2.1426077031893005,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806300000000021,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1212,
+        "name": "Quiet Fjord",
+        "motionPixels": 156622,
+        "motionMean": 0.9642550797325102,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000016,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1213,
+        "name": "Golden Dunes",
+        "motionPixels": 108830,
+        "motionMean": 0.47147071116255146,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.804500000000004,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.04587155963302,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1214,
+        "name": "Orbital Bath",
+        "motionPixels": 84745,
+        "motionMean": 0.3702483603395062,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.800099999999994,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1215,
+        "name": "Signal Garden",
+        "motionPixels": 191614,
+        "motionMean": 0.8457317386831276,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.800100000000002,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1216,
+        "name": "Aurora Relay",
+        "motionPixels": 172311,
+        "motionMean": 0.7853165187757202,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000005,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1217,
+        "name": "Soft Monolith",
+        "motionPixels": 57354,
+        "motionMean": 0.4147505144032922,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.792700000000011,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.03762776592161,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1218,
+        "name": "Glass Horizon",
+        "motionPixels": 638372,
+        "motionMean": 3.7468094135802468,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8001000000000085,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1219,
+        "name": "Copper Cathedral",
+        "motionPixels": 27549,
+        "motionMean": 0.08478604038065844,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806400000000014,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99388956782578,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1220,
+        "name": "Jade Dream",
+        "motionPixels": 143297,
+        "motionMean": 0.9521638695987654,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000021,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99388956782578,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1301,
+        "name": "Maple Afterglow",
+        "motionPixels": 252148,
+        "motionMean": 2.0690247235082304,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1302,
+        "name": "Rainy Chestnut",
+        "motionPixels": 154036,
+        "motionMean": 0.9602470743312758,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8001000000000165,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1303,
+        "name": "Copper Lake",
+        "motionPixels": 181479,
+        "motionMean": 1.1244981352880659,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806000000000025,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.000000000000014,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1304,
+        "name": "Sapporo Blue",
+        "motionPixels": 33011,
+        "motionMean": 0.21790428883744856,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.792800000000021,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.034536979839395,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1305,
+        "name": "Snowfall Onsen",
+        "motionPixels": 244092,
+        "motionMean": 2.0591510738168726,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000011,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1306,
+        "name": "Winter Vinyl",
+        "motionPixels": 1295,
+        "motionMean": 0.038445376800411525,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.80620000000001,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1401,
+        "name": "Киллуа · Blue Current",
+        "motionPixels": 65849,
+        "motionMean": 0.8611736432613168,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000005,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1402,
+        "name": "Киллуа · Midnight Voltage",
+        "motionPixels": 203233,
+        "motionMean": 2.0898352301954732,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.798700000000008,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.03975093122812,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1403,
+        "name": "Годжо · Limitless",
+        "motionPixels": 195992,
+        "motionMean": 1.3404951131687244,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0.02306805074971165,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.800199999999993,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1404,
+        "name": "Саске · Violet Storm",
+        "motionPixels": 182987,
+        "motionMean": 1.124835390946502,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.7940000000000005,
+          "paused": false,
+          "textureMb": 33.0074462890625,
+          "targetMb": 23.73046875,
+          "fps": 54.997474605757894,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1405,
+        "name": "Какаши · Silver Thunder",
+        "motionPixels": 328178,
+        "motionMean": 2.2738252314814815,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.793999999999999,
+          "paused": false,
+          "textureMb": 22.750178019205727,
+          "targetMb": 23.73046875,
+          "fps": 54.99747460575788,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1406,
+        "name": "Зеницу · Thunderclap",
+        "motionPixels": 228452,
+        "motionMean": 1.7361988811728395,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000002,
+          "paused": false,
+          "textureMb": 33.0074462890625,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1407,
+        "name": "Итачи · Crimson Silence",
+        "motionPixels": 192276,
+        "motionMean": 1.284113940329218,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.792800000000002,
+          "paused": false,
+          "textureMb": 33.00266011555989,
+          "targetMb": 23.73046875,
+          "fps": 55.031446540880516,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1408,
+        "name": "Райден · Eternal Violet",
+        "motionPixels": 312158,
+        "motionMean": 2.732404513888889,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8001000000000085,
+          "paused": false,
+          "textureMb": 33.0074462890625,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 3,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1409,
+        "name": "Макима · Scarlet Hour",
+        "motionPixels": 215354,
+        "motionMean": 1.14919045781893,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794000000000011,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.997474605757915,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1410,
+        "name": "Леви · Emerald Wind",
+        "motionPixels": 266655,
+        "motionMean": 1.7986816808127573,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.804500000000009,
+          "paused": false,
+          "textureMb": 22.750178019205727,
+          "targetMb": 23.73046875,
+          "fps": 55.04893238434162,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1501,
+        "name": "Orbital Silence",
+        "motionPixels": 87823,
+        "motionMean": 0.3588641332304527,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000017,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1502,
+        "name": "Ocean Cathedral",
+        "motionPixels": 56366,
+        "motionMean": 0.2152657214506173,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.799000000000022,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.03057254030016,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1503,
+        "name": "Alpine Mirror",
+        "motionPixels": 440321,
+        "motionMean": 3.758070826903292,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.812300000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99388956782578,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1504,
+        "name": "Moss & Mist",
+        "motionPixels": 318937,
+        "motionMean": 1.4778073559670781,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000018,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1505,
+        "name": "After Rain",
+        "motionPixels": 179695,
+        "motionMean": 0.741600758744856,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1506,
+        "name": "Midnight GT",
+        "motionPixels": 254011,
+        "motionMean": 1.5785910172325104,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.805900000000001,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.00305572531807,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1507,
+        "name": "Liquid Chrome",
+        "motionPixels": 745843,
+        "motionMean": 6.237180909207819,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 111,
+          "time": 5.806199999999999,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.000000000000014,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.3000001907348633,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1508,
+        "name": "Dune Nocturne",
+        "motionPixels": 561214,
+        "motionMean": 3.0357254693930042,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 108,
+          "time": 5.79399999999999,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.997474605757894,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1509,
+        "name": "Rainy Reading Room",
+        "motionPixels": 192832,
+        "motionMean": 1.1850466177983539,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.7928000000000095,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.034536979839395,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1510,
+        "name": "Skybound Citadel",
+        "motionPixels": 371114,
+        "motionMean": 2.7934633809156377,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000004,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.3000001907348633,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1601,
+        "name": "Полярная тишина",
+        "motionPixels": 263111,
+        "motionMean": 1.0303030156893005,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800099999999994,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1602,
+        "name": "Снежные ели",
+        "motionPixels": 48266,
+        "motionMean": 0.49155108667695474,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8000000000000185,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1603,
+        "name": "Ледяное озеро",
+        "motionPixels": 307492,
+        "motionMean": 2.994796167695473,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000012,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1604,
+        "name": "Красный экспресс",
+        "motionPixels": 165763,
+        "motionMean": 2.562418016975309,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.792600000000025,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.04071889918562,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1605,
+        "name": "Маяк на краю зимы",
+        "motionPixels": 457202,
+        "motionMean": 2.583170010288066,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.798700000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.03975093122812,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1606,
+        "name": "Тёплая долина",
+        "motionPixels": 173707,
+        "motionMean": 1.4425286136831277,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794000000000028,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99747460575788,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1607,
+        "name": "Северный мост",
+        "motionPixels": 279554,
+        "motionMean": 1.1796469907407408,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806200000000017,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.299999999999727,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1608,
+        "name": "Зимний рассвет",
+        "motionPixels": 151180,
+        "motionMean": 1.5298019547325103,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 108,
+          "time": 5.794000000000007,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.00056123021663,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1609,
+        "name": "Хрустальная ветка",
+        "motionPixels": 199473,
+        "motionMean": 0.9784624164094651,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000011,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.5,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1610,
+        "name": "Белый лис",
+        "motionPixels": 311929,
+        "motionMean": 1.5336051633230452,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000002,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1701,
+        "name": "Деревня под снегом",
+        "motionPixels": 211940,
+        "motionMean": 2.0568237204218107,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.800000000000008,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1702,
+        "name": "Морозное утро",
+        "motionPixels": 197739,
+        "motionMean": 2.0145588991769547,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8002000000000145,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1703,
+        "name": "Зимняя речка",
+        "motionPixels": 190394,
+        "motionMean": 1.3471823559670781,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806000000000017,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1704,
+        "name": "Баня у пруда",
+        "motionPixels": 333814,
+        "motionMean": 1.8843250064300412,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800000000000012,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1705,
+        "name": "Тихий храм",
+        "motionPixels": 263308,
+        "motionMean": 2.7893637474279833,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000015,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1706,
+        "name": "Улица детства",
+        "motionPixels": 294441,
+        "motionMean": 3.723189139660494,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000016,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1707,
+        "name": "Сугробы и наличники",
+        "motionPixels": 255511,
+        "motionMean": 4.6125991833847735,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000015,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1708,
+        "name": "Вечер в деревне",
+        "motionPixels": 270121,
+        "motionMean": 2.096441936728395,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794100000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99438832772166,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1709,
+        "name": "У лесной опушки",
+        "motionPixels": 81821,
+        "motionMean": 0.42800652649176957,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.798600000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.042811075280774,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1710,
+        "name": "Зимняя луна",
+        "motionPixels": 148385,
+        "motionMean": 1.5787082047325103,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000011,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99388956782578,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1801,
+        "name": "Ромашковое поле",
+        "motionPixels": 910421,
+        "motionMean": 9.156680009002057,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.80000000000002,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1802,
+        "name": "Река за огородом",
+        "motionPixels": 543307,
+        "motionMean": 4.809935699588477,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000013,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1803,
+        "name": "Сенокос",
+        "motionPixels": 924450,
+        "motionMean": 9.264445087448559,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.805000000000025,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 55.030572540300184,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1804,
+        "name": "Берёзовая тропа",
+        "motionPixels": 710118,
+        "motionMean": 10.02650993441358,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.812200000000025,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1805,
+        "name": "Лето у бабушки",
+        "motionPixels": 368605,
+        "motionMean": 3.875931712962963,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000018,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.9938895678258,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1806,
+        "name": "Перед грозой",
+        "motionPixels": 1002678,
+        "motionMean": 11.195824009773663,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794000000000021,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.997474605757915,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1807,
+        "name": "Подсолнухи у забора",
+        "motionPixels": 558790,
+        "motionMean": 7.0639547968107,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000019,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1808,
+        "name": "Озеро на закате",
+        "motionPixels": 649005,
+        "motionMean": 7.147438271604938,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.794000000000015,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99438832772168,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1809,
+        "name": "Яблоневый сад",
+        "motionPixels": 604639,
+        "motionMean": 7.039287551440329,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800000000000024,
+          "paused": false,
+          "textureMb": 12.502482096354166,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 1,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1810,
+        "name": "Туман над лугом",
+        "motionPixels": 466584,
+        "motionMean": 6.367533436213992,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.793800000000018,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.00056123021663,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1901,
+        "name": "Сад после дождя",
+        "motionPixels": 275905,
+        "motionMean": 1.9907592271090535,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800200000000019,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99388956782578,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1902,
+        "name": "У окна со снегом",
+        "motionPixels": 41388,
+        "motionMean": 0.3103390239197531,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000017,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.9969446141881,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1903,
+        "name": "Морской ветер",
+        "motionPixels": 232189,
+        "motionMean": 1.9176802019032921,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.8001000000000165,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1904,
+        "name": "Лавандовый вечер",
+        "motionPixels": 566358,
+        "motionMean": 5.1358384773662555,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.793800000000011,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.0036482011562,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1905,
+        "name": "Тихая библиотека",
+        "motionPixels": 222845,
+        "motionMean": 1.8154584619341563,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000008,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1906,
+        "name": "Вишнёвый дождь",
+        "motionPixels": 294937,
+        "motionMean": 2.4955082947530864,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.806100000000006,
+          "paused": false,
+          "textureMb": 22.750178019205727,
+          "targetMb": 23.73046875,
+          "fps": 54.996944614188116,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.20000004768371582,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1907,
+        "name": "Ночной поезд",
+        "motionPixels": 248960,
+        "motionMean": 1.4862180105452676,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0.0011534025374855825,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 106,
+          "time": 5.7940000000000005,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.00056123021663,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1908,
+        "name": "Подсолнухи",
+        "motionPixels": 644527,
+        "motionMean": 4.401518132716049,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.806099999999997,
+          "paused": false,
+          "textureMb": 22.750178019205727,
+          "targetMb": 23.73046875,
+          "fps": 54.99999999999999,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1909,
+        "name": "Звёздный балкон",
+        "motionPixels": 355852,
+        "motionMean": 2.0856336805555555,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 109,
+          "time": 5.7993999999999994,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 55.01833944648216,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "id": 1910,
+        "name": "Осенний свет",
+        "motionPixels": 350303,
+        "motionMean": 2.680310892489712,
+        "loopSeamPixels": 0,
+        "faceDeltaMean": 0,
+        "stats": {
+          "adapter": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1060 6GB (0x00001C03) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "width": 1920,
+          "height": 1080,
+          "frames": 107,
+          "time": 5.800100000000001,
+          "paused": false,
+          "textureMb": 22.754964192708332,
+          "targetMb": 23.73046875,
+          "fps": 54.99694461418809,
+          "frameP95": 18.300000000000182,
+          "submitP95": 0.2999999523162842,
+          "layers": 2,
+          "frame": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "facePatchInspection": [
+    {
+      "id": 0,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 2,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 4,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 5,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 7,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 11,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 12,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 13,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 14,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 17,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1401,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1402,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1403,
+      "mean": 0.0231,
+      "p95": 0.0,
+      "max": 1
+    },
+    {
+      "id": 1404,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1405,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1406,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1407,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1408,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1409,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1410,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1901,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1902,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1903,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1904,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1905,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1906,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1907,
+      "mean": 0.0012,
+      "p95": 0.0,
+      "max": 1
+    },
+    {
+      "id": 1908,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1909,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    },
+    {
+      "id": 1910,
+      "mean": 0.0,
+      "p95": 0.0,
+      "max": 0
+    }
+  ],
+  "dataAndMigration": "PASS: 132 valid scenes; stable IDs; aliases, favorites, playlists and custom edits preserved; idempotent migration; trusted root confinement; editable copies; schema 3 bundle roundtrip with materials, weather masks and alpha layers.",
+  "coreRenderer": "PASS: all requested Studio scenes passed native rendering and lifecycle checks.",
+  "nativeHost": "PASS: three projects attach to native wallpaper HWND without star gate; scene switching, GPU capture, user/automatic pause precedence, resume and disposal.",
+  "hiddenDesktopClock": "PASS: real hidden native WebView keeps animating; native pause freezes frames/time; hidden resume and visible transition preserve animation.",
+  "cityAuto": "PASS: authenticated star gate, encrypted credentials, revocation, backend gate, visible animated city, pause and bounded 40km travel",
+  "cityEco": "PASS: authenticated star gate, encrypted credentials, revocation, backend gate, visible animated city, pause and bounded 40km travel",
+  "crashRecovery": "PASS: real native renderer crash; project/masks/time retained; pause retained; animation resumes.",
+  "notes": [
+    "FPS is observed on this test host, not a guarantee on other PCs.",
+    "Source artwork is typically 1672x941; native FHD captures are not native 4K artwork."
+  ]
+}

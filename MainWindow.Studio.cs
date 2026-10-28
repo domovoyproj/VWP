@@ -64,7 +64,11 @@ public partial class MainWindow
     {
         if(StudioProject.IsProject(scene.Path))return null;
         if(scene.PresetId==CityId)return null;
-        if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom)){custom.Video=custom.MotionId is not null?scene.Path:null;return custom;}
+        if(preferences.Layers.TryGetValue(PlaybackRules.Key(scene),out var custom))
+        {
+            if(scene.LegacyCustomized){var retained=custom.Copy();retained.Realtime=true;if(retained.Background is null||!File.Exists(retained.Background))retained.Background=scene.Thumbnail;retained.Video=File.Exists(scene.Path)&&Path.GetExtension(scene.Path).Equals(".mp4",StringComparison.OrdinalIgnoreCase)?scene.Path:null;return retained;}
+            custom.Video=custom.MotionId is not null?scene.Path:null;return custom;
+        }
         if(scene.Thumbnail is null)return null;
         var preset=scene.PresetId is int id?definitions.GetValueOrDefault(id):null;
         // Procedural videos already contain motion; inherited layer settings must not replace them with a still.

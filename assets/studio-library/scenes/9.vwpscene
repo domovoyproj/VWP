@@ -1,0 +1,243 @@
+{
+  "schema": 3,
+  "id": "library-9",
+  "name": "Skyline Racer",
+  "description": "Ночные трассы футуристического города.",
+  "author": "VWP",
+  "cover": "studio-library/posters/9.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "9-background",
+      "name": "Окружение",
+      "source": "scene-9.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mirror",
+      "light": "cool",
+      "tint": "#E983D4",
+      "surfaceStrength": 0.45,
+      "lightStrength": 0.65,
+      "seed": 15178,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.75
+            ],
+            [
+              0.24,
+              0.7
+            ],
+            [
+              0.43,
+              0.7
+            ],
+            [
+              0.58,
+              0.76
+            ],
+            [
+              0.78,
+              0.78
+            ],
+            [
+              1.0,
+              0.87
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.59,
+              0.53
+            ],
+            [
+              0.76,
+              0.52
+            ],
+            [
+              0.87,
+              0.61
+            ],
+            [
+              0.88,
+              0.72
+            ],
+            [
+              0.8,
+              0.79
+            ],
+            [
+              0.62,
+              0.74
+            ],
+            [
+              0.55,
+              0.65
+            ]
+          ],
+          "feather": 0.005,
+          "erase": true
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.77,
+              0.0
+            ],
+            [
+              0.77,
+              0.17
+            ],
+            [
+              0.65,
+              0.21
+            ],
+            [
+              0.46,
+              0.15
+            ],
+            [
+              0.33,
+              0.23
+            ],
+            [
+              0.16,
+              0.17
+            ],
+            [
+              0.0,
+              0.25
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.34,
+              0.02
+            ],
+            [
+              0.4,
+              0.02
+            ],
+            [
+              0.4,
+              0.14
+            ],
+            [
+              0.34,
+              0.14
+            ]
+          ],
+          "feather": 0.012,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.71,
+              0.62
+            ],
+            [
+              0.82,
+              0.62
+            ],
+            [
+              0.82,
+              0.64
+            ],
+            [
+              0.71,
+              0.64
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.85,
+              0.23
+            ],
+            [
+              0.89,
+              0.23
+            ],
+            [
+              0.89,
+              0.29
+            ],
+            [
+              0.85,
+              0.29
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "rain",
+    "count": 150,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#CBDCED",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

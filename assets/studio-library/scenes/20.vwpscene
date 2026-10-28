@@ -1,0 +1,250 @@
+{
+  "schema": 3,
+  "id": "library-20",
+  "name": "Clockwork Cafe",
+  "description": "Тёплое кафе: дождь за стеклом и мягкий свет ламп.",
+  "author": "VWP",
+  "cover": "studio-library/posters/20.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "20-background",
+      "name": "Окружение",
+      "source": "cinematic/20.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "rain",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.45,
+      "lightStrength": 0.65,
+      "seed": 41380,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.54,
+              0.14
+            ],
+            [
+              0.64,
+              0.14
+            ],
+            [
+              0.64,
+              0.53
+            ],
+            [
+              0.54,
+              0.53
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.67,
+              0.13
+            ],
+            [
+              0.77,
+              0.13
+            ],
+            [
+              0.77,
+              0.53
+            ],
+            [
+              0.67,
+              0.53
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.8,
+              0.14
+            ],
+            [
+              0.87,
+              0.14
+            ],
+            [
+              0.87,
+              0.54
+            ],
+            [
+              0.8,
+              0.54
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.17,
+              0.03
+            ],
+            [
+              0.21,
+              0.03
+            ],
+            [
+              0.23,
+              0.08
+            ],
+            [
+              0.2,
+              0.1
+            ],
+            [
+              0.17,
+              0.08
+            ]
+          ],
+          "feather": 0.006,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.34,
+              0.15
+            ],
+            [
+              0.36,
+              0.15
+            ],
+            [
+              0.36,
+              0.22
+            ],
+            [
+              0.34,
+              0.22
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.4,
+              0.13
+            ],
+            [
+              0.42,
+              0.13
+            ],
+            [
+              0.42,
+              0.21
+            ],
+            [
+              0.4,
+              0.21
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.65,
+              0.13
+            ],
+            [
+              0.67,
+              0.13
+            ],
+            [
+              0.67,
+              0.2
+            ],
+            [
+              0.65,
+              0.2
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 22,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.194,
+            0.1226
+          ],
+          [
+            0.4286,
+            0.2042
+          ],
+          [
+            0.4592,
+            0.7856
+          ],
+          [
+            0.1226,
+            0.7346
+          ]
+        ],
+        "feather": 0.025,
+        "erase": false
+      }
+    ],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

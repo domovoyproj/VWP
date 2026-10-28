@@ -1,0 +1,201 @@
+{
+  "schema": 3,
+  "id": "library-1215",
+  "name": "Signal Garden",
+  "description": "Оранжерея далёкой станции. Звёзды и сигнальные огни.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1215.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1215-background",
+      "name": "Окружение",
+      "source": "vibes/1215.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.25,
+      "surface": "cosmic",
+      "light": "stars",
+      "tint": "#DAC3EE",
+      "surfaceStrength": 0.3,
+      "lightStrength": 0.65,
+      "seed": 6742,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.33,
+              0.02
+            ],
+            [
+              0.67,
+              0.0
+            ],
+            [
+              0.9,
+              0.1
+            ],
+            [
+              0.94,
+              0.28
+            ],
+            [
+              0.79,
+              0.38
+            ],
+            [
+              0.61,
+              0.28
+            ],
+            [
+              0.44,
+              0.35
+            ],
+            [
+              0.32,
+              0.21
+            ]
+          ],
+          "feather": 0.02,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.65,
+              0.13
+            ],
+            [
+              0.77,
+              0.02
+            ],
+            [
+              0.88,
+              0.05
+            ],
+            [
+              0.84,
+              0.2
+            ],
+            [
+              0.76,
+              0.24
+            ],
+            [
+              0.71,
+              0.37
+            ],
+            [
+              0.65,
+              0.31
+            ]
+          ],
+          "feather": 0.014,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.79,
+              0.32
+            ],
+            [
+              0.93,
+              0.21
+            ],
+            [
+              1.0,
+              0.27
+            ],
+            [
+              1.0,
+              0.54
+            ],
+            [
+              0.9,
+              0.61
+            ],
+            [
+              0.8,
+              0.49
+            ]
+          ],
+          "feather": 0.014,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.33,
+              0.03
+            ],
+            [
+              0.74,
+              0.0
+            ],
+            [
+              0.92,
+              0.16
+            ],
+            [
+              0.85,
+              0.33
+            ],
+            [
+              0.63,
+              0.3
+            ],
+            [
+              0.43,
+              0.35
+            ],
+            [
+              0.31,
+              0.23
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 26,
+    "region": [
+      0,
+      0.3,
+      1,
+      0.6000000000000001
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

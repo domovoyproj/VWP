@@ -1,0 +1,120 @@
+{
+  "schema": 3,
+  "id": "library-16",
+  "name": "Electric Bloom",
+  "description": "Стеклянные лепестки и световые ленты.",
+  "author": "VWP",
+  "cover": "studio-library/posters/16.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "16-background",
+      "name": "Окружение",
+      "source": "scene-16.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "glass",
+      "light": "warm",
+      "tint": "#C2D6F2",
+      "surfaceStrength": 0.65,
+      "lightStrength": 0.65,
+      "seed": 48041,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.44,
+              0.12
+            ],
+            [
+              0.58,
+              0.05
+            ],
+            [
+              0.68,
+              0.14
+            ],
+            [
+              0.76,
+              0.06
+            ],
+            [
+              0.94,
+              0.0
+            ],
+            [
+              1.0,
+              0.03
+            ],
+            [
+              1.0,
+              0.84
+            ],
+            [
+              0.86,
+              0.93
+            ],
+            [
+              0.72,
+              0.87
+            ],
+            [
+              0.6,
+              0.9
+            ],
+            [
+              0.48,
+              0.76
+            ],
+            [
+              0.51,
+              0.51
+            ],
+            [
+              0.44,
+              0.37
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 16,
+    "region": [
+      0,
+      0.2,
+      0.5,
+      0.7
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

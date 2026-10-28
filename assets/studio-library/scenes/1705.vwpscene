@@ -1,0 +1,154 @@
+{
+  "schema": 3,
+  "id": "library-1705",
+  "name": "Тихий храм",
+  "description": "Плавно падающий снег в нескольких планах.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1705.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1705-background",
+      "name": "Окружение",
+      "source": "village-winter/1705.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 973,
+      "waterline": 0.48,
+      "sun": [
+        0.22,
+        0.36
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.22
+            ],
+            [
+              0.87,
+              0.3
+            ],
+            [
+              0.77,
+              0.21
+            ],
+            [
+              0.7,
+              0.33
+            ],
+            [
+              0.53,
+              0.34
+            ],
+            [
+              0.36,
+              0.39
+            ],
+            [
+              0.17,
+              0.34
+            ],
+            [
+              0.0,
+              0.27
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.7,
+              0.53
+            ],
+            [
+              0.72,
+              0.53
+            ],
+            [
+              0.72,
+              0.58
+            ],
+            [
+              0.7,
+              0.58
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.81,
+              0.45
+            ],
+            [
+              0.83,
+              0.45
+            ],
+            [
+              0.83,
+              0.52
+            ],
+            [
+              0.81,
+              0.52
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 88,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

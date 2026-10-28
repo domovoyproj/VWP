@@ -83,6 +83,7 @@
         <Button Content="Космос" Tag="Космос" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Фэнтези" Tag="Фэнтези" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
         <Button Content="Импорт" Tag="Импорт" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
+        <Button Content="Мои сцены" Tag="Мои сцены" Click="CategoryClick" Background="Transparent" HorizontalContentAlignment="Left" FontSize="11" Padding="12,7" Margin="0,0,0,2" FontWeight="Normal" />
        </StackPanel>
        <Button x:Name="SidebarImport" Content="＋ Импорт видео" Click="ImportClick" Background="Transparent" FontSize="11" Padding="13,12" HorizontalContentAlignment="Left" Margin="0,10,0,0" />
       </StackPanel>

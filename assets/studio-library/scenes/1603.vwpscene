@@ -1,0 +1,162 @@
+{
+  "schema": 3,
+  "id": "library-1603",
+  "name": "Ледяное озеро",
+  "description": "Плавно падающий снег в нескольких планах.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1603.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1603-background",
+      "name": "Окружение",
+      "source": "winter/1603.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mirror",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.45,
+      "lightStrength": 0.65,
+      "seed": 49744,
+      "waterline": 0.48,
+      "sun": [
+        0.22,
+        0.29
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.55
+            ],
+            [
+              0.26,
+              0.48
+            ],
+            [
+              0.47,
+              0.53
+            ],
+            [
+              0.72,
+              0.48
+            ],
+            [
+              1.0,
+              0.46
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.22
+            ],
+            [
+              0.79,
+              0.24
+            ],
+            [
+              0.65,
+              0.08
+            ],
+            [
+              0.56,
+              0.24
+            ],
+            [
+              0.4,
+              0.26
+            ],
+            [
+              0.25,
+              0.35
+            ],
+            [
+              0.0,
+              0.24
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.15,
+              0.2
+            ],
+            [
+              0.25,
+              0.2
+            ],
+            [
+              0.25,
+              0.36
+            ],
+            [
+              0.15,
+              0.36
+            ]
+          ],
+          "feather": 0.015,
+          "erase": true
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 28,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

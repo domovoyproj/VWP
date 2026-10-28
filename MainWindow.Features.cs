@@ -127,7 +127,7 @@ public partial class MainWindow
         var layers=LayersFor(scene);
         if(StudioProject.IsProject(scene.Path))
         {
-            await player.PlayStudio(StudioProject.Load(scene.Path),screen,config.Performance,audio,cancellation.Token);
+            await player.PlayStudio(StudioLibrary.Load(scene.Path),screen,config.Performance,audio,cancellation.Token);
             if(exiting||applyGeneration.GetValueOrDefault(screen.DeviceName)!=generation)return;
         }
         else if((layers?.Realtime==true || config.Interactive && (scene.PresetId is null || preferences.Layers.ContainsKey(PlaybackRules.Key(scene)))) && layers?.Background is string background && File.Exists(background))

@@ -1,0 +1,220 @@
+{
+  "schema": 3,
+  "id": "library-1107",
+  "name": "Summer Afterglow",
+  "description": "Японский город на закате. Плывущие облака и летний свет.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1107.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1107-background",
+      "name": "Окружение",
+      "source": "anime/1107.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.4,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 16507,
+      "waterline": 0.42,
+      "sun": [
+        0.22,
+        0.29
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.03,
+              0.43
+            ],
+            [
+              0.16,
+              0.42
+            ],
+            [
+              0.28,
+              0.45
+            ],
+            [
+              0.36,
+              0.47
+            ],
+            [
+              0.3,
+              0.52
+            ],
+            [
+              0.12,
+              0.52
+            ],
+            [
+              0.02,
+              0.48
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.17
+            ],
+            [
+              0.82,
+              0.2
+            ],
+            [
+              0.68,
+              0.28
+            ],
+            [
+              0.51,
+              0.2
+            ],
+            [
+              0.31,
+              0.3
+            ],
+            [
+              0.16,
+              0.2
+            ],
+            [
+              0.0,
+              0.29
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.17,
+              0.18
+            ],
+            [
+              0.26,
+              0.18
+            ],
+            [
+              0.26,
+              0.35
+            ],
+            [
+              0.17,
+              0.35
+            ]
+          ],
+          "feather": 0.02,
+          "erase": true
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.0,
+              0.54
+            ],
+            [
+              0.17,
+              0.5
+            ],
+            [
+              0.27,
+              0.58
+            ],
+            [
+              0.26,
+              0.81
+            ],
+            [
+              0.14,
+              0.87
+            ],
+            [
+              0.0,
+              0.76
+            ]
+          ],
+          "feather": 0.018,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.91,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.28
+            ],
+            [
+              0.95,
+              0.31
+            ],
+            [
+              0.9,
+              0.18
+            ]
+          ],
+          "feather": 0.01,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 22,
+    "region": [
+      0,
+      0.5,
+      1,
+      0.5
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

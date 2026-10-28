@@ -1,0 +1,218 @@
+{
+  "schema": 3,
+  "id": "library-1504",
+  "name": "Moss & Mist",
+  "description": "Летающие светлячки с мягким мерцанием.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1504.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1504-background",
+      "name": "Окружение",
+      "source": "horizons/1504.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.42,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 35170,
+      "waterline": 0.66,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.24,
+              0.76
+            ],
+            [
+              0.41,
+              0.68
+            ],
+            [
+              0.49,
+              0.67
+            ],
+            [
+              0.56,
+              0.74
+            ],
+            [
+              0.73,
+              0.77
+            ],
+            [
+              0.77,
+              0.88
+            ],
+            [
+              0.62,
+              1.0
+            ],
+            [
+              0.26,
+              1.0
+            ]
+          ],
+          "feather": 0.01,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.0,
+              0.26
+            ],
+            [
+              0.15,
+              0.25
+            ],
+            [
+              0.22,
+              0.45
+            ],
+            [
+              0.21,
+              0.71
+            ],
+            [
+              0.08,
+              0.82
+            ],
+            [
+              0.0,
+              0.74
+            ]
+          ],
+          "feather": 0.02,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.73,
+              0.11
+            ],
+            [
+              0.96,
+              0.13
+            ],
+            [
+              0.95,
+              0.36
+            ],
+            [
+              0.83,
+              0.49
+            ],
+            [
+              0.75,
+              0.42
+            ]
+          ],
+          "feather": 0.02,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "1504-material-0",
+      "name": "Атмосфера · mist",
+      "source": "horizons/1504.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.22,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 26684,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.43,
+              0.28
+            ],
+            [
+              0.63,
+              0.19
+            ],
+            [
+              0.85,
+              0.27
+            ],
+            [
+              0.84,
+              0.54
+            ],
+            [
+              0.61,
+              0.67
+            ],
+            [
+              0.42,
+              0.52
+            ]
+          ],
+          "feather": 0.035,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "fireflies",
+    "count": 35,
+    "region": [
+      0,
+      0.3,
+      1,
+      0.7
+    ],
+    "masks": [],
+    "color": "#E2F6B4",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

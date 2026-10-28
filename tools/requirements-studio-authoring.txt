@@ -1,0 +1,4 @@
+# Optional image registration and source/preview inspection; no runtime dependency.
+opencv-python-headless==4.10.0.84
+Pillow>=11,<13
+numpy>=2,<3

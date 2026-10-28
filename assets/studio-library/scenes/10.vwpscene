@@ -1,0 +1,194 @@
+{
+  "schema": 3,
+  "id": "library-10",
+  "name": "Cloud Sanctuary",
+  "description": "Парящий сад над морем облаков.",
+  "author": "VWP",
+  "cover": "studio-library/posters/10.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "10-background",
+      "name": "Окружение",
+      "source": "scene-10.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.3,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.5,
+      "lightStrength": 0.65,
+      "seed": 45014,
+      "waterline": 0.48,
+      "sun": [
+        0.77,
+        0.22
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.66
+            ],
+            [
+              0.19,
+              0.59
+            ],
+            [
+              0.34,
+              0.63
+            ],
+            [
+              0.45,
+              0.69
+            ],
+            [
+              0.39,
+              0.84
+            ],
+            [
+              0.2,
+              0.89
+            ],
+            [
+              0.03,
+              0.81
+            ]
+          ],
+          "feather": 0.04,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.78,
+              0.0
+            ],
+            [
+              0.77,
+              0.24
+            ],
+            [
+              0.66,
+              0.31
+            ],
+            [
+              0.52,
+              0.2
+            ],
+            [
+              0.41,
+              0.29
+            ],
+            [
+              0.23,
+              0.23
+            ],
+            [
+              0.08,
+              0.31
+            ],
+            [
+              0.0,
+              0.25
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.86,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.2
+            ],
+            [
+              0.95,
+              0.27
+            ],
+            [
+              0.87,
+              0.19
+            ]
+          ],
+          "feather": 0.014,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 20,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.5306,
+            0.245
+          ],
+          [
+            0.6836,
+            0.2552
+          ],
+          [
+            0.7958,
+            0.6632
+          ],
+          [
+            0.6632,
+            0.7652
+          ],
+          [
+            0.4694,
+            0.5
+          ]
+        ],
+        "feather": 0.035,
+        "erase": false
+      }
+    ],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

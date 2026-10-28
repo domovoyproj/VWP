@@ -1,0 +1,164 @@
+{
+  "schema": 3,
+  "id": "library-1610",
+  "name": "Белый лис",
+  "description": "Плавно падающий снег в нескольких планах.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1610.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1610-background",
+      "name": "Окружение",
+      "source": "winter/1610.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 755,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.28
+            ],
+            [
+              0.75,
+              0.29
+            ],
+            [
+              0.67,
+              0.37
+            ],
+            [
+              0.46,
+              0.3
+            ],
+            [
+              0.31,
+              0.38
+            ],
+            [
+              0.12,
+              0.26
+            ],
+            [
+              0.0,
+              0.33
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "1610-material-0",
+      "name": "Атмосфера · mist",
+      "source": "winter/1610.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.12,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 37902,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.57,
+              0.58
+            ],
+            [
+              0.78,
+              0.55
+            ],
+            [
+              0.98,
+              0.6
+            ],
+            [
+              1.0,
+              0.72
+            ],
+            [
+              0.73,
+              0.73
+            ],
+            [
+              0.59,
+              0.66
+            ]
+          ],
+          "feather": 0.03,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 56,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

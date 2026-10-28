@@ -1,0 +1,169 @@
+{
+  "schema": 3,
+  "id": "library-1708",
+  "name": "Вечер в деревне",
+  "description": "Плавно падающий снег в нескольких планах.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1708.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1708-background",
+      "name": "Окружение",
+      "source": "village-winter/1708.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 17480,
+      "waterline": 0.48,
+      "sun": [
+        0.83,
+        0.32
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.24
+            ],
+            [
+              0.82,
+              0.22
+            ],
+            [
+              0.66,
+              0.3
+            ],
+            [
+              0.44,
+              0.26
+            ],
+            [
+              0.24,
+              0.31
+            ],
+            [
+              0.0,
+              0.24
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.23,
+              0.62
+            ],
+            [
+              0.26,
+              0.62
+            ],
+            [
+              0.26,
+              0.66
+            ],
+            [
+              0.23,
+              0.66
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.32,
+              0.62
+            ],
+            [
+              0.35,
+              0.62
+            ],
+            [
+              0.35,
+              0.67
+            ],
+            [
+              0.32,
+              0.67
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.55,
+              0.72
+            ],
+            [
+              0.57,
+              0.72
+            ],
+            [
+              0.57,
+              0.76
+            ],
+            [
+              0.55,
+              0.76
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 98,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

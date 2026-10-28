@@ -1,0 +1,174 @@
+{
+  "schema": 3,
+  "id": "library-1217",
+  "name": "Soft Monolith",
+  "description": "Архитектурная тишина. Вода, свет и стеклянные каустики.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1217.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1217-background",
+      "name": "Окружение",
+      "source": "vibes/1217.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.25,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 37365,
+      "waterline": 0.56,
+      "sun": [
+        0.2,
+        0.35
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.6
+            ],
+            [
+              0.2,
+              0.59
+            ],
+            [
+              0.43,
+              0.57
+            ],
+            [
+              0.64,
+              0.61
+            ],
+            [
+              0.85,
+              0.61
+            ],
+            [
+              1.0,
+              0.65
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.55,
+              0.0
+            ],
+            [
+              0.55,
+              0.17
+            ],
+            [
+              0.42,
+              0.2
+            ],
+            [
+              0.32,
+              0.15
+            ],
+            [
+              0.19,
+              0.24
+            ],
+            [
+              0.05,
+              0.22
+            ],
+            [
+              0.0,
+              0.28
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.78,
+              0.31
+            ],
+            [
+              0.85,
+              0.25
+            ],
+            [
+              0.92,
+              0.3
+            ],
+            [
+              0.95,
+              0.4
+            ],
+            [
+              0.91,
+              0.46
+            ],
+            [
+              0.83,
+              0.43
+            ],
+            [
+              0.79,
+              0.37
+            ]
+          ],
+          "feather": 0.01,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 12,
+    "region": [
+      0,
+      0.4,
+      1,
+      0.5
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

@@ -1,0 +1,471 @@
+{
+  "schema": 3,
+  "id": "library-17",
+  "name": "Moonlit Garden",
+  "description": "Серебряный сад под полной луной.",
+  "author": "VWP",
+  "cover": "studio-library/posters/17.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "17-background",
+      "name": "Окружение",
+      "source": "studio-library/art/17-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.3,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 64514,
+      "waterline": 0.58,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.14,
+              0.66
+            ],
+            [
+              0.35,
+              0.62
+            ],
+            [
+              0.51,
+              0.58
+            ],
+            [
+              0.68,
+              0.59
+            ],
+            [
+              0.78,
+              0.66
+            ],
+            [
+              0.78,
+              0.74
+            ],
+            [
+              0.69,
+              0.83
+            ],
+            [
+              0.65,
+              1.0
+            ],
+            [
+              0.15,
+              1.0
+            ],
+            [
+              0.14,
+              0.87
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.2,
+              0.73
+            ],
+            [
+              0.29,
+              0.7
+            ],
+            [
+              0.35,
+              0.75
+            ],
+            [
+              0.34,
+              0.8
+            ],
+            [
+              0.24,
+              0.81
+            ]
+          ],
+          "feather": 0.003,
+          "erase": true
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.04,
+              0.0
+            ],
+            [
+              0.38,
+              0.0
+            ],
+            [
+              0.43,
+              0.11
+            ],
+            [
+              0.38,
+              0.22
+            ],
+            [
+              0.23,
+              0.19
+            ],
+            [
+              0.09,
+              0.28
+            ],
+            [
+              0.03,
+              0.19
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.72,
+              0.0
+            ],
+            [
+              0.84,
+              0.0
+            ],
+            [
+              0.84,
+              0.19
+            ],
+            [
+              0.8,
+              0.3
+            ],
+            [
+              0.76,
+              0.22
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.72,
+              0.35
+            ],
+            [
+              0.74,
+              0.35
+            ],
+            [
+              0.74,
+              0.39
+            ],
+            [
+              0.72,
+              0.39
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.47,
+              0.45
+            ],
+            [
+              0.48,
+              0.45
+            ],
+            [
+              0.48,
+              0.48
+            ],
+            [
+              0.47,
+              0.48
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.03,
+              0.5
+            ],
+            [
+              0.05,
+              0.5
+            ],
+            [
+              0.05,
+              0.53
+            ],
+            [
+              0.03,
+              0.53
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "17-material-0",
+      "name": "Атмосфера · waterfall",
+      "source": "studio-library/art/17-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.8,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "waterfall",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 49856,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.54,
+              0.36
+            ],
+            [
+              0.58,
+              0.36
+            ],
+            [
+              0.59,
+              0.43
+            ],
+            [
+              0.57,
+              0.48
+            ],
+            [
+              0.54,
+              0.44
+            ]
+          ],
+          "feather": 0.006,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    },
+    {
+      "id": "17-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/17-character.png",
+      "rect": [
+        0.23139651,
+        0.08739062,
+        0.77593496,
+        0.78420334
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.35,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 7999,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.832548,
+              0.122939
+            ],
+            [
+              0.88513,
+              0.083919
+            ],
+            [
+              0.937712,
+              0.096926
+            ],
+            [
+              0.950857,
+              0.187973
+            ],
+            [
+              0.937712,
+              0.253008
+            ],
+            [
+              0.911421,
+              0.226994
+            ],
+            [
+              0.88513,
+              0.16196
+            ],
+            [
+              0.858839,
+              0.187973
+            ],
+            [
+              0.832548,
+              0.266014
+            ]
+          ],
+          "feather": 0.007,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.81283,
+              0.20098
+            ],
+            [
+              0.904848,
+              0.20098
+            ],
+            [
+              0.904848,
+              0.357062
+            ],
+            [
+              0.81283,
+              0.357062
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.806258,
+              0.617199
+            ],
+            [
+              0.858839,
+              0.578178
+            ],
+            [
+              0.911421,
+              0.630206
+            ],
+            [
+              0.937712,
+              0.721253
+            ],
+            [
+              0.898276,
+              0.812301
+            ],
+            [
+              0.806258,
+              0.773281
+            ]
+          ],
+          "feather": 0.018,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.81283,
+              0.20098
+            ],
+            [
+              0.904848,
+              0.20098
+            ],
+            [
+              0.904848,
+              0.357062
+            ],
+            [
+              0.81283,
+              0.357062
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "petals",
+    "count": 25,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#F5C7DC",
+    "afterLayer": 1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

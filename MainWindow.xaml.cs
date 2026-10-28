@@ -14,11 +14,12 @@ using Microsoft.Win32;
 using LibVLCSharp.Shared;
 using Forms = System.Windows.Forms;
 namespace VWP;
-public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null,bool IsSpatial=false,bool Clock=false,string? StudioId=null);
+public record Wallpaper(string Name,string Path,string? Thumbnail,string Subtitle,string Category="Импорт",string Description="Твоё видео",int? PresetId=null,bool IsSpatial=false,bool Clock=false,string? StudioId=null,bool LegacyCustomized=false);
 public record PresetDefinition(int Id,string Name,string Category,string Description,string Accent,string Motion);
 public sealed class Preferences
 {
     public int SettingsVersion {get;set;}
+    public int StudioLibraryVersion {get;set;}
     public List<string> Imports { get; set; }=new();
     public Dictionary<string,string> ImportNames {get;set;}=new();
     public Dictionary<string,string> ImportThumbnails {get;set;}=new();
@@ -59,7 +60,7 @@ public partial class MainWindow : Window
     bool fullscreen;
     Rect compactBounds;
     string screenLayout="";
-    string category="Оригиналы VWP";
+    string category="Все сцены";
     Rect launchArea;
     public MainWindow()
     {
@@ -75,14 +76,10 @@ public partial class MainWindow : Window
         Core.Initialize(); StaticBackdrop.RecoverAll();
         Trace("vlc");
         string assets=System.IO.Path.Combine(AppContext.BaseDirectory,"assets");
-        var presets=JsonSerializer.Deserialize<List<PresetDefinition>>(File.ReadAllText(System.IO.Path.Combine(assets,"presets.json")),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
-        foreach(var preset in presets)items.Add(new(preset.Name,System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"{preset.Id}.jpg"),preset.Category+" · 4K · 60 FPS",preset.Category,preset.Description,preset.Id));
-        foreach(var preset in presets)items.Add(new(preset.Name+" · Живая сцена",System.IO.Path.Combine(assets,$"{preset.Id}.mp4"),System.IO.Path.Combine(assets,$"scene-{preset.Id}.png"),preset.Category+" · ЖИВАЯ СЦЕНА",preset.Category,SpatialScene.Descriptions[preset.Id],preset.Id,true));
-        LoadExpansion(assets);
-        LoadLiving(assets);
+        RemoveRetiredWallpapers();
+        LoadQualityLibrary(assets);
         LoadStudioOriginals(assets);
         items.Add(new("Afterlight · Endless City",Path.Combine(assets,"city","index.html"),Path.Combine(assets,"city","cover.png"),"ЭКСКЛЮЗИВ · ИНТЕРАКТИВНЫЙ 3D", "Город","Бесконечный неоновый город. Прогулка, полёт, дождь, транспорт и три настроения. Открывается за звезду GitHub.",CityId,true));
-        RemoveRetiredWallpapers();
         foreach(string path in preferences.Imports)items.Add(new(preferences.ImportNames.GetValueOrDefault(path)??System.IO.Path.GetFileNameWithoutExtension(path),path,preferences.ImportThumbnails.GetValueOrDefault(path),StudioProject.IsProject(path)?"МОЯ ЖИВАЯ СЦЕНА":"LOCAL VIDEO",IsSpatial:StudioProject.IsProject(path)||preferences.Layers.GetValueOrDefault(path)?.MotionId is not null));
         if(!items.Any(s=>s.Category==category))category="Все сцены";
         Library.ItemsSource=items;System.Windows.Data.CollectionViewSource.GetDefaultView(items).Filter=FilterScene; Library.SelectedItem=items.FirstOrDefault(s=>s.Category==category)??items.FirstOrDefault();CountLabel.Text=$"{items.Count} сцен";

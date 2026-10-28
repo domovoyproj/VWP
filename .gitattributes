@@ -1,0 +1,6 @@
+# Integrity manifests hash exact project bytes on Windows and Linux alike.
+assets/studio-library/**/*.json text eol=lf
+assets/studio-library/**/*.vwpscene text eol=lf
+assets/studio-library/*.json text eol=lf
+assets/studio-library/**/*.png binary
+assets/studio-library/**/*.jpg binary
