@@ -48,7 +48,7 @@ public static class BundleService
                     var item=new BundleScene{Name=scene.Name};
                     if(StudioProject.IsProject(scene.Path))
                     {
-                        manifest.Format=2;var original=StudioProject.Load(scene.Path);var project=original.Copy();int resource=0;
+                        manifest.Format=2;var original=StudioLibrary.Load(scene.Path);var project=original.Copy();int resource=0;
                         foreach(string asset in original.Assets()){string added=Add(original.Asset(asset),"resource-"+(resource++),item.Id);project.ReplaceAsset(asset,Path.GetFileName(added));}
                         item.Video="scenes/"+item.Id+"/scene.vwpscene";
                         byte[] json=JsonSerializer.SerializeToUtf8Bytes(project,StudioProject.Json);using(var output=archive.CreateEntry(item.Video).Open())output.Write(json);

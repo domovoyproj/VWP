@@ -99,10 +99,10 @@ function recolor(){scene.background=new T.Color(palettes[palette].fog);scene.fog
 function toast(text){const el=document.querySelector('#toast');el.textContent=text;el.classList.add('visible');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('visible'),2400);}
 function state(){return{x:world.x,y:world.y,z:world.z,yaw,pitch,palette,distance,flying,raining};}
 function restore(s){if(!s)return;for(const n of ['x','y','z','yaw','pitch','distance'])if(s[n]!==undefined&&!Number.isFinite(s[n]))return;world.set(s.x??5.55,Math.max(1.65,Math.min(180,s.y??1.92)),s.z??22);yaw=s.yaw??0;pitch=Math.max(-1.25,Math.min(1.25,s.pitch??-.025));distance=s.distance??0;flying=!!s.flying;raining=s.raining!==false;palette=Math.abs(Math.floor(s.palette??palette))%3;recolor();recycle();}
-window.city={state,metrics:()=>({frames,chunks:chunks.size,drawCalls:renderCalls,triangles:renderTriangles,resolution:renderer.getDrawingBufferSize(new T.Vector2()).toArray(),memory:renderer.info.memory,adapter:renderer.getContext().getParameter(renderer.getContext().getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL||renderer.getContext().RENDERER),actors:actors.count,canal:canal.metrics(),architecture:architecture.metrics(),sceneResolution:[target.width,target.height],renderScale:renderScale,captureMode:manual?'offline':'realtime',observedFps:manual?null:1000/frameAverage,walkingPose:actors.inspect(),world:[world.x,world.y,world.z],paused}),move:(x,z)=>{world.x+=x;world.z+=z;recycle();},pause:v=>paused=v,interact:()=>{palette=(palette+1)%3;recolor();toast('Район сменил освещение · '+palettes[palette].name);},restore};
+window.city={state,metrics:()=>({frames,chunks:chunks.size,drawCalls:renderCalls,triangles:renderTriangles,resolution:renderer.getDrawingBufferSize(new T.Vector2()).toArray(),memory:renderer.info.memory,adapter:renderer.getContext().getParameter(renderer.getContext().getExtension('WEBGL_debug_renderer_info')?.UNMASKED_RENDERER_WEBGL||renderer.getContext().RENDERER),actors:actors.count,canal:canal.metrics(),architecture:architecture.metrics(),sceneResolution:[target.width,target.height],renderScale:renderScale,captureMode:manual?'offline':'realtime',observedFps:manual?null:1000/frameAverage,walkingPose:actors.inspect(),world:[world.x,world.y,world.z],paused}),move:(x,z)=>{world.x+=x;world.z+=z;recycle();},pause:pauseFrame,interact:()=>{palette=(palette+1)%3;recolor();toast('Район сменил освещение · '+palettes[palette].name);},restore};
 window.city.exportMotions=()=>actors.exportMotions();
 window.city.renderAt=(seconds,pose)=>{if(!manual||!Number.isFinite(seconds))return;elapsed=seconds;auto=false;if(pose)restore(pose);frame(0,true);};
-window.chrome?.webview?.addEventListener('message',async e=>{if(e.data.type==='pause')paused=!!e.data.value;if(e.data.type==='state')restore(e.data.value);if(manual&&e.data.type==='render'){window.city.renderAt(e.data.time,e.data.pose);await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));send({type:'frame',id:e.data.id});}});
+window.chrome?.webview?.addEventListener('message',async e=>{if(e.data.type==='pause')pauseFrame(!!e.data.value);if(e.data.type==='state')restore(e.data.value);if(manual&&e.data.type==='render'){window.city.renderAt(e.data.time,e.data.pose);await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));send({type:'frame',id:e.data.id});}});
 document.querySelector('#enter').onclick=()=>canvas.requestPointerLock();document.querySelector('#close').onclick=()=>send({type:'close',state:state()});
 addEventListener('pointerlockchange',()=>{const wasActive=active;active=document.pointerLockElement===canvas;auto=!active;steps.clear();document.body.classList.toggle('playing',active);if(wasActive&&!active&&params.get('explore')==='1')send({type:'close',state:state()});});
 addEventListener('mousemove',e=>{if(active){yaw-=e.movementX*.002;pitch=Math.max(-1.25,Math.min(1.25,pitch-e.movementY*.002));}});
@@ -112,15 +112,27 @@ document.body.classList.toggle('wallpaper',!preview);recolor();restore(window.in
 // Start Auto within the budget of integrated graphics; scale up after measured frames.
 let frameAverage=1000/fps,scaleTimer=0,renderScale=adaptive?.65:1;
 let ready=false,shadowCell='';
+let frameRequest=0,hiddenTimer=0;
+function cancelFrame(){if(frameRequest)cancelAnimationFrame(frameRequest);if(hiddenTimer)clearTimeout(hiddenTimer);frameRequest=hiddenTimer=0;}
+function queueFrame(){
+    if(manual||paused||frameRequest||hiddenTimer)return;
+    // A desktop child may remain document.hidden even when its pixels are visible
+    // behind desktop icons. rAF then stops permanently; native pause policy still
+    // needs an explicitly scheduled frame clock.
+    if(document.hidden)hiddenTimer=setTimeout(()=>{hiddenTimer=0;frame(performance.now());},1000/fps);
+    else frameRequest=requestAnimationFrame(now=>{frameRequest=0;frame(now);});
+}
+function pauseFrame(value){paused=!!value;cancelFrame();lastTime=lastRender=0;if(!paused)queueFrame();}
+addEventListener('visibilitychange',()=>{cancelFrame();lastTime=lastRender=0;queueFrame();});
 const reflectionProjection=new T.Matrix4();let reflectionTime=-Infinity;
 if(reflection){const reflect=reflection.onBeforeRender.bind(reflection);reflection.onBeforeRender=(...args)=>{if(manual||elapsed-reflectionTime>=1/20||frames<4){reflect(...args);reflectionProjection.copy(reflection.material.uniforms.textureMatrix.value).multiply(reflection.matrixWorld.clone().invert());reflectionTime=elapsed;}else reflection.material.uniforms.textureMatrix.value.copy(reflectionProjection).multiply(reflection.matrixWorld);};}
 
-function frame(now,forced=false){if(!manual&&!forced)requestAnimationFrame(frame);if(!forced&&paused){lastTime=lastRender=now;return;}if(!forced&&now-lastRender<1000/fps-.5)return;const dt=forced?0:Math.min(.08,(now-(lastTime||now))/1000);const interval=now-lastRender;lastTime=now;lastRender=now;elapsed+=dt;
+function frame(now,forced=false){if(!manual&&!forced)queueFrame();if(!forced&&paused){lastTime=lastRender=now;return;}if(!forced&&now-lastRender<1000/fps-.5)return;const dt=forced?0:Math.min(.08,(now-(lastTime||now))/1000);const interval=now-lastRender;lastTime=now;lastRender=now;elapsed+=dt;
 if(!manual&&!forced&&frames>10&&interval>0){frameAverage=frameAverage*.95+interval*.05;if(adaptive&&now-scaleTimer>2000){scaleTimer=now;const budget=1000/fps;let next=renderScale;if(frameAverage>budget*1.22)next=Math.max(.45,renderScale-.08);else if(frameAverage<budget*1.06)next=Math.min(1,renderScale+.04);if(Math.abs(next-renderScale)>.01){renderScale=next;resize();}}}
 const old=world.clone();if(active){const speed=(steps.has('ShiftLeft')||steps.has('ShiftRight')?22:7)*dt,forward=(steps.has('KeyW')?1:0)-(steps.has('KeyS')?1:0),side=(steps.has('KeyD')?1:0)-(steps.has('KeyA')?1:0);world.x+=(-Math.sin(yaw)*forward+Math.cos(yaw)*side)*speed;world.z+=(-Math.cos(yaw)*forward-Math.sin(yaw)*side)*speed;
 if(!flying){const qx=Math.abs(((world.x%40)+60)%40-20),qz=Math.abs(((world.z%40)+60)%40-20);const river=Math.abs(((world.x+80)%160+160)%160-80);if((qx>6.2&&qz>6.2)||(river<4.6&&qz>4.12))world.copy(old);world.y+=((qz<4.12?1.72:1.92)-world.y)*Math.min(1,dt*4);}else{world.y+=((steps.has('Space')?1:0)-(steps.has('ControlLeft')?1:0))*speed;world.y=Math.max(1.72,Math.min(160,world.y));}}
 else if(auto){world.z-=dt*.95;world.x+=(Math.round(world.x/40)*40+5.55+Math.sin(elapsed*.04)*.2-world.x)*Math.min(1,dt*.1);world.y+=(1.92-world.y)*Math.min(1,dt*.6);yaw+=(-yaw)*Math.min(1,dt*.3);pitch+=(-.025-pitch)*Math.min(1,dt*.3);}distance+=world.distanceTo(old);recycle();camera.position.copy(world).sub(origin);camera.rotation.order='YXZ';camera.rotation.set(pitch,yaw,0);
-road.update(elapsed,camera,origin,palettes[palette].fog);canal.update(elapsed,world,origin);sky.position.copy(camera.position);skyMaterial.uniforms.time.value=elapsed;moon.position.x=camera.position.x-120;moon.position.z=camera.position.z-350;
+road.update(elapsed,camera,origin,palettes[palette].fog,raining);canal.update(elapsed,world,origin);sky.position.copy(camera.position);skyMaterial.uniforms.time.value=elapsed;moon.position.x=camera.position.x-120;moon.position.z=camera.position.z-350;
 rail.position.set(Math.round(world.x/40)*40-origin.x,0,Math.floor((world.z+40)/160)*160-40-origin.z);train.position.set(rail.position.x+((elapsed*11+200)%430)-215,12.35,rail.position.z);
 accentLight.position.set(camera.position.x-4,7,camera.position.z-18);warmLight.position.set(camera.position.x+8,5,camera.position.z-32);
 actors.update(elapsed,world,origin);
@@ -136,4 +148,4 @@ addEventListener('error',e=>{send({type:'error',message:e.message});document.que
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();send({type:'contextlost'});});
 if(!manual)setInterval(()=>send({type:'state',value:state()}),3000);
 resize();recycle();
-if(manual){for(let i=0;i<4;i++)frame(0,true);}else requestAnimationFrame(frame);
+if(manual){for(let i=0;i<4;i++)frame(0,true);}else queueFrame();

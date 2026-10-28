@@ -1,0 +1,166 @@
+{
+  "schema": 3,
+  "id": "library-1605",
+  "name": "Маяк на краю зимы",
+  "description": "Плавно падающий снег в нескольких планах.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1605.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1605-background",
+      "name": "Окружение",
+      "source": "winter/1605.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.85,
+      "surface": "ocean",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 58672,
+      "waterline": 0.59,
+      "sun": [
+        0.18,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.62
+            ],
+            [
+              0.22,
+              0.62
+            ],
+            [
+              0.35,
+              0.65
+            ],
+            [
+              0.45,
+              0.74
+            ],
+            [
+              0.4,
+              0.83
+            ],
+            [
+              0.22,
+              0.86
+            ],
+            [
+              0.17,
+              0.97
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.28
+            ],
+            [
+              0.86,
+              0.26
+            ],
+            [
+              0.75,
+              0.36
+            ],
+            [
+              0.68,
+              0.31
+            ],
+            [
+              0.54,
+              0.39
+            ],
+            [
+              0.3,
+              0.29
+            ],
+            [
+              0.0,
+              0.4
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.75,
+              0.255
+            ],
+            [
+              0.777,
+              0.255
+            ],
+            [
+              0.777,
+              0.282
+            ],
+            [
+              0.75,
+              0.282
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 68,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

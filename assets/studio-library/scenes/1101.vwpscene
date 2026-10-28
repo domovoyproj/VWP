@@ -1,0 +1,200 @@
+{
+  "schema": 3,
+  "id": "library-1101",
+  "name": "Tsukimi Shrine",
+  "description": "Лунный храм. Живая вода, ветер и лепестки сакуры.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1101.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1101-background",
+      "name": "Окружение",
+      "source": "anime/1101.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 3759,
+      "waterline": 0.53,
+      "sun": [
+        0.28,
+        0.09
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.58
+            ],
+            [
+              0.23,
+              0.54
+            ],
+            [
+              0.43,
+              0.56
+            ],
+            [
+              0.54,
+              0.62
+            ],
+            [
+              0.51,
+              0.82
+            ],
+            [
+              0.37,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.76,
+              0.0
+            ],
+            [
+              0.73,
+              0.23
+            ],
+            [
+              0.54,
+              0.27
+            ],
+            [
+              0.33,
+              0.17
+            ],
+            [
+              0.18,
+              0.24
+            ],
+            [
+              0.0,
+              0.19
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.25,
+              0.02
+            ],
+            [
+              0.31,
+              0.02
+            ],
+            [
+              0.31,
+              0.17
+            ],
+            [
+              0.25,
+              0.17
+            ]
+          ],
+          "feather": 0.015,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.68,
+              0.43
+            ],
+            [
+              0.71,
+              0.43
+            ],
+            [
+              0.71,
+              0.49
+            ],
+            [
+              0.68,
+              0.49
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.85,
+              0.49
+            ],
+            [
+              0.88,
+              0.49
+            ],
+            [
+              0.88,
+              0.57
+            ],
+            [
+              0.85,
+              0.57
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "petals",
+    "count": 35,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#F5C7DC",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

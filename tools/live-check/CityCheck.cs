@@ -119,7 +119,11 @@ static class CityCheck
                 }
                 File.WriteAllText(Path.Combine(folder,"status.txt"),"PASS: authenticated star gate, encrypted credentials, revocation, backend gate, visible animated city, pause and bounded 40km travel"+(desktop?", actual Explorer host initialization and changing frames":""));
             }
-            catch(Exception e){File.WriteAllText(Path.Combine(folder,"status.txt"),e.ToString());Environment.ExitCode=1;}
+            catch(Exception e)
+            {
+                File.WriteAllText(Path.Combine(folder,"status.txt"),e.ToString());Environment.ExitCode=1;
+                try{File.WriteAllText(Path.Combine(folder,"startup-diagnostics.json"),await city.Control.CoreWebView2.ExecuteScriptAsync("({ready:document.readyState,visibility:document.visibilityState,metrics:window.city?.metrics(),error:document.querySelector('#error')?.textContent})").WaitAsync(TimeSpan.FromSeconds(3)));await city.Capture(Path.Combine(folder,"failed.png"));}catch{}
+            }
             finally{form.Close();}
         };
         Forms.Application.Run(form);

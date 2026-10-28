@@ -1,0 +1,146 @@
+{
+  "schema": 3,
+  "id": "library-1506",
+  "name": "Midnight GT",
+  "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1506.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1506-background",
+      "name": "Окружение",
+      "source": "horizons/1506.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mirror",
+      "light": "cool",
+      "tint": "#ABD5EA",
+      "surfaceStrength": 0.45,
+      "lightStrength": 0.65,
+      "seed": 1346,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.74
+            ],
+            [
+              0.25,
+              0.68
+            ],
+            [
+              0.42,
+              0.67
+            ],
+            [
+              0.57,
+              0.73
+            ],
+            [
+              0.83,
+              0.74
+            ],
+            [
+              1.0,
+              0.81
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.02,
+              0
+            ],
+            [
+              0.59,
+              0
+            ],
+            [
+              0.59,
+              0.23
+            ],
+            [
+              0.02,
+              0.23
+            ]
+          ],
+          "feather": 0.015,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.67,
+              0.58
+            ],
+            [
+              0.76,
+              0.58
+            ],
+            [
+              0.76,
+              0.6
+            ],
+            [
+              0.67,
+              0.6
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "rain",
+    "count": 150,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#CBDCED",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

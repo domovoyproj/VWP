@@ -1,0 +1,163 @@
+{
+  "schema": 3,
+  "id": "library-26",
+  "name": "Coral Research",
+  "description": "Подводная станция: вода и пузырьки за стеклом.",
+  "author": "VWP",
+  "cover": "studio-library/posters/26.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "26-background",
+      "name": "Окружение",
+      "source": "cinematic/26.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "ocean",
+      "light": "cool",
+      "tint": "#9EDBEB",
+      "surfaceStrength": 0.22,
+      "lightStrength": 0.25,
+      "seed": 3686,
+      "waterline": 0.05,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.14,
+              0.02
+            ],
+            [
+              0.46,
+              0.0
+            ],
+            [
+              0.72,
+              0.0
+            ],
+            [
+              0.93,
+              0.17
+            ],
+            [
+              0.97,
+              0.73
+            ],
+            [
+              0.78,
+              0.9
+            ],
+            [
+              0.49,
+              0.88
+            ],
+            [
+              0.27,
+              0.73
+            ],
+            [
+              0.2,
+              0.5
+            ]
+          ],
+          "feather": 0.01,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.1,
+              0.07
+            ],
+            [
+              0.67,
+              0.07
+            ],
+            [
+              0.67,
+              0.25
+            ],
+            [
+              0.1,
+              0.25
+            ]
+          ],
+          "feather": 0.014,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "bubbles",
+    "count": 55,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.2042,
+            0.1328
+          ],
+          [
+            0.653,
+            0.0614
+          ],
+          [
+            0.908,
+            0.2144
+          ],
+          [
+            0.8876,
+            0.7346
+          ],
+          [
+            0.6326,
+            0.908
+          ],
+          [
+            0.3266,
+            0.7754
+          ],
+          [
+            0.2246,
+            0.5408
+          ]
+        ],
+        "feather": 0.008,
+        "erase": false
+      }
+    ],
+    "color": "#BBDFED",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

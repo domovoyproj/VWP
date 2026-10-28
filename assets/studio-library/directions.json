@@ -1,0 +1,2741 @@
+{
+  "schema": 1,
+  "count": 132,
+  "scenes": [
+    {
+      "id": 0,
+      "source": "scene-0.png",
+      "background": "studio-library/art/0-background.png",
+      "sourceSha256": "419143b1f82d2e538a1a56d7448bd64f0f75005856ef2db185a14957c1e06045",
+      "protectedPoints": [
+        [
+          0.3062,
+          0.4286
+        ],
+        [
+          0.1226,
+          0.8162
+        ]
+      ],
+      "face": [
+        0.7244,
+        0.245
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/0.jpg"
+    },
+    {
+      "id": 1,
+      "source": "scene-1.png",
+      "background": "studio-library/art/1-background.png",
+      "sourceSha256": "ad5613aa76c4847245567071f2aa63fa53383e6e17bb9a19955881068ceaa19b",
+      "protectedPoints": [
+        [
+          0.602,
+          0.2654
+        ],
+        [
+          0.1838,
+          0.3878
+        ]
+      ],
+      "face": [
+        0.7958,
+        0.1838
+      ],
+      "surfaces": [
+        "mirror",
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1.jpg"
+    },
+    {
+      "id": 2,
+      "source": "scene-2.png",
+      "background": "studio-library/art/2-background.png",
+      "sourceSha256": "7c9b1733891125f4a237cb999daa5e731106d099d50ff838658830073e20e88b",
+      "protectedPoints": [
+        [
+          0.5306,
+          0.6428
+        ],
+        [
+          0.602,
+          0.8672
+        ]
+      ],
+      "face": [
+        0.7244,
+        0.1736
+      ],
+      "surfaces": [
+        "mist",
+        "waterfall"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/2.jpg"
+    },
+    {
+      "id": 3,
+      "source": "scene-3.png",
+      "background": "scene-3.png",
+      "sourceSha256": "cb7460ae0b78b4c6d60600184f390d16cf6b19d4d4c46e49ef57929b6a7370b9",
+      "protectedPoints": [
+        [
+          0.8162,
+          0.5714
+        ],
+        [
+          0.6326,
+          0.4388
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "aurora",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/3.jpg"
+    },
+    {
+      "id": 4,
+      "source": "scene-4.png",
+      "background": "studio-library/art/4-background.png",
+      "sourceSha256": "04d751cfaca5025f71c506d6c1e3594dff39e31b4412c5a479ca405b224f4068",
+      "protectedPoints": [
+        [
+          0.8978,
+          0.1124
+        ],
+        [
+          0.449,
+          0.1226
+        ]
+      ],
+      "face": [
+        0.73154,
+        0.2348
+      ],
+      "surfaces": [
+        "cosmic"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/4.jpg"
+    },
+    {
+      "id": 5,
+      "source": "scene-5.png",
+      "background": "studio-library/art/5-background.png",
+      "sourceSha256": "7c883fd2445e753c1e5c598bf4faf3436da041bd0af25f6d4cf4db31bc6c8d50",
+      "protectedPoints": [
+        [
+          0.755,
+          0.347
+        ],
+        [
+          0.551,
+          0.7958
+        ]
+      ],
+      "face": [
+        0.857,
+        0.4796
+      ],
+      "surfaces": [],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/5.jpg"
+    },
+    {
+      "id": 6,
+      "source": "scene-6.png",
+      "background": "scene-6.png",
+      "sourceSha256": "51827dba7a29ca8e1bf03ae6c086de2bf509ada9952b73be63ec704bdc379ca3",
+      "protectedPoints": [
+        [
+          0.8672,
+          0.5204
+        ],
+        [
+          0.4898,
+          0.2246
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/6.jpg"
+    },
+    {
+      "id": 7,
+      "source": "scene-7.png",
+      "background": "studio-library/art/7-background.png",
+      "sourceSha256": "418c143b7ce28a60228bf5bf1b58ff280b48f6262e2a9f7329fd9dbdf951ad25",
+      "protectedPoints": [
+        [
+          0.4898,
+          0.398
+        ],
+        [
+          0.5408,
+          0.8366
+        ]
+      ],
+      "face": [
+        0.74582,
+        0.245
+      ],
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/7.jpg"
+    },
+    {
+      "id": 8,
+      "source": "scene-8.png",
+      "background": "scene-8.png",
+      "sourceSha256": "5a415881b2a015c058925bdfb329bdd48ffdf169d0a146e58840991ae2ed927d",
+      "protectedPoints": [
+        [
+          0.7958,
+          0.3572
+        ],
+        [
+          0.8366,
+          0.6938
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water",
+        "waterfall"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/8.jpg"
+    },
+    {
+      "id": 9,
+      "source": "scene-9.png",
+      "background": "scene-9.png",
+      "sourceSha256": "7d68e63e599e0a5621d6e8ffcfb4d3e8afcb0a5f6a4bf1f861a1a6ec02495a5a",
+      "protectedPoints": [
+        [
+          0.7244,
+          0.653
+        ],
+        [
+          0.5306,
+          0.2756
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/9.jpg"
+    },
+    {
+      "id": 10,
+      "source": "scene-10.png",
+      "background": "scene-10.png",
+      "sourceSha256": "987ac02f7be1b2c9ae1b11b01ba3f10a90be0b294ee87a7f8816c53e1d36c8ed",
+      "protectedPoints": [
+        [
+          0.806,
+          0.653
+        ],
+        [
+          0.5816,
+          0.3674
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/10.jpg"
+    },
+    {
+      "id": 11,
+      "source": "scene-11.png",
+      "background": "studio-library/art/11-background.png",
+      "sourceSha256": "3c85ef38313b199b29d800ba69d2d09e9dad528e974009159ff731f06acdf6c8",
+      "protectedPoints": [
+        [
+          0.908,
+          0.4388
+        ],
+        [
+          0.4286,
+          0.5918
+        ]
+      ],
+      "face": [
+        0.8366,
+        0.2246
+      ],
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/11.jpg"
+    },
+    {
+      "id": 12,
+      "source": "scene-12.png",
+      "background": "studio-library/art/12-background.png",
+      "sourceSha256": "ce3a0b39bd15d1421b50db931552f88abe0d402dbbe0e0394ddd42b7d9300492",
+      "protectedPoints": [
+        [
+          0.551,
+          0.5918
+        ],
+        [
+          0.9386,
+          0.3266
+        ]
+      ],
+      "face": [
+        0.81416,
+        0.4388
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/12.jpg"
+    },
+    {
+      "id": 13,
+      "source": "scene-13.png",
+      "background": "studio-library/art/13-background.png",
+      "sourceSha256": "4e2715fcea04f2059503519099176a2c9d3c92945ab46be0ec7ce220418ecb46",
+      "protectedPoints": [
+        [
+          0.6428,
+          0.4898
+        ],
+        [
+          0.4898,
+          0.3674
+        ]
+      ],
+      "face": [
+        0.7244,
+        0.2042
+      ],
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/13.jpg"
+    },
+    {
+      "id": 14,
+      "source": "scene-14.png",
+      "background": "studio-library/art/14-background.png",
+      "sourceSha256": "bfd0029e308512e2f091a359d745f04d65a02ea94d1397cdf23e3c726472d833",
+      "protectedPoints": [
+        [
+          0.8519,
+          0.5816
+        ],
+        [
+          0.7856,
+          0.6836
+        ]
+      ],
+      "face": [
+        0.8162,
+        0.3674
+      ],
+      "surfaces": [
+        "rain"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/14.jpg"
+    },
+    {
+      "id": 15,
+      "source": "scene-15.png",
+      "background": "scene-15.png",
+      "sourceSha256": "f53f9a51218e70a1b469dcdd0a1ffeb29d63fdad555c3b8d9bae27037e1776cd",
+      "protectedPoints": [
+        [
+          0.7244,
+          0.2756
+        ],
+        [
+          0.8978,
+          0.6122
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/15.jpg"
+    },
+    {
+      "id": 16,
+      "source": "scene-16.png",
+      "background": "scene-16.png",
+      "sourceSha256": "07dc41f3509e0640159a535b3149724df335c54deeb626a46933ef365f603992",
+      "protectedPoints": [
+        [
+          0.2144,
+          0.7958
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "glass"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/16.jpg"
+    },
+    {
+      "id": 17,
+      "source": "scene-17.png",
+      "background": "studio-library/art/17-background.png",
+      "sourceSha256": "791389f52be456d5eee758e48cf23a2c015467360edb90a37f56996b147d06c9",
+      "protectedPoints": [
+        [
+          0.6224,
+          0.4388
+        ],
+        [
+          0.8876,
+          0.7754
+        ]
+      ],
+      "face": [
+        0.8876,
+        0.2858
+      ],
+      "surfaces": [
+        "water",
+        "waterfall"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/17.jpg"
+    },
+    {
+      "id": 18,
+      "source": "cinematic/18.png",
+      "background": "cinematic/18.png",
+      "sourceSha256": "d6ed9250702fe65b1e6b5d2e39d1a30eadedcc8ebe996ceafc93883d07deedfe",
+      "protectedPoints": [
+        [
+          0.4898,
+          0.5714
+        ],
+        [
+          0.398,
+          0.296
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/18.jpg"
+    },
+    {
+      "id": 19,
+      "source": "cinematic/19.png",
+      "background": "cinematic/19.png",
+      "sourceSha256": "6e2bec11d115bfd1f6bf546072dd330bb81a0d978c62df7dd06066feec47b815",
+      "protectedPoints": [
+        [
+          0.5918,
+          0.8978
+        ],
+        [
+          0.1226,
+          0.4694
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/19.jpg"
+    },
+    {
+      "id": 20,
+      "source": "cinematic/20.png",
+      "background": "cinematic/20.png",
+      "sourceSha256": "cd65d1eff189ccf326f45b77fcb0d2166614c3439eeb63f6a33e152e8d5501ba",
+      "protectedPoints": [
+        [
+          0.3674,
+          0.5714
+        ],
+        [
+          0.5102,
+          0.8774
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "rain"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/20.jpg"
+    },
+    {
+      "id": 21,
+      "source": "cinematic/21.png",
+      "background": "cinematic/21.png",
+      "sourceSha256": "0aaf6b953ec4005a651140b7294199ff0cb5969f30750ab0172dcc9f0958db7d",
+      "protectedPoints": [
+        [
+          0.4388,
+          0.653
+        ],
+        [
+          0.7856,
+          0.1022
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/21.jpg"
+    },
+    {
+      "id": 22,
+      "source": "cinematic/22.png",
+      "background": "cinematic/22.png",
+      "sourceSha256": "47c317f5be28974f47aac5e5877f1d344e6b4b1d5f02fa81c926a43febb47707",
+      "protectedPoints": [
+        [
+          0.4286,
+          0.551
+        ],
+        [
+          0.8468,
+          0.2042
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/22.jpg"
+    },
+    {
+      "id": 23,
+      "source": "cinematic/23.png",
+      "background": "cinematic/23.png",
+      "sourceSha256": "c853182dd90fe855edd1233d9a3712b6d83c0643251a70783f8abf9970638686",
+      "protectedPoints": [
+        [
+          0.551,
+          0.4286
+        ],
+        [
+          0.3572,
+          0.6428
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/23.jpg"
+    },
+    {
+      "id": 24,
+      "source": "cinematic/24.png",
+      "background": "cinematic/24.png",
+      "sourceSha256": "45741707b9b4b8211462410b56dfd1b37dcbe36d2ee7261f7821942d7d230e70",
+      "protectedPoints": [
+        [
+          0.6836,
+          0.4796
+        ],
+        [
+          0.8366,
+          0.857
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "cosmic"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/24.jpg"
+    },
+    {
+      "id": 25,
+      "source": "cinematic/25.png",
+      "background": "cinematic/25.png",
+      "sourceSha256": "e162fc5f539d82e812e566b29d819207c44d37a6c23ac5fd8a4d8db5f6f2b5fd",
+      "protectedPoints": [
+        [
+          0.5612,
+          0.4184
+        ],
+        [
+          0.9284,
+          0.3266
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/25.jpg"
+    },
+    {
+      "id": 26,
+      "source": "cinematic/26.png",
+      "background": "cinematic/26.png",
+      "sourceSha256": "ebeaca70cee0d547c5bb2b58ec4ae045472dd34cafbf867832ecb0c90aa31855",
+      "protectedPoints": [
+        [
+          0.1226,
+          0.6836
+        ],
+        [
+          0.0206,
+          0.4082
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/26.jpg"
+    },
+    {
+      "id": 27,
+      "source": "cinematic/27.png",
+      "background": "cinematic/27.png",
+      "sourceSha256": "290693a145d38ce56b8ecd7d6acdc9c122216b93be42b51045ca2b576403ce4c",
+      "protectedPoints": [
+        [
+          0.1226,
+          0.2144
+        ],
+        [
+          0.4694,
+          0.7652
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/27.jpg"
+    },
+    {
+      "id": 1001,
+      "source": "living/1001.png",
+      "background": "studio-library/art/1001-background.png",
+      "sourceSha256": "34fd8b333d9af5821b0cb8b056ec4dca353a864a2dd2e09e842a034fb1547e51",
+      "protectedPoints": [
+        [
+          0.653,
+          0.4796
+        ],
+        [
+          0.245,
+          0.4184
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1001.jpg"
+    },
+    {
+      "id": 1002,
+      "source": "living/1002.png",
+      "background": "studio-library/art/1002-background.png",
+      "sourceSha256": "d035f036dc527f3998a81025b8a7adb9ababe42c3964a690990df14997023421",
+      "protectedPoints": [
+        [
+          0.7652,
+          0.6938
+        ],
+        [
+          0.4796,
+          0.7142
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1002.jpg"
+    },
+    {
+      "id": 1003,
+      "source": "living/1003.png",
+      "background": "studio-library/art/1003-background.png",
+      "sourceSha256": "c389fab42b8c6ed02d5e66f234153ca072f3b7a07654a0b086d48dcb76944e29",
+      "protectedPoints": [
+        [
+          0.6836,
+          0.4082
+        ],
+        [
+          0.9794,
+          0.6428
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1003.jpg"
+    },
+    {
+      "id": 1101,
+      "source": "anime/1101.png",
+      "background": "anime/1101.png",
+      "sourceSha256": "becd2c899b93f5d11d31f8b635c5b0caefd5a294294f05f609634c63134552d2",
+      "protectedPoints": [
+        [
+          0.755,
+          0.3572
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1101.jpg"
+    },
+    {
+      "id": 1102,
+      "source": "anime/1102.png",
+      "background": "anime/1102.png",
+      "sourceSha256": "766ebf24270da8c4eac064633e25bb8a03b4f01c63b86bb4915624a4027a57c7",
+      "protectedPoints": [
+        [
+          0.6836,
+          0.3572
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1102.jpg"
+    },
+    {
+      "id": 1103,
+      "source": "anime/1103.png",
+      "background": "anime/1103.png",
+      "sourceSha256": "7d52213834283c9f92db59d660f5671a696bd863ddec1b81cf4d5825cd7fe05b",
+      "protectedPoints": [
+        [
+          0.7652,
+          0.6938
+        ],
+        [
+          0.245,
+          0.3368
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "rain"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1103.jpg"
+    },
+    {
+      "id": 1104,
+      "source": "anime/1104.png",
+      "background": "anime/1104.png",
+      "sourceSha256": "5815a6d6c391fbeac841ea02e6fea04581cff267aa8847b7ca3255a960c60420",
+      "protectedPoints": [
+        [
+          0.653,
+          0.5306
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1104.jpg"
+    },
+    {
+      "id": 1105,
+      "source": "anime/1105.png",
+      "background": "anime/1105.png",
+      "sourceSha256": "43dee87cf1898e5521bba207dd42ae64eb865c13ffe6f5d9241f87b651cd5fad",
+      "protectedPoints": [
+        [
+          0.6734,
+          0.653
+        ],
+        [
+          0.908,
+          0.7652
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1105.jpg"
+    },
+    {
+      "id": 1106,
+      "source": "anime/1106.png",
+      "background": "anime/1106.png",
+      "sourceSha256": "021766329c0bcc2e919114bf504b44d0e556a45dd36a52ef4d57b60f633104e1",
+      "protectedPoints": [
+        [
+          0.6734,
+          0.3164
+        ],
+        [
+          0.1634,
+          0.4184
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water",
+        "waterfall"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1106.jpg"
+    },
+    {
+      "id": 1107,
+      "source": "anime/1107.png",
+      "background": "anime/1107.png",
+      "sourceSha256": "68643e9f83e1f29e8f609b2e16cd608512891c127aa2d47b993eb27679af230d",
+      "protectedPoints": [
+        [
+          0.8162,
+          0.6326
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1107.jpg"
+    },
+    {
+      "id": 1108,
+      "source": "anime/1108.png",
+      "background": "anime/1108.png",
+      "sourceSha256": "0acbe5b728926e9ddbcfcce2f2485d6cabaf0998fe8ad3f867603859497bf8ca",
+      "protectedPoints": [
+        [
+          0.7856,
+          0.2756
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1108.jpg"
+    },
+    {
+      "id": 1109,
+      "source": "anime/1109.png",
+      "background": "anime/1109.png",
+      "sourceSha256": "ea76a2a83d6dc25d1b35705dca6b592264de4448a459c176795e0ac42a60ec0b",
+      "protectedPoints": [
+        [
+          0.7448,
+          0.3266
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1109.jpg"
+    },
+    {
+      "id": 1110,
+      "source": "anime/1110.png",
+      "background": "anime/1110.png",
+      "sourceSha256": "f1746e1c1cea4a15ccab17ff9666623efc1c8eef7b6224e491df3eadb2f8e7b9",
+      "protectedPoints": [
+        [
+          0.2756,
+          0.449
+        ],
+        [
+          0.6122,
+          0.7142
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1110.jpg"
+    },
+    {
+      "id": 1111,
+      "source": "anime/1111.png",
+      "background": "anime/1111.png",
+      "sourceSha256": "95f8d5bce3c543097735beebc86aabacefbe45eacab3fefc00c656bf69f161a4",
+      "protectedPoints": [
+        [
+          0.7346,
+          0.6938
+        ],
+        [
+          0.8978,
+          0.398
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1111.jpg"
+    },
+    {
+      "id": 1112,
+      "source": "anime/1112.png",
+      "background": "anime/1112.png",
+      "sourceSha256": "2f655ba5871a050dbc790c44cfaa1d42c2b0470239ca721a6fdb4f1f69418e8c",
+      "protectedPoints": [
+        [
+          0.296,
+          0.4286
+        ],
+        [
+          0.9386,
+          0.6326
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1112.jpg"
+    },
+    {
+      "id": 1113,
+      "source": "anime/1113.png",
+      "background": "anime/1113.png",
+      "sourceSha256": "090082e54e644fe72a8647d450e0ba855e8181d28d1fa75fd4eb3bded2b398e6",
+      "protectedPoints": [
+        [
+          0.857,
+          0.7448
+        ],
+        [
+          0.5918,
+          0.398
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1113.jpg"
+    },
+    {
+      "id": 1114,
+      "source": "anime/1114.png",
+      "background": "anime/1114.png",
+      "sourceSha256": "65de7b442f4f39cdba09c4ceafc625548d06b6c92b0e16dc911083126878fbee",
+      "protectedPoints": [
+        [
+          0.7142,
+          0.2552
+        ],
+        [
+          0.2246,
+          0.4898
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1114.jpg"
+    },
+    {
+      "id": 1115,
+      "source": "anime/1115.png",
+      "background": "anime/1115.png",
+      "sourceSha256": "d8c687d5408ab17a983ddbf2b697c1b5e080f3136bbeadb0f471598093a2cb78",
+      "protectedPoints": [
+        [
+          0.653,
+          0.6428
+        ],
+        [
+          0.8366,
+          0.5204
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1115.jpg"
+    },
+    {
+      "id": 1201,
+      "source": "vibes/1201.png",
+      "background": "vibes/1201.png",
+      "sourceSha256": "1b30ac6e3af2288ca8648c029eb6859008785b3711dcd3c28ed17a41b26c503e",
+      "protectedPoints": [
+        [
+          0.6632,
+          0.4898
+        ],
+        [
+          0.2654,
+          0.5918
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1201.jpg"
+    },
+    {
+      "id": 1202,
+      "source": "vibes/1202.png",
+      "background": "vibes/1202.png",
+      "sourceSha256": "b8019487fb481c483fbf4cf86f001f37bd9157722e6f7bd26c2943341c043362",
+      "protectedPoints": [
+        [
+          0.8366,
+          0.7754
+        ],
+        [
+          0.7346,
+          0.5816
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1202.jpg"
+    },
+    {
+      "id": 1203,
+      "source": "vibes/1203.png",
+      "background": "vibes/1203.png",
+      "sourceSha256": "6ae1ff51687ca3d255476c18472bd29666497338360a812d68827b4321f69d82",
+      "protectedPoints": [
+        [
+          0.398,
+          0.5408
+        ],
+        [
+          0.755,
+          0.4286
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1203.jpg"
+    },
+    {
+      "id": 1204,
+      "source": "vibes/1204.png",
+      "background": "vibes/1204.png",
+      "sourceSha256": "24f190c3764a5696bebb8e482ed00c03a0e3500ac18ac32028050f0193d2b1e1",
+      "protectedPoints": [
+        [
+          0.6836,
+          0.7958
+        ],
+        [
+          0.2144,
+          0.2858
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "rain"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1204.jpg"
+    },
+    {
+      "id": 1205,
+      "source": "vibes/1205.png",
+      "background": "vibes/1205.png",
+      "sourceSha256": "2d22d29d4ebc9e79bd009945c59506d23dd980f684b5e4b4de9295ed616bf9c1",
+      "protectedPoints": [
+        [
+          0.602,
+          0.5204
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1205.jpg"
+    },
+    {
+      "id": 1206,
+      "source": "vibes/1206.png",
+      "background": "vibes/1206.png",
+      "sourceSha256": "e32a148dee2bff9f2d9b9164931b9e3180821aefdbe508de99daadd7157e60ef",
+      "protectedPoints": [
+        [
+          0.8774,
+          0.5306
+        ],
+        [
+          0.6428,
+          0.8264
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1206.jpg"
+    },
+    {
+      "id": 1207,
+      "source": "vibes/1207.png",
+      "background": "vibes/1207.png",
+      "sourceSha256": "41e952e7d7fdd05b1cbb98b2ddb2b3d037a908a9d5593b5376ef899207792323",
+      "protectedPoints": [
+        [
+          0.806,
+          0.2246
+        ],
+        [
+          0.347,
+          0.5408
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1207.jpg"
+    },
+    {
+      "id": 1208,
+      "source": "vibes/1208.png",
+      "background": "vibes/1208.png",
+      "sourceSha256": "4a35c2ce758d9fac506ee4c3429b7e71be3606063378b8a3bd6a4b6c175192a4",
+      "protectedPoints": [
+        [
+          0.8774,
+          0.653
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1208.jpg"
+    },
+    {
+      "id": 1209,
+      "source": "vibes/1209.png",
+      "background": "vibes/1209.png",
+      "sourceSha256": "ad74d022a606bc7fcf465d4e89faef2d5c6118dc5e41a56efd697be8f1c09039",
+      "protectedPoints": [
+        [
+          0.6326,
+          0.398
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1209.jpg"
+    },
+    {
+      "id": 1210,
+      "source": "vibes/1210.png",
+      "background": "vibes/1210.png",
+      "sourceSha256": "afa567fd3bb8e7dd84b8b2ebe2f33e31d171b3da638485cea68a3a7924014b2e",
+      "protectedPoints": [
+        [
+          0.8672,
+          0.6122
+        ],
+        [
+          0.1226,
+          0.4082
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1210.jpg"
+    },
+    {
+      "id": 1211,
+      "source": "vibes/1211.png",
+      "background": "vibes/1211.png",
+      "sourceSha256": "069edd74958f2f5c473e0535ece36ec4d071a5a5477972d4db91b3d6c7a8e752",
+      "protectedPoints": [
+        [
+          0.7448,
+          0.5102
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1211.jpg"
+    },
+    {
+      "id": 1212,
+      "source": "vibes/1212.png",
+      "background": "vibes/1212.png",
+      "sourceSha256": "dcea14001cfeac52287b98dde8293bf7419cea6012465e555b871d15bfc1db16",
+      "protectedPoints": [
+        [
+          0.7448,
+          0.2042
+        ],
+        [
+          0.9182,
+          0.7958
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1212.jpg"
+    },
+    {
+      "id": 1213,
+      "source": "vibes/1213.png",
+      "background": "vibes/1213.png",
+      "sourceSha256": "ee2464d7f58554a44debf332fa24fc5ca17489d3e2ec67005173223cd474fd67",
+      "protectedPoints": [
+        [
+          0.4592,
+          0.7958
+        ],
+        [
+          0.7754,
+          0.2552
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1213.jpg"
+    },
+    {
+      "id": 1214,
+      "source": "vibes/1214.png",
+      "background": "vibes/1214.png",
+      "sourceSha256": "f3ba7cf2ab5a8680534c0f31e4c28d9acaf4982a6c1ad57e8e949e0990c44450",
+      "protectedPoints": [
+        [
+          0.2042,
+          0.3572
+        ],
+        [
+          0.9488,
+          0.449
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1214.jpg"
+    },
+    {
+      "id": 1215,
+      "source": "vibes/1215.png",
+      "background": "vibes/1215.png",
+      "sourceSha256": "7b7e2c76ab0c496e5cfc4d8b2172c42571fa62ea386081cf1c44be2af5178696",
+      "protectedPoints": [
+        [
+          0.6428,
+          0.6428
+        ],
+        [
+          0.1838,
+          0.704
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "cosmic"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1215.jpg"
+    },
+    {
+      "id": 1216,
+      "source": "vibes/1216.png",
+      "background": "vibes/1216.png",
+      "sourceSha256": "55fe52394529a6fa890a5476b0f9a0a452fdb01f82f5dc98c1ebe9fb8f35fa53",
+      "protectedPoints": [
+        [
+          0.8366,
+          0.4796
+        ],
+        [
+          0.4388,
+          0.6224
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "aurora"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1216.jpg"
+    },
+    {
+      "id": 1217,
+      "source": "vibes/1217.png",
+      "background": "vibes/1217.png",
+      "sourceSha256": "c01dc2eb1dc117504dfba2ee50feb3db31c022d5b56cf0136772d43a5ab4d37a",
+      "protectedPoints": [
+        [
+          0.6428,
+          0.398
+        ],
+        [
+          0.9386,
+          0.5714
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1217.jpg"
+    },
+    {
+      "id": 1218,
+      "source": "vibes/1218.png",
+      "background": "vibes/1218.png",
+      "sourceSha256": "09cbaef976d5da8951b95e8f7491a7635876e9e60abbb20913a24cb064b8f7ad",
+      "protectedPoints": [
+        [
+          0.143,
+          0.6326
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "glass"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1218.jpg"
+    },
+    {
+      "id": 1219,
+      "source": "vibes/1219.png",
+      "background": "vibes/1219.png",
+      "sourceSha256": "415f3f84df722e7167da2292653e53a11c55156d389880f9834c9acac31dd658",
+      "protectedPoints": [
+        [
+          0.6734,
+          0.347
+        ],
+        [
+          0.8978,
+          0.653
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1219.jpg"
+    },
+    {
+      "id": 1220,
+      "source": "vibes/1220.png",
+      "background": "vibes/1220.png",
+      "sourceSha256": "aa81fb13cee42cfed9b17afd71ed444283622971a36d85d70bae1730c3e7b33a",
+      "protectedPoints": [
+        [
+          0.8366,
+          0.4694
+        ],
+        [
+          0.449,
+          0.602
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1220.jpg"
+    },
+    {
+      "id": 1301,
+      "source": "seasons/1301.png",
+      "background": "seasons/1301.png",
+      "sourceSha256": "1784e0f64e2b41dc89d6bb1fea9061d7e772002121b89d1774f733fb408b561b",
+      "protectedPoints": [
+        [
+          0.806,
+          0.2654
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1301.jpg"
+    },
+    {
+      "id": 1302,
+      "source": "seasons/1302.png",
+      "background": "seasons/1302.png",
+      "sourceSha256": "32547153f58ad1db09ceeb08558fb1b07d145e8b98791d741dc6f9eea25571e5",
+      "protectedPoints": [
+        [
+          0.2552,
+          0.4082
+        ],
+        [
+          0.755,
+          0.755
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "rain"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1302.jpg"
+    },
+    {
+      "id": 1303,
+      "source": "seasons/1303.png",
+      "background": "seasons/1303.png",
+      "sourceSha256": "5e51a716f892a9d89388bd1045fef7a28376a7ebd6baf0e5ff39ba7a90cce953",
+      "protectedPoints": [
+        [
+          0.8876,
+          0.4184
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1303.jpg"
+    },
+    {
+      "id": 1304,
+      "source": "seasons/1304.png",
+      "background": "seasons/1304.png",
+      "sourceSha256": "b648bb47d1943ec43616c1ba3115e7b6a6ebeb7779ab4d3866c8b088164a5e80",
+      "protectedPoints": [
+        [
+          0.5,
+          0.398
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1304.jpg"
+    },
+    {
+      "id": 1305,
+      "source": "seasons/1305.png",
+      "background": "seasons/1305.png",
+      "sourceSha256": "44f0661698a1f5821fa30f62b03243489621b1cbe65332d3a2739dcf36d554fa",
+      "protectedPoints": [
+        [
+          0.8468,
+          0.2654
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1305.jpg"
+    },
+    {
+      "id": 1306,
+      "source": "seasons/1306.png",
+      "background": "seasons/1306.png",
+      "sourceSha256": "76c0d533e2c243b94ada1006a30bb6db32f1f3c4fd4c0398310b926a9a9f61fc",
+      "protectedPoints": [
+        [
+          0.1532,
+          0.347
+        ],
+        [
+          0.7856,
+          0.704
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1306.jpg"
+    },
+    {
+      "id": 1401,
+      "source": "electric/1401.png",
+      "background": "studio-library/art/1401-background.png",
+      "sourceSha256": "35735f2e82c9612dc358f8c01a66dd09425e50ed06f6fce09756729f01b342bf",
+      "protectedPoints": [
+        [
+          0.5612,
+          0.4388
+        ]
+      ],
+      "face": [
+        0.5612,
+        0.4286
+      ],
+      "surfaces": [],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1401.jpg"
+    },
+    {
+      "id": 1402,
+      "source": "electric/1402.png",
+      "background": "studio-library/art/1402-background.png",
+      "sourceSha256": "874781a524b407da704609282188f42263be9b1400254c1e93d0486711576fd8",
+      "protectedPoints": [
+        [
+          0.6122,
+          0.4592
+        ]
+      ],
+      "face": [
+        0.6122,
+        0.4592
+      ],
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1402.jpg"
+    },
+    {
+      "id": 1403,
+      "source": "electric/1403.png",
+      "background": "studio-library/art/1403-background.png",
+      "sourceSha256": "5e14732b36f225f320b565ae6d352e749877fab58b93799513cd0eec86b2fcd8",
+      "protectedPoints": [
+        [
+          0.6632,
+          0.3776
+        ],
+        [
+          0.2246,
+          0.7754
+        ]
+      ],
+      "face": [
+        0.6632,
+        0.3776
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1403.jpg"
+    },
+    {
+      "id": 1404,
+      "source": "electric/1404.png",
+      "background": "studio-library/art/1404-background.png",
+      "sourceSha256": "bfb93cb09ac7469e3d01bb137eeca92d83774dfb6f299584872a98afa52cd7cb",
+      "protectedPoints": [
+        [
+          0.602,
+          0.4082
+        ],
+        [
+          0.3164,
+          0.704
+        ]
+      ],
+      "face": [
+        0.602,
+        0.4082
+      ],
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1404.jpg"
+    },
+    {
+      "id": 1405,
+      "source": "electric/1405.png",
+      "background": "studio-library/art/1405-background.png",
+      "sourceSha256": "c99d248c248f4b996d8ba7afa703b2b55c9a8adf172f96c2c23f6f219b90c375",
+      "protectedPoints": [
+        [
+          0.6428,
+          0.3878
+        ],
+        [
+          0.398,
+          0.5918
+        ]
+      ],
+      "face": [
+        0.6428,
+        0.3878
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1405.jpg"
+    },
+    {
+      "id": 1406,
+      "source": "electric/1406.png",
+      "background": "studio-library/art/1406-background.png",
+      "sourceSha256": "d96518a2e103b9ee2377cb93dc29b5a7aae6bfe47edede6d1fcae38ff37728b6",
+      "protectedPoints": [
+        [
+          0.704,
+          0.4388
+        ],
+        [
+          0.1736,
+          0.5204
+        ]
+      ],
+      "face": [
+        0.704,
+        0.4388
+      ],
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1406.jpg"
+    },
+    {
+      "id": 1407,
+      "source": "electric/1407.png",
+      "background": "studio-library/art/1407-background.png",
+      "sourceSha256": "57d1e4fdaa51abced7b01e3d4e6b6760f56d03c6b7ae46975792833f5fb9667b",
+      "protectedPoints": [
+        [
+          0.704,
+          0.3674
+        ],
+        [
+          0.5102,
+          0.5
+        ]
+      ],
+      "face": [
+        0.704,
+        0.3674
+      ],
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1407.jpg"
+    },
+    {
+      "id": 1408,
+      "source": "electric/1408.png",
+      "background": "studio-library/art/1408-background.png",
+      "sourceSha256": "88fd50a328b4b6f32e03b1ca8fa96234515b7d373c5e25f85f6b3985d4f8ddbe",
+      "protectedPoints": [
+        [
+          0.7346,
+          0.3062
+        ],
+        [
+          0.2756,
+          0.5612
+        ]
+      ],
+      "face": [
+        0.7346,
+        0.3062
+      ],
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1408.jpg"
+    },
+    {
+      "id": 1409,
+      "source": "electric/1409.png",
+      "background": "studio-library/art/1409-background.png",
+      "sourceSha256": "cab0d3d78fd228b30c1b52937a57dc1e0f312f1e64707dc5bab7f05e7e29966e",
+      "protectedPoints": [
+        [
+          0.6224,
+          0.3062
+        ],
+        [
+          0.5306,
+          0.4592
+        ]
+      ],
+      "face": [
+        0.6224,
+        0.3062
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1409.jpg"
+    },
+    {
+      "id": 1410,
+      "source": "electric/1410.png",
+      "background": "studio-library/art/1410-background.png",
+      "sourceSha256": "bb2079f13bffcc9b6c29f3952743381b5d237049b361780c8c2c3f9f8b69765c",
+      "protectedPoints": [
+        [
+          0.6224,
+          0.3062
+        ],
+        [
+          0.0818,
+          0.5306
+        ]
+      ],
+      "face": [
+        0.6224,
+        0.3062
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1410.jpg"
+    },
+    {
+      "id": 1501,
+      "source": "horizons/1501.png",
+      "background": "horizons/1501.png",
+      "sourceSha256": "4cf0e39394414014e6c7211adeada5503705da733d46379f5501904d3c5cce0c",
+      "protectedPoints": [
+        [
+          0.7244,
+          0.296
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "cosmic"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1501.jpg"
+    },
+    {
+      "id": 1502,
+      "source": "horizons/1502.png",
+      "background": "horizons/1502.png",
+      "sourceSha256": "cbb77fd24797e53a32f22512575fbe2d656ce811d647ec6813e9b3510bcd83fe",
+      "protectedPoints": [
+        [
+          0.1838,
+          0.3062
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1502.jpg"
+    },
+    {
+      "id": 1503,
+      "source": "horizons/1503.png",
+      "background": "horizons/1503.png",
+      "sourceSha256": "e9bf2464b768a38d9affcf8004be2c796858bc596139e6f63aafffe832ea82a7",
+      "protectedPoints": [
+        [
+          0.6326,
+          0.3368
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1503.jpg"
+    },
+    {
+      "id": 1504,
+      "source": "horizons/1504.png",
+      "background": "horizons/1504.png",
+      "sourceSha256": "6e096aae1a972e306930138d2af735cac98f2bd7cedf18a46dd0e7ed28b19c7f",
+      "protectedPoints": [
+        [
+          0.1124,
+          0.4898
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1504.jpg"
+    },
+    {
+      "id": 1505,
+      "source": "horizons/1505.png",
+      "background": "horizons/1505.png",
+      "sourceSha256": "cadd904523056c6c6b0729958bc4e9edf45da2ae7a534bdd3e068f8aad875260",
+      "protectedPoints": [
+        [
+          0.6734,
+          0.4286
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1505.jpg"
+    },
+    {
+      "id": 1506,
+      "source": "horizons/1506.png",
+      "background": "horizons/1506.png",
+      "sourceSha256": "64f980a8da42ec822296d77f787c48987bbfe38463d3022196e9c654128bfc85",
+      "protectedPoints": [
+        [
+          0.7142,
+          0.4796
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1506.jpg"
+    },
+    {
+      "id": 1507,
+      "source": "horizons/1507.png",
+      "background": "horizons/1507.png",
+      "sourceSha256": "b0fe72bc01bfa2109e1b831dd213e582f1f33c980fe25c84e175c088dc5ed60b",
+      "protectedPoints": [
+        [
+          0.1226,
+          0.959
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "glass"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1507.jpg"
+    },
+    {
+      "id": 1508,
+      "source": "horizons/1508.png",
+      "background": "horizons/1508.png",
+      "sourceSha256": "d250fafecd4fb9e54d8ead9f0c17933f1cb561e122af9b9c563f84ab6922c952",
+      "protectedPoints": [
+        [
+          0.5,
+          0.8366
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1508.jpg"
+    },
+    {
+      "id": 1509,
+      "source": "horizons/1509.png",
+      "background": "horizons/1509.png",
+      "sourceSha256": "d9a1a735b5569e4b66000da1a19331748e56eb940e7fcbd9be7323123f8db8a9",
+      "protectedPoints": [
+        [
+          0.1736,
+          0.5918
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "rain"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1509.jpg"
+    },
+    {
+      "id": 1510,
+      "source": "horizons/1510.png",
+      "background": "horizons/1510.png",
+      "sourceSha256": "3db99f8026b88e396c363b46a40e8a48772a15ccbedcdd2f9ec06141275b9a12",
+      "protectedPoints": [
+        [
+          0.653,
+          0.3164
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "waterfall"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1510.jpg"
+    },
+    {
+      "id": 1601,
+      "source": "winter/1601.png",
+      "background": "winter/1601.png",
+      "sourceSha256": "1cd8c614de4a37e79c02acaecd026e6db9df48766c6ed015249942ef1b8d7999",
+      "protectedPoints": [
+        [
+          0.7958,
+          0.3776
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "aurora",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1601.jpg"
+    },
+    {
+      "id": 1602,
+      "source": "winter/1602.png",
+      "background": "winter/1602.png",
+      "sourceSha256": "43b14d594a74a4192eb88b1e5c2a037ae4b254fde2e499f868472c3e18d52c6a",
+      "protectedPoints": [
+        [
+          0.8468,
+          0.5306
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1602.jpg"
+    },
+    {
+      "id": 1603,
+      "source": "winter/1603.png",
+      "background": "winter/1603.png",
+      "sourceSha256": "b8aa6d98069280d783f1d73edf92a24ddd02afa4ee5a74b4f978021b9cebaa3e",
+      "protectedPoints": [
+        [
+          0.6122,
+          0.3266
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1603.jpg"
+    },
+    {
+      "id": 1604,
+      "source": "winter/1604.png",
+      "background": "winter/1604.png",
+      "sourceSha256": "4e123798f92912850bee7a10907e679119dc307fe001fa1c2cc0d2b9f7db10c9",
+      "protectedPoints": [
+        [
+          0.8366,
+          0.5
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1604.jpg"
+    },
+    {
+      "id": 1605,
+      "source": "winter/1605.png",
+      "background": "winter/1605.png",
+      "sourceSha256": "6114d577c25aeb6cad10347101bf9615c7eb294e45a4b357bbd469c7283af0c3",
+      "protectedPoints": [
+        [
+          0.7958,
+          0.449
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "ocean"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1605.jpg"
+    },
+    {
+      "id": 1606,
+      "source": "winter/1606.png",
+      "background": "winter/1606.png",
+      "sourceSha256": "9abef48cda2b0517678e9c4d26ef98352682281265b148b6d71f17ec5bb8da9d",
+      "protectedPoints": [
+        [
+          0.2756,
+          0.449
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1606.jpg"
+    },
+    {
+      "id": 1607,
+      "source": "winter/1607.png",
+      "background": "winter/1607.png",
+      "sourceSha256": "f9f9e844c78a29f8bc0ca89cb5cfdba3b3ed08352711b85559b48c64486f9484",
+      "protectedPoints": [
+        [
+          0.5714,
+          0.4286
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1607.jpg"
+    },
+    {
+      "id": 1608,
+      "source": "winter/1608.png",
+      "background": "winter/1608.png",
+      "sourceSha256": "4a50da2fd701b3f1301b603e37af0e09c2268d80feebb363b79c391bc4ed7a30",
+      "protectedPoints": [
+        [
+          0.2756,
+          0.4694
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1608.jpg"
+    },
+    {
+      "id": 1609,
+      "source": "winter/1609.png",
+      "background": "winter/1609.png",
+      "sourceSha256": "8e0b212873bcd3493877fae0d3aa57af17fc92b94b41e56058911ad7d15359c7",
+      "protectedPoints": [
+        [
+          0.194,
+          0.449
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mirror"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1609.jpg"
+    },
+    {
+      "id": 1610,
+      "source": "winter/1610.png",
+      "background": "winter/1610.png",
+      "sourceSha256": "fe7ed359398b57b99e1f9651c964f3715412bb492a82fee57b565fe985a61e92",
+      "protectedPoints": [
+        [
+          0.4898,
+          0.4898
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1610.jpg"
+    },
+    {
+      "id": 1701,
+      "source": "village-winter/1701.png",
+      "background": "village-winter/1701.png",
+      "sourceSha256": "2fd8e0e0a178c7646131239df380ecd9b51929e566021f6848dc23b34e922a88",
+      "protectedPoints": [
+        [
+          0.1736,
+          0.2654
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1701.jpg"
+    },
+    {
+      "id": 1702,
+      "source": "village-winter/1702.png",
+      "background": "village-winter/1702.png",
+      "sourceSha256": "928982cb8e8509951a26af58ab1119eab69eb8d910555eb4508b35a5d722230a",
+      "protectedPoints": [
+        [
+          0.7652,
+          0.245
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1702.jpg"
+    },
+    {
+      "id": 1703,
+      "source": "village-winter/1703.png",
+      "background": "village-winter/1703.png",
+      "sourceSha256": "c084dcc77595239013b13cb35ce9f22c4e0a5b09aa4c73e4d4cbbc57af674918",
+      "protectedPoints": [
+        [
+          0.551,
+          0.4592
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1703.jpg"
+    },
+    {
+      "id": 1704,
+      "source": "village-winter/1704.png",
+      "background": "village-winter/1704.png",
+      "sourceSha256": "634aba08404d581f75d1e72734d1dd63f2ed137b30540d0c1f52de6938017793",
+      "protectedPoints": [
+        [
+          0.2654,
+          0.296
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1704.jpg"
+    },
+    {
+      "id": 1705,
+      "source": "village-winter/1705.png",
+      "background": "village-winter/1705.png",
+      "sourceSha256": "0ddfa5229a7b37ee9587bb9b3a512da0942c4bd2f5843002f0e35f0ee78422c4",
+      "protectedPoints": [
+        [
+          0.7448,
+          0.2756
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1705.jpg"
+    },
+    {
+      "id": 1706,
+      "source": "village-winter/1706.png",
+      "background": "village-winter/1706.png",
+      "sourceSha256": "591d567c934a81adb79f187843b4d83fd214d511ece8d6148857d9da2ea66c47",
+      "protectedPoints": [
+        [
+          0.8672,
+          0.2348
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1706.jpg"
+    },
+    {
+      "id": 1707,
+      "source": "village-winter/1707.png",
+      "background": "village-winter/1707.png",
+      "sourceSha256": "b5eded957a9d6f55852ccda32d35eebe53a5664cdb866a011529b876e5d31107",
+      "protectedPoints": [
+        [
+          0.6224,
+          0.2246
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1707.jpg"
+    },
+    {
+      "id": 1708,
+      "source": "village-winter/1708.png",
+      "background": "village-winter/1708.png",
+      "sourceSha256": "78ed8cec32cdea3f85b0d1cdd09af7c0dcf562dfc451f95738a65bd48407a9c4",
+      "protectedPoints": [
+        [
+          0.2858,
+          0.4898
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1708.jpg"
+    },
+    {
+      "id": 1709,
+      "source": "village-winter/1709.png",
+      "background": "village-winter/1709.png",
+      "sourceSha256": "1c95d9a4190c5e4a58bfade499256778543944fd2c69dd56be12703cc320530e",
+      "protectedPoints": [
+        [
+          0.653,
+          0.4286
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1709.jpg"
+    },
+    {
+      "id": 1710,
+      "source": "village-winter/1710.png",
+      "background": "village-winter/1710.png",
+      "sourceSha256": "f563716ea3b7a71d072b0ddc594b04488119e0baf7d8753a7e337c56472e7da5",
+      "protectedPoints": [
+        [
+          0.6122,
+          0.398
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1710.jpg"
+    },
+    {
+      "id": 1801,
+      "source": "village-summer/1801.png",
+      "background": "village-summer/1801.png",
+      "sourceSha256": "f2eee79eea96cad8043f8f4e1c1296c73f5e81185707b2fbed14e86d42b2a629",
+      "protectedPoints": [
+        [
+          0.755,
+          0.4286
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1801.jpg"
+    },
+    {
+      "id": 1802,
+      "source": "village-summer/1802.png",
+      "background": "village-summer/1802.png",
+      "sourceSha256": "78900e0b5dbda27251177c77aa75e53189df7f17d78d8239e5e9305ef52cb452",
+      "protectedPoints": [
+        [
+          0.8366,
+          0.4898
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1802.jpg"
+    },
+    {
+      "id": 1803,
+      "source": "village-summer/1803.png",
+      "background": "village-summer/1803.png",
+      "sourceSha256": "abf80adf3dce41585b4de5b07d86966614ce3889ccb457d3e56a41f662662912",
+      "protectedPoints": [
+        [
+          0.8876,
+          0.3776
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1803.jpg"
+    },
+    {
+      "id": 1804,
+      "source": "village-summer/1804.png",
+      "background": "village-summer/1804.png",
+      "sourceSha256": "42853c5fccb06782e1b9da52be9f4994d69d11ca8f1824c7a39a7a74b551a928",
+      "protectedPoints": [
+        [
+          0.245,
+          0.3368
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1804.jpg"
+    },
+    {
+      "id": 1805,
+      "source": "village-summer/1805.png",
+      "background": "village-summer/1805.png",
+      "sourceSha256": "199ee1c490c3bc031dd3b35636f6d8999d7341c5388da88e3cdacf9b43720625",
+      "protectedPoints": [
+        [
+          0.6224,
+          0.551
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1805.jpg"
+    },
+    {
+      "id": 1806,
+      "source": "village-summer/1806.png",
+      "background": "village-summer/1806.png",
+      "sourceSha256": "4f96d5f7425d95fa0d0996a4743645cc050ac9724d0b3923fe4c17b65c8f8f3e",
+      "protectedPoints": [
+        [
+          0.1838,
+          0.4694
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1806.jpg"
+    },
+    {
+      "id": 1807,
+      "source": "village-summer/1807.png",
+      "background": "village-summer/1807.png",
+      "sourceSha256": "ff23657568827963d94428a158847a84bdfa997d55ef55961fb163c52e4b6640",
+      "protectedPoints": [
+        [
+          0.704,
+          0.4694
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1807.jpg"
+    },
+    {
+      "id": 1808,
+      "source": "village-summer/1808.png",
+      "background": "village-summer/1808.png",
+      "sourceSha256": "7ec32ff476dd23d333f8c84c0867bd5f7391d1bafc7b427c3e40deac1883c115",
+      "protectedPoints": [
+        [
+          0.449,
+          0.7346
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1808.jpg"
+    },
+    {
+      "id": 1809,
+      "source": "village-summer/1809.png",
+      "background": "village-summer/1809.png",
+      "sourceSha256": "ff406b192a408cce5bfb59967fb293530f54974e5544bd2883d68158ff9a6398",
+      "protectedPoints": [
+        [
+          0.7448,
+          0.4388
+        ]
+      ],
+      "face": null,
+      "surfaces": [],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1809.jpg"
+    },
+    {
+      "id": 1810,
+      "source": "village-summer/1810.png",
+      "background": "village-summer/1810.png",
+      "sourceSha256": "ffd6674ce47dd5bce8603656366ea87210f61d08e7b2817f46d31a53549c5007",
+      "protectedPoints": [
+        [
+          0.8162,
+          0.398
+        ]
+      ],
+      "face": null,
+      "surfaces": [
+        "mist",
+        "water"
+      ],
+      "separateCharacter": false,
+      "poster": "studio-library/posters/1810.jpg"
+    },
+    {
+      "id": 1901,
+      "source": "muses/1901.png",
+      "background": "studio-library/art/1901-background.png",
+      "sourceSha256": "9e3c8e079065f51ab1c31add4c0d223fbc573cc6024121ba25a73ba2ce1be2de",
+      "protectedPoints": [
+        [
+          0.7448,
+          0.3368
+        ],
+        [
+          0.2858,
+          0.6632
+        ]
+      ],
+      "face": [
+        0.6785,
+        0.2552
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1901.jpg"
+    },
+    {
+      "id": 1902,
+      "source": "muses/1902.png",
+      "background": "studio-library/art/1902-background.png",
+      "sourceSha256": "1c2c18fa3cad0983852a7b95c935b1a16123f59f614e61a06f75b6621fc7e054",
+      "protectedPoints": [
+        [
+          0.6785,
+          0.5102
+        ],
+        [
+          0.194,
+          0.6836
+        ]
+      ],
+      "face": [
+        0.6836,
+        0.2858
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1902.jpg"
+    },
+    {
+      "id": 1903,
+      "source": "muses/1903.png",
+      "background": "studio-library/art/1903-background.png",
+      "sourceSha256": "578ce629ffab215b74c3c06ebf9b7aefc68ef426647d84306be052a1021afad6",
+      "protectedPoints": [
+        [
+          0.8162,
+          0.7244
+        ],
+        [
+          0.5612,
+          0.857
+        ]
+      ],
+      "face": [
+        0.806,
+        0.2654
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1903.jpg"
+    },
+    {
+      "id": 1904,
+      "source": "muses/1904.png",
+      "background": "studio-library/art/1904-background.png",
+      "sourceSha256": "2296ee88b1ad13ae9c8fdd12a1dc31daef6213d5ddf56caf698cafc62bde9513",
+      "protectedPoints": [
+        [
+          0.8978,
+          0.5408
+        ]
+      ],
+      "face": [
+        0.7346,
+        0.2654
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1904.jpg"
+    },
+    {
+      "id": 1905,
+      "source": "muses/1905.png",
+      "background": "studio-library/art/1905-background.png",
+      "sourceSha256": "34dea4774ec110f124a0823288d30202e8b1176ece830be935cc8836c4ab6b54",
+      "protectedPoints": [
+        [
+          0.2042,
+          0.7244
+        ],
+        [
+          0.653,
+          0.5204
+        ]
+      ],
+      "face": [
+        0.704,
+        0.3062
+      ],
+      "surfaces": [],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1905.jpg"
+    },
+    {
+      "id": 1906,
+      "source": "muses/1906.png",
+      "background": "studio-library/art/1906-background.png",
+      "sourceSha256": "8ff8d48c8494b88e81e3683a515e723d62b4785db0f7b1788152157d5de2d881",
+      "protectedPoints": [
+        [
+          0.8774,
+          0.5918
+        ],
+        [
+          0.1838,
+          0.6632
+        ]
+      ],
+      "face": [
+        0.7652,
+        0.2654
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1906.jpg"
+    },
+    {
+      "id": 1907,
+      "source": "muses/1907.png",
+      "background": "studio-library/art/1907-background.png",
+      "sourceSha256": "dc37653600557db3c2f76c4e3bf599a3010611f51817b90716f54c391806973e",
+      "protectedPoints": [
+        [
+          0.4592,
+          0.7346
+        ],
+        [
+          0.8876,
+          0.245
+        ]
+      ],
+      "face": [
+        0.6734,
+        0.2654
+      ],
+      "surfaces": [
+        "rain"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1907.jpg"
+    },
+    {
+      "id": 1908,
+      "source": "muses/1908.png",
+      "background": "studio-library/art/1908-background.png",
+      "sourceSha256": "9192c81aee9a6df52a156125a21f2cf060546d3a36f8532aaa3c6199d5a2c9e0",
+      "protectedPoints": [
+        [
+          0.9488,
+          0.4694
+        ]
+      ],
+      "face": [
+        0.7346,
+        0.245
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1908.jpg"
+    },
+    {
+      "id": 1909,
+      "source": "muses/1909.png",
+      "background": "studio-library/art/1909-background.png",
+      "sourceSha256": "8120d6cd4a77c1849e1d4af13e13f1529f68899ac85d39629c2aee084aa4cf2c",
+      "protectedPoints": [
+        [
+          0.653,
+          0.4184
+        ],
+        [
+          0.347,
+          0.7754
+        ]
+      ],
+      "face": [
+        0.6632,
+        0.2756
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1909.jpg"
+    },
+    {
+      "id": 1910,
+      "source": "muses/1910.png",
+      "background": "studio-library/art/1910-background.png",
+      "sourceSha256": "3862d89690ba771bc772ab937a7cb26b79e036a835617c6ba4999e32568876e3",
+      "protectedPoints": [
+        [
+          0.6428,
+          0.4592
+        ],
+        [
+          0.1022,
+          0.5918
+        ]
+      ],
+      "face": [
+        0.6734,
+        0.2858
+      ],
+      "surfaces": [
+        "water"
+      ],
+      "separateCharacter": true,
+      "poster": "studio-library/posters/1910.jpg"
+    }
+  ]
+}

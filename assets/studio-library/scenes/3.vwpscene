@@ -1,0 +1,218 @@
+{
+  "schema": 3,
+  "id": "library-3",
+  "name": "Aurora Voyage",
+  "description": "Северное сияние над снежным фьордом.",
+  "author": "VWP",
+  "cover": "studio-library/posters/3.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "3-background",
+      "name": "Окружение",
+      "source": "scene-3.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "stars",
+      "tint": "#C5E5EF",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 11584,
+      "waterline": 0.58,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.62
+            ],
+            [
+              0.23,
+              0.6
+            ],
+            [
+              0.42,
+              0.59
+            ],
+            [
+              0.58,
+              0.61
+            ],
+            [
+              0.76,
+              0.58
+            ],
+            [
+              1.0,
+              0.63
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.78,
+              0.47
+            ],
+            [
+              0.83,
+              0.46
+            ],
+            [
+              0.84,
+              0.63
+            ],
+            [
+              0.81,
+              0.67
+            ],
+            [
+              0.77,
+              0.62
+            ]
+          ],
+          "feather": 0.004,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.35
+            ],
+            [
+              0,
+              0.35
+            ]
+          ],
+          "feather": 0.01,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "3-material-0",
+      "name": "Атмосфера · aurora",
+      "source": "scene-3.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.75,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "aurora",
+      "light": "warm",
+      "tint": "#79EDB5",
+      "surfaceStrength": 0.65,
+      "lightStrength": 0.65,
+      "seed": 58484,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.32,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.2
+            ],
+            [
+              0.86,
+              0.26
+            ],
+            [
+              0.74,
+              0.2
+            ],
+            [
+              0.6,
+              0.37
+            ],
+            [
+              0.47,
+              0.31
+            ],
+            [
+              0.32,
+              0.42
+            ]
+          ],
+          "feather": 0.022,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "snow",
+    "count": 48,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#DFEFFF",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

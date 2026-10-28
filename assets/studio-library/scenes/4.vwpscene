@@ -1,0 +1,288 @@
+{
+  "schema": 3,
+  "id": "library-4",
+  "name": "Astral Drift",
+  "description": "Невесомость на орбите далёкой планеты.",
+  "author": "VWP",
+  "cover": "studio-library/posters/4.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "4-background",
+      "name": "Окружение",
+      "source": "studio-library/art/4-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "cosmic",
+      "light": "stars",
+      "tint": "#C3B0ED",
+      "surfaceStrength": 0.35,
+      "lightStrength": 0.65,
+      "seed": 38721,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.33,
+              0.01
+            ],
+            [
+              0.56,
+              0.0
+            ],
+            [
+              0.65,
+              0.11
+            ],
+            [
+              0.65,
+              0.25
+            ],
+            [
+              0.58,
+              0.34
+            ],
+            [
+              0.41,
+              0.29
+            ],
+            [
+              0.32,
+              0.18
+            ]
+          ],
+          "feather": 0.035,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.69,
+              0.0
+            ],
+            [
+              0.68,
+              0.34
+            ],
+            [
+              0.5,
+              0.37
+            ],
+            [
+              0.35,
+              0.31
+            ],
+            [
+              0.18,
+              0.4
+            ],
+            [
+              0.0,
+              0.34
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "4-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/4-character.png",
+      "rect": [
+        0.29035157,
+        0.08687602,
+        0.6332003,
+        0.64099881
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.25,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 3255,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.669375,
+              0.151208
+            ],
+            [
+              0.749918,
+              0.10347
+            ],
+            [
+              0.798244,
+              0.214858
+            ],
+            [
+              0.782135,
+              0.326247
+            ],
+            [
+              0.73381,
+              0.310334
+            ],
+            [
+              0.701592,
+              0.246684
+            ]
+          ],
+          "feather": 0.007,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.653266,
+              0.151208
+            ],
+            [
+              0.73381,
+              0.151208
+            ],
+            [
+              0.73381,
+              0.294422
+            ],
+            [
+              0.653266,
+              0.294422
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.717701,
+              0.40581
+            ],
+            [
+              0.814353,
+              0.358072
+            ],
+            [
+              0.84657,
+              0.533112
+            ],
+            [
+              0.830461,
+              0.612675
+            ],
+            [
+              0.749918,
+              0.564937
+            ]
+          ],
+          "feather": 0.015,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.653266,
+              0.151208
+            ],
+            [
+              0.73381,
+              0.151208
+            ],
+            [
+              0.73381,
+              0.294422
+            ],
+            [
+              0.653266,
+              0.294422
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "meteors",
+    "count": 5,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5204,
+            0
+          ],
+          [
+            0.5204,
+            0.347
+          ],
+          [
+            0,
+            0.347
+          ]
+        ],
+        "feather": 0.008,
+        "erase": false
+      }
+    ],
+    "color": "#CDE4FF",
+    "afterLayer": 0
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

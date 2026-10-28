@@ -1,0 +1,496 @@
+{
+  "schema": 3,
+  "id": "library-2",
+  "name": "Crimson Moon",
+  "description": "Красная луна над горным храмом.",
+  "author": "VWP",
+  "cover": "studio-library/posters/2.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "2-background",
+      "name": "Окружение",
+      "source": "studio-library/art/2-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 35983,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.6,
+              0.0
+            ],
+            [
+              0.59,
+              0.13
+            ],
+            [
+              0.46,
+              0.17
+            ],
+            [
+              0.32,
+              0.14
+            ],
+            [
+              0.18,
+              0.24
+            ],
+            [
+              0.0,
+              0.17
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.51,
+              0.81
+            ],
+            [
+              0.53,
+              0.81
+            ],
+            [
+              0.53,
+              0.85
+            ],
+            [
+              0.51,
+              0.85
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.57,
+              0.62
+            ],
+            [
+              0.58,
+              0.62
+            ],
+            [
+              0.58,
+              0.65
+            ],
+            [
+              0.57,
+              0.65
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.91,
+              0.23
+            ],
+            [
+              0.92,
+              0.23
+            ],
+            [
+              0.92,
+              0.28
+            ],
+            [
+              0.91,
+              0.28
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "2-material-0",
+      "name": "Атмосфера · mist",
+      "source": "studio-library/art/2-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.24,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 41542,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.51
+            ],
+            [
+              0.19,
+              0.44
+            ],
+            [
+              0.35,
+              0.5
+            ],
+            [
+              0.5,
+              0.45
+            ],
+            [
+              0.58,
+              0.57
+            ],
+            [
+              0.51,
+              0.66
+            ],
+            [
+              0.3,
+              0.63
+            ],
+            [
+              0.14,
+              0.69
+            ],
+            [
+              0.0,
+              0.62
+            ]
+          ],
+          "feather": 0.035,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    },
+    {
+      "id": "2-material-1",
+      "name": "Атмосфера · waterfall",
+      "source": "studio-library/art/2-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.72,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "waterfall",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 7941,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.177,
+              0.44
+            ],
+            [
+              0.19,
+              0.44
+            ],
+            [
+              0.19,
+              0.53
+            ],
+            [
+              0.177,
+              0.53
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.317,
+              0.5
+            ],
+            [
+              0.329,
+              0.5
+            ],
+            [
+              0.329,
+              0.58
+            ],
+            [
+              0.317,
+              0.58
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    },
+    {
+      "id": "2-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/2-character.png",
+      "rect": [
+        -0.0090563,
+        -0.00891745,
+        1.01778094,
+        1.0178974
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.55,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 26365,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.680555,
+              0.089122
+            ],
+            [
+              0.730664,
+              0.039019
+            ],
+            [
+              0.790795,
+              0.04904
+            ],
+            [
+              0.830882,
+              0.129205
+            ],
+            [
+              0.810839,
+              0.269494
+            ],
+            [
+              0.76073,
+              0.20937
+            ],
+            [
+              0.720643,
+              0.229412
+            ],
+            [
+              0.690577,
+              0.339639
+            ],
+            [
+              0.660512,
+              0.419804
+            ]
+          ],
+          "feather": 0.009,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.790795,
+              0.269494
+            ],
+            [
+              0.87097,
+              0.339639
+            ],
+            [
+              0.941122,
+              0.379721
+            ],
+            [
+              1,
+              0.469907
+            ],
+            [
+              1,
+              0.650279
+            ],
+            [
+              0.891013,
+              0.580135
+            ],
+            [
+              0.810839,
+              0.419804
+            ]
+          ],
+          "feather": 0.012,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.690577,
+              0.119184
+            ],
+            [
+              0.770752,
+              0.119184
+            ],
+            [
+              0.770752,
+              0.249453
+            ],
+            [
+              0.690577,
+              0.249453
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.680555,
+              0.499969
+            ],
+            [
+              0.740686,
+              0.449866
+            ],
+            [
+              0.800817,
+              0.620217
+            ],
+            [
+              0.790795,
+              0.850692
+            ],
+            [
+              0.700599,
+              0.930858
+            ],
+            [
+              0.640468,
+              0.790568
+            ]
+          ],
+          "feather": 0.022,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.690577,
+              0.119184
+            ],
+            [
+              0.770752,
+              0.119184
+            ],
+            [
+              0.770752,
+              0.249453
+            ],
+            [
+              0.690577,
+              0.249453
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "leaves",
+    "count": 30,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [],
+    "color": "#E9AD5B",
+    "afterLayer": 2
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

@@ -2,9 +2,9 @@ name: Engine Studio release
 on:
   workflow_dispatch:
   pull_request:
-    paths: ['**.cs', '**.xaml', 'assets/studio/**', 'assets/studio-originals/**', 'tools/*release*', 'tools/bootstrap_webview.ps1', 'build.ps1', 'installer/VWP-Online.iss', 'VWP.csproj', '.github/workflows/engine-release.yml']
+    paths: ['**.cs', '**.xaml', 'assets/studio/**', 'assets/studio-originals/**', 'assets/studio-library/**', 'tools/*release*', 'tools/*studio_library*', 'tools/library_directions.py', 'tools/bootstrap_webview.ps1', 'build.ps1', 'installer/VWP-Online.iss', 'VWP.csproj', '.github/workflows/engine-release.yml']
   push:
-    tags: ['v0.11.*']
+    tags: ['v0.12.*']
 permissions:
   contents: read
   actions: read
@@ -27,6 +27,8 @@ jobs:
           python-version: '3.12'
       - name: Check volume reconstruction and release scripts
         run: |
+          python -m pip install 'Pillow>=11,<13'
+          if ($LASTEXITCODE -ne 0) { throw 'Package validation dependencies failed' }
           python -m py_compile tools/restore_engine_release.py tools/package_online_release.py
           if ($LASTEXITCODE -ne 0) { throw 'Release script syntax check failed' }
           python tools/check_release_packaging.py
@@ -54,10 +56,10 @@ jobs:
         run: |
           [xml]$project = Get-Content VWP.csproj
           $version = $project.Project.PropertyGroup.Version
-          if ($version -notmatch '^0\.11\.\d+$') { throw 'Unexpected release version' }
+          if ($version -notmatch '^0\.12\.\d+$') { throw 'Unexpected release version' }
           if ('${{ github.ref_type }}' -eq 'tag' -and '${{ github.ref_name }}' -ne "v$version") { throw 'Tag/version mismatch' }
           "value=$version" >> $env:GITHUB_OUTPUT
-      - name: Restore verified complete wallpaper library
+      - name: Verify complete GPU library and prepare native dependencies
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
@@ -68,8 +70,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'WebView2 bootstrap verification failed' }
           python tools/bootstrap_ffmpeg.py
           if ($LASTEXITCODE -ne 0) { throw 'FFmpeg verification failed' }
-          python tools/restore_engine_release.py
-          if ($LASTEXITCODE -ne 0) { throw 'Verified media restore failed' }
+          python tools/validate_studio_library.py
+          if ($LASTEXITCODE -ne 0) { throw 'Complete GPU library validation failed' }
       - name: Publish self-contained Windows build
         shell: pwsh
         run: |
@@ -120,7 +122,7 @@ jobs:
           $version = '${{ steps.version.outputs.value }}'
           $qa = Join-Path $env:GITHUB_WORKSPACE 'artifacts/release-check'
           New-Item -ItemType Directory -Force -Path $qa | Out-Null
-          $installDir = [IO.Path]::GetFullPath((Join-Path $env:RUNNER_TEMP 'VWP-0.11-install-check'))
+          $installDir = [IO.Path]::GetFullPath((Join-Path $env:RUNNER_TEMP 'VWP-0.12-install-check'))
           if (!$installDir.StartsWith([IO.Path]::GetFullPath($env:RUNNER_TEMP)+[IO.Path]::DirectorySeparatorChar)) { throw 'Unexpected smoke install directory' }
           $server = Start-Process python -ArgumentList '-m','http.server','8765','--bind','127.0.0.1','--directory','dist' -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $qa 'http.txt') -RedirectStandardError (Join-Path $qa 'http-error.txt')
           try {
@@ -161,7 +163,7 @@ jobs:
           if ($LASTEXITCODE -eq 0) {
             if (!(($existing | ConvertFrom-Json).isDraft)) { throw 'Refusing to overwrite an already published release' }
           } else {
-            gh release create $tag --repo $repo --target '${{ github.sha }}' --draft --title "VWP $version - Engine Studio" --notes-file "docs/RELEASE-$version.md"
+            gh release create $tag --repo $repo --target '${{ github.sha }}' --draft --title "VWP $version - Living Library" --notes-file "docs/RELEASE-$version.md"
             if ($LASTEXITCODE -ne 0) { throw 'Draft creation failed' }
           }
           $files = @(Get-ChildItem "dist/VWP-$version-Setup.exe","dist/VWP-$version-Portable-*.zip",'dist/*.sha256','dist/README-INSTALL.txt','dist/install-parts.json')
@@ -183,7 +185,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: VWP-0.11-Release-Checks
+          name: VWP-0.12-Release-Checks
           path: |
             artifacts/release-check/
             dist/Release-*/verification/engine-ui-status.txt

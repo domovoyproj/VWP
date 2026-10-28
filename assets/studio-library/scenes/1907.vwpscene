@@ -1,0 +1,299 @@
+{
+  "schema": 3,
+  "id": "library-1907",
+  "name": "Ночной поезд",
+  "description": "Движущиеся дождевые струи и мягкая атмосфера.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1907.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1907-background",
+      "name": "Окружение",
+      "source": "studio-library/art/1907-background.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "rain",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.65,
+      "lightStrength": 0.65,
+      "seed": 32481,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.54,
+              0.0
+            ],
+            [
+              0.54,
+              0.53
+            ],
+            [
+              0.52,
+              0.62
+            ],
+            [
+              0.44,
+              0.66
+            ],
+            [
+              0.17,
+              0.72
+            ],
+            [
+              0.0,
+              0.69
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.15,
+              0.08
+            ],
+            [
+              0.46,
+              0.08
+            ],
+            [
+              0.46,
+              0.19
+            ],
+            [
+              0.15,
+              0.19
+            ]
+          ],
+          "feather": 0.016,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.84,
+              0.05
+            ],
+            [
+              0.87,
+              0.05
+            ],
+            [
+              0.87,
+              0.1
+            ],
+            [
+              0.84,
+              0.1
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "1907-character",
+      "name": "Персонаж · волосы и дыхание",
+      "source": "studio-library/art/1907-character.png",
+      "rect": [
+        0.02408247,
+        0.00530529,
+        0.96862846,
+        0.96661182
+      ],
+      "opacity": 1,
+      "depth": 0.23,
+      "motion": "character",
+      "strength": 0.55,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 4034,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.554513,
+              0.110794
+            ],
+            [
+              0.617696,
+              0.036928
+            ],
+            [
+              0.722999,
+              0.026375
+            ],
+            [
+              0.786181,
+              0.089689
+            ],
+            [
+              0.807242,
+              0.205765
+            ],
+            [
+              0.765121,
+              0.279631
+            ],
+            [
+              0.722999,
+              0.174108
+            ],
+            [
+              0.659817,
+              0.142451
+            ],
+            [
+              0.596635,
+              0.216317
+            ],
+            [
+              0.554513,
+              0.300736
+            ]
+          ],
+          "feather": 0.007,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.596635,
+              0.131899
+            ],
+            [
+              0.74406,
+              0.131899
+            ],
+            [
+              0.74406,
+              0.416811
+            ],
+            [
+              0.596635,
+              0.416811
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.586105,
+              0.627858
+            ],
+            [
+              0.680878,
+              0.553991
+            ],
+            [
+              0.828303,
+              0.543439
+            ],
+            [
+              0.912545,
+              0.722829
+            ],
+            [
+              0.870424,
+              0.881113
+            ],
+            [
+              0.722999,
+              0.881113
+            ],
+            [
+              0.607165,
+              0.796695
+            ]
+          ],
+          "feather": 0.02,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.596635,
+              0.131899
+            ],
+            [
+              0.74406,
+              0.131899
+            ],
+            [
+              0.74406,
+              0.416811
+            ],
+            [
+              0.596635,
+              0.416811
+            ]
+          ],
+          "feather": 0.002,
+          "erase": true
+        }
+      ],
+      "clipToSurface": false
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 14,
+    "region": [
+      0.6,
+      0.2,
+      0.4,
+      0.8
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": 0
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

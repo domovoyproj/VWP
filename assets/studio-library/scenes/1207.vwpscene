@@ -1,0 +1,273 @@
+{
+  "schema": 3,
+  "id": "library-1207",
+  "name": "Paper Lantern River",
+  "description": "Тихая набережная. Волны, светлячки и фонари.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1207.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1207-background",
+      "name": "Окружение",
+      "source": "vibes/1207.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.3,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 37742,
+      "waterline": 0.52,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.57
+            ],
+            [
+              0.22,
+              0.53
+            ],
+            [
+              0.37,
+              0.57
+            ],
+            [
+              0.55,
+              0.56
+            ],
+            [
+              0.75,
+              0.61
+            ],
+            [
+              1.0,
+              0.65
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.28,
+              0.52
+            ],
+            [
+              0.41,
+              0.52
+            ],
+            [
+              0.44,
+              0.58
+            ],
+            [
+              0.34,
+              0.61
+            ]
+          ],
+          "feather": 0.003,
+          "erase": true
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.06,
+              0.0
+            ],
+            [
+              0.45,
+              0.0
+            ],
+            [
+              0.46,
+              0.19
+            ],
+            [
+              0.31,
+              0.26
+            ],
+            [
+              0.19,
+              0.2
+            ],
+            [
+              0.08,
+              0.28
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.26,
+              0.03
+            ],
+            [
+              0.33,
+              0.03
+            ],
+            [
+              0.33,
+              0.17
+            ],
+            [
+              0.26,
+              0.17
+            ]
+          ],
+          "feather": 0.015,
+          "erase": true
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.53,
+              0.0
+            ],
+            [
+              0.65,
+              0.0
+            ],
+            [
+              0.65,
+              0.29
+            ],
+            [
+              0.59,
+              0.4
+            ],
+            [
+              0.53,
+              0.32
+            ]
+          ],
+          "feather": 0.011,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.59,
+              0.27
+            ],
+            [
+              0.61,
+              0.27
+            ],
+            [
+              0.61,
+              0.33
+            ],
+            [
+              0.59,
+              0.33
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.73,
+              0.35
+            ],
+            [
+              0.76,
+              0.35
+            ],
+            [
+              0.76,
+              0.42
+            ],
+            [
+              0.73,
+              0.42
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.89,
+              0.33
+            ],
+            [
+              0.91,
+              0.33
+            ],
+            [
+              0.91,
+              0.39
+            ],
+            [
+              0.89,
+              0.39
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 19,
+    "region": [
+      0,
+      0.3,
+      1,
+      0.7
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

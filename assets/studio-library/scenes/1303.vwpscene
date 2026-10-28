@@ -1,0 +1,166 @@
+{
+  "schema": 3,
+  "id": "library-1303",
+  "name": "Copper Lake",
+  "description": "Медный лес, ветер в листве, рябь озера и медленно плывущий туман.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1303.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1303-background",
+      "name": "Окружение",
+      "source": "seasons/1303.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.4,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 8303,
+      "waterline": 0.47,
+      "sun": [
+        0.15,
+        0.23
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.0,
+              0.49
+            ],
+            [
+              0.2,
+              0.48
+            ],
+            [
+              0.39,
+              0.48
+            ],
+            [
+              0.62,
+              0.52
+            ],
+            [
+              0.77,
+              0.56
+            ],
+            [
+              0.75,
+              0.72
+            ],
+            [
+              0.61,
+              0.88
+            ],
+            [
+              0.45,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.49,
+              0.0
+            ],
+            [
+              0.51,
+              0.18
+            ],
+            [
+              0.36,
+              0.2
+            ],
+            [
+              0.21,
+              0.13
+            ],
+            [
+              0.11,
+              0.22
+            ],
+            [
+              0.0,
+              0.17
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.86,
+              0.0
+            ],
+            [
+              1.0,
+              0.0
+            ],
+            [
+              1.0,
+              0.27
+            ],
+            [
+              0.93,
+              0.33
+            ],
+            [
+              0.87,
+              0.19
+            ]
+          ],
+          "feather": 0.013,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "leaves",
+    "count": 24,
+    "region": [
+      0.65,
+      0,
+      0.35,
+      1
+    ],
+    "masks": [],
+    "color": "#E9AD5B",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

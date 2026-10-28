@@ -12,9 +12,12 @@ using Microsoft.Win32;
 namespace VWP;
 public partial class StudioEditor : Window
 {
-    static readonly string[] motions={"still","flow","foliage","cloth","character","rain"};
+    static readonly string[] motions={"still","flow","foliage","cloth","character","rain","landscape"};
     static readonly string[] anchors={"top","bottom","center"};
     static readonly string[] channels={"water","clouds","wind","light"};
+    static readonly string[] surfaces={"water","ocean","rain","mist","aurora","cosmic","glass","energy","waterfall","mirror"};
+    static readonly string[] lights={"warm","cool","stars","lightning","fire"};
+    static readonly string[] weatherKinds={"none","snow","dust","fireflies","rain","petals","leaves","embers","meteors","bubbles"};
     StudioProject working;
     StudioSurface? surface;
     bool loading=true,ready,dirty,busy,scrubbing,paused,allowClose,canvasFocused;
@@ -26,9 +29,9 @@ public partial class StudioEditor : Window
     {
         working=project.CloneTo(Path.Combine(StudioProject.DataRoot,Guid.NewGuid().ToString("N")));
         InitializeComponent();StudioWindowChrome.Apply(this);SceneName.Text=working.Name;Timeline.Maximum=working.Duration;
-        SceneMotion.Value=working.Settings.Motion;Wind.Value=working.Settings.Wind;Parallax.Value=working.Settings.Parallax;Exposure.Value=working.Settings.Exposure;Bloom.Value=working.Settings.Bloom;Clock.IsChecked=working.Settings.Clock;Weather.SelectedIndex=Array.IndexOf(new[]{"none","snow","dust","fireflies"},working.Weather.Kind);ParticleCount.Value=working.Weather.Count;
+        SceneMotion.Value=working.Settings.Motion;Wind.Value=working.Settings.Wind;Parallax.Value=working.Settings.Parallax;Exposure.Value=working.Settings.Exposure;Bloom.Value=working.Settings.Bloom;Clock.IsChecked=working.Settings.Clock;Weather.SelectedIndex=Array.IndexOf(weatherKinds,working.Weather.Kind);ParticleCount.Value=working.Weather.Count;WeatherPlacement.SelectedIndex=working.Weather.AfterLayer<0?0:1;
         MaskChannel.SelectedIndex=0;RefreshLayers(0);loading=false;
-        SceneName.PreviewMouseDown+=(_,_)=>canvasFocused=false;LayerName.PreviewMouseDown+=(_,_)=>canvasFocused=false;
+        SceneName.PreviewMouseDown+=(_,_)=>canvasFocused=false;LayerName.PreviewMouseDown+=(_,_)=>canvasFocused=false;MaterialTint.PreviewMouseDown+=(_,_)=>canvasFocused=false;
         Loaded+=async(_,_)=>await StartSurface();
         clock.Tick+=async(_,_)=>
         {
@@ -61,6 +64,7 @@ public partial class StudioEditor : Window
     {
         if(Selected is not StudioLayer layer)return;
         bool previous=loading;loading=true;LayerName.Text=layer.Name;LayerVisible.IsChecked=layer.Visible;Motion.SelectedIndex=Array.IndexOf(motions,layer.Motion);Anchor.SelectedIndex=Array.IndexOf(anchors,layer.Anchor);Strength.Value=layer.Strength;Depth.Value=layer.Depth;LayerOpacity.Value=layer.Opacity;LayerX.Value=layer.Rect[0];LayerY.Value=layer.Rect[1];baseWidth=layer.Rect[2];baseHeight=layer.Rect[3];LayerScale.Value=1;Waterline.Value=layer.Waterline;SunX.Value=layer.Sun[0];loading=previous;
+        loading=true;SurfaceKind.SelectedIndex=Array.IndexOf(surfaces,layer.Surface);LightKind.SelectedIndex=Array.IndexOf(lights,layer.Light);SurfaceAmount.Value=layer.SurfaceStrength;LightAmount.Value=layer.LightStrength;MaterialTint.Text=layer.Tint;SurfaceClip.IsChecked=layer.ClipToSurface;loading=previous;
         if(!loading)_=SetBrush();
     }
     void NameChanged(object sender,TextChangedEventArgs e){if(loading)return;working.Name=SceneName.Text;dirty=true;}
@@ -68,7 +72,12 @@ public partial class StudioEditor : Window
     async void PropertiesChanged(object sender,RoutedEventArgs e)
     {
         if(loading||Selected is not StudioLayer layer)return;
-        layer.Visible=LayerVisible.IsChecked==true;layer.Motion=motions[Math.Max(0,Motion.SelectedIndex)];layer.Anchor=anchors[Math.Max(0,Anchor.SelectedIndex)];layer.Strength=Strength.Value;layer.Depth=Depth.Value;layer.Opacity=LayerOpacity.Value;layer.Rect[0]=LayerX.Value;layer.Rect[1]=LayerY.Value;layer.Waterline=Waterline.Value;layer.Sun[0]=SunX.Value;dirty=true;await PushLayer();
+        layer.Visible=LayerVisible.IsChecked==true;layer.Motion=motions[Math.Max(0,Motion.SelectedIndex)];layer.Anchor=anchors[Math.Max(0,Anchor.SelectedIndex)];layer.Strength=Strength.Value;layer.Depth=Depth.Value;layer.Opacity=LayerOpacity.Value;layer.Rect[0]=LayerX.Value;layer.Rect[1]=LayerY.Value;layer.Waterline=Waterline.Value;layer.Sun[0]=SunX.Value;dirty=true;
+        layer.Surface=surfaces[Math.Max(0,SurfaceKind.SelectedIndex)];layer.Light=lights[Math.Max(0,LightKind.SelectedIndex)];layer.SurfaceStrength=SurfaceAmount.Value;layer.LightStrength=LightAmount.Value;
+        layer.ClipToSurface=SurfaceClip.IsChecked==true;
+        if(System.Text.RegularExpressions.Regex.IsMatch(MaterialTint.Text,"^#[0-9a-fA-F]{6}$"))layer.Tint=MaterialTint.Text;
+        else{MaterialTint.Text=layer.Tint;Status.Text="Цвет задаётся в формате #RRGGBB.";}
+        await PushLayer();
     }
     async void ScaleChanged(object sender,RoutedPropertyChangedEventArgs<double> e){if(loading||Selected is not StudioLayer layer)return;double scale=Math.Min(e.NewValue,Math.Min(4/baseWidth,4/baseHeight));layer.Rect[2]=baseWidth*scale;layer.Rect[3]=baseHeight*scale;dirty=true;await PushLayer();}
     async Task PushLayer(){if(!ready||surface is null||Selected is null)return;try{await surface.Layer(LayerList.SelectedIndex,Selected);}catch(Exception error){Status.Text=error.Message;}}
@@ -78,13 +87,18 @@ public partial class StudioEditor : Window
     }
     async void WeatherChanged(object sender,RoutedEventArgs e)
     {
-        if(loading)return;working.Weather.Kind=new[]{"none","snow","dust","fireflies"}[Math.Max(0,Weather.SelectedIndex)];
-        if(ReferenceEquals(sender,Weather)){if(working.Weather.Kind!="none"&&ParticleCount.Value<1){loading=true;ParticleCount.Value=80;loading=false;}working.Weather.Color=working.Weather.Kind switch{"fireflies"=>"#D7F6AA","dust"=>"#ECD8B6",_=>"#DFEFFF"};}
+        if(loading)return;working.Weather.Kind=weatherKinds[Math.Max(0,Weather.SelectedIndex)];
+        if(ReferenceEquals(sender,WeatherPlacement))
+        {
+            int subject=working.Layers.FindIndex(l=>l.Motion=="character");
+            working.Weather.AfterLayer=WeatherPlacement.SelectedIndex==1?Math.Max(0,subject>0?subject-1:working.Layers.Count-2):-1;
+        }
+        if(ReferenceEquals(sender,Weather)){if(working.Weather.Kind!="none"&&ParticleCount.Value<1){loading=true;ParticleCount.Value=80;loading=false;}working.Weather.Color=working.Weather.Kind switch{"fireflies"=>"#D7F6AA","dust"=>"#ECD8B6","petals"=>"#F8C7DD","leaves"=>"#D39244","embers"=>"#FFC07B",_=>"#DFEFFF"};}
         working.Weather.Count=(int)ParticleCount.Value;dirty=true;
         if(ready&&surface is not null)try{await surface.Execute("window.studio.weather("+JsonSerializer.Serialize(working.Weather,StudioProject.Json)+")");}catch(Exception error){Status.Text=error.Message;}
     }
     async void BrushChanged(object sender,RoutedEventArgs e){if(!loading)await SetBrush();}
-    async Task SetBrush(){if(!ready||surface is null)return;try{if(Painting.IsChecked==true&&Selected is not null){await surface.Tool(LayerList.SelectedIndex,Math.Max(0,MaskChannel.SelectedIndex),BrushRadius.Value,Erase.IsChecked==true);ViewLabel.Text="Маска · "+Selected.Name;}else{await surface.StopTool();ViewLabel.Text="Живой просмотр";}}catch(Exception error){Status.Text=error.Message;}}
+    async Task SetBrush(){if(!ready||surface is null)return;try{if(Painting.IsChecked==true&&Selected is not null){await surface.Tool(LayerList.SelectedIndex,Math.Max(0,MaskChannel.SelectedIndex),BrushRadius.Value,Erase.IsChecked==true);ViewLabel.Text=MaskChannel.SelectedIndex==4?"Область погоды":"Маска · "+Selected.Name;}else{await surface.StopTool();ViewLabel.Text="Живой просмотр";}}catch(Exception error){Status.Text=error.Message;}}
     async void UndoClick(object sender,RoutedEventArgs e){if(ready&&surface is not null)await surface.Execute("window.studio.undo()");}
     async void RedoClick(object sender,RoutedEventArgs e){if(ready&&surface is not null)await surface.Execute("window.studio.redo()");}
     void PauseClick(object sender,RoutedEventArgs e){paused=!paused;surface?.SetPaused(paused);PauseButton.Content=paused?"▷ Продолжить":"Ⅱ Пауза";}
@@ -100,13 +114,19 @@ public partial class StudioEditor : Window
             foreach(string channel in channels){string name=$"mask-{index}-{channel}.png";await File.WriteAllBytesAsync(Path.Combine(working.Folder,name),Convert.FromBase64String(mask.GetProperty(channel).GetString()!));working.Layers[index].MaskFiles[channel]=name;}
             working.Layers[index++].Masks.Clear();
         }
+        using var weather=JsonDocument.Parse(await surface.Execute("window.studio.weatherMask()"));
+        await File.WriteAllBytesAsync(Path.Combine(working.Folder,"weather-mask.png"),Convert.FromBase64String(weather.RootElement.GetString()!));working.Weather.MaskFile="weather-mask.png";working.Weather.Masks.Clear();
         working.Save(working.FileName);
     }
     async Task Rebuild(Action change,int selection)
     {
         if(busy)return;busy=true;StudioProject? before=null;int oldSelection=LayerList.SelectedIndex;
-        try{if(ready&&surface is not null)playbackTime=(await surface.ReadStatistics()).Time;await PersistMasks();before=working.Copy();change();working.Save(working.FileName);RefreshLayers(selection);dirty=true;await StartSurface();}
-        catch(Exception error){if(before is not null){working.Layers=before.Layers;RefreshLayers(oldSelection);}Status.Text=error.Message;}finally{busy=false;}
+        try{if(ready&&surface is not null)playbackTime=(await surface.ReadStatistics()).Time;await PersistMasks();before=working.Copy();
+            int weatherIndex=working.Weather.AfterLayer;string? weatherAnchor=weatherIndex>=0&&weatherIndex<working.Layers.Count?working.Layers[weatherIndex].Id:null;
+            change();
+            if(weatherAnchor is not null){int moved=working.Layers.FindIndex(l=>l.Id==weatherAnchor);working.Weather.AfterLayer=moved>=0?moved:Math.Max(0,Math.Min(weatherIndex-1,working.Layers.Count-1));}
+            working.Save(working.FileName);RefreshLayers(selection);dirty=true;await StartSurface();}
+        catch(Exception error){if(before is not null){working.Layers=before.Layers;working.Weather=before.Weather;RefreshLayers(oldSelection);}Status.Text=error.Message;}finally{busy=false;}
     }
     async void AddClick(object sender,RoutedEventArgs e)
     {

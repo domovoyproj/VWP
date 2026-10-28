@@ -1,20 +1,16 @@
 """Create hash-verified portable volumes and an online install manifest below GitHub's asset limit."""
 import argparse,hashlib,json,zipfile
 from pathlib import Path
+from validate_studio_library import validate_library
 
 ROOT=Path(__file__).resolve().parents[1]
 LIMIT=1_500_000_000
 
 def validate(source):
     required=['VWP.exe','VWP.dll','VWP.runtimeconfig.json','coreclr.dll','hostfxr.dll','tools/ffmpeg.exe','libvlc/win-x64/libvlc.dll','assets/presets.json','assets/themes/themes.json','assets/themes/palettes.json']
-    for sid in range(18):required += [f'assets/{sid}{ext}' for ext in ('.mp4','.jpg','.cover.jpg','.preview.mp4')]+[f'assets/scene-{sid}.png']
-    for sid in range(18,28):required += [f'assets/cinematic/{sid}.{ext}' for ext in ('png','mp4')]
-    for folder,ids in [('living',range(1001,1004)),('anime',range(1101,1116)),('vibes',range(1201,1221)),('seasons',range(1301,1307))]:
-        required += [f'assets/{folder}/catalog.json']
-        for sid in ids:required += [f'assets/{folder}/{sid}.{ext}' for ext in (('png','mp4') if folder in ('living','anime') else ('png','mp4','poster.png','preview.mp4'))]
-    for group in json.loads((ROOT/'tools/collections-plan.json').read_text(encoding='utf-8')):
-        required += [f"assets/{group['folder']}/catalog.json"]
-        for scene in group['entries']:required += [f"assets/{group['folder']}/{scene['id']}.{ext}" for ext in ('png','mp4','poster.png','preview.mp4')]
+    library_files=validate_library(source)
+    for sid in range(18):required += [f'assets/scene-{sid}.png']
+    for sid in range(18,28):required += [f'assets/cinematic/{sid}.png']
     required += ['assets/studio/runtime/'+name for name in ('index.html','runtime.css','gl.js','masks.js','shaders.js','renderer.js')]
     for scene in ('silver-shore','winter-lane','rainy-afternoon'):
         project_path=source/'assets/studio-originals'/scene/'scene.vwpscene'
@@ -38,7 +34,7 @@ def validate(source):
     absent=[name for name in required if not (source/name).is_file()]
     if absent:raise SystemExit('Incomplete release: '+absent[0])
     if any((source/path).exists() for path in ('assets/motion','assets/spatial','assets/vibes/characters')):raise SystemExit('Retired scenery in release')
-    return len(required)
+    return len(required)+library_files
 
 def package(source,output,version,limit=LIMIT):
     files=[]
@@ -79,7 +75,7 @@ if __name__=='__main__':
     source=(ROOT/args.build).resolve();count=validate(source);print(f'Validated {count} required release files and 55 cursor packs.',flush=True)
     if args.validate_only:raise SystemExit()
     # Every volume extracts directly into the same destination, for both Setup and portable use.
-    readme=f'VWP {args.version}\n\nУСТАНОВКА: скачайте VWP-{args.version}-Setup.exe. Установщик сам скачает и проверит все пакеты; нужен интернет.\n\nPORTABLE: скачайте ВСЕ файлы VWP-{args.version}-Portable-*.zip и распакуйте их в одну общую папку. Затем запустите VWP.exe.\n\nВключены .NET x64, все 151 записи обоев, 55 наборов курсоров и редактор живых сцен.\nНастройки пользователя сохраняются в %LOCALAPPDATA%/VWP.\n'
+    readme=f'VWP {args.version}\n\nУСТАНОВКА: скачайте VWP-{args.version}-Setup.exe. Установщик сам скачает и проверит все пакеты; нужен интернет.\n\nPORTABLE: скачайте ВСЕ файлы VWP-{args.version}-Portable-*.zip и распакуйте их в одну общую папку. Затем запустите VWP.exe.\n\nВключены .NET x64, 132 переработанные живые сцены, 3 оригинала VWP и интерактивный 3D-город, 55 наборов курсоров и редактор живых сцен.\nНастройки пользователя сохраняются в %LOCALAPPDATA%/VWP.\n'
     (source/'README-INSTALL.txt').write_text(readme,encoding='utf-8-sig')
     (ROOT/'dist/README-INSTALL.txt').write_text(readme,encoding='utf-8-sig')
     package(source,ROOT/'dist',args.version)

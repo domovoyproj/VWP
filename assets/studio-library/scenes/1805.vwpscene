@@ -1,0 +1,146 @@
+{
+  "schema": 3,
+  "id": "library-1805",
+  "name": "Лето у бабушки",
+  "description": "Лёгкая летняя пыльца в солнечном свете.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1805.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1805-background",
+      "name": "Окружение",
+      "source": "village-summer/1805.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.4,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 38024,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.15,
+              0.07
+            ],
+            [
+              0.4,
+              0.08
+            ],
+            [
+              0.43,
+              0.26
+            ],
+            [
+              0.31,
+              0.34
+            ],
+            [
+              0.17,
+              0.32
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.0,
+              0.5
+            ],
+            [
+              0.19,
+              0.43
+            ],
+            [
+              0.38,
+              0.51
+            ],
+            [
+              0.34,
+              0.72
+            ],
+            [
+              0.15,
+              0.88
+            ],
+            [
+              0.0,
+              0.89
+            ]
+          ],
+          "feather": 0.018,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.32,
+              0.02
+            ],
+            [
+              0.48,
+              0.0
+            ],
+            [
+              0.48,
+              0.21
+            ],
+            [
+              0.4,
+              0.32
+            ],
+            [
+              0.31,
+              0.21
+            ]
+          ],
+          "feather": 0.014,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 32,
+    "region": [
+      0.25,
+      0.1,
+      0.5,
+      0.8
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

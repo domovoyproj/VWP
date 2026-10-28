@@ -1,0 +1,154 @@
+{
+  "schema": 3,
+  "id": "library-1804",
+  "name": "Берёзовая тропа",
+  "description": "Лёгкая летняя пыльца в солнечном свете.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1804.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1804-background",
+      "name": "Окружение",
+      "source": "village-summer/1804.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "landscape",
+      "strength": 0.48,
+      "surface": "water",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 50546,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 1,
+          "points": [
+            [
+              0.42,
+              0.0
+            ],
+            [
+              0.81,
+              0.0
+            ],
+            [
+              0.73,
+              0.26
+            ],
+            [
+              0.62,
+              0.4
+            ],
+            [
+              0.5,
+              0.4
+            ],
+            [
+              0.43,
+              0.29
+            ]
+          ],
+          "feather": 0.008,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.48,
+              0.0
+            ],
+            [
+              0.41,
+              0.28
+            ],
+            [
+              0.28,
+              0.42
+            ],
+            [
+              0.09,
+              0.48
+            ],
+            [
+              0.0,
+              0.31
+            ]
+          ],
+          "feather": 0.015,
+          "erase": false
+        },
+        {
+          "channel": 2,
+          "points": [
+            [
+              0.1,
+              0.72
+            ],
+            [
+              0.29,
+              0.65
+            ],
+            [
+              0.4,
+              0.71
+            ],
+            [
+              0.33,
+              0.91
+            ],
+            [
+              0.02,
+              1.0
+            ],
+            [
+              0.0,
+              0.88
+            ]
+          ],
+          "feather": 0.02,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 28,
+    "region": [
+      0.1,
+      0.3,
+      0.75,
+      0.7
+    ],
+    "masks": [],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

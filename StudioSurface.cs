@@ -125,12 +125,16 @@ internal sealed class StudioSurface : IDisposable
     {
         await Control.CoreWebView2.CallDevToolsProtocolMethodAsync("Emulation.setDeviceMetricsOverride",JsonSerializer.Serialize(new{width,height,deviceScaleFactor=1,mobile=false,screenWidth=width,screenHeight=height}));
     }
-    internal async Task CaptureExport(string path,int width,int height)
+    internal async Task<byte[]> ExportFrame(int width,int height)
     {
         if(!Ready)throw new InvalidOperationException("Сцена восстанавливается. Дождись готовности и повтори сохранение.");
-        string raw=await Control.CoreWebView2.CallDevToolsProtocolMethodAsync("Page.captureScreenshot",JsonSerializer.Serialize(new{format="png",fromSurface=true,captureBeyondViewport=true,clip=new{x=0,y=0,width,height,scale=1}}));
-        using var json=JsonDocument.Parse(raw);await File.WriteAllBytesAsync(path,Convert.FromBase64String(json.RootElement.GetProperty("data").GetString()!));
+        // Read the freshly rendered canvas in the same JS turn. Browser compositor
+        // screenshots can stall or return stale pixels while a native window is hidden.
+        using var json=JsonDocument.Parse(await Execute("window.studio.capture()"));
+        if(json.RootElement.GetProperty("width").GetInt32()!=width||json.RootElement.GetProperty("height").GetInt32()!=height)throw new InvalidOperationException("Размер кадра не совпадает с разрешением экспорта.");
+        return Convert.FromBase64String(json.RootElement.GetProperty("png").GetString()!);
     }
+    internal async Task CaptureExport(string path,int width,int height)=>await File.WriteAllBytesAsync(path,await ExportFrame(width,height));
     internal Task ResetExportViewport()=>Control.CoreWebView2.CallDevToolsProtocolMethodAsync("Emulation.clearDeviceMetricsOverride","{}");
     async Task Recover()
     {

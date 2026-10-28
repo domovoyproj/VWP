@@ -1,0 +1,224 @@
+{
+  "schema": 3,
+  "id": "library-1112",
+  "name": "Aqua Terminal",
+  "description": "Подводная станция. Живые каустики, пузырьки и синий свет.",
+  "author": "VWP",
+  "cover": "studio-library/posters/1112.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "1112-background",
+      "name": "Окружение",
+      "source": "anime/1112.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "ocean",
+      "light": "cool",
+      "tint": "#7ADFEA",
+      "surfaceStrength": 0.22,
+      "lightStrength": 0.3,
+      "seed": 63010,
+      "waterline": 0,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.05,
+              0.01
+            ],
+            [
+              0.27,
+              0.01
+            ],
+            [
+              0.29,
+              0.44
+            ],
+            [
+              0.26,
+              0.69
+            ],
+            [
+              0.04,
+              0.74
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.32,
+              0.05
+            ],
+            [
+              0.58,
+              0.12
+            ],
+            [
+              0.64,
+              0.51
+            ],
+            [
+              0.58,
+              0.66
+            ],
+            [
+              0.34,
+              0.69
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.65,
+              0.16
+            ],
+            [
+              0.81,
+              0.23
+            ],
+            [
+              0.87,
+              0.58
+            ],
+            [
+              0.85,
+              0.7
+            ],
+            [
+              0.66,
+              0.67
+            ]
+          ],
+          "feather": 0.004,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.0,
+              0.75
+            ],
+            [
+              0.33,
+              0.7
+            ],
+            [
+              0.62,
+              0.73
+            ],
+            [
+              0.82,
+              0.78
+            ],
+            [
+              1.0,
+              0.75
+            ],
+            [
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "feather": 0.02,
+          "erase": false
+        }
+      ]
+    }
+  ],
+  "weather": {
+    "kind": "bubbles",
+    "count": 45,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.0512,
+            0.0512
+          ],
+          [
+            0.2552,
+            0.041
+          ],
+          [
+            0.2654,
+            0.6836
+          ],
+          [
+            0.0512,
+            0.7142
+          ]
+        ],
+        "feather": 0.002,
+        "erase": false
+      },
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.3368,
+            0.1328
+          ],
+          [
+            0.5816,
+            0.2144
+          ],
+          [
+            0.5918,
+            0.6428
+          ],
+          [
+            0.347,
+            0.653
+          ]
+        ],
+        "feather": 0.002,
+        "erase": false
+      }
+    ],
+    "color": "#BBDFED",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}

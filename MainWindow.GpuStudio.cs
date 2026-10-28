@@ -19,7 +19,7 @@ public partial class MainWindow
     }
     void OpenGpuEditor(Wallpaper scene)
     {
-        StopPreview();StopHover();try{EditGpuProject(StudioProject.Load(scene.Path),scene);}catch(Exception error){Status.Text="Scene Studio: "+error.Message;}
+        StopPreview();StopHover();try{EditGpuProject(StudioLibrary.Load(scene.Path),scene);}catch(Exception error){Status.Text="Scene Studio: "+error.Message;}
     }
     void CreateGpuScene()
     {
@@ -84,6 +84,6 @@ public partial class MainWindow
     }
     void PreviewGpuScene(Wallpaper scene)
     {
-        StopPreview();StopHover();try{studioPlayer=new StudioPlayer(StudioProject.Load(scene.Path),Config(SelectedScreen).Performance){Owner=this};studioPlayer.Closed+=(_,_)=>studioPlayer=null;studioPlayer.Show();}catch(Exception error){Status.Text="Превью: "+error.Message;}
+        StopPreview();StopHover();try{studioPlayer=new StudioPlayer(StudioLibrary.Load(scene.Path),Config(SelectedScreen).Performance){Owner=this};studioPlayer.Closed+=(_,_)=>studioPlayer=null;studioPlayer.Show();}catch(Exception error){Status.Text="Превью: "+error.Message;}
     }
 }

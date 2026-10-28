@@ -1,0 +1,241 @@
+{
+  "schema": 3,
+  "id": "library-25",
+  "name": "Robot Workshop",
+  "description": "Мастерская: свет панелей и пыль в лучах.",
+  "author": "VWP",
+  "cover": "studio-library/posters/25.jpg",
+  "duration": 24,
+  "layers": [
+    {
+      "id": "25-background",
+      "name": "Окружение",
+      "source": "cinematic/25.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "water",
+      "light": "cool",
+      "tint": "#71D5E9",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 13225,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.06,
+              0.21
+            ],
+            [
+              0.13,
+              0.21
+            ],
+            [
+              0.13,
+              0.23
+            ],
+            [
+              0.06,
+              0.23
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.47,
+              0.36
+            ],
+            [
+              0.55,
+              0.36
+            ],
+            [
+              0.55,
+              0.38
+            ],
+            [
+              0.47,
+              0.38
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.77,
+              0.23
+            ],
+            [
+              0.82,
+              0.23
+            ],
+            [
+              0.82,
+              0.25
+            ],
+            [
+              0.77,
+              0.25
+            ]
+          ],
+          "feather": 0.002,
+          "erase": false
+        },
+        {
+          "channel": 3,
+          "points": [
+            [
+              0.17,
+              0.04
+            ],
+            [
+              0.23,
+              0.04
+            ],
+            [
+              0.23,
+              0.06
+            ],
+            [
+              0.17,
+              0.06
+            ]
+          ],
+          "feather": 0.003,
+          "erase": false
+        }
+      ]
+    },
+    {
+      "id": "25-material-0",
+      "name": "Атмосфера · mist",
+      "source": "cinematic/25.png",
+      "rect": [
+        -0.01,
+        -0.01,
+        1.02,
+        1.02
+      ],
+      "opacity": 0.1,
+      "depth": 0.035,
+      "motion": "still",
+      "strength": 0.65,
+      "surface": "mist",
+      "light": "warm",
+      "tint": "#B5D7F5",
+      "surfaceStrength": 0.7,
+      "lightStrength": 0.65,
+      "seed": 22426,
+      "waterline": 0.48,
+      "sun": [
+        0.75,
+        0.4
+      ],
+      "masks": [
+        {
+          "channel": 0,
+          "points": [
+            [
+              0.08,
+              0.69
+            ],
+            [
+              0.3,
+              0.61
+            ],
+            [
+              0.43,
+              0.7
+            ],
+            [
+              0.4,
+              0.87
+            ],
+            [
+              0.18,
+              0.9
+            ],
+            [
+              0.07,
+              0.79
+            ]
+          ],
+          "feather": 0.035,
+          "erase": false
+        }
+      ],
+      "clipToSurface": true
+    }
+  ],
+  "weather": {
+    "kind": "dust",
+    "count": 25,
+    "region": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "masks": [
+      {
+        "channel": 0,
+        "points": [
+          [
+            0.4286,
+            0.143
+          ],
+          [
+            0.5612,
+            0.092
+          ],
+          [
+            0.6734,
+            0.6224
+          ],
+          [
+            0.551,
+            0.8468
+          ],
+          [
+            0.3776,
+            0.4898
+          ]
+        ],
+        "feather": 0.04,
+        "erase": false
+      }
+    ],
+    "color": "#EEDBC2",
+    "afterLayer": -1
+  },
+  "settings": {
+    "exposure": 0,
+    "bloom": 0.07,
+    "motion": 1,
+    "wind": 0.65,
+    "parallax": 0.3,
+    "audioReactive": false,
+    "clock": false
+  }
+}
